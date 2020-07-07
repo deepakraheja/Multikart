@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Users } from '../modals/Users';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +23,10 @@ export class UsersService {
     );
   }
 
-  ValidLogin(_BrandObj: any): Observable<Users[]> {
+  ValidLogin(_BrandObj: any): Observable<any[]> {
     this._methodName = "ValidLogin";
     this._param = _BrandObj;
-    return this._http.post<Users[]>(
+    return this._http.post<any[]>(
       this._url + this._methodName, this._param
     );
   }

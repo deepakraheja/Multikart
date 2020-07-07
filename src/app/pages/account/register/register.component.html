@@ -6,27 +6,27 @@
             <div class="col-lg-12">
                 <h3>create account</h3>
                 <div class="theme-card">
-                    <form class="theme-form">
+                    <form class="theme-form" [formGroup]="RegistrationForm">
                         <div class="form-row">
                             <div class="col-md-6">
-                                <label for="email">First Name</label>
-                                <input type="text" class="form-control" id="fname" placeholder="First Name" required="">
+                                <label for="email">Name</label>
+                                <input type="text" class="form-control" id="fname" formControlName="name" placeholder="Name" required="">
                             </div>
                             <div class="col-md-6">
-                                <label for="review">Last Name</label>
-                                <input type="password" class="form-control" id="lname" placeholder="Last Name" required="">
+                                <label for="review">Mobile No</label>
+                                <input type="text" class="form-control" id="mobileNo" placeholder="Mobile No" maxlength="10" formControlName="mobileNo" required="">
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
                                 <label for="email">email</label>
-                                <input type="text" class="form-control" id="email" placeholder="Email" required="">
+                                <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email" required="">
                             </div>
                             <div class="col-md-6">
                                 <label for="review">Password</label>
-                                <input type="password" class="form-control" id="review" placeholder="Enter your password" required="">
+                                <input type="password" class="form-control" id="review" formControlName="password" placeholder="Enter your password" required="">
                             </div>
-                            <button class="btn btn-solid">create Account</button>
+                            <button class="btn btn-solid" (click)="CreateRegistration();">create Account</button>
                         </div>
                     </form>
                 </div>
