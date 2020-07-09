@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from 'src/app/Service/users.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { SharedDataService } from 'src/app/Service/shared-data.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
     private userService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _SharedDataService:SharedDataService
   ) { }
 
   ngOnInit(): void {
@@ -40,8 +42,30 @@ export class RegisterComponent implements OnInit {
     }
     else {
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
-        if (res > 0)
-          this.router.navigate(['/home/fashion']);
+        if (res > 0) {
+          let obj = {
+            LoginId: this.RegistrationForm.value.email,
+            password: this.RegistrationForm.value.password
+          };
+          this.userService.ValidLogin(obj).subscribe(res => {
+            if (res.length > 0) {
+
+              sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
+              this._SharedDataService.AssignUser(res);
+              debugger
+              this.route.paramMap.subscribe((params: ParamMap) => {
+                if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
+                  this.router.navigate(['/shop/cart']);
+                }
+                else {
+                  this.router.navigate(['/home/fashion']);
+                }
+              });
+            }
+          });
+
+          //this.router.navigate(['/home/fashion']);
+        }
         else {
           this.toastr.error("email address already exists");
           return;

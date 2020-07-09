@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedDataService } from 'src/app/Service/shared-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +11,10 @@ export class DashboardComponent implements OnInit {
 
   public openDashboard: boolean = false;
 
-  constructor() { }
+  constructor(
+    private _SharedDataService: SharedDataService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -18,4 +23,9 @@ export class DashboardComponent implements OnInit {
     this.openDashboard = !this.openDashboard;
   }
 
+  Logout() {
+    sessionStorage.removeItem('LoggedInUser');
+    this._SharedDataService.AssignUser([]);
+    this.router.navigate(['/home/fashion']);
+  }
 }

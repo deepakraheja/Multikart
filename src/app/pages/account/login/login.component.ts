@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
+import { SharedDataService } from 'src/app/Service/shared-data.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     private userService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _SharedDataService:SharedDataService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
         if (res.length > 0) {
 
           sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
-          //this._SharedDataService.AssignUser(res);
+          this._SharedDataService.AssignUser(res);
           debugger
           this.route.paramMap.subscribe((params: ParamMap) => {
             if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
