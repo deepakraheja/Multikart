@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { Product } from "../../shared/classes/product";
 import { ProductService } from "../../shared/services/product.service";
 import { OrderService } from "../../shared/services/order.service";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-checkout',
@@ -14,15 +15,18 @@ import { OrderService } from "../../shared/services/order.service";
 })
 export class CheckoutComponent implements OnInit {
 
-  public checkoutForm:  FormGroup;
+  public checkoutForm: FormGroup;
   public products: Product[] = [];
-  public payPalConfig ? : IPayPalConfig;
-  public payment: string = 'Stripe';
-  public amount:  any;
+  public payPalConfig?: IPayPalConfig;
+  public payment: string = 'OnlinePayment';
+  public amount: any;
+  public Submitted: boolean = false;
 
   constructor(private fb: FormBuilder,
     public productService: ProductService,
-    private orderService: OrderService) { 
+    private orderService: OrderService,
+    private toastr: ToastrService
+  ) {
     this.checkoutForm = this.fb.group({
       firstname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       lastname: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
@@ -46,6 +50,17 @@ export class CheckoutComponent implements OnInit {
     return this.productService.cartTotalAmount();
   }
 
+  ProcessCheckOut() {
+    this.Submitted = true;
+    if (this.checkoutForm.invalid) {
+      this.toastr.error("All fields are mandatory.");
+      return;
+    }
+    else {
+
+    }
+  }
+
   // Stripe Payment Gateway
   stripeCheckout() {
     var handler = (<any>window).StripeCheckout.configure({
@@ -61,56 +76,56 @@ export class CheckoutComponent implements OnInit {
       name: 'Multikart',
       description: 'Online Fashion Store',
       amount: this.amount * 100
-    }) 
+    })
   }
 
   // Paypal Payment Gateway
   private initConfig(): void {
     this.payPalConfig = {
-        currency: this.productService.Currency.currency,
-        clientId: environment.paypal_token,
-        createOrderOnClient: (data) => < ICreateOrderRequest > {
-          intent: 'CAPTURE',
-          purchase_units: [{
-              amount: {
+      currency: this.productService.Currency.currency,
+      clientId: environment.paypal_token,
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: this.productService.Currency.currency,
+            value: this.amount,
+            breakdown: {
+              item_total: {
                 currency_code: this.productService.Currency.currency,
-                value: this.amount,
-                breakdown: {
-                    item_total: {
-                        currency_code: this.productService.Currency.currency,
-                        value: this.amount
-                    }
-                }
+                value: this.amount
               }
-          }]
+            }
+          }
+        }]
       },
-        advanced: {
-            commit: 'true'
-        },
-        style: {
-            label: 'paypal',
-            size:  'small', // small | medium | large | responsive
-            shape: 'rect', // pill | rect
-        },
-        onApprove: (data, actions) => {
-            this.orderService.createOrder(this.products, this.checkoutForm.value, data.orderID, this.getTotal);
-            console.log('onApprove - transaction was approved, but not authorized', data, actions);
-            actions.order.get().then(details => {
-                console.log('onApprove - you can get full order details inside onApprove: ', details);
-            });
-        },
-        onClientAuthorization: (data) => {
-            console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-        },
-        onCancel: (data, actions) => {
-            console.log('OnCancel', data, actions);
-        },
-        onError: err => {
-            console.log('OnError', err);
-        },
-        onClick: (data, actions) => {
-            console.log('onClick', data, actions);
-        }
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        size: 'small', // small | medium | large | responsive
+        shape: 'rect', // pill | rect
+      },
+      onApprove: (data, actions) => {
+        this.orderService.createOrder(this.products, this.checkoutForm.value, data.orderID, this.getTotal);
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then(details => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      }
     };
   }
 

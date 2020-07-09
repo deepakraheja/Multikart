@@ -13,8 +13,8 @@ import { Product } from "../../classes/product";
 export class SettingsComponent implements OnInit {
 
   public products: Product[] = []
-  
-  public languages = [{ 
+
+  public languages = [{
     name: 'English',
     code: 'en'
   }, {
@@ -22,23 +22,24 @@ export class SettingsComponent implements OnInit {
     code: 'fr'
   }];
 
-  public currencies = [{
-    name: 'Euro',
-    currency: 'EUR',
-    price: 0.90 // price of euro
-  }, {
-    name: 'Rupees',
-    currency: 'INR',
-    price: 70.93 // price of inr
-  }, {
-    name: 'Pound',
-    currency: 'GBP',
-    price: 0.78 // price of euro
-  }, {
-    name: 'Dollar',
-    currency: 'USD',
-    price: 1 // price of usd
-  }]
+  public currencies = [
+    {
+      name: 'Rupees',
+      currency: 'INR',
+      price: 70.93 // price of inr
+    }, {
+      name: 'Euro',
+      currency: 'EUR',
+      price: 0.90 // price of euro
+    }, {
+      name: 'Pound',
+      currency: 'GBP',
+      price: 0.78 // price of euro
+    }, {
+      name: 'Dollar',
+      currency: 'USD',
+      price: 1 // price of usd
+    }]
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
@@ -49,7 +50,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  changeLanguage(code){
+  changeLanguage(code) {
     if (isPlatformBrowser(this.platformId)) {
       this.translate.use(code)
     }

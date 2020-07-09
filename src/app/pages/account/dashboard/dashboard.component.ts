@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   public openDashboard: boolean = false;
-
+  public ShowTabName: string = "AccountInfor";
+  
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router
