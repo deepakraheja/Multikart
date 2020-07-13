@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map, startWith, delay } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
+import { productSizeColor } from '../classes/productsizecolor';
+import { Productkart } from 'src/app/shared/classes/productkart';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -17,7 +19,7 @@ const state = {
 })
 export class ProductService {
 
-  public Currency = { name: 'Dollar', currency: 'USD', price: 1 } // Default Currency
+  public Currency = { name: 'Rupees', currency: 'INR', price: 70.93 } // Default Currency
   public OpenCart: boolean = false;
   public Products
 
@@ -139,6 +141,44 @@ export class ProductService {
     return <Observable<Product[]>>itemsStream;
   }
 
+  // Get Cart Items
+  public get ProductcartItems(): Observable<Product[]> {
+    const itemsStream = new Observable(observer => {
+      observer.next(state.cart);
+      observer.complete();
+    });
+    return <Observable<productSizeColor[]>>itemsStream;
+  }
+
+
+  // added on 13 july 2020 by deepak
+  //Add to Cart 
+  public addToCartProduct(product: productSizeColor): any {
+    debugger;
+    const cartItem = state.cart.find(item => item.productSizeColorId === product.productSizeColorId);
+    const qty = product.quantity ? product.quantity : 1;
+    const items = cartItem ? cartItem : product;
+    const stock = this.calculateStockCounts(items, qty);
+
+    if (!stock) return false
+
+    if (cartItem) {
+      cartItem.quantity += qty
+    } else {
+      state.cart.push({
+        ...product,
+        quantity: qty
+      })
+    }
+
+    this.OpenCart = true; // If we use cart variation modal
+    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    return true;
+  }
+
+
+
+  // commnented on 13 july 2020 by deepak
   // Add to Cart
   public addToCart(product): any {
     const cartItem = state.cart.find(item => item.id === product.id);
@@ -196,6 +236,21 @@ export class ProductService {
     return true
   }
 
+  //added on 13 july 2020 by deepak
+  // Total amount 
+  public productcartTotalAmount(): Observable<number> {
+    return this.cartItems.pipe(map((product: productSizeColor[]) => {
+      return product.reduce((prev, curr: productSizeColor) => {
+        let price = curr.salePrice;
+        // if (curr.discount) {
+        //   price = curr.price - (curr.price * curr.discount / 100)
+        // }
+        return (prev + price * curr.quantity);
+      }, 0);
+    }));
+  }
+
+  // commnented on 13 july 2020 by deepak
   // Total amount 
   public cartTotalAmount(): Observable<number> {
     return this.cartItems.pipe(map((product: Product[]) => {

@@ -24,7 +24,7 @@ export class DataService {
 
 
   get(method) {
-    debugger;
+    
     return this.httpClient.get(this.baseURL + method);
   }
   getWithParam(method, _params) {

@@ -23,9 +23,9 @@ export class LeftMenuComponent implements OnInit {
   }
 
   BindCategory(): void {
-    debugger;
+   
     this._categoryService.GetCategoryJson().subscribe(menuItems => {
-      debugger;
+      
       this.menuItems = menuItems;
 
     });

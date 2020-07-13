@@ -8,12 +8,12 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./header-one.component.scss']
 })
 export class HeaderOneComponent implements OnInit {
-
+  
   @Input() class: string;
   @Input() themeLogo: string = 'assets/images/icon/logo.png'; // Default Logo
   @Input() topbar: boolean = true; // Default True
   @Input() sticky: boolean = false; // Default false
-
+  
   public stick: boolean = false;
   public LoggedInUser: any[] = [];
   constructor(
@@ -23,7 +23,6 @@ export class HeaderOneComponent implements OnInit {
 
   ngOnInit(): void {
     this._SharedDataService.currentUser.subscribe(a => {
-
       this.LoggedInUser = a;
     });
   }
@@ -32,18 +31,17 @@ export class HeaderOneComponent implements OnInit {
   @HostListener("window:scroll", [])
   onWindowScroll() {
     let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (number >= 300 && window.innerWidth > 400) {
-      this.stick = true;
-    } else {
-      this.stick = false;
-    }
+  	if (number >= 300 && window.innerWidth > 400) { 
+  	  this.stick = true;
+  	} else {
+  	  this.stick = false;
+  	}
   }
 
   Logout() {
-
     sessionStorage.removeItem('LoggedInUser');
     this.LoggedInUser = [];
+    this._SharedDataService.AssignUser(null);
     this.router.navigate(['/home/fashion']);
   }
-
 }

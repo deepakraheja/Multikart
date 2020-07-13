@@ -52,6 +52,10 @@ const routes: Routes = [
     component: LoginComponent 
   },
   { 
+    path: 'login/:cart', 
+    component: LoginComponent 
+  },
+  { 
     path: 'register', 
     component: RegisterComponent 
   },

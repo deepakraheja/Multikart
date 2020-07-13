@@ -43,7 +43,9 @@
                                     </div>
                                 </div>
                             </td>
-                            <td><h2>$63.00</h2></td>
+                            <td>
+                                <h2>$63.00</h2>
+                            </td>
                             <td>
                                 <div class="qty-box">
                                     <div class="input-group">
@@ -66,7 +68,9 @@
                                     <i class="ti-close"></i>
                                 </a>
                             </td>
-                            <td><h2 class="td-color">$4539.00</h2></td>
+                            <td>
+                                <h2 class="td-color">$4539.00</h2>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -74,7 +78,9 @@
                     <tfoot>
                         <tr>
                             <td>total price :</td>
-                            <td><h2> $6935.00 </h2></td>
+                            <td>
+                                <h2> $6935.00 </h2>
+                            </td>
                         </tr>
                     </tfoot>
                 </table>
@@ -85,7 +91,7 @@
                 <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
             </div>
             <div class="col-6">
-                <a [routerLink]="['/shop/checkout']" class="btn btn-solid">check out</a>
+                <a class="btn btn-solid" (click)="ProceedToCheckout()">check out</a>
             </div>
         </div>
     </div>

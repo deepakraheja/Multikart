@@ -3,7 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { Products } from '../modals/products.model';
+import { Productkart } from '../shared/classes/productkart';
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +22,16 @@ export class ProductsService {
 
 
 
-  BindProductByPopular(): Observable<Products[]> {
- 
+  BindProductByPopular(): Observable<Productkart[]> {
+
     this._methodName = "GetProductByPopular";
-    return this._http.post<Products[]>(
+    return this._http.post<Productkart[]>(
       this._url + this._methodName, this._param
     );
   }
 
   getProductByCategory(_categoryObj: any): Observable<any[]> {
- 
+
     this._methodName = "GetProductBySubcatecode";
     this._param = _categoryObj;
     return this._http.post<any[]>(
@@ -39,17 +39,17 @@ export class ProductsService {
     );
   }
 
-  getProductById(_productObj: any): Observable<Products[]> {
-    this._methodName = "GetProductByRowID"; 
+  getProductById(_productObj: any): Observable<Productkart[]> {
+    this._methodName = "GetProductByRowID";
     this._param = _productObj;
-    return this._http.post<Products[]>(
+    return this._http.post<Productkart[]>(
       this._url + this._methodName, this._param
     );
   }
 
-  GetBannerProduct(): Observable<Products[]> {
-    this._methodName = "GetBannerProduct"; 
-    return this._http.post<Products[]>(
+  GetBannerProduct(): Observable<Productkart[]> {
+    this._methodName = "GetBannerProduct";
+    return this._http.post<Productkart[]>(
       this._url + this._methodName, this._param
     );
   }

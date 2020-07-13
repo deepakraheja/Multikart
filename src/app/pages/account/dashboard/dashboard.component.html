@@ -36,7 +36,7 @@
                             <h2>My Dashboard</h2>
                         </div>
                         <div class="welcome-msg">
-                            <p>Hello, MARK JECNO !</p>
+                            <p>Hello, {{LoggedInUser[0].name}}!</p>
                             <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
                         </div>
                         <div class="box-account box-info">
@@ -51,50 +51,26 @@
                                             <a href="javascript:void(0)">Edit</a>
                                         </div>
                                         <div class="box-content">
-                                            <h6>MARK JECNO</h6>
-                                            <h6>MARk-JECNO@gmail.com</h6>
-                                            <h6><a href="javascript:void(0)">Change Password</a></h6>
+                                            <h6>Name : {{LoggedInUser[0].name}}</h6>
+                                            <h6>Email : {{LoggedInUser[0].email}}</h6>
+                                            <!-- <h6><a href="javascript:void(0)">Change Password</a></h6> -->
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            <h3>Newsletters</h3>
-                                            <a href="javascript:void(0)">Edit</a>
+                                            &nbsp;
                                         </div>
                                         <div class="box-content">
                                             <p>
-                                                You are currently not subscribed to any newsletter.
+                                                Mobile No : {{LoggedInUser[0].mobileNo}}
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <div class="box">
-                                    <div class="box-title">
-                                        <h3>Address Book</h3>
-                                        <a href="javascript:void(0)">Manage Addresses</a>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h6>Default Billing Address</h6>
-                                            <address>
-                                                You have not set a default billing address.<br>
-                                                <a href="javascript:void(0)">Edit Address</a>
-                                            </address>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h6>Default Shipping Address</h6>
-                                            <address>
-                                                You have not set a default shipping address.<br>
-                                                <a href="javascript:void(0)">Edit Address</a>
-                                            </address>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -141,7 +117,7 @@
                         </div>
                         <div class="box-account box-info">
                             <div>
-                                <div class="box">
+                                <!-- <div class="box">
                                     <div class="a-box-group a-spacing-base order" *ngFor="let lst of lstOrder">
                                         <div class="a-box a-color-offset-background order-info">
                                             <div class="a-box-inner">
@@ -182,10 +158,7 @@
                                                                     <div class="a-row a-size-base">
                                                                         <span class="a-color-secondary value">
                                                                             {{lst.Amount | currency:'INR'}}/-
-                                                                            <!-- <span
-                                                                                style="text-decoration: inherit; white-space: nowrap;"><span
-                                                                                    class="currencyINR">&nbsp;&nbsp;</span><span class="currencyINRFallback" style="display:none">Rs.
-                                                                                </span>359.00</span> -->
+                                                                           
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -209,12 +182,7 @@
                                                                     </div>
                                                                     <div class="a-row a-size-base">
                                                                         <span class="a-color-secondary">
-                                                                            <!-- <span class="a-declarative" data-action="a-popover"
-                                                                                data-a-popover="{&quot;width&quot;:&quot;250&quot;,&quot;inlineContent&quot;:&quot;\u003cdiv class=\&quot;a-row recipient-address\&quot;>\u003cdiv class=\&quot;displayAddressDiv\&quot;>\n\u003cul class=\&quot;displayAddressUL\&quot;>\n\u003cli class=\&quot;displayAddressLI displayAddressFullName\&quot;>Rakesh Kumar\u003c/li>\n\u003cli class=\&quot;displayAddressLI displayAddressAddressLine1\&quot;>C/o Sonu Kumar, 7th Floor, East Wing\u003c/li>\n\u003cli class=\&quot;displayAddressLI displayAddressAddressLine2\&quot;>JMD Regent Square, MG Road\u003c/li>\n\u003cli class=\&quot;displayAddressLI displayAddressCityStateOrRegionPostalCode\&quot;>GURUGRAM, HARYANA 122002\u003c/li>\n\u003cli class=\&quot;displayAddressLI displayAddressCountryName\&quot;>India\u003c/li>\n\u003cli class=\&quot;displayAddressLI displayAddressPhoneNumber\&quot;>Phone: 9716315409\u003c/li>\n\u003c/ul>\n\u003c/div>\n\n\u003c/div>&quot;,&quot;closeButton&quot;:&quot;false&quot;,&quot;closeButtonLabel&quot;:&quot;&quot;,&quot;position&quot;:&quot;triggerBottom&quot;,&quot;dataStrategy&quot;:&quot;inline&quot;,&quot;name&quot;:&quot;recipient&quot;,&quot;popoverLabel&quot;:&quot;&quot;}">
-                                                                                <a aria-label="" href="javascript:void(0)"
-                                                                                    class="a-popover-trigger a-declarative value"><span
-                                                                                        class="trigger-text">Rakesh Kumar</span><i class="a-icon a-icon-popover"></i></a>
-                                                                        </span> --> {{lst.ShipAddress}} {{lst.ShipAddress2=='null'?'':lst.ShipAddress2}} {{lst.City}}, {{lst.State}}, {{lst.Zip}}
+                                                                           {{lst.ShipAddress}} {{lst.ShipAddress2=='null'?'':lst.ShipAddress2}} {{lst.City}}, {{lst.State}}, {{lst.Zip}}
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -232,38 +200,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- <div class="a-fixed-right-grid-col actions a-col-right" style="width:290px;margin-right:-290px;float:left;">
-                                                            <div class="a-row a-size-mini">
-                                                                <span class="a-color-secondary label" style="font-weight: 700;">
-                                                                    Order #
-                                                                </span>
-                                                                <span class="a-color-secondary value">
-                                                                    9999{{lst.OrderId}}
-                                                                </span>
-                                                            </div>
-                                                            <div class="a-row a-size-base">
-                                                                <ul class="a-unordered-list a-nostyle a-vertical">
-                                                                    <a class="a-link-normal" href="/gp/your-account/order-details/ref=ppx_yo_dt_b_order_details_o00?ie=UTF8&amp;orderID=407-6204539-9441150">
-                                                                        Order Details
-                                                                    </a>
-                                                                    <i class="a-icon a-icon-text-separator" role="img"></i>
-                                                                    <span class="hide-if-no-js">
-                                                                        <span class="a-declarative" data-action="a-popover"
-                                                                            data-a-popover="{&quot;url&quot;:&quot;/gp/shared-cs/ajax/invoice/invoice.html?orderId=407-6204539-9441150&amp;relatedRequestId=NXVNX246C1MRHA7RVG7H&amp;isADriveSubscription=&amp;isHFC=&amp;isBookingOrder=0&quot;,&quot;position&quot;:&quot;triggerBottom&quot;,&quot;ajaxFailMsg&quot;:&quot;\n\u003cdiv class=\&quot;a-box a-alert-inline a-alert-inline-warning\&quot;>\u003cdiv class=\&quot;a-box-inner a-alert-container\&quot;>\u003ci class=\&quot;a-icon a-icon-alert\&quot;>\u003c/i>\u003cdiv class=\&quot;a-alert-content\&quot;>\n        \u003cspan class=\&quot;a-text-bold\&quot;>\n            There was a problem getting your invoice.\n        \u003c/span>\n\u003c/div>\u003c/div>\u003c/div>\n\u003cdiv class=\&quot;a-row a-spacing-top-mini\&quot;>\n    Please visit order details for information about your order.\n\u003c/div>\n\u003cdiv class=\&quot;a-row\&quot;>\n    \u003ca class=\&quot;a-link-emphasis\&quot; href=\&quot;/gp/your-account/order-details/ref=oh_aui_invorder_details?ie=UTF8&amp;orderID=407-6204539-9441150\&quot;>View order details\u003c/a>\n\u003c/div>\n&quot;,&quot;activate&quot;:&quot;onclick&quot;}">
-                                                                            <a href="javascript:void(0)"
-                                                                                class="a-popover-trigger a-declarative">
-                                                                                Invoice
-                                                                                <i class="a-icon a-icon-popover"></i></a>
-                                                                        </span>
-                                                                    </span>
-                                                                    <span class="hide-if-js">
-                                                                        <a class="a-link-normal"
-                                                                            href="/gp/css/summary/print.html/ref=ppx_yo_dt_b_invoice_o00?ie=UTF8&amp;orderID=407-6204539-9441150">Printable
-                                                                            Order Summary</a>
-                                                                    </span>
-                                                                </ul>
-                                                            </div>
-                                                        </div> -->
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,11 +210,6 @@
                                                 <div class="a-row shipment-top-row js-shipment-info-container">
                                                     <div style="margin-right:230px; padding-right:20px">
 
-                                                        <!-- <div class="a-row">
-                                                            <span class="a-size-medium a-color-base a-text-bold">
-                                                                Arriving {{lst.OrderDate | date}}
-                                                            </span>
-                                                        </div> -->
                                                         <div class="a-row">
                                                             <span class="a-color-success">
                                                                 Not yet dispatched
@@ -287,21 +219,7 @@
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <!-- <div class="actions" style="width:230px;">
-                                                        <div class="a-row">
-                                                            <div class="a-button-stack">
-                                                                <span class="a-declarative" data-action="set-shipment-info-cookies" data-set-shipment-info-cookies="{}">
-                                                                    <span class="a-button a-button-primary track-package-button"
-                                                                        id="a-autoid-3"><span class="a-button-inner"><a
-                                                                                href="/progress-tracker/package/ref=ppx_yo_dt_b_track_package?_encoding=UTF8&amp;itemId=jishkuqrskrsuo&amp;orderId=407-6204539-9441150&amp;vt="
-                                                                                class="a-button-text" role="button"
-                                                                                id="a-autoid-3-announce">
-                                                                                Track package
-                                                                            </a></span></span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+                                                   
                                                 </div>
                                                 <div class="a-fixed-right-grid a-spacing-top-medium">
                                                     <div class="a-fixed-right-grid-inner a-grid-vertical-align a-grid-top">
@@ -370,7 +288,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

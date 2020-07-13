@@ -11,13 +11,16 @@ export class DashboardComponent implements OnInit {
 
   public openDashboard: boolean = false;
   public ShowTabName: string = "AccountInfor";
-  
+  public LoggedInUser: any[] = [];
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this._SharedDataService.currentUser.subscribe(a => {
+      this.LoggedInUser = a;
+    });
   }
 
   ToggleDashboard() {
@@ -26,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   Logout() {
     sessionStorage.removeItem('LoggedInUser');
-    this._SharedDataService.AssignUser([]);
+    this._SharedDataService.AssignUser(null);
     this.router.navigate(['/home/fashion']);
   }
 }
