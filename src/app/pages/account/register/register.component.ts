@@ -34,8 +34,6 @@ export class RegisterComponent implements OnInit {
   get f() { return this.RegistrationForm.controls; }
 
   CreateRegistration() {
-
-    let message, status;
     if (this.RegistrationForm.invalid) {
       this.toastr.error('All the * marked fields are mandatory');
       return;
@@ -43,26 +41,27 @@ export class RegisterComponent implements OnInit {
     else {
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
         if (res > 0) {
-          let obj = {
-            LoginId: this.RegistrationForm.value.email,
-            password: this.RegistrationForm.value.password
-          };
-          this.userService.ValidLogin(obj).subscribe(res => {
-            if (res.length > 0) {
+          this.toastr.success("Thank you for registering. We will inform you when your account will be approved.");
+          // let obj = {
+          //   LoginId: this.RegistrationForm.value.email,
+          //   password: this.RegistrationForm.value.password
+          // };
+          // this.userService.ValidLogin(obj).subscribe(res => {
+          //   if (res.length > 0) {
 
-              sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
-              this._SharedDataService.AssignUser(res);
-              debugger
-              this.route.paramMap.subscribe((params: ParamMap) => {
-                if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
-                  this.router.navigate(['/shop/cart']);
-                }
-                else {
-                  this.router.navigate(['/home/fashion']);
-                }
-              });
-            }
-          });
+          //     sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
+          //     this._SharedDataService.AssignUser(res);
+          //     debugger
+          //     this.route.paramMap.subscribe((params: ParamMap) => {
+          //       if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
+          //         this.router.navigate(['/shop/cart']);
+          //       }
+          //       else {
+          //         this.router.navigate(['/home/fashion']);
+          //       }
+          //     });
+          //   }
+          // });
 
           //this.router.navigate(['/home/fashion']);
         }

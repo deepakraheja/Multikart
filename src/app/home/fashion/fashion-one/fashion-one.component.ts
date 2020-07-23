@@ -12,7 +12,7 @@ export class FashionOneComponent implements OnInit {
 
   public products: Product[] = [];
   public productCollections: any[] = [];
-  
+
   constructor(public productService: ProductService) {
     this.productService.getProducts.subscribe(response => {
       this.products = response.filter(item => item.type == 'fashion');
@@ -29,14 +29,32 @@ export class FashionOneComponent implements OnInit {
   public ProductSliderConfig: any = ProductSlider;
 
   public sliders = [{
-    title: 'welcome to fashion',
-    subTitle: 'Men fashion',
-    image: 'assets/images/slider/1.jpg'
+    // title: 'welcome to fashion',
+    //subTitle: ''Men fashion'',
+    image: 'assets/images/slider/banner_1.jpg'
   }, {
-    title: 'welcome to fashion',
-    subTitle: 'Women fashion',
-    image: 'assets/images/slider/2.jpg'
-  }]
+    //title: 'welcome to fashion',
+    //subTitle: 'Women fashion',
+    image: 'assets/images/slider/banner_2.jpg'
+
+  },
+  {
+    image: 'assets/images/slider/banner_3.jpg'
+
+  },
+  {
+    image: 'assets/images/slider/banner_4.jpg'
+
+  },
+  {
+    image: 'assets/images/slider/banner_5.jpg'
+
+  },
+  {
+    image: 'assets/images/slider/banner_6.jpg'
+
+  }
+  ]
 
   // Collection banner
   public collections = [{
@@ -102,5 +120,5 @@ export class FashionOneComponent implements OnInit {
       }
     })
   }
-  
+
 }

@@ -8,6 +8,10 @@ import { productSizeColor } from '../../classes/productsizecolor';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from 'src/app/pages/account/login/login.component';
+import { CartService } from 'src/app/Service/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-settings',
@@ -15,12 +19,12 @@ import { SharedDataService } from 'src/app/Service/shared-data.service';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-  
+
   public ProductImage = environment.ProductImage;
 
-
+  user: any[] = [];
   public products: Product[] = []
-  public productSizeColor: productSizeColor[] = [];
+  public productSizeColor: productSizeColor[];
 
   public languages = [{
     name: 'English',
@@ -30,7 +34,7 @@ export class SettingsComponent implements OnInit {
     code: 'fr'
   }];
 
- public currencies = [
+  public currencies = [
     {
       name: 'Rupees',
       currency: 'INR',
@@ -60,15 +64,26 @@ export class SettingsComponent implements OnInit {
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
     private translate: TranslateService,
     public productService: ProductService,
-      private router: Router,
-    private _SharedDataService: SharedDataService) {
-    this.productService.ProductcartItems.subscribe(response => {
-      this.productSizeColor = response
-      debugger;
-    });
+    private router: Router,
+    private _SharedDataService: SharedDataService,
+    private modalPopUpService: NgbModal,
+    private _cartService: CartService,
+    private toastrService: ToastrService
+  ) {
+    debugger
+
+
+    // this.productService.ProductcartItems.subscribe(response => {
+    //   this.productSizeColor = response
+    //   debugger;
+    // });
   }
 
   ngOnInit(): void {
+    this._SharedDataService.lstCart.subscribe(res => {
+      debugger
+      this.LoadCart();
+    });
   }
 
   changeLanguage(code) {
@@ -76,9 +91,33 @@ export class SettingsComponent implements OnInit {
       this.translate.use(code)
     }
   }
+  getTotal() {
+    var TotalAmount = 0;
+    this.productSizeColor.forEach(element => {
+      TotalAmount += element.salePrice * element.quantity
+    });
+    return TotalAmount;
+  }
 
-  get getTotal(): Observable<number> {
-    return this.productService.cartTotalAmount();
+  // public get getTotal(): Observable<number> {
+  //   return this.productService.productcartTotalAmount();
+  // }
+
+  LoadCart() {
+    debugger
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    if (this.user != null) {
+      let obj = {
+        UserID: this.user[0].userID
+      };
+      this._cartService.GetCartById(obj).subscribe(response => {
+        debugger
+        this.productSizeColor = response;
+      });
+    }
+    else {
+      this.productSizeColor = [];
+    }
   }
 
   removeItem(product: any) {
@@ -89,21 +128,39 @@ export class SettingsComponent implements OnInit {
     this.productService.Currency = currency
   }
 
-  ProceedToCheckout() {
-    debugger
-    this._SharedDataService.currentUser.subscribe(res => {
-      debugger
-      if (res == null || res == undefined) {
-        this.router.navigate(['/pages/login/cart']);
-      }
-      else {
-        if (res.length > 0) {
-          this.router.navigate(['/shop/checkout']);
-        }
-        else {
-          this.router.navigate(['/pages/login/cart']);
-        }
-      }
-    });
-  }
+  // ProceedToCheckout(val) {
+  //   debugger
+  //   this._SharedDataService.currentUser.subscribe(res => {
+  //     debugger
+  //     if (res == null || res == undefined) {
+  //       //this.router.navigate(['/pages/login/cart']);
+
+  //       this.modalPopUpService.open(LoginComponent, {
+  //         size: 'lg',
+  //         //ariaLabelledBy: 'Cart-Modal',
+  //         centered: true,
+  //         //windowClass: 'theme-modal cart-modal CartModal'
+  //       }).result.then((result) => {
+  //         `Result ${result}`
+  //       }, (reason) => {
+  //         this.modalPopUpService.dismissAll();
+  //       });
+
+  //     }
+  //     else {
+  //       if (res.length > 0) {
+  //         this.router.navigate(['/shop/' + val]);
+  //       }
+  //       // else {
+  //       //   this.modalPopUpService.open(LoginComponent, {
+  //       //     size: 'lg',
+  //       //     ariaLabelledBy: 'Cart-Modal',
+  //       //     centered: true,
+  //       //     windowClass: 'theme-modal cart-modal CartModal'
+  //       //   });
+  //       //   //this.router.navigate(['/pages/login/cart']);
+  //       // }
+  //     }
+  //   });
+  // }
 }

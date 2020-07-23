@@ -1,26 +1,51 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Order } from '../../../shared/classes/order';
-import { OrderService } from '../../../shared/services/order.service';
+//import { OrderService } from '../../../shared/services/order.service';
 import { ProductService } from '../../../shared/services/product.service';
+import { OrderService } from 'src/app/Service/order.service';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-success',
   templateUrl: './success.component.html',
   styleUrls: ['./success.component.scss']
 })
-export class SuccessComponent implements OnInit, AfterViewInit{
+export class SuccessComponent implements OnInit, AfterViewInit {
+  public ProductImage = environment.ProductImage;
+  public orderDetails: any[] = [];
+  user: any[] = [];
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    public productService: ProductService,
+    //private orderService: OrderService
+    private _OrderService: OrderService
+  ) { }
 
-  public orderDetails : Order = {};
+  ngOnInit(): void {
 
-  constructor(public productService: ProductService,
-    private orderService: OrderService) { }
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      debugger
+      //this.GetOrderById(Number(params.get('orderId')));
+      var orderId = params.get('id');
+      if (Number(orderId) != NaN && orderId.length <= 9) {
+        let obj = {
+          OrderId: Number(orderId)
+        };
+        this._OrderService.GetOrderByOrderId(obj).subscribe(res => {
+          this.orderDetails = res;
+          //console.log(res);
+        });
+      }
+    });
+    //this.orderService.checkoutItems.subscribe(response => this.orderDetails = response);
+    //this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
 
-  ngOnInit(): void {	
-    this.orderService.checkoutItems.subscribe(response => this.orderDetails = response);
   }
 
   ngAfterViewInit() {
-    
+
   }
 
 }

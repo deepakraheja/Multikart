@@ -17,8 +17,7 @@
                             <del *ngIf="product?.discount"><span class="money">{{ product.price * currency?.price | currency:currency?.currency:'symbol' }}</span></del>
                         </h3>
                         <ul class="color-variant" *ngIf="Color(product.variants).length">
-                            <li [class]="color" *ngFor="let color of Color(product.variants)"
-                                [ngStyle]="{'background-color': color}" (click)="ChangeVariants(color, product)">
+                            <li [class]="color" *ngFor="let color of Color(product.variants)" [ngStyle]="{'background-color': color}" (click)="ChangeVariants(color, product)">
                             </li>
                         </ul>
                         <div class="border-product">

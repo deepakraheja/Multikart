@@ -6,6 +6,10 @@ import { ToastrService } from 'ngx-toastr';
 import { Product } from '../classes/product';
 import { productSizeColor } from '../classes/productsizecolor';
 import { Productkart } from 'src/app/shared/classes/productkart';
+import { LoginComponent } from 'src/app/pages/account/login/login.component';
+import { SharedDataService } from 'src/app/Service/shared-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from 'src/app/Service/cart.service';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -19,12 +23,16 @@ const state = {
 })
 export class ProductService {
 
-  public Currency = { name: 'Rupees', currency: 'INR', price: 70.93 } // Default Currency
+  public Currency = { name: 'Rupees', currency: 'INR', price: 1 } // Default Currency
   public OpenCart: boolean = false;
   public Products
-
+  user: any[] = null;
   constructor(private http: HttpClient,
-    private toastrService: ToastrService) { }
+    private toastrService: ToastrService,
+    private _SharedDataService: SharedDataService,
+    private modalService: NgbModal,
+    private _cartService: CartService
+  ) { }
 
   /*
     ---------------------------------------------
@@ -153,26 +161,50 @@ export class ProductService {
 
   // added on 13 july 2020 by deepak
   //Add to Cart 
-  public addToCartProduct(product: productSizeColor): any {
+  public addToCartProduct(product: any[]): any {
     debugger;
-    const cartItem = state.cart.find(item => item.productSizeColorId === product.productSizeColorId);
-    const qty = product.quantity ? product.quantity : 1;
-    const items = cartItem ? cartItem : product;
-    const stock = this.calculateStockCounts(items, qty);
-
-    if (!stock) return false
-
-    if (cartItem) {
-      cartItem.quantity += qty
-    } else {
-      state.cart.push({
-        ...product,
-        quantity: qty
-      })
+    console.log(product);
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    debugger
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
     }
+    else {
+      // debugger
+      // let obj = {
+      //   UserID: Number(this.user[0].userID),
+      //   ProductSizeId: Number(product.productSizeId),
+      //   Quantity: Number(product.quantity)
+      // }
+      this._cartService.AddToCart(product).subscribe(res => {
+        this.toastrService.success("Product has been successfully added in cart.");
+        this._SharedDataService.UserCart([]);
+      });
+    }
+    // const cartItem = state.cart.find(item => item.productSizeColorId === product.productSizeColorId);
+    // const qty = product.quantity ? product.quantity : 1;
+    // const items = cartItem ? cartItem : product;
+    // const stock = this.calculateStockCounts(items, qty);
 
-    this.OpenCart = true; // If we use cart variation modal
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+    // if (!stock) return false
+
+    // if (cartItem) {
+    //   cartItem.quantity += qty
+    // } else {
+    //   state.cart.push({
+    //     ...product,
+    //     quantity: qty
+    //   })
+    // }
+
+    // this.OpenCart = true; // If we use cart variation modal
+    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
     return true;
   }
 
@@ -181,6 +213,22 @@ export class ProductService {
   // commnented on 13 july 2020 by deepak
   // Add to Cart
   public addToCart(product): any {
+    debugger
+
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    debugger
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
+    }
+    else {
+      alert('hi');
+    }
     const cartItem = state.cart.find(item => item.id === product.id);
     const qty = product.quantity ? product.quantity : 1;
     const items = cartItem ? cartItem : product;
@@ -229,10 +277,19 @@ export class ProductService {
   }
 
   // Remove Cart items
-  public removeCartItem(product: Product): any {
-    const index = state.cart.indexOf(product);
-    state.cart.splice(index, 1);
-    localStorage.setItem("cartItems", JSON.stringify(state.cart));
+  public removeCartItem(product: any): any {
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    let obj = {
+      CartId: product.cartId,
+      UserID: this.user[0].userID
+    };
+    this._cartService.DelCartById(obj).subscribe(res => {
+      this.toastrService.success('Product has been deleted successfully.');
+      this._SharedDataService.UserCart([]);
+    });
+    // const index = state.cart.indexOf(product);
+    // state.cart.splice(index, 1);
+    // localStorage.setItem("cartItems", JSON.stringify(state.cart));
     return true
   }
 

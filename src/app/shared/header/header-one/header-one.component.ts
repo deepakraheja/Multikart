@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { LoginComponent } from 'src/app/pages/account/login/login.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header-one',
@@ -18,7 +20,8 @@ export class HeaderOneComponent implements OnInit {
   public LoggedInUser: any[] = [];
   constructor(
     private router: Router,
-    private _SharedDataService: SharedDataService
+    private _SharedDataService: SharedDataService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -43,5 +46,17 @@ export class HeaderOneComponent implements OnInit {
     this.LoggedInUser = [];
     this._SharedDataService.AssignUser(null);
     this.router.navigate(['/home/fashion']);
+  }
+  Login() {
+    this.modalService.open(LoginComponent, {
+      size: 'lg',
+      //ariaLabelledBy: 'Cart-Modal',
+      centered: true,
+      //windowClass: 'theme-modal cart-modal CartModal'
+    }).result.then((result) => {
+      `Result ${result}`
+    }, (reason) => {
+      this.modalService.dismissAll();
+    });
   }
 }

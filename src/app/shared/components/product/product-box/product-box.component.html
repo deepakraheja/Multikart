@@ -73,7 +73,7 @@
       <span class="lable4" *ngIf="productkart.sale">on sale</span> -->
     </div>
     <div class="front">
-      <a [routerLink]="['/shop/product/left/sidebar/', productkart.rowID,productkart?.productSizeColor[0]?.productSizeColorId]">
+      <a (click)="GoToDetail(productkart.rowID,productkart?.productSizeId,productkart?.setType);">
         <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
           [lazyLoad]="ImageSrc ? ImageSrc : ProductImage+productkart.productID+'/frontImage/'+productkart.frontImage"
           class="img-fluid lazy-loading" alt="" />
@@ -92,23 +92,23 @@
         </a>
       </li>
     </ul> -->
-    <div class="cart-info cart-wrap">
-      <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(product)" *ngIf="cartModal">
+    <!-- <div class="cart-info cart-wrap">
+      <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(productkart)" *ngIf="cartModal">
         <i class="ti-shopping-cart"></i>
       </a>
-      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(product)" *ngIf="!cartModal">
+      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(productkart)" *ngIf="!cartModal">
         <i class="ti-shopping-cart"></i>
       </a>
-      <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishlist(product)">
+      <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishlist(productkart)">
         <i class="ti-heart" aria-hidden="true"></i>
       </a>
       <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
         <i class="ti-search" aria-hidden="true"></i>
       </a>
-      <a href="javascript:void(0)" title="Compare" (click)="addToCompare(product)">
+      <a href="javascript:void(0)" title="Compare" (click)="addToCompare(productkart)">
         <i class="ti-reload" aria-hidden="true"></i>
       </a>
-    </div>
+    </div> -->
   </div>
   <div class="product-detail">
     <div>
@@ -122,26 +122,26 @@
         <del> <span class="money">
             {{ productkart?.price  | currency:currency?.currency:'symbol' }}</span></del>
         <br />
-        <div>{{productkart?.discount}}%
-          off</div>
+        <div>{{productkart?.discount}}% off
+        </div>
 
       </h4>
-      <ul class="color-variant" *ngIf="Color(productkart?.productSizeColor).length">
+      <!-- <ul class="color-variant" *ngIf="Color(productkart?.productSizeColor).length">
         <li [class]="color" *ngFor="let color of Color(productkart?.productSizeColor)"
           [ngStyle]="{'background-color': color}" (click)="ChangeVariants(color, productkart?.productSizeColor)">
 
         </li>
 
-      </ul>
+      </ul> -->
 
-      <ul *ngIf="Size(productkart?.productSizeColor).length">
+      <!-- <ul *ngIf="Size(productkart?.productSizeColor).length">
         <li
           style="cursor: pointer;color: #222; font-size: 12px;padding: 4px;align-items: center; justify-content: center;height: 100%"
           *ngFor="let size of Size(productkart?.productSizeColor)"
           (click)="ChangeVariants(size, productkart?.productSizeColor)">
           {{size}}
         </li>
-      </ul>
+      </ul> -->
 
     </div>
   </div>

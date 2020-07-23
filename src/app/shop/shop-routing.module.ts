@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ProductLeftSidebarComponent } from './product/sidebar/product-left-sidebar/product-left-sidebar.component';
-import { ProductRightSidebarComponent } from './product/sidebar/product-right-sidebar/product-right-sidebar.component';
-import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
+//import { ProductRightSidebarComponent } from './product/sidebar/product-right-sidebar/product-right-sidebar.component';
+//import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
 import { ThreeColumnComponent } from './product/three-column/three-column.component';
 import { FourImageComponent } from './product/four-image/four-image.component';
 import { BundleProductComponent } from './product/bundle-product/bundle-product.component';
@@ -20,11 +20,27 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
 
 import { Resolver } from '../shared/services/resolver.service';
+import { ProductLeftSidebarWithSetComponent } from './product/sidebar/product-left-sidebar-with-set/product-left-sidebar-with-set.component';
+import { ProductLeftSidebarWithBundleComponent } from './product/sidebar/product-left-sidebar-with-bundle/product-left-sidebar-with-bundle.component';
 
 const routes: Routes = [
   {
-    path: 'product/left/sidebar/:productId/:productSizeColorId',
+    path: 'product/left/sidebar/:productId/:productSizeId',
     component: ProductLeftSidebarComponent,
+    resolve: {
+      data: Resolver
+    }
+  },
+  {
+    path: 'product/left/sidebarwithset/:productId/:productSizeColorId',
+    component: ProductLeftSidebarWithSetComponent,
+    resolve: {
+      data: Resolver
+    }
+  },
+  {
+    path: 'product/left/sidebarwithbundle/:productId/:productSizeColorId',
+    component: ProductLeftSidebarWithBundleComponent,
     resolve: {
       data: Resolver
     }

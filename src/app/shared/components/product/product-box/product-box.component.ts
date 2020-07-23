@@ -5,6 +5,12 @@ import { Product } from "../../../classes/product";
 import { ProductService } from "../../../services/product.service";
 import { Productkart } from '../../../../shared/classes/productkart';
 import { environment } from 'src/environments/environment';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from 'src/app/pages/account/login/login.component';
+import { SharedDataService } from 'src/app/Service/shared-data.service';
+import { Router } from '@angular/router';
+import { CartService } from 'src/app/Service/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-box',
@@ -21,16 +27,22 @@ export class ProductBoxComponent implements OnInit {
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
   @Input() loader: boolean = false;
-  
+  public user: any[] = JSON.parse(sessionStorage.getItem('LoggedInUser'));
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
+  //public closeResult: string;
+  public ImageSrc: string
 
-  public ImageSrc : string
-
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+    private modalService: NgbModal,
+    private _SharedDataService: SharedDataService,
+    private router: Router,
+    private _CartService: CartService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
-    if(this.loader) {
+    if (this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }
   }
@@ -47,9 +59,10 @@ export class ProductBoxComponent implements OnInit {
   }
   // Get Product Size
   Size(variants) {
+    debugger;
     const uniqSize = [];
     for (let i = 0; i < Object.keys(variants).length; i++) {
-      if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
+      if (uniqSize.indexOf(variants[i].size + ' ') === -1 && variants[i].size) {
         uniqSize.push(variants[i].size + ' ')
       }
     }
@@ -74,8 +87,49 @@ export class ProductBoxComponent implements OnInit {
     this.ImageSrc = src;
   }
 
+  GoToDetail(rowID, productSizeColorId, setType) {
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    debugger
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
+    }
+    else {
+      if (setType == 1)
+        this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
+      else if (setType == 2)
+        this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + productSizeColorId);
+      if (setType == 3)
+        this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
+    }
+  }
   addToCart(product: any) {
-    this.productService.addToCart(product);
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    debugger
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+    this.modalService.open(LoginComponent, {
+      size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+      centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+    });
+    }
+    else {
+      let obj = {
+        UserID: Number(this.user[0].userID),
+        ProductSizeId: Number(product.productSizeId),
+        Quantity: Number(product.quantity)
+      }
+      // this._CartService.AddToCart(obj).subscribe(res => {
+      //   this.toastr.success("Product has been successfully added in cart.");
+      // });
+    }
   }
 
   addToWishlist(product: any) {

@@ -7,8 +7,8 @@ import { ShopRoutingModule } from './shop-routing.module';
 
 // Product Details Components
 import { ProductLeftSidebarComponent } from './product/sidebar/product-left-sidebar/product-left-sidebar.component';
-import { ProductRightSidebarComponent } from './product/sidebar/product-right-sidebar/product-right-sidebar.component';
-import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
+//import { ProductRightSidebarComponent } from './product/sidebar/product-right-sidebar/product-right-sidebar.component';
+//import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
 import { FourImageComponent } from './product/four-image/four-image.component';
 import { ThreeColumnComponent } from './product/three-column/three-column.component';
 import { BundleProductComponent } from './product/bundle-product/bundle-product.component';
@@ -39,12 +39,14 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { CompareComponent } from './compare/compare.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
+import { ProductLeftSidebarWithSetComponent } from './product/sidebar/product-left-sidebar-with-set/product-left-sidebar-with-set.component';
+import { ProductLeftSidebarWithBundleComponent } from './product/sidebar/product-left-sidebar-with-bundle/product-left-sidebar-with-bundle.component';
 
 @NgModule({
   declarations: [
     ProductLeftSidebarComponent, 
-    ProductRightSidebarComponent,
-    ProductNoSidebarComponent,
+    //ProductRightSidebarComponent,
+   // ProductNoSidebarComponent,
     ThreeColumnComponent,
     FourImageComponent,
     BundleProductComponent,
@@ -67,7 +69,9 @@ import { SuccessComponent } from './checkout/success/success.component';
     WishlistComponent,
     CompareComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    ProductLeftSidebarWithSetComponent,
+    ProductLeftSidebarWithBundleComponent
   ],
   imports: [
     CommonModule,

@@ -8,20 +8,15 @@ import { Productkart } from 'src/app/shared/classes/productkart';
 import { ProductsService } from 'src/app/Service/Products.service';
 import { environment } from 'src/environments/environment';
 import { productSizeColor } from 'src/app/shared/classes/productsizecolor';
-import { CartService } from 'src/app/Service/cart.service';
-import { ToastrService } from 'ngx-toastr';
 
-declare var $;
 
 @Component({
-  selector: 'app-product-left-sidebar',
-  templateUrl: './product-left-sidebar.component.html',
-  styleUrls: ['./product-left-sidebar.component.scss']
+  selector: 'app-product-left-sidebar-with-set',
+  templateUrl: './product-left-sidebar-with-set.component.html',
+  styleUrls: ['./product-left-sidebar-with-set.component.scss']
 })
-export class ProductLeftSidebarComponent implements OnInit {
+export class ProductLeftSidebarWithSetComponent implements OnInit {
 
-
-  public headers: any = ["", "COLOR", "SIZE", "QUANTITY", "STOCK"];
   public ProductImage = environment.ProductImage;
 
   index: number;
@@ -31,12 +26,8 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   public productkart: Productkart[] = [];
 
-  public productSizeColor: productSizeColor[] = [];
-
-  public counter: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+  public counter: number = 1;
   public activeSlide: any = 0;
-
-  activeSlide1: any = 0;
   public selectedSize: any;
   public mobileSidebar: boolean = false;
 
@@ -44,25 +35,19 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
-  user: any[] = null;
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
+  constructor(private route: ActivatedRoute, private router: Router,
     public productService: ProductService,
-    private _prodService: ProductsService,
-    private _CartService: CartService,
-    private toastr: ToastrService
-  ) {
+    private _prodService: ProductsService) {
     // this.route.data.subscribe(response => this.product = response.data );
   }
   BindProduct(): void {
     this.route.params.subscribe(params => {
       const productid = params['productId'];
-      const productSizeId = params['productSizeId'];
+      const productSizeColorId = params['productSizeColorId'];
 
       let productObj = {
-        rowID: productid,
-        productSizeId: productSizeId
+        rowID: productid
       }
       this._prodService.getProductById(productObj).subscribe(product => {
         if (!product) { // When product is empty redirect 404
@@ -78,7 +63,6 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     this.BindProduct();
   }
 
@@ -115,72 +99,38 @@ export class ProductLeftSidebarComponent implements OnInit {
     }
   }
 
-  fnCheck(item: productSizeColor, evt: any, rdoId: string) {
-    debugger;
-    item.isSelected = evt;
-  }
-
   selectSize(size) {
     this.selectedSize = size;
   }
 
   // Increament
-  increment(myIndex, item: productSizeColor) {
-    debugger;
-    item.selectedQty++;
-
-    //this.counter[myIndex]++;
+  increment() {
+    this.counter++;
   }
 
   // Decrement
-  decrement(myIndex, item: productSizeColor) {
-    if (item.selectedQty > 1) item.selectedQty--;
+  decrement() {
+    if (this.counter > 1) this.counter--;
   }
 
   // Add to cart
-  async addToCart(type: Number) {
-    debugger
-    //product.quantity = this.counter || 1;
-    //product.productname = productname;
-
-    var obj: any[] = [];
-    var array: any[] = this.productkart[0].productSizeColor;
-    (array).forEach(element => {
-
-      if (element.isSelected) {
-
-        obj.push({
-          UserID: Number(this.user[0].userID),
-          ProductSizeId: Number(element.productSizeId),
-          Quantity: Number(element.selectedQty)
-        })
-
-      }
-    });
-    debugger;
-    if (Number(obj.length) > 0) {
-      const status = await this.productService.addToCartProduct(obj);
-
-      if (status) {
-        if (type == 1)
-          this.router.navigate(['/shop/cart']);
-        else
-          this.router.navigate(['/shop/checkout']);
-      }
-    }
-    else {
-
-      this.toastr.error("Please select an item.");
-    }
-  }
+  // async addToCart(product: productSizeColor, productname: any) {
+  //   debugger
+  //   product.quantity = this.counter || 1;
+  //   product.productname = productname;
+  //   const status = await this.productService.addToCartProduct(product);
+  //   debugger;
+  //   // if (status)
+  //   this.router.navigate(['/shop/cart']);
+  // }
 
   // Buy Now
-  // async buyNow(product: any) {
-  //   product.quantity = this.counter || 1;
-  //   const status = await this.productService.addToCart(product);
-  //   if (status)
-  //     this.router.navigate(['/shop/checkout']);
-  // }
+  async buyNow(product: any) {
+    product.quantity = this.counter || 1;
+    const status = await this.productService.addToCart(product);
+    if (status)
+      this.router.navigate(['/shop/checkout']);
+  }
 
   // Add to Wishlist
   addToWishlist(product: any) {
