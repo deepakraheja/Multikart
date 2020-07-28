@@ -24,24 +24,23 @@
                         <tr>
                             <td>
                                 <a>
-                                    <img
-                                        [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]">
+                                    <img *ngIf="product?.setNo>0" [src]="ProductImage+product?.productId+'/productSetImage/'+product?.setNo+'/'+product?.productImg[0]">
+                                    <img *ngIf="product?.setNo==0" [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]">
                                 </a>
                             </td>
                             <td>
-                                <a>{{ product?.productName| titlecase }} ({{ product?.color| titlecase }} - {{ product?.size| titlecase }})</a>
+                                <a>{{ product?.productName| titlecase }}</a>
                                 <div class="mobile-cart-content row">
                                     <div class="col-xs-3">
                                         <div class="qty-box">
                                             <div class="input-group">
-                                                <input type="text" name="quantity" class="form-control input-number"
-                                                    disabled [(ngModel)]="product.quantity">
+                                                <input type="text" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-3">
                                         <h2 class="td-color">
-                                            {{ (product.price | discount:product) * productService?.Currency.price | currency:productService?.Currency.currency:'symbol' }}
+                                            {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
                                         </h2>
                                     </div>
                                     <div class="col-xs-3">
@@ -55,7 +54,7 @@
                             </td>
                             <td>
                                 <h2>
-                                    {{ (product.salePrice ) | currency:productService?.Currency.currency:'symbol' }}
+                                    {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
                                 </h2>
                             </td>
                             <td>
@@ -67,8 +66,7 @@
                                                 <i class="ti-angle-left"></i>
                                             </button>
                                         </span> -->
-                                        <input type="text" name="quantity" class="form-control input-number" disabled
-                                            [(ngModel)]="product.quantity">
+                                        <input type="text" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
                                         <!-- <span class="input-group-prepend">
                                             <button type="button" class="btn quantity-right-plus" data-type="plus"
                                                 (click)="increment(product)">

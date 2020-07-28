@@ -21,7 +21,8 @@ declare var $;
 export class ProductLeftSidebarComponent implements OnInit {
 
 
-  public headers: any = ["", "COLOR", "SIZE", "QUANTITY", "STOCK"];
+  //public headers: any = ["", "COLOR", "SIZE", "QUANTITY", "STOCK"];
+  public headers: any = ["", "COLOR", "SIZE", "QUANTITY"];
   public ProductImage = environment.ProductImage;
 
   index: number;

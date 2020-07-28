@@ -59,13 +59,15 @@
                     <div class="row product-order-detail" *ngFor="let product of orderDetails[0].orderDetails">
                         <div class="col-4">
                             <!-- <img [src]="product.productImg[0]" alt="" class="img-fluid"> -->
-                            <img [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]"
-                                class="img-fluid">
+                            <!-- <img [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]"
+                                class="img-fluid"> -->
+                            <img *ngIf="product?.setNo>0" [src]="ProductImage+product?.productId+'/productSetImage/'+product?.setNo+'/'+product?.productImg[0]" class="img-fluid">
+                            <img *ngIf="product?.setNo==0" [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]" class="img-fluid">
                         </div>
                         <div class="col-4 order_detail">
                             <div>
                                 <!-- <h4>product name</h4> -->
-                                <h5>{{ product?.productName }} ({{ product?.color }} - {{ product?.size }})</h5>
+                                <h5>{{ product?.productName }}</h5>
                             </div>
                         </div>
                         <div class="col-1 order_detail">
@@ -77,7 +79,7 @@
                         <div class="col-3 order_detail">
                             <div>
                                 <!-- <h4>price</h4> -->
-                                <h5>{{ product?.price * productService?.Currency?.price | discount:product | currency:productService?.Currency.currency:'symbol' }}
+                                <h5>{{ product?.price | currency:productService?.Currency.currency:'symbol' }}
                                 </h5>
                             </div>
                         </div>
@@ -109,8 +111,7 @@
                         <ul class="order-detail">
                             <li>order ID: {{ orderDetails[0].orderNumber }}</li>
                             <li>Order Date: {{ orderDetails[0].orderDate | date : 'MMM dd, yyyy'}}</li>
-                            <li>Order Total:
-                                {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
+                            <li>Order Total: {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
                             </li>
                         </ul>
                     </div>
@@ -126,8 +127,7 @@
 
                     <div class="col-sm-12 payment-mode">
                         <h4>payment method</h4>
-                        <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) available. Card/Net banking acceptance
-                            subject to device availability.</p>
+                        <p>Pay on Delivery (Cash/Card). Cash on delivery (COD) available. Card/Net banking acceptance subject to device availability.</p>
                     </div>
                     <div class="col-md-12">
                         <div class="delivery-sec">

@@ -279,9 +279,12 @@ export class ProductService {
   // Remove Cart items
   public removeCartItem(product: any): any {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    debugger
     let obj = {
       CartId: product.cartId,
-      UserID: this.user[0].userID
+      UserID: this.user[0].userID,
+      SetNo: product.setNo,
+      ProductId: product.productId
     };
     this._cartService.DelCartById(obj).subscribe(res => {
       this.toastrService.success('Product has been deleted successfully.');
