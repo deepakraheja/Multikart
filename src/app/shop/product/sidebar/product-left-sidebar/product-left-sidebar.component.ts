@@ -33,7 +33,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   public productSizeColor: productSizeColor[] = [];
 
-  public counter: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+  //public counter: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   public activeSlide: any = 0;
 
   activeSlide1: any = 0;
@@ -64,7 +64,7 @@ export class ProductLeftSidebarComponent implements OnInit {
         rowID: productid,
         productSizeId: productSizeId
       }
-      this._prodService.getProductById(productObj).subscribe(product => {
+      this._prodService.GetWithoutSetProductByRowID(productObj).subscribe(product => {
         if (!product) { // When product is empty redirect 404
           this.router.navigateByUrl('/pages/404', { skipLocationChange: true });
         } else {
@@ -83,6 +83,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   }
 
   changecolor(index: string) {
+    debugger;
     this.bigProductImageIndex = Number(index);
     this.activeSlide = Number(index);
   }
@@ -93,27 +94,48 @@ export class ProductLeftSidebarComponent implements OnInit {
     if (variants != null) {
 
       const uniqColor = []
+
       for (let i = 0; i < Object.keys(variants).length; i++) {
+
+        debugger;
+        // if (uniqColor.find(item => item.color === -1) && variants[i].color) {
+        //   debugger;
+
+        //   uniqColor.push({
+        //     color: variants[i].color,
+        //     productSizeId: variants[i].ProductSizeId,
+
+        //   })
+        // }
+
+
         if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
           uniqColor.push(variants[i].color)
+
+          // uniqColor.push({
+          //   color: variants[i].color,
+          //   productSizeId: variants[i].ProductSizeId,
+
+          // })
         }
       }
+      debugger;
       return uniqColor
     }
   }
 
-  // Get Product Size
-  Size(variants) {
-    if (variants != null) {
-      const uniqSize = []
-      for (let i = 0; i < Object.keys(variants).length; i++) {
-        if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
-          uniqSize.push(variants[i].size)
-        }
-      }
-      return uniqSize
-    }
-  }
+  // Get Product Size  commented on 23 july 2020
+  // Size(variants) {
+  //   if (variants != null) {
+  //     const uniqSize = []
+  //     for (let i = 0; i < Object.keys(variants).length; i++) {
+  //       if (uniqSize.indexOf(variants[i].size) === -1 && variants[i].size) {
+  //         uniqSize.push(variants[i].size)
+  //       }
+  //     }
+  //     return uniqSize
+  //   }
+  // }
 
   fnCheck(item: productSizeColor, evt: any, rdoId: string) {
     debugger;
@@ -125,9 +147,10 @@ export class ProductLeftSidebarComponent implements OnInit {
   }
 
   // Increament
-  increment(myIndex, item: productSizeColor) {
+  increment(myIndex, item: productSizeColor, qty: any) {
     debugger;
-    item.selectedQty++;
+    if (item.selectedQty < qty--)
+      item.selectedQty++;
 
     //this.counter[myIndex]++;
   }

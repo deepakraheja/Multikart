@@ -111,14 +111,14 @@
             <!-- Mega Menu Start-->
             <ng-container *ngIf="menuItem.megaMenu">
               <li>
-                <div class="row m-0">
+                <div class="row m-0" style="overflow-y: auto;max-height: 530px;">
                   <div class="col-xl-4" *ngFor="let childrenItem of menuItem.children">
                     <div class="link-section">
                       <h5>{{childrenItem.title}}</h5>
                       <ul>
                         <li *ngFor="let childrenSubItem of childrenItem.children">
                           <!-- Link -->
-                          <a [routerLink]="childrenSubItem.path" *ngIf="childrenSubItem.type === 'link'">
+                          <a href="{{childrenSubItem.path}}" *ngIf="childrenSubItem.type === 'link'">
                             {{childrenSubItem.title}}
                           </a>
                           <!-- External Link -->

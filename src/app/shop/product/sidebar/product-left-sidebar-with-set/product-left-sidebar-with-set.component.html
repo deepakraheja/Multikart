@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
-                  <ng-container
+                  <!-- <ng-container
                     *ngFor="let image of productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
                     <ng-template carouselSlide [id]="i">
                       <div>
@@ -46,13 +46,13 @@
                           [alt]="image.alt" class="img-fluid">
                       </div>
                     </ng-template>
-                  </ng-container>
+                  </ng-container> -->
                 </owl-carousel-o>
                 <div class="col-12 p-0">
-                  <!-- *ngIf="product?.images.length > 1" -->
+
                   <div class="slider-nav">
                     <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
-                      <ng-container
+                      <!-- <ng-container
                         *ngFor="let image of  productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
                         <ng-template carouselSlide [id]="i">
                           <div class="owl-thumb" [class.active]="i == activeSlide">
@@ -61,7 +61,7 @@
                               [alt]="image.alt" class="img-fluid" (click)="owlCar.to(activeSlide = i.toString())">
                           </div>
                         </ng-template>
-                      </ng-container>
+                      </ng-container> -->
                     </owl-carousel-o>
                   </div>
                 </div>
@@ -72,38 +72,107 @@
                   <h2>{{ productkart[0]?.productName }}</h2>
                   <h4>
                     <del>{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
-                    <span>{{ productkart[0]?.discount }}% off</span>
+
                   </h4>
                   <h3>
                     {{  productkart[0]?.salePrice  | currency: productService.Currency?.currency:'symbol' }}
                   </h3>
-                  <ul class="color-variant">
+                  <!-- <ul class="color-variant">
                     <li [class]="color" [class.active]="activeSlide == i.toString()"
                       *ngFor="let color of Color(productkart[0]?.productSizeColor); index as i"
                       [ngStyle]="{'background-color': color}" (click)="changecolor(i.toString())"> </li>
-                  </ul>
-                  <app-stock-inventory [stock]="productkart[0]?.qty"></app-stock-inventory>
+                  </ul> -->
+
                   <div class="product-description border-product">
-                    <h6 class="product-title size-text">
-                      select size
-                      <span>
-                        <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>
-                      </span>
-                    </h6>
+
                     <div class="size-box">
                       <ul>
-                        <li [class.active]="selectedSize == size"
-                          *ngFor="let size of Size(productkart[0]?.productSizeColor)">
-                          <a href="javascript:void(0)" (click)="selectSize(size)">
-                            {{ size | titlecase }}
+                        <li [class.active]="selectedSize == list"
+                          *ngFor="let list of SetList(productkart[0]?.productSizeSet)">
+                          <a href="javascript:void(0)" (click)="selectSize(list)">
+                            {{ list }}
                           </a>
                         </li>
                       </ul>
                     </div>
-                    <h5 class="avalibility" *ngIf="counter <= productkart[0]?.qty"><span>In Stock</span></h5>
-                    <h5 class="avalibility" *ngIf="counter > productkart[0]?.qty"><span>Out of Stock</span></h5>
-                    <h6 class="product-title">quantity</h6>
-                    <div class="qty-box">
+
+                    <h6 class="product-title size-text">
+                      select set
+                      <span>
+                        <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size chart</a>
+                      </span>
+                    </h6>
+
+                    <table class="table table-bordered table-hover">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th class="thead-dark">
+
+                          </th>
+                          <th class="thead-dark">
+                            SET
+                          </th>
+                          <th class="thead-dark">
+                            QUANTITY
+                          </th>
+                          <th class="thead-dark">
+                            Details
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of productkart[0]?.productSizeSet; let myIndex  = index">
+                          <td>
+                            <input type="checkbox" [(ngModel)]="item.isSelected"   [value]="item.setNo" name="checkIn" id="{{myIndex}}">
+                          </td>
+                          <td>
+                            {{item.setNo}}
+                          </td>
+
+                          <td>
+
+                            <div class="qty-box">
+                              <div class="input-group">
+                                <span class="input-group-prepend">
+                                  <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                    (click)="decrement(myIndex,item)">
+                                    <i class="ti-angle-left"></i>
+                                  </button>
+                                </span>
+                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}" style="width: 45px;"
+                                  class="form-control input-number" [value]="item.selectedQty" disabled />
+                                <span class="input-group-prepend">
+                                  <button type="button" class="btn quantity-right-plus" data-type="plus"
+                                    (click)="increment(myIndex,item,item.qty)">
+                                    <i class="ti-angle-right"></i>
+                                  </button>
+                                </span>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+
+                            {{item.details}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+
+
+                    <!-- <div class="size-box">
+                      <ul>
+                        <li [class.active]="selectedSize == list" *ngFor="let list of SetList(productkart[0]?.setList)">
+                          <a href="javascript:void(0)" (click)="selectSize(list)">
+                            {{ list  }}
+                          </a>
+                        </li>
+                      </ul>
+                    </div> -->
+                    <!-- <h5 class="avalibility" *ngIf="counter <= productkart[0]?.qty"><span>In Stock</span></h5>
+                    <h5 class="avalibility" *ngIf="counter > productkart[0]?.qty"><span>Out of Stock</span></h5> -->
+                    <!-- <h6 class="product-title">quantity</h6> -->
+                    <!-- <div class="qty-box">
                       <div class="input-group">
                         <span class="input-group-prepend">
                           <button type="button" class="btn quantity-left-minus" data-type="minus" (click)="decrement()">
@@ -118,13 +187,12 @@
                           </button>
                         </span>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div class="product-buttons">
-                    <a href="javascrip:void(0)" class="btn btn-solid"
-                      [class.disabled]="counter >  productkart[0]?.qty">add
+                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"  (click)="addToCart(1)">add
                       to cart</a>
-                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter >  productkart[0]?.qty"
+                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"
                       (click)="buyNow(productkart[0])">buy now</a>
                   </div>
                   <div class="border-product">

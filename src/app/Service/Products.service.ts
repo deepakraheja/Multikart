@@ -39,8 +39,17 @@ export class ProductsService {
     );
   }
 
-  getProductById(_productObj: any): Observable<Productkart[]> {
+  GetWithoutSetProductByRowID(_productObj: any): Observable<Productkart[]> {
     this._methodName = "GetWithoutSetProductByRowID";
+    this._param = _productObj;
+    return this._http.post<Productkart[]>(
+      this._url + this._methodName, this._param
+    );
+  }
+
+  GetWithSetProductByRowID(_productObj: any): Observable<Productkart[]> {
+    debugger;
+    this._methodName = "GetWithSetProductByRowID";
     this._param = _productObj;
     return this._http.post<Productkart[]>(
       this._url + this._methodName, this._param

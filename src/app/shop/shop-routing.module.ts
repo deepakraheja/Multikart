@@ -32,7 +32,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'product/left/sidebarwithset/:productId/:productSizeColorId',
+    path: 'product/left/sidebarwithset/:productId/:productSizeId',
     component: ProductLeftSidebarWithSetComponent,
     resolve: {
       data: Resolver

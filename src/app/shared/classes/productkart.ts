@@ -40,7 +40,8 @@ export class Productkart {
     prodsize?: string[];
     productSizeColor: string[];
     setType: number;
-    
+    setList: string[];
+    productSizeSet?: string[];
 
     productSizeId: number;
     constructor(
@@ -85,7 +86,8 @@ export class Productkart {
         productSizeColor?: string[],
         setType?: number,
         productSizeId?: number,
-       
+        setList?: string[],
+        productSizeSet?: string[],
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -130,7 +132,8 @@ export class Productkart {
         this.productSizeColor = productSizeColor;
         this.setType = setType;
         this.productSizeId = productSizeId;
-      
+        this.setList = this.setList;
+        this.productSizeSet = this.productSizeSet;
 
     }
 

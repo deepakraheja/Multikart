@@ -123,11 +123,11 @@
                                     <i class="ti-angle-left"></i>
                                   </button>
                                 </span>
-                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}"
+                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}" style="width: 45px;"
                                   class="form-control input-number" [value]="item.selectedQty" disabled />
                                 <span class="input-group-prepend">
                                   <button type="button" class="btn quantity-right-plus" data-type="plus"
-                                    (click)="increment(myIndex,item)">
+                                    (click)="increment(myIndex,item,item.qty)">
                                     <i class="ti-angle-right"></i>
                                   </button>
                                 </span>
@@ -174,10 +174,10 @@
                     </div> -->
                   </div>
                   <div class="product-buttons">
-                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter >  productkart[0]?.qty"
+                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"
                       (click)="addToCart(1)">add
                       to cart</a>
-                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="counter >  productkart[0]?.qty"
+                    <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"
                       (click)="addToCart(2)">buy now</a>
                   </div>
                   <div class="border-product">
