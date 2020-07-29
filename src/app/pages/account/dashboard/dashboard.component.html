@@ -236,7 +236,10 @@
                                                                             <div class="item-view-left-col-inner">
                                                                                 <a class="a-link-normal">
                                                                                     <!-- <img src="assets/ProductImages/{{lstPro.ImagePath}}" width="150px" height="100px" alt=""> -->
-                                                                                    <img [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
+                                                                                    <!-- <img [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt=""> -->
+                                                                                    <img *ngIf="lstPro?.setNo>0" [src]="ProductImage+lstPro?.productId+'/productSetImage/'+lstPro?.setNo+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
+                                                                                    <img *ngIf="lstPro?.setNo==0" [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
+
                                                                                 </a>
                                                                             </div>
                                                                         </div>
