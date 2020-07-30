@@ -18,25 +18,27 @@ export class ProductBoxOneComponent implements OnInit {
   @Input() thumbnail: boolean = false; // Default False 
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
+
   @Input() loader: boolean = false;
+  @Input() productkart: Productkart;
 
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
   public ImageSrc: string
-  public productskart: Productkart[] = [];
+  //public productskart: Productkart[] = [];
 
   constructor(
     private productService: ProductService,
     private _prodService: ProductsService
-    ) {
-    let productObj = {
-      Active: 1,
-      Subcatecode: ''
-    }
-    this._prodService.getProductByCategory(productObj).subscribe(products => {
-      this.productskart = products;
-    });
+  ) {
+    // let productObj = {
+    //   Active: 1,
+    //   Subcatecode: ''
+    // }
+    // this._prodService.getProductByCategory(productObj).subscribe(products => {
+    //   this.productskart = products;
+    // });
 
   }
 

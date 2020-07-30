@@ -42,6 +42,7 @@ export class ProductBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    debugger;
     if (this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }

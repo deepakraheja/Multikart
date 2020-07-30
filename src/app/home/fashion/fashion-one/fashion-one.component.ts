@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductSlider } from '../../../shared/data/slider';
 import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
+import { Productkart } from 'src/app/shared/classes/productkart';
+import { ProductsService } from 'src/app/Service/Products.service';
 
 @Component({
   selector: 'app-fashion-one',
@@ -11,19 +13,53 @@ import { ProductService } from '../../../shared/services/product.service';
 export class FashionOneComponent implements OnInit {
 
   public products: Product[] = [];
-  public productCollections: any[] = [];
+  public productCollections: any[] = [
+    { name: "new products" },
+    { name: "featured products" },
+    { name: "On Sale" },
 
-  constructor(public productService: ProductService) {
-    this.productService.getProducts.subscribe(response => {
-      this.products = response.filter(item => item.type == 'fashion');
-      // Get Product Collection
-      this.products.filter((item) => {
-        item.collection.filter((collection) => {
-          const index = this.productCollections.indexOf(collection);
-          if (index === -1) this.productCollections.push(collection);
-        })
-      })
+  ];
+
+  public productskart: Productkart[] = [];
+  public productskartselling: Productkart[] = [];
+
+  constructor(public productService: ProductService,
+    private _prodService: ProductsService
+  ) {
+
+    // this.productService.getProducts.subscribe(response => {
+    //   this.products = response.filter(item => item.type == 'fashion');
+    //   // Get Product Collection
+    //   this.products.filter((item) => {
+    //     item.collection.filter((collection) => {
+    //       const index = this.productCollections.indexOf(collection);
+    //       if (index === -1) this.productCollections.push(collection);
+    //     })
+    //   })
+    // });
+
+
+    this.BindProductByCategory();
+  }
+
+
+
+
+  //Added on 08/07/2020
+  BindProductByCategory() {
+
+    let productObj = {
+      Active: 1,
+      Subcatecode: ''
+
+    }
+    this._prodService.getProductByCategory(productObj).subscribe(products => {
+      debugger;
+      this.productskart = products;
+      this.productskartselling = products.filter(item => item.topSelling == true);
+
     });
+
   }
 
   public ProductSliderConfig: any = ProductSlider;
@@ -114,11 +150,16 @@ export class FashionOneComponent implements OnInit {
 
   // Product Tab collection
   getCollectionProducts(collection) {
-    return this.products.filter((item) => {
-      if (item.collection.find(i => i === collection)) {
-        return item
-      }
-    })
+
+    debugger;
+    if (collection.name == "featured products")
+      return this.productskart.filter(item => item.featured == true)
+    else if (collection.name == "new products")
+      return this.productskart.filter(item => item.latest == true)
+
+    else if (collection.name == "On Sale")
+      return this.productskart.filter(item => item.onSale == true)
+
   }
 
 }
