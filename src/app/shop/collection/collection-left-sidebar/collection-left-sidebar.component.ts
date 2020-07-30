@@ -23,7 +23,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public colors: any[] = [];
   public size: any[] = [];
   public minPrice: number = 0;
-  public maxPrice: number = 1200;
+  public maxPrice: number = 10000;
   public tags: any[] = [];
   public category: string;
   public pageNo: number = 1;
@@ -89,13 +89,13 @@ export class CollectionLeftSidebarComponent implements OnInit {
       const category = params['category'];
       let productObj = {
         Active: 1,
-        Subcatecode: category
+        Subcatecode: category == 'fashion' ? '' : category
 
       }
       this._prodService.getProductByCategory(productObj).subscribe(products => {
-     
+
         this.productskart = products;
-      
+
       });
     });
   }

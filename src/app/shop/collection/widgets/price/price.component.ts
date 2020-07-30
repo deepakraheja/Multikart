@@ -19,7 +19,7 @@ export class PriceComponent implements OnInit {
 
   options: Options = {
     floor: 0,
-    ceil: 1000
+    ceil: 10000
   };
   
   price = { 

@@ -3,6 +3,8 @@ import { QuickViewComponent } from "../../modal/quick-view/quick-view.component"
 import { CartModalComponent } from "../../modal/cart-modal/cart-modal.component";
 import { Product } from "../../../classes/product";
 import { ProductService } from "../../../services/product.service";
+import { ProductsService } from 'src/app/Service/Products.service';
+import { Productkart } from 'src/app/shared/classes/productkart';
 
 @Component({
   selector: 'app-product-box-one',
@@ -17,16 +19,29 @@ export class ProductBoxOneComponent implements OnInit {
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
   @Input() loader: boolean = false;
-  
+
   @ViewChild("quickView") QuickView: QuickViewComponent;
   @ViewChild("cartModal") CartModal: CartModalComponent;
 
-  public ImageSrc : string
+  public ImageSrc: string
+  public productskart: Productkart[] = [];
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private _prodService: ProductsService
+    ) {
+    let productObj = {
+      Active: 1,
+      Subcatecode: ''
+    }
+    this._prodService.getProductByCategory(productObj).subscribe(products => {
+      this.productskart = products;
+    });
+
+  }
 
   ngOnInit(): void {
-    if(this.loader) {
+    if (this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }
   }
