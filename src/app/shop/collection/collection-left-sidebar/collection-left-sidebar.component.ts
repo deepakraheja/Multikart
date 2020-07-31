@@ -54,21 +54,21 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
 
 
-        // ***********************************************************
-        //
-        //******************Category Filter*******************************
-        //
-        //*********************************************************** */
+      // ***********************************************************
+      //
+      //******************Category Filter*******************************
+      //
+      //*********************************************************** */
 
-        // if (params.category) {
+      // if (params.category) {
 
-        //   this.products = this.products.filter(item => item.type == this.category);
-        // }
+      //   this.products = this.products.filter(item => item.type == this.category);
+      // }
 
-
-        if (params.category) {
-          this.BindProductByCategory();
-        }
+      debugger
+      if (params.category == undefined || params.category) {
+        this.BindProductByCategory();
+      }
 
       //})
     })
