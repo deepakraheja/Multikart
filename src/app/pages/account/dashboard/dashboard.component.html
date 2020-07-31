@@ -53,7 +53,7 @@
                                         <div class="box-content">
                                             <h6>Name : {{LoggedInUser[0].name}}</h6>
                                             <h6>Email : {{LoggedInUser[0].email}}</h6>
-                                            <h6><a href="javascript:void(0)">Change Password</a></h6>
+                                            <h6><a href="javascript:void(0)" (click)="ChangePassword(templateChangePwd)">Change Password</a></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -472,6 +472,72 @@
                                         <button type="button" class="btn-solid btn" (click)="modal.dismiss('Cross click')">
                                             No
                                         </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template class="theme-modal" #templateChangePwd let-modal>
+    <div class="modal-content quick-view-modal">
+        <div class="modal-body">
+            <button type="button" class="close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="checkout-page">
+                <div class="checkout-form">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="checkout-title">
+                                    <h3>Change Password</h3>
+                                </div>
+                                <div class="row check-out">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Old Paswword</div>
+                                        <input type="password" name="password" [formControl]="ChangePwdForm.controls['password']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(ChangePwdForm.controls.password.touched || Submitted) && ChangePwdForm.controls.password.errors?.required" class="text text-danger">
+                                            Old Password is required.
+                                        </div>
+                                        <div *ngIf="(ChangePwdForm.controls.password.touched || Submitted) && ChangePwdForm.controls.password.errors?.minlength" class="text text-danger">
+                                            Old Password must be greater than 7 character.
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">New Password </div>
+                                        <input type="password" name="NewPassword" [formControl]="ChangePwdForm.controls['NewPassword']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(ChangePwdForm.controls.NewPassword.touched || Submitted) && ChangePwdForm.controls.NewPassword.errors?.required" class="text text-danger">
+                                            New Password is required.
+                                        </div>
+                                        <div *ngIf="(ChangePwdForm.controls.NewPassword.touched || Submitted) && ChangePwdForm.controls.NewPassword.errors?.minlength" class="text text-danger">
+                                            New Password must be greater than 7 character.
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <div class="field-label">Confirm Password </div>
+                                        <input type="password" name="ConfirmPwd" [formControl]="ChangePwdForm.controls['ConfirmPwd']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(ChangePwdForm.controls.ConfirmPwd.touched || Submitted) && ChangePwdForm.controls.ConfirmPwd.errors?.required" class="text text-danger">
+                                            Confirm Password is required.
+                                        </div>
+                                        <div *ngIf="(ChangePwdForm.controls.ConfirmPwd.touched || Submitted) && ChangePwdForm.controls.ConfirmPwd.errors?.minlength" class="text text-danger">
+                                            Confirm Password must be greater than 7 character.
+                                        </div>
+                                        <div *ngIf="(ChangePwdForm.controls.ConfirmPwd.touched || Submitted) && (ChangePwdForm.controls.NewPassword.value != ChangePwdForm.controls.ConfirmPwd.value)" class="text text-danger">
+                                            New Password must be same Confirm password.
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                        <!-- <div class="field-label">&nbsp;</div> -->
+                                        <button type="submit" class="btn-solid btn" (click)="UpdatePassword()">
+                                            Save
+                                        </button>
+                                        <button class="btn btn-solid" style="float:right;" (click)="modal.dismiss('Cross click')">Close</button>
                                     </div>
                                 </div>
                             </div>

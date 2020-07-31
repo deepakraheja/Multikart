@@ -8,6 +8,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from 'src/app/Service/users.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
   public checkoutForm: FormGroup;
   public Submitted: boolean = false;
   public SelectedBillingAddressId: number = 0;
+  public ChangePwdForm: FormGroup;
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router,
@@ -33,7 +35,9 @@ export class DashboardComponent implements OnInit {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private toastr: ToastrService,
+    private _userService: UsersService
   ) {
+
   }
 
   ngOnInit(): void {
@@ -53,6 +57,14 @@ export class DashboardComponent implements OnInit {
         state: ['', Validators.required],
         zipCode: ['', Validators.required],
       });
+
+      this.ChangePwdForm = this.fb.group({
+        userID: this.LoggedInUser[0].userID,
+        password: ['', [Validators.required]],
+        NewPassword: ['', [Validators.required, Validators.minLength(8)]],
+        ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
+      });
+
       this.LoadBillingAddress();
       this.LoadAllOrder();
     });
@@ -205,6 +217,49 @@ export class DashboardComponent implements OnInit {
         this.toastr.success("Billing Address has been saved successfully.");
         this.modalService.dismissAll();
         //this.LoadBillingAddress();
+      });
+    }
+  }
+
+  ChangePassword(template: TemplateRef<any>) {
+    this.Submitted = false;
+    this.ChangePwdForm = this.fb.group({
+      userID: this.LoggedInUser[0].userID,
+      password: ['', [Validators.required]],
+      NewPassword: ['', [Validators.required, Validators.minLength(8)]],
+      ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
+    });
+    this.modalService.open(template, {
+      size: 'md',
+      //ariaLabelledBy: 'Cart-Modal',
+      centered: true,
+      //windowClass: 'theme-modal cart-modal CartModal'
+    }).result.then((result) => {
+      `Result ${result}`
+    }, (reason) => {
+      this.modalService.dismissAll();
+    });
+  }
+
+  UpdatePassword() {
+    this.Submitted = true;
+    if (this.ChangePwdForm.invalid) {
+      this.toastr.error("All fields are mandatory.");
+      return;
+    }
+    else {
+      let obj = {
+        userID: this.LoggedInUser[0].userID,
+        password: this.ChangePwdForm.value.password,
+        NewPassword: this.ChangePwdForm.value.NewPassword
+      }
+      this._userService.UpdatePwd(obj).subscribe(res => {
+        if (Number(res) > 0) {
+          this.toastr.success("Password has been saved successfully.");
+          this.modalService.dismissAll();
+        }
+        else
+          this.toastr.error("Old Password is invalid.");
       });
     }
   }
