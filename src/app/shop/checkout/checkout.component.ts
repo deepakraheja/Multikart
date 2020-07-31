@@ -198,6 +198,7 @@ export class CheckoutComponent implements OnInit {
       debugger
       this._orderService.SaveOrder(obj).subscribe(res => {
         debugger
+        this._SharedDataService.UserCart([]);
         this.router.navigate(['/shop/checkout/success/' + res]);
       });
     }
