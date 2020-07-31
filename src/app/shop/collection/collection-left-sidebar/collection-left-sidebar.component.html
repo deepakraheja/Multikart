@@ -86,7 +86,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                                <div class="collection-product-wrapper" id="products">
+                                <div class="collection-product-wrapper" id="productskart">
                                     <app-grid [productskart]="productskart" [paginate]="paginate" [layoutView]="layoutView" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
                                     <div class="product-wrapper-grid" [ngClass]="layoutView">
@@ -102,7 +102,7 @@
                                                 <img src="assets/images/empty-search.jpg" class="img-fluid mb-4">
                                                 <h3>Sorry! Couldn't find the product you were looking For!!! </h3>
                                                 <p>Please check if you have misspelt something or try searching with other words.</p>
-                                                <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
+                                                <a href='/shop/collection/left/sidebar?category=fashion' class="btn btn-solid">continue shopping</a>
                                             </div>
                                         </div>
                                         <!-- <div class="row">
