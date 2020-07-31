@@ -39,8 +39,7 @@
         <div class="col-lg-6 offset-lg-3">
             <div class="product-para">
                 <p class="text-center">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry, Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s.
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry, Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                 </p>
             </div>
         </div>
@@ -54,8 +53,7 @@
                     <ng-container *ngFor="let product of productskartselling | slice:0:16">
                         <ng-template carouselSlide>
                             <div class="product-box">
-                                <app-product-box [productkart]="product" [currency]="productService?.Currency"
-                                    [thumbnail]="true">
+                                <app-product-box [productkart]="product" [currency]="productService?.Currency" [thumbnail]="true">
                                 </app-product-box>
                             </div>
                         </ng-template>
@@ -69,13 +67,12 @@
 
 <!-- Parallax banner start-->
 <section class="p-0">
-    <div class="full-banner parallax-banner1 parallax text-center p-left"
-        [ngStyle]="{'background-image': 'url(assets/images/parallax/1.jpg)'}">
+    <div class="full-banner parallax-banner1 parallax text-center p-left" [ngStyle]="{'background-image': 'url(assets/images/parallax/1.jpg)'}">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="banner-contain">
-                        <h2>2018</h2>
+                        <h2>2020</h2>
                         <h3>fashion trends</h3>
                         <h4>special offer</h4>
                     </div>
@@ -102,8 +99,7 @@
                             <div class="no-slider row">
                                 <ng-container *ngFor="let product of getCollectionProducts(collection) | slice:0:8">
                                     <div class="product-box">
-                                        <app-product-box [productkart]="product" [currency]="productService?.Currency"
-                                            [thumbnail]="true" >
+                                        <app-product-box [productkart]="product" [currency]="productService?.Currency">
                                         </app-product-box>
                                     </div>
                                 </ng-container>

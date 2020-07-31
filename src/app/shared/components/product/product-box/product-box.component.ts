@@ -28,8 +28,8 @@ export class ProductBoxComponent implements OnInit {
   @Input() cartModal: boolean = false; // Default False
   @Input() loader: boolean = false;
   public user: any[] = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-  @ViewChild("quickView") QuickView: QuickViewComponent;
-  @ViewChild("cartModal") CartModal: CartModalComponent;
+  // @ViewChild("quickView") QuickView: QuickViewComponent;
+  // @ViewChild("cartModal") CartModal: CartModalComponent;
   //public closeResult: string;
   public ImageSrc: string
 

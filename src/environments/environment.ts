@@ -14,10 +14,10 @@ export const environment = {
   isContentLoading: false,
   //BASE_API_URL: 'https://esssrv.schedulingsite.com/essservice/Service.svc/',
   //BASE_API_URL: 'http://localhost:61397/ESSServicetest/Service.svc/',
-  BASE_API_URL: 'http://localhost:5205/api/',
+  //BASE_API_URL: 'http://localhost:5205/api/',
 
   Domain: 'http://localhost:4200/',
-  //BASE_API_URL: 'http://ecomapi.uccnoida.com/api/',
+  BASE_API_URL: 'http://ecomapi.uccnoida.com/api/',
   ProductImage: 'http://ecomapi.uccnoida.com/ProductImage/',
   // ProductImage: 'http://localhost:5205/ProductImage/',
 
