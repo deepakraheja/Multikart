@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../../../shared/classes/product';
+import { Productkart } from 'src/app/shared/classes/productkart';
 
 @Component({
   selector: 'app-grid',
@@ -12,6 +13,7 @@ export class GridComponent implements OnInit {
   @Input() paginate: any = {};
   @Input() layoutView: string = 'grid-view';
   @Input() sortBy: string;
+  @Input() productskart: Productkart[] = [];
 
   @Output() setGrid: EventEmitter<any> = new EventEmitter<any>();
   @Output() setLayout: EventEmitter<any> = new EventEmitter<any>();

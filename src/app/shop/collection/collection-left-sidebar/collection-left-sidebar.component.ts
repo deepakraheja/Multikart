@@ -50,10 +50,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
       this.pageNo = params.page ? params.page : this.pageNo;
 
       // Get Filtered Products..
-      this.productService.filterProducts(this.tags).subscribe(response => {
+      //this.productService.filterProducts(this.tags).subscribe(response => {
 
-        // Sorting Filter
-        this.products = this.productService.sortProducts(response, this.sortBy);
+
 
         // ***********************************************************
         //
@@ -61,23 +60,17 @@ export class CollectionLeftSidebarComponent implements OnInit {
         //
         //*********************************************************** */
 
-        if (params.category) {
+        // if (params.category) {
 
-          this.products = this.products.filter(item => item.type == this.category);
-        }
+        //   this.products = this.products.filter(item => item.type == this.category);
+        // }
 
 
         if (params.category) {
           this.BindProductByCategory();
         }
 
-        // Price Filter
-        this.products = this.products.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
-
-        // Paginate Products
-        this.paginate = this.productService.getPager(this.products.length, +this.pageNo);     // get paginate object from service
-        this.products = this.products.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-      })
+      //})
     })
   }
 
@@ -95,6 +88,15 @@ export class CollectionLeftSidebarComponent implements OnInit {
       this._prodService.getProductByCategory(productObj).subscribe(products => {
 
         this.productskart = products;
+
+        // Sorting Filter
+        this.productskart = this.productService.sortProducts(products, this.sortBy);
+        // Price Filter
+        this.productskart = this.productskart.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
+        debugger
+        // Paginate Products
+        this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
+        this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
 
       });
     });

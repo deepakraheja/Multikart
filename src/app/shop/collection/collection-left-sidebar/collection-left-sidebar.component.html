@@ -87,7 +87,7 @@
                                     </li>
                                 </ul>
                                 <div class="collection-product-wrapper" id="products">
-                                    <app-grid [products]="products" [paginate]="paginate" [layoutView]="layoutView" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
+                                    <app-grid [productskart]="productskart" [paginate]="paginate" [layoutView]="layoutView" [sortBy]="sortBy" (setGrid)="updateGridLayout($event)" (setLayout)="updateLayoutView($event)" (sortedBy)="sortByFilter($event)">
                                     </app-grid>
                                     <div class="product-wrapper-grid" [ngClass]="layoutView">
 
@@ -125,7 +125,7 @@
                                             </div>
                                         </div> -->
                                     </div>
-                                    <app-pagination [products]="products" [paginate]="paginate" (setPage)="setPage($event)">
+                                    <app-pagination [productskart]="productskart" [paginate]="paginate" (setPage)="setPage($event)">
                                     </app-pagination>
                                 </div>
                             </div>

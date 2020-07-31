@@ -10,10 +10,13 @@
                         {{ category }}
                     </a>
                 </li> -->
-
+                <li>
+                    <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: 'fashion'}">
+                        All
+                    </a>
+                </li>
                 <li *ngFor="let subcategory of lstsubCategory">
-                    <a [routerLink]="['/shop/collection/left/sidebar']"
-                        [queryParams]="{ category: subcategory.subCatCode}">
+                    <a [routerLink]="['/shop/collection/left/sidebar']" [queryParams]="{ category: subcategory.subCatCode}">
                         {{subcategory.name}}
                     </a>
                 </li>

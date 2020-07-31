@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../../../shared/classes/product';
+import { Productkart } from 'src/app/shared/classes/productkart';
 
 @Component({
   selector: 'app-pagination',
@@ -10,7 +11,7 @@ export class PaginationComponent implements OnInit {
 
   @Input() products: Product[] = [];
   @Input() paginate: any = {};
-
+  @Input() productskart: Productkart[] = [];
   @Output() setPage  : EventEmitter<any> = new EventEmitter<any>();
     
   constructor() { 
