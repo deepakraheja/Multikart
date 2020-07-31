@@ -46,8 +46,8 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
     }
     this._prodService.getProductByCategory(productObj).subscribe(products => {
       debugger;
-      this.productskart = products;
-      //this.productskart = products.filter(item => item.latest == true);
+      //this.productskart = products;
+      this.productskart = products.filter(item => item.latest == true);
     });
   }
 
