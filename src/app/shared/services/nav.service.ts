@@ -65,7 +65,7 @@ export class NavService {
 		// 	]
 		// },
 		{
-			title: 'Products', type: 'link', active: false, path: '/shop/collection/left/sidebar?category=fashion'
+			title: 'Products', type: 'link', active: false, path: '/shop/collection/left/sidebar'
 			// children: [
 			// 	{
 			// 		title: 'sidebar', type: 'sub', active: false, children: [
