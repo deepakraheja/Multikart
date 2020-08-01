@@ -17,6 +17,7 @@ export class FashionOneComponent implements OnInit {
     { name: "new products" },
     { name: "featured products" },
     { name: "On Sale" },
+
   ];
 
   public productskart: Productkart[] = [];
@@ -36,8 +37,13 @@ export class FashionOneComponent implements OnInit {
     //     })
     //   })
     // });
+
+
     this.BindProductByCategory();
   }
+
+
+
 
   //Added on 08/07/2020
   BindProductByCategory() {
@@ -45,11 +51,13 @@ export class FashionOneComponent implements OnInit {
     let productObj = {
       Active: 1,
       Subcatecode: ''
+
     }
     this._prodService.getProductByCategory(productObj).subscribe(products => {
       debugger;
       this.productskart = products;
       this.productskartselling = products.filter(item => item.topSelling == true);
+
     });
 
   }
@@ -64,19 +72,25 @@ export class FashionOneComponent implements OnInit {
     //title: 'welcome to fashion',
     //subTitle: 'Women fashion',
     image: 'assets/images/slider/banner_2.jpg'
+
   },
   {
     image: 'assets/images/slider/banner_3.jpg'
+
   },
   {
     image: 'assets/images/slider/banner_4.jpg'
+
   },
   {
     image: 'assets/images/slider/banner_5.jpg'
+
   },
   {
     image: 'assets/images/slider/banner_6.jpg'
-  }]
+
+  }
+  ]
 
   // Collection banner
   public collections = [{
@@ -136,13 +150,16 @@ export class FashionOneComponent implements OnInit {
 
   // Product Tab collection
   getCollectionProducts(collection) {
-    //debugger;
+
+    debugger;
     if (collection.name == "featured products")
       return this.productskart.filter(item => item.featured == true)
     else if (collection.name == "new products")
       return this.productskart.filter(item => item.latest == true)
+
     else if (collection.name == "On Sale")
       return this.productskart.filter(item => item.onSale == true)
+
   }
 
 }
