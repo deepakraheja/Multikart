@@ -162,10 +162,10 @@ export class ProductService {
   // added on 13 july 2020 by deepak
   //Add to Cart 
   public addToCartProduct(product: any[]): any {
-    debugger;
+    // debugger;
     console.log(product);
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
       this.modalService.open(LoginComponent, {
@@ -176,7 +176,7 @@ export class ProductService {
       });
     }
     else {
-      // debugger
+      // // debugger
       // let obj = {
       //   UserID: Number(this.user[0].userID),
       //   ProductSizeId: Number(product.productSizeId),
@@ -213,10 +213,10 @@ export class ProductService {
   // commnented on 13 july 2020 by deepak
   // Add to Cart
   public addToCart(product): any {
-    debugger
+    // debugger
 
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
       this.modalService.open(LoginComponent, {
@@ -279,7 +279,7 @@ export class ProductService {
   // Remove Cart items
   public removeCartItem(product: any): any {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     let obj = {
       CartId: product.cartId,
       UserID: this.user[0].userID,
@@ -349,7 +349,7 @@ export class ProductService {
 
   // Sorting Filter
   public sortProducts(products: Productkart[], payload: string): any {
-    debugger
+    // debugger
     if (payload === 'ascending') {
       return products.sort((a, b) => {
         if (a.productID < b.productID) {
@@ -405,7 +405,7 @@ export class ProductService {
   */
   public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 8) {
     // calculate total pages
-    debugger
+    // debugger
     let totalPages = Math.ceil(totalItems / pageSize);
 
     // Paginate Range

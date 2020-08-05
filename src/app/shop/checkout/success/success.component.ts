@@ -26,7 +26,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
-      debugger
+      // debugger
       //this.GetOrderById(Number(params.get('orderId')));
       var orderId = params.get('id');
       if (Number(orderId) != NaN && orderId.length <= 9) {

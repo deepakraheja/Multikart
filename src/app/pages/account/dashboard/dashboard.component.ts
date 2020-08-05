@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
   }
 
   OrderTrackingListByOrderId(OrderId) {
-    //debugger
+    //// debugger
     let res = this.lstOrder[0].orderDetails;
     return res.filter(x => (x.orderId == null || x.orderId == OrderId));
   }
@@ -100,7 +100,9 @@ export class DashboardComponent implements OnInit {
   }
 
   Logout() {
+    debugger;
     sessionStorage.removeItem('LoggedInUser');
+    sessionStorage.removeItem('Token');
     this._SharedDataService.AssignUser(null);
     this.router.navigate(['/home/fashion']);
   }
@@ -178,11 +180,11 @@ export class DashboardComponent implements OnInit {
   DelBillingAddress() {
     let obj = {
       billingAddressId: this.SelectedBillingAddressId,
-      userID: Number(this.LoggedInUser[0].userID,),
+      userID: Number(this.LoggedInUser[0].userID),
     }
-    debugger
+    // debugger
     this._BillingAddressService.DeleteBillingAddress(obj).subscribe(res => {
-      debugger
+      // debugger
       this.lstBillingAddress = res;
       this.toastr.success("Billing Address has been deleted successfully.");
       this.modalService.dismissAll();
@@ -198,7 +200,7 @@ export class DashboardComponent implements OnInit {
     else {
       let obj = {
         billingAddressId: Number(this.checkoutForm.value.billingAddressId),
-        userID: Number(this.LoggedInUser[0].userID,),
+        userID: Number(this.LoggedInUser[0].userID),
         fName: this.checkoutForm.value.fName,
         lName: this.checkoutForm.value.lName,
         companyName: this.checkoutForm.value.companyName,
@@ -210,9 +212,9 @@ export class DashboardComponent implements OnInit {
         state: this.checkoutForm.value.state,
         zipCode: this.checkoutForm.value.zipCode,
       }
-      debugger
+      // debugger
       this._BillingAddressService.SaveBillingAddress(obj).subscribe(res => {
-        debugger
+        // debugger
         this.lstBillingAddress = res;
         this.toastr.success("Billing Address has been saved successfully.");
         this.modalService.dismissAll();

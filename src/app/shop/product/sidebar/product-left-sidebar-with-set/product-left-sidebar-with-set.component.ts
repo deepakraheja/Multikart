@@ -58,7 +58,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
       }
       this._prodService.GetWithSetProductByRowID(productObj).subscribe(product => {
 
-        debugger;
+        // debugger;
         if (!product) { // When product is empty redirect 404
           this.router.navigateByUrl('/pages/404', { skipLocationChange: true });
         } else {
@@ -131,7 +131,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
   // Increament
   increment(myIndex, item: any, qty: any) {
-    debugger;
+    // debugger;
     if (item.selectedQty < qty--)
       item.selectedQty++;
 
@@ -146,11 +146,11 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
   // Add to cart
   // async addToCart(product: productSizeColor, productname: any) {
-  //   debugger
+  //   // debugger
   //   product.quantity = this.counter || 1;
   //   product.productname = productname;
   //   const status = await this.productService.addToCartProduct(product);
-  //   debugger;      
+  //   // debugger;      
   //   // if (status)
   //   this.router.navigate(['/shop/cart']);
   // }
@@ -174,7 +174,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   }
   // Add to cart
   async addToCart(type: Number) {
-    debugger
+    // debugger
     //product.quantity = this.counter || 1;
     //product.productname = productname;
 
@@ -193,7 +193,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
       }
     });
-    debugger;
+    // debugger;
     if (Number(obj.length) > 0) {
       const status = await this.productService.addToCartProduct(obj);
 

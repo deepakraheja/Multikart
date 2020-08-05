@@ -45,7 +45,7 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
       Subcatecode: ''
     }
     this._prodService.getProductByCategory(productObj).subscribe(products => {
-      debugger;
+      // debugger;
       //this.productskart = products;
       this.productskart = products.filter(item => item.latest == true);
     });
@@ -53,7 +53,7 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
 
   GoToDetail(rowID, productSizeColorId, setType) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
       this.modalService.open(LoginComponent, {

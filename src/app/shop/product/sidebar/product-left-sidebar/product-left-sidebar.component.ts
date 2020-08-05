@@ -84,7 +84,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   }
 
   changecolor(index: string) {
-    debugger;
+    // debugger;
     this.bigProductImageIndex = Number(index);
     this.activeSlide = Number(index);
   }
@@ -98,9 +98,9 @@ export class ProductLeftSidebarComponent implements OnInit {
 
       for (let i = 0; i < Object.keys(variants).length; i++) {
 
-        debugger;
+        // debugger;
         // if (uniqColor.find(item => item.color === -1) && variants[i].color) {
-        //   debugger;
+        //   // debugger;
 
         //   uniqColor.push({
         //     color: variants[i].color,
@@ -120,7 +120,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           // })
         }
       }
-      debugger;
+      // debugger;
       return uniqColor
     }
   }
@@ -139,7 +139,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   // }
 
   fnCheck(item: productSizeColor, evt: any, rdoId: string) {
-    debugger;
+    // debugger;
     item.isSelected = evt;
   }
 
@@ -149,7 +149,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Increament
   increment(myIndex, item: productSizeColor, qty: any) {
-    debugger;
+    // debugger;
     if (item.selectedQty < qty--)
       item.selectedQty++;
 
@@ -163,7 +163,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Add to cart
   async addToCart(type: Number) {
-    debugger
+    // debugger
     //product.quantity = this.counter || 1;
     //product.productname = productname;
 
@@ -181,7 +181,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
       }
     });
-    debugger;
+    // debugger;
     if (Number(obj.length) > 0) {
       const status = await this.productService.addToCartProduct(obj);
 

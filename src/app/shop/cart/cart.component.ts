@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
 
     // this.productService.ProductcartItems.subscribe(response => {
     //   this.productSizeColor = response
-    //   debugger;
+    //   // debugger;
     // });
   }
 
@@ -68,7 +68,7 @@ export class CartComponent implements OnInit {
         UserID: this.user[0].userID
       };
       this._cartService.GetCartById(obj).subscribe(response => {
-        debugger
+        // debugger
         this.productSizeColor = response
       });
     }
@@ -80,7 +80,7 @@ export class CartComponent implements OnInit {
 
   // Increament
   increment(product, qty = 1) {
-    debugger
+    // debugger
     let obj = {
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
@@ -96,7 +96,7 @@ export class CartComponent implements OnInit {
 
   // Decrement
   decrement(product, qty = -1) {
-    debugger
+    // debugger
     if (product.quantity > 1) {
       let obj = {
         UserID: Number(this.user[0].userID),
@@ -117,11 +117,11 @@ export class CartComponent implements OnInit {
   }
 
   ProceedToCheckout() {
-    debugger
+    // debugger
     this.router.navigate(['/shop/checkout']);
 
     // this._SharedDataService.currentUser.subscribe(res => {
-    //   debugger
+    //   // debugger
     //   if (res == null || res == undefined) {
     //     this.router.navigate(['/pages/login/cart']);
     //   }

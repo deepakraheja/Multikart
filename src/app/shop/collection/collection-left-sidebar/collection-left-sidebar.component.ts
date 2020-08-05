@@ -65,7 +65,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
       //   this.products = this.products.filter(item => item.type == this.category);
       // }
 
-      debugger
+      // debugger
       if (params.category == undefined || params.category) {
         this.BindProductByCategory();
       }
@@ -93,7 +93,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
         this.productskart = this.productService.sortProducts(products, this.sortBy);
         // Price Filter
         this.productskart = this.productskart.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
-        //debugger
+        //// debugger
         // Paginate Products
         this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
         this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items

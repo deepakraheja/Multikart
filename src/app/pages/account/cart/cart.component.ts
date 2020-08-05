@@ -21,11 +21,11 @@ export class CartComponent implements OnInit {
   }
 
   ProceedToCheckout() {
-    debugger
+    // debugger
 
     this.router.navigate(['/shop/checkout']);
     // this._SharedDataService.currentUser.subscribe(res => {
-    //   debugger
+    //   // debugger
     //   if (res == null || res == undefined) {
     //     //this.router.navigate(['/pages/login']);
     //     this.modalService.open(LoginComponent, {

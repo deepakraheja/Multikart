@@ -42,7 +42,7 @@ export class ProductBoxComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    debugger;
+    // debugger;
     if (this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }
@@ -60,7 +60,7 @@ export class ProductBoxComponent implements OnInit {
   }
   // Get Product Size
   Size(variants) {
-    debugger;
+    // debugger;
     const uniqSize = [];
     for (let i = 0; i < Object.keys(variants).length; i++) {
       if (uniqSize.indexOf(variants[i].size + ' ') === -1 && variants[i].size) {
@@ -90,7 +90,7 @@ export class ProductBoxComponent implements OnInit {
 
   GoToDetail(rowID, productSizeColorId, setType) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
       this.modalService.open(LoginComponent, {
@@ -111,7 +111,7 @@ export class ProductBoxComponent implements OnInit {
   }
   addToCart(product: any) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    debugger
+    // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
     this.modalService.open(LoginComponent, {
