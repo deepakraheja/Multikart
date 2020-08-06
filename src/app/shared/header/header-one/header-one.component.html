@@ -25,11 +25,11 @@
                             <a (click)="Login()"><i class="fa fa-user" aria-hidden="true"></i>Login</a>
                         </li>
                         <li class="onhover-dropdown mobile-account" *ngIf="LoggedInUser!=[] && LoggedInUser!=undefined && LoggedInUser?.length>0">
-                            <i class="fa fa-user" aria-hidden="true"></i> My Account
+                            <i class="fa fa-user" aria-hidden="true"></i> {{LoggedInUser[0].name}}
                             <ul class="onhover-show-div">
                                 <li>
                                     <a data-lng="en" [routerLink]="['/pages/dashboard']">
-                    Dashboard
+                    My Account
                   </a>
                                 </li>
                                 <li>
