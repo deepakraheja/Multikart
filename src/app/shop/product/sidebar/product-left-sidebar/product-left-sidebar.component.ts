@@ -13,6 +13,11 @@ import { ToastrService } from 'ngx-toastr';
 
 declare var $;
 
+export interface image {
+  index: number;
+  color: string;
+}
+
 @Component({
   selector: 'app-product-left-sidebar',
   templateUrl: './product-left-sidebar.component.html',
@@ -96,6 +101,8 @@ export class ProductLeftSidebarComponent implements OnInit {
 
       const uniqColor = []
 
+      let imageColor: image[] = []
+
       for (let i = 0; i < Object.keys(variants).length; i++) {
 
         // debugger;
@@ -113,6 +120,12 @@ export class ProductLeftSidebarComponent implements OnInit {
         if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
           uniqColor.push(variants[i].color)
 
+          imageColor.push({
+            index: i,
+            color: variants[i].color
+
+          })
+
           // uniqColor.push({
           //   color: variants[i].color,
           //   productSizeId: variants[i].ProductSizeId,
@@ -120,7 +133,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           // })
         }
       }
-      // debugger;
+      debugger;
       return uniqColor
     }
   }

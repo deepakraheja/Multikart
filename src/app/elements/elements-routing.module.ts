@@ -11,7 +11,6 @@ import { ServicesComponent } from './theme/services/services.component';
 import { ProductSliderComponent } from './product/product-slider/product-slider.component';
 import { BannersComponent } from './product/banners/banners.component';
 import { ProductTabsComponent } from './product/product-tabs/product-tabs.component';
-import { MultiSliderComponent } from './product/multi-slider/multi-slider.component';
 
 const routes: Routes = [
   { 
@@ -45,10 +44,6 @@ const routes: Routes = [
   { 
     path: 'product/tabs', 
     component: ProductTabsComponent 
-  },
-  { 
-    path: 'product/multi-slider', 
-    component: MultiSliderComponent 
   }
 ];
 
