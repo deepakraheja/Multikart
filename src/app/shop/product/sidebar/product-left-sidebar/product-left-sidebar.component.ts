@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 declare var $;
 
 export interface image {
-  index: number;
+  colorindex: number;
   color: string;
 }
 
@@ -94,6 +94,7 @@ export class ProductLeftSidebarComponent implements OnInit {
     this.activeSlide = Number(index);
   }
 
+
   // Get Product Color
   Color(variants) {
 
@@ -104,37 +105,19 @@ export class ProductLeftSidebarComponent implements OnInit {
       let imageColor: image[] = []
 
       for (let i = 0; i < Object.keys(variants).length; i++) {
-
-        // debugger;
-        // if (uniqColor.find(item => item.color === -1) && variants[i].color) {
-        //   // debugger;
-
-        //   uniqColor.push({
-        //     color: variants[i].color,
-        //     productSizeId: variants[i].ProductSizeId,
-
-        //   })
-        // }
-
-
         if (uniqColor.indexOf(variants[i].color) === -1 && variants[i].color) {
           uniqColor.push(variants[i].color)
 
           imageColor.push({
-            index: i,
+            colorindex: i,
             color: variants[i].color
 
           })
-
-          // uniqColor.push({
-          //   color: variants[i].color,
-          //   productSizeId: variants[i].ProductSizeId,
-
-          // })
         }
       }
       debugger;
-      return uniqColor
+      console.log(imageColor);
+      return imageColor
     }
   }
 

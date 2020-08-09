@@ -88,7 +88,7 @@ export class ProductBoxComponent implements OnInit {
     this.ImageSrc = src;
   }
 
-  GoToDetail(rowID, productSizeColorId, setType) {
+  GoToDetail(rowID, productSizeColorId, setType, setNo) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     // debugger
     if (this.user == null || this.user == undefined) {
@@ -104,7 +104,7 @@ export class ProductBoxComponent implements OnInit {
       if (setType == 1)
         this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
       else if (setType == 2)
-        this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + productSizeColorId);
+        this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + setNo);
       if (setType == 3)
         this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
     }
@@ -114,12 +114,12 @@ export class ProductBoxComponent implements OnInit {
     // debugger
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
-    this.modalService.open(LoginComponent, {
-      size: 'lg',
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
         ariaLabelledBy: 'Cart-Modal',
-      centered: true,
+        centered: true,
         windowClass: 'theme-modal cart-modal CartModal'
-    });
+      });
     }
     else {
       let obj = {

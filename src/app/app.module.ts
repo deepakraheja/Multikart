@@ -21,6 +21,10 @@ import 'mousetrap';
 import { DatePipe } from '@angular/common';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
+
+// Import the library
+//import { NgxImageZoomModule } from 'ngx-image-zoom';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
    return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -34,7 +38,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ElementsComponent
   ],
   imports: [
+    
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    
     BrowserAnimationsModule,
     HttpClientModule,
     NgbModule,
@@ -53,7 +59,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         }
     }),
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+  
+    //NgxImageZoomModule, // <-- Add this line
   ],
   providers: [DatePipe,
     {

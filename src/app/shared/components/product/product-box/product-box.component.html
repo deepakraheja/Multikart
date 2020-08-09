@@ -73,7 +73,7 @@
       <span class="lable4" *ngIf="productkart.sale">on sale</span> -->
     </div>
     <div class="front">
-      <a (click)="GoToDetail(productkart.rowID,productkart?.productSizeId,productkart?.setType);">
+      <a (click)="GoToDetail(productkart.rowID,productkart?.productSizeId,productkart?.setType,productkart?.setNo);">
         <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
           [lazyLoad]="ImageSrc ? ImageSrc : ProductImage+productkart.productID+'/frontImage/'+productkart.frontImage"
           class="img-fluid lazy-loading" alt="" />

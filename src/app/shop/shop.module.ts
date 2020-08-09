@@ -41,6 +41,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { SuccessComponent } from './checkout/success/success.component';
 import { ProductLeftSidebarWithSetComponent } from './product/sidebar/product-left-sidebar-with-set/product-left-sidebar-with-set.component';
 import { ProductLeftSidebarWithBundleComponent } from './product/sidebar/product-left-sidebar-with-bundle/product-left-sidebar-with-bundle.component';
+import { SafePipeModule } from 'safe-pipe';
+//import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { ProductLeftSidebarWithBundleComponent } from './product/sidebar/product
     NgxPayPalModule,
     Ng5SliderModule,
     SharedModule,
-    ShopRoutingModule
+    ShopRoutingModule,
+    SafePipeModule,
+    //NgxImageZoomModule, // <-- Add this line
   ]
 })
 export class ShopModule { }

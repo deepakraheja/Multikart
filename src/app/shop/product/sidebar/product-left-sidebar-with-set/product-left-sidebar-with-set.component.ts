@@ -126,7 +126,10 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   }
 
   selectSize(size) {
-    this.selectedSize = size;
+    debugger
+    this.selectedSize = size + 1;
+    this.bigProductImageIndex = Number(size);
+
   }
 
   // Increament
@@ -188,7 +191,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
           UserID: Number(this.user[0].userID),
           SetNo: Number(element.setNo),
           Quantity: Number(element.selectedQty),
-          RowID:  this.productId
+          RowID: this.productId
         })
 
       }

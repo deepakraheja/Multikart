@@ -44,6 +44,9 @@ export class Productkart {
     productSizeSet?: string[];
 
     productSizeId: number;
+    videoURL: string;
+    setNo: number;
+    piece: number;
     constructor(
         productID?: number,
         productName?: string,
@@ -88,6 +91,9 @@ export class Productkart {
         productSizeId?: number,
         setList?: string[],
         productSizeSet?: string[],
+        videoURL?: string,
+        setNo?: number,
+        piece?: number,
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -134,6 +140,9 @@ export class Productkart {
         this.productSizeId = productSizeId;
         this.setList = this.setList;
         this.productSizeSet = this.productSizeSet;
+        this.videoURL = this.videoURL;
+        this.setNo = this.setNo;
+        this.piece = this.piece;
 
     }
 
