@@ -81,35 +81,37 @@ export class CartComponent implements OnInit {
   // Increament
   increment(product, qty = 1) {
     // debugger
-    let obj = {
+    let obj = [{
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
-      Quantity: qty
-    }
-    // this._cartService.AddToCart(obj).subscribe(res => {
-    //   this.toastrService.success("Product quantity has been successfully updated in cart.");
-    //   this.LoadCart();
-    //   this._SharedDataService.UserCart(this.productSizeColor);
-    // });
-    //this.productService.updateCartQuantity(product, qty);
+      Quantity: qty,
+      SetNo:Number(product.setNo)
+    }];
+    this._cartService.UpdateToCart(obj).subscribe(res => {
+      this.toastrService.success("Product quantity has been successfully updated in cart.");
+      this.LoadCart();
+      this._SharedDataService.UserCart(this.productSizeColor);
+    });
+    this.productService.updateCartQuantity(product, qty);
   }
 
   // Decrement
   decrement(product, qty = -1) {
     // debugger
     if (product.quantity > 1) {
-      let obj = {
+      let obj = [{
         UserID: Number(this.user[0].userID),
         ProductSizeId: Number(product.productSizeId),
-        Quantity: qty
-      }
-      // this._cartService.AddToCart(obj).subscribe(res => {
-      //   this.toastrService.success("Product quantity has been successfully updated in cart.");
-      //   this.LoadCart();
-      //   this._SharedDataService.UserCart(this.productSizeColor);
-      // });
+        Quantity: qty,
+        SetNo:Number(product.setNo)
+      }];
+      this._cartService.UpdateToCart(obj).subscribe(res => {
+        this.toastrService.success("Product quantity has been successfully updated in cart.");
+        this.LoadCart();
+        this._SharedDataService.UserCart(this.productSizeColor);
+      });
     }
-    //this.productService.updateCartQuantity(product, qty);
+    this.productService.updateCartQuantity(product, qty);
   }
 
   public removeItem(product: any) {

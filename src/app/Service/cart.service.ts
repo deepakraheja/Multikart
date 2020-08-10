@@ -38,4 +38,12 @@ export class CartService {
       this._url + this._methodName, this._param
     );
   }
+  
+  UpdateToCart(_Obj: any[]): Observable<any[]> {
+    this._methodName = "UpdateToCart";
+    this._param = _Obj;
+    return this._http.post<any[]>(
+      this._url + this._methodName, this._param
+    );
+  }
 }
