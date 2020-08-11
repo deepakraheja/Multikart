@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
           //   }
           // });
 
-          //this.router.navigate(['/home/fashion']);
+          this.router.navigate(['/home/fashion']);
         }
         else {
           this.toastr.error("email address already exists");

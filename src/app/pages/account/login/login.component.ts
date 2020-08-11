@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
 
   close() {
     this.modalService.dismissAll();
-
   }
 
   Login() {
@@ -53,22 +52,32 @@ export class LoginComponent implements OnInit {
       this.userService.ValidLogin(this.LoginForm.value).subscribe(res => {
         if (res.length > 0) {
 
-          sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
-          sessionStorage.setItem('Token', res[0].token);
+          if (res[0].isApproval == 0) {
+            this.toastr.error('Your login is pending. Please wait for approval');
+            return;
+          }
+          else if (res[0].isApproval == 2) {
+            this.toastr.error('Your login approval is denied');
+            return;
+          }
+          else if (res[0].isApproval == 1 && res[0].isActive == 1) {
+            sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
+            sessionStorage.setItem('Token', res[0].token);
 
-          this._SharedDataService.AssignUser(res);
-          this._SharedDataService.UserCart(res);
-          // debugger
-          // this.route.paramMap.subscribe((params: ParamMap) => {
-          //   if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
-          //     this.router.navigate(['/shop/cart']);
-          //   }
-          //   else {
-          //     this.router.navigate(['/home/fashion']);
-          //   }
-          // });
-          this.modalService.dismissAll();
-          //this.toastr.error('You approval is pending.');
+            this._SharedDataService.AssignUser(res);
+            this._SharedDataService.UserCart(res);
+            // debugger
+            // this.route.paramMap.subscribe((params: ParamMap) => {
+            //   if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
+            //     this.router.navigate(['/shop/cart']);
+            //   }
+            //   else {
+            //     this.router.navigate(['/home/fashion']);
+            //   }
+            // });
+            this.modalService.dismissAll();
+            //this.toastr.error('You approval is pending.');
+          }
         }
         else {
           this.toastr.error('Invalid email address and password');
