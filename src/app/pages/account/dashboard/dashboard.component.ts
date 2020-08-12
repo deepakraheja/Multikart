@@ -100,7 +100,7 @@ export class DashboardComponent implements OnInit {
   }
 
   Logout() {
-    debugger;
+   
     sessionStorage.removeItem('LoggedInUser');
     sessionStorage.removeItem('Token');
     this._SharedDataService.AssignUser(null);

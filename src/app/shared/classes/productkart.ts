@@ -47,6 +47,7 @@ export class Productkart {
     videoURL: string;
     setNo: number;
     piece: number;
+    minimum: number;
     constructor(
         productID?: number,
         productName?: string,
@@ -94,6 +95,7 @@ export class Productkart {
         videoURL?: string,
         setNo?: number,
         piece?: number,
+        minimum?: number,
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -143,6 +145,7 @@ export class Productkart {
         this.videoURL = this.videoURL;
         this.setNo = this.setNo;
         this.piece = this.piece;
+        this.minimum = this.minimum;
 
     }
 

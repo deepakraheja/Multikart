@@ -28,7 +28,7 @@ export class CategoryService {
     this._methodName = "GetCategoryJson";
 
     return this.dataService.get(this._controllerName + this._methodName).pipe(map((data: any) => {
-     debugger;
+    
       return data;
     }));
 

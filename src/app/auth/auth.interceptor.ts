@@ -15,7 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // 
         // add authorization header with jwt token if available      
 
-        debugger;
+       
         let Token = sessionStorage.getItem('Token');
 
         if (Token != null) {

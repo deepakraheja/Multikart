@@ -39,7 +39,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'product/left/sidebarwithbundle/:productId/:productSizeColorId',
+    path: 'product/left/sidebarwithbundle/:productId/:productSizeId',
     component: ProductLeftSidebarWithBundleComponent,
     resolve: {
       data: Resolver

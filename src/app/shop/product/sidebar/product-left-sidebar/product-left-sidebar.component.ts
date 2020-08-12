@@ -115,7 +115,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           })
         }
       }
-      debugger;
+     
       console.log(imageColor);
       return imageColor
     }
