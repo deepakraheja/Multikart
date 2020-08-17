@@ -6,25 +6,26 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="collection-filter" [class.openFilterbar]="mobileSidebar">
-                        <div class="collection-filter-block">
+                        <!-- commented on 12 aug 2020 -->
+                        <!--    <div class="collection-filter-block">
                             <div class="collection-mobile-back" (click)="toggleMobileSidebar()">
                                 <span class="filter-back">
                                     <i class="fa fa-angle-left" aria-hidden="true"></i> back
                                 </span>
                             </div> 
-                            <!-- commented on 12 aug 2020 -->
-                            <!-- <app-categories></app-categories> -->
+                           
+                            <app-categories></app-categories> 
                         </div>
                         <div class="collection-filter-block">
                             <app-services></app-services>
                         </div>
-                        <!-- <app-product-box-vertical-slider 
+                         <app-product-box-vertical-slider 
                   [title]="'New product'" 
                   [type]="product?.type">
                 </app-product-box-vertical-slider> -->
                     </div>
                 </div>
-                <div class="col-lg-9 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-xl-12">

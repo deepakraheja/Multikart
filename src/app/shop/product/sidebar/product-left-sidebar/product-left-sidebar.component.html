@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div class="collection-filter" [class.openFilterbar]="mobileSidebar">
-                        <div class="collection-filter-block">
+                        <!--<div class="collection-filter-block">
                             <div class="collection-mobile-back" (click)="toggleMobileSidebar()">
                                 <span class="filter-back">
                                     <i class="fa fa-angle-left" aria-hidden="true"></i> back
@@ -18,13 +18,13 @@
                         <div class="collection-filter-block">
                             <app-services></app-services>
                         </div>
-                        <!-- <app-product-box-vertical-slider 
+                        <app-product-box-vertical-slider 
                   [title]="'New product'" 
                   [type]="product?.type">
                 </app-product-box-vertical-slider> -->
                     </div>
                 </div>
-                <div class="col-lg-9 col-sm-12 col-xs-12">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-xl-12">
@@ -38,12 +38,15 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
-                                    <ng-container *ngFor="let image of productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
+                                <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar
+                                    class="product-slick">
+                                    <ng-container
+                                        *ngFor="let image of productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
                                         <ng-template carouselSlide [id]="i">
                                             <div>
 
-                                                <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[i]"
+                                                <img [defaultImage]="'assets/images/product/placeholder.jpg'"
+                                                    [lazyLoad]="ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[i]"
                                                     [alt]="image.alt" class="img-fluid">
                                             </div>
                                         </ng-template>
@@ -53,11 +56,14 @@
                                     <!-- *ngIf="product?.images.length > 1" -->
                                     <div class="slider-nav">
                                         <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
-                                            <ng-container *ngFor="let image of  productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
+                                            <ng-container
+                                                *ngFor="let image of  productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
                                                 <ng-template carouselSlide [id]="i">
                                                     <div class="owl-thumb" [class.active]="i == activeSlide">
-                                                        <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[i]"
-                                                            [alt]="image.alt" class="img-fluid" (click)="owlCar.to(activeSlide1 = i.toString())">
+                                                        <img [defaultImage]="'assets/images/product/placeholder.jpg'"
+                                                            [lazyLoad]="ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[i]"
+                                                            [alt]="image.alt" class="img-fluid"
+                                                            (click)="owlCar.to(activeSlide1 = i.toString())">
                                                     </div>
                                                 </ng-template>
                                             </ng-container>
@@ -70,7 +76,8 @@
                                 <div class="product-right">
                                     <h2>{{ productkart[0]?.productName }}</h2>
                                     <h4>
-                                        <del *ngIf="productkart[0]?.discount > 0">{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
+                                        <del
+                                            *ngIf="productkart[0]?.discount > 0">{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
                                         <span *ngIf="productkart[0]?.discount > 0"> {{ productkart[0]?.discount }}%
                                             off</span>
                                     </h4>
@@ -78,12 +85,16 @@
                                         {{ productkart[0]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h3>
                                     <ul class="color-variant">
-                                        <li [class]="color" [class.active]="activeSlide == color.colorindex.toString()" *ngFor="let color of Color(productkart[0]?.productSizeColor); index as i" [ngStyle]="{'background-color': color.color}" (click)="changecolor(color.colorindex.toString())">
+                                        <li [class]="color" [class.active]="activeSlide == color.colorindex.toString()"
+                                            *ngFor="let color of Color(productkart[0]?.productSizeColor); index as i"
+                                            [ngStyle]="{'background-color': color.color}"
+                                            (click)="changecolor(color.colorindex.toString())">
                                         </li>
                                     </ul>
                                     <!-- <app-stock-inventory [stock]="productkart[0]?.qty"></app-stock-inventory> commented on 22 july by deepak -->
                                     <div class="product-description border-product">
-                                        <h6 style="color: #222222;text-transform: capitalize;font-weight: 400;margin-bottom: 0;font-size: 18px;">
+                                        <h6
+                                            style="color: #222222;text-transform: capitalize;font-weight: 400;margin-bottom: 0;font-size: 18px;">
                                             select size
                                             <span>
                                                 <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size
@@ -100,9 +111,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of productkart[0]?.productSizeColor; let myIndex  = index">
+                                                <tr
+                                                    *ngFor="let item of productkart[0]?.productSizeColor; let myIndex  = index">
                                                     <td>
-                                                        <input type="checkbox" [(ngModel)]="item.isSelected" *ngIf="item?.qty > 0" name="checkIn" [value]="item.productSizeId" id="{{myIndex}}" (ngModelChange)="fnCheck(item,$event,myIndex)"> {{item.color}}
+                                                        <input type="checkbox" [(ngModel)]="item.isSelected"
+                                                            *ngIf="item?.qty > 0" name="checkIn"
+                                                            [value]="item.productSizeId" id="{{myIndex}}"
+                                                            (ngModelChange)="fnCheck(item,$event,myIndex)">
+                                                        {{item.color}}
                                                     </td>
                                                     <!-- <td>
                                                         {{item.color}}
@@ -122,7 +138,11 @@
                                                                         <i class="ti-angle-left"></i>
                                                                     </button>
                                                                 </span>
-                                                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}" style="width: 45px; height: 27px;" class="form-control input-number" [value]="item.selectedQty" disabled />
+                                                                <input type="text" name="quantity"
+                                                                    id="{{ 'txtqty' + myIndex}}"
+                                                                    style="width: 45px; height: 27px;"
+                                                                    class="form-control input-number"
+                                                                    [value]="item.selectedQty" disabled />
                                                                 <span class="input-group-prepend">
                                                                     <button type="button"
                                                                         class="btn quantity-right-plus" data-type="plus"
@@ -175,13 +195,16 @@
                     </div> -->
                                     </div>
                                     <div class="product-buttons">
-                                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false" (click)="addToCart(1)">add
+                                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"
+                                            (click)="addToCart(1)">add
                                             to cart</a>
-                                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false" (click)="addToCart(2)">buy now</a>
+                                        <a href="javascrip:void(0)" class="btn btn-solid" [class.disabled]="false"
+                                            (click)="addToCart(2)">buy now</a>
                                     </div>
                                     <div class="border-product">
                                         <h6 class="product-title">product details</h6>
-                                        <div class="blog-post" [innerHTML]="productkart[0]?.shortDetails | safe: 'html'"></div>
+                                        <div class="blog-post"
+                                            [innerHTML]="productkart[0]?.shortDetails | safe: 'html'"></div>
                                         <!-- <p inner>{{ productkart[0]?.shortDetails }}</p> -->
                                     </div>
                                     <div class="border-product">
@@ -210,7 +233,8 @@
                                     <ngb-tab>
                                         <ng-template ngbTabTitle>Description</ng-template>
                                         <ng-template ngbTabContent>
-                                            <div class="blog-post" [innerHTML]="productkart[0]?.description | safe: 'html'"></div>
+                                            <div class="blog-post"
+                                                [innerHTML]="productkart[0]?.description | safe: 'html'"></div>
                                             <!-- <p>{{productkart[0]?.description }}</p> -->
                                         </ng-template>
                                     </ngb-tab>
@@ -222,7 +246,9 @@
                                                 <!-- <iframe width="560" height="315"
                                                     src="https://www.youtube.com/embed/BUWzX78Ye_8"
                                                       allow="autoplay; encrypted-media" allowfullscreen></iframe> -->
-                                                <iframe width="560" height="315" [src]="productkart[0]?.videoURL | safe: 'resourceUrl'" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                <iframe width="560" height="315"
+                                                    [src]="productkart[0]?.videoURL | safe: 'resourceUrl'"
+                                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                             </div>
                                         </ng-template>
                                     </ngb-tab>

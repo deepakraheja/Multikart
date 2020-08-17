@@ -172,14 +172,16 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // product Pagination
   setPage(page: number) {
+    debugger
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page: page },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
       skipLocationChange: false  // do trigger navigation
     }).finally(() => {
-      this.viewScroller.setOffset([120, 120]);
-      this.viewScroller.scrollToAnchor('products'); // Anchore Link
+      debugger
+      this.viewScroller.setOffset([220, 220]);
+      this.viewScroller.scrollToAnchor('productskart'); // Anchore Link
     });
   }
 
