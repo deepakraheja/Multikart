@@ -43,7 +43,7 @@ import { SizeModalComponent } from './components/modal/size-modal/size-modal.com
 import { AgeVerificationComponent } from './components/modal/age-verification/age-verification.component';
 
 // Skeleton Loader Components
-import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
+//import { SkeletonProductBoxComponent } from './components/skeleton/skeleton-product-box/skeleton-product-box.component';
 
 // Layout Box
 //import { LayoutBoxComponent } from './components/layout-box/layout-box.component';
@@ -84,7 +84,7 @@ import { ProductBoxComponent } from './components/product/product-box/product-bo
     VideoModalComponent,
     SizeModalComponent,
     AgeVerificationComponent,
-    SkeletonProductBoxComponent,
+    //SkeletonProductBoxComponent,
     //LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,
@@ -138,7 +138,7 @@ import { ProductBoxComponent } from './components/product/product-box/product-bo
     VideoModalComponent,
     SizeModalComponent,
     AgeVerificationComponent,
-    SkeletonProductBoxComponent,
+    //SkeletonProductBoxComponent,
     //LayoutBoxComponent,
     TapToTopComponent,
     DiscountPipe,

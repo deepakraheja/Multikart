@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
+import { LookupService } from 'src/app/Service/lookup.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
   public Submitted: boolean = false;
   public SelectedBillingAddressId: number = 0;
   public ChangePwdForm: FormGroup;
+  public lstOrderStatus: any = [];
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router,
@@ -35,7 +37,8 @@ export class DashboardComponent implements OnInit {
     private fb: FormBuilder,
     private modalService: NgbModal,
     private toastr: ToastrService,
-    private _userService: UsersService
+    private _userService: UsersService,
+    public _lookupService: LookupService,
   ) {
 
   }
@@ -67,9 +70,15 @@ export class DashboardComponent implements OnInit {
 
       this.LoadBillingAddress();
       this.LoadAllOrder();
+      this.LoadOrderStatus();
     });
   }
 
+  LoadOrderStatus() {
+    this._lookupService.GetOrderStatus().subscribe(res => {
+      this.lstOrderStatus = res;
+    });
+  }
   LoadBillingAddress() {
     let obj = {
       UserID: this.LoggedInUser[0].userID

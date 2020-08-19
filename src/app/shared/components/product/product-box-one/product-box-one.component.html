@@ -6,15 +6,12 @@
         </div>
         <div class="front">
             <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'"
-                    [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src" class="img-fluid lazy-loading"
-                    alt="{{ product.images[0].alt }}" />
+                <img [defaultImage]="ImageSrc ? ImageSrc : 'assets/images/product/placeholder.jpg'" [lazyLoad]="ImageSrc ? ImageSrc : product.images[0].src" class="img-fluid lazy-loading" alt="{{ product.images[0].alt }}" />
             </a>
         </div>
         <div class="back" *ngIf="onHowerChangeImage">
             <a [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]">
-                <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading"
-                    alt="{{ product.images[1].alt }}">
+                <img [src]="ImageSrc ? ImageSrc : product.images[1].src" class="img-fluid lazy-loading" alt="{{ product.images[1].alt }}">
             </a>
         </div>
         <ul class="product-thumb-list" *ngIf="thumbnail">
@@ -52,7 +49,7 @@
             </a>
             <p>{{ productkart?.description }}</p>
             <h4>
-                {{ productkart?.salePrice  |  currency:currency?.currency:'symbol' }}
+                {{ productkart?.salePrice | currency:currency?.currency:'symbol' }}
                 <del> <span class="money">
                     {{ productkart?.price  | currency:currency?.currency:'symbol' }}</span></del>
             </h4>
@@ -64,6 +61,6 @@
         </div>
     </div>
 </div>
-<app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box>
+<!-- <app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box> -->
 <!-- <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view> -->
 <!-- <app-cart-modal #cartModal [product]="product" [currency]="currency" *ngIf="cartModal"></app-cart-modal> -->
