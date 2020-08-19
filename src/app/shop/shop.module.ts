@@ -9,10 +9,10 @@ import { ShopRoutingModule } from './shop-routing.module';
 import { ProductLeftSidebarComponent } from './product/sidebar/product-left-sidebar/product-left-sidebar.component';
 //import { ProductRightSidebarComponent } from './product/sidebar/product-right-sidebar/product-right-sidebar.component';
 //import { ProductNoSidebarComponent } from './product/sidebar/product-no-sidebar/product-no-sidebar.component';
-import { FourImageComponent } from './product/four-image/four-image.component';
-import { ThreeColumnComponent } from './product/three-column/three-column.component';
-import { BundleProductComponent } from './product/bundle-product/bundle-product.component';
-import { ImageOutsideComponent } from './product/image-outside/image-outside.component';
+// import { FourImageComponent } from './product/four-image/four-image.component';
+// import { ThreeColumnComponent } from './product/three-column/three-column.component';
+// import { BundleProductComponent } from './product/bundle-product/bundle-product.component';
+// import { ImageOutsideComponent } from './product/image-outside/image-outside.component';
 
 // Product Details Widgest Components
 import { ServicesComponent } from './product/widgets/services/services.component';
@@ -49,10 +49,10 @@ import { SafePipeModule } from 'safe-pipe';
     ProductLeftSidebarComponent, 
     //ProductRightSidebarComponent,
    // ProductNoSidebarComponent,
-    ThreeColumnComponent,
-    FourImageComponent,
-    BundleProductComponent,
-    ImageOutsideComponent,
+    // ThreeColumnComponent,
+    // FourImageComponent,
+    // BundleProductComponent,
+    // ImageOutsideComponent,
     ServicesComponent,
     CountdownComponent,
     SocialComponent,

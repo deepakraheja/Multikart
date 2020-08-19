@@ -4,8 +4,8 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 
 import { FashionOneComponent } from './fashion/fashion-one/fashion-one.component';
-import { FashionTwoComponent } from './fashion/fashion-two/fashion-two.component';
-import { FashionThreeComponent } from './fashion/fashion-three/fashion-three.component';
+//import { FashionTwoComponent } from './fashion/fashion-two/fashion-two.component';
+//import { FashionThreeComponent } from './fashion/fashion-three/fashion-three.component';
 
 
 // Widgest Components
@@ -19,8 +19,8 @@ import { CollectionComponent } from './widgets/collection/collection.component';
 @NgModule({
   declarations: [
     FashionOneComponent,
-    FashionTwoComponent,
-    FashionThreeComponent,
+    //FashionTwoComponent,
+    //FashionThreeComponent,
    
     // Widgest Components
     SliderComponent,

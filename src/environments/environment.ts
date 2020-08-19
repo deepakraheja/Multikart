@@ -16,7 +16,7 @@ export const environment = {
   //BASE_API_URL: 'http://localhost:61397/ESSServicetest/Service.svc/',
   BASE_API_URL: 'http://localhost:5205/api/',
 
-  Domain: 'http://localhost:4200/',
+  //Domain: 'http://localhost:4200/',
   
   //BASE_API_URL: 'http://ecomapi.uccnoida.com/api/',
   //ProductImage: 'http://ecomapi.uccnoida.com/ProductImage/',

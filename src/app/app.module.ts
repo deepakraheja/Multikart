@@ -14,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ShopComponent } from './shop/shop.component';
 import { PagesComponent } from './pages/pages.component';
-import { ElementsComponent } from './elements/elements.component';
+//import { ElementsComponent } from './elements/elements.component';
 
 import 'hammerjs';
 import 'mousetrap';
@@ -35,7 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     ShopComponent,
     PagesComponent,
-    ElementsComponent
+    //ElementsComponent
   ],
   imports: [
     
