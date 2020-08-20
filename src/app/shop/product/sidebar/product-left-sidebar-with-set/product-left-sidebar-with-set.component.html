@@ -78,16 +78,28 @@
                                         <del>{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
 
                                     </h4>
-                                    <h3>
+
+                                    <h5>
+                                        <span>Price per set</span>
                                         {{ productkart[0]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
+                                    </h5>
+                                    <h3>
+                                        Average price:
+                                        {{ productkart[0]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h3>
-                                    <!-- <ul class="color-variant">
-                    <li [class]="color" [class.active]="activeSlide == i.toString()"
-                      *ngFor="let color of Color(productkart[0]?.productSizeColor); index as i"
-                      [ngStyle]="{'background-color': color}" (click)="changecolor(i.toString())"> </li>
-                  </ul> -->
+                                    <h4>
+                                        Total pieces: {{ productkart[0]?.piece}}
+                                    </h4>
+
 
                                     <div class="product-description border-product">
+                                        <h6 class="product-title size-text">
+                                            select set
+                                            <span>
+                                                <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size
+                                                    chart</a>
+                                            </span>
+                                        </h6>
 
                                         <div class="size-box">
                                             <ul>
@@ -99,21 +111,10 @@
                                                 </li>
                                             </ul>
                                         </div>
-
-                                        <h6 class="product-title size-text">
-                                            select set
-                                            <span>
-                                                <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size
-                                                    chart</a>
-                                            </span>
-                                        </h6>
-
                                         <table class="table table-bordered table-hover">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                    <!-- <th class="thead-dark">
-
-                          </th> -->
+                                                 
                                                     <th class="thead-dark">
                                                         SET
                                                     </th>
@@ -123,6 +124,7 @@
                                                     <th class="thead-dark">
                                                         Details
                                                     </th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>

@@ -48,6 +48,7 @@ export class Productkart {
     setNo: number;
     piece: number;
     minimum: number;
+    averagePrice:number
     constructor(
         productID?: number,
         productName?: string,
@@ -96,6 +97,7 @@ export class Productkart {
         setNo?: number,
         piece?: number,
         minimum?: number,
+        averagePrice?:number,
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -146,6 +148,7 @@ export class Productkart {
         this.setNo = this.setNo;
         this.piece = this.piece;
         this.minimum = this.minimum;
+        this.averagePrice=this.averagePrice;
 
     }
 

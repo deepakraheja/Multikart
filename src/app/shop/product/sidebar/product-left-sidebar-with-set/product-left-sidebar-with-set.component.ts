@@ -31,7 +31,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
   public counter: number = 1;
   public activeSlide: any = 0;
-  public selectedSize: any;
+  public selectedSize: any = 1;
   public mobileSidebar: boolean = false;
   public productId: any;
 
