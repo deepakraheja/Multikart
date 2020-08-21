@@ -23,8 +23,9 @@
                                 <br>
                                 <!-- <a href="javascript:void(0)" (click)="SelectBillingAddress(lstBilling)">Select
                                     Address</a> -->
-                                    <button type="submit" class="btn-primary" (click)="SelectBillingAddress(lstBilling)">
-                                      {{checkoutForm.controls['billingAddressId'].value==lstBilling.billingAddressId?'Selected Deliver Address':'Deliver to this address'}}  
+                                    <button type="submit" class="btn-solid btn" (click)="SelectBillingAddress(lstBilling)"
+                                    [ngStyle]="(checkoutForm.controls['billingAddressId'].value==lstBilling.billingAddressId)?{'background-color':'#6fbd6f','background-image': 'none'}:{'background-color':''}">
+                                      {{checkoutForm.controls['billingAddressId'].value==lstBilling.billingAddressId?'Selected Delivery Address':'Deliver to this address'}}  
                                     </button>
 
                             </address>
