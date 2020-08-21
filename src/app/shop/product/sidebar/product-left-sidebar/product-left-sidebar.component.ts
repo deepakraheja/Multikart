@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { productSizeColor } from 'src/app/shared/classes/productsizecolor';
 import { CartService } from 'src/app/Service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 declare var $;
 
@@ -57,11 +58,13 @@ export class ProductLeftSidebarComponent implements OnInit {
     public productService: ProductService,
     private _prodService: ProductsService,
     private _CartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     // this.route.data.subscribe(response => this.product = response.data );
   }
   BindProduct(): void {
+    this.spinner.show();
     this.route.params.subscribe(params => {
       const productid = params['productId'];
       const productSizeId = params['productSizeId'];
@@ -78,7 +81,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           this.productkart = product;
 
         }
-
+        setTimeout(()=> this.spinner.hide(),1000);
       });
     });
 

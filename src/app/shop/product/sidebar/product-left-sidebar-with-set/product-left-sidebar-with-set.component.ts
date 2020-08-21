@@ -60,7 +60,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
         productSizeId: productSizeId
       }
       this._prodService.GetWithSetProductByRowID(productObj).subscribe(product => {
-        this.spinner.hide();
+     
         // debugger;
         if (!product) { // When product is empty redirect 404
           this.router.navigateByUrl('/pages/404', { skipLocationChange: true });
@@ -70,7 +70,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
           debugger
 
         }
-
+        setTimeout(()=> this.spinner.hide(),1000);
       });
     });
 

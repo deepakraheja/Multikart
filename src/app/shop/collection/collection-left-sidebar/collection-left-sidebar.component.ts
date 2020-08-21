@@ -5,6 +5,7 @@ import { ProductService } from "../../../shared/services/product.service";
 import { Product } from '../../../shared/classes/product';
 import { Productkart } from '../../../shared/classes/productkart';
 import { ProductsService } from 'src/app/Service/Products.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-collection-left-sidebar',
@@ -34,7 +35,8 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router,
     private viewScroller: ViewportScroller, public productService: ProductService,
-    private _prodService: ProductsService) {
+    private _prodService: ProductsService,
+    private spinner: NgxSpinnerService) {
     // Get Query params..
     this.route.queryParams.subscribe(params => {
 
@@ -76,7 +78,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   //Added on 08/07/2020
   BindProductByCategory() {
-
+this.spinner.show();
     this.route.queryParams.subscribe((params: Params) => {
 
       const category = params['category'];
@@ -97,7 +99,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
         // Paginate Products
         this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
         this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-
+        setTimeout(()=> this.spinner.hide(),1000);
+        
+       
       });
     });
   }
