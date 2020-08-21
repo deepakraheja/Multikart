@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { productSizeColor } from 'src/app/shared/classes/productsizecolor';
 import { CartService } from 'src/app/Service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -44,10 +45,12 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
     public productService: ProductService,
     private _prodService: ProductsService,
     private _CartService: CartService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService) {
     // this.route.data.subscribe(response => this.product = response.data );
   }
   BindProduct(): void {
+    this.spinner.show();
     this.route.params.subscribe(params => {
       this.productId = params['productId'];
       const productSizeId = params['productSizeId'];
@@ -57,7 +60,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
         productSizeId: productSizeId
       }
       this._prodService.GetWithSetProductByRowID(productObj).subscribe(product => {
-
+        this.spinner.hide();
         // debugger;
         if (!product) { // When product is empty redirect 404
           this.router.navigateByUrl('/pages/404', { skipLocationChange: true });

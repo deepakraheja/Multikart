@@ -42,10 +42,12 @@ import { SuccessComponent } from './checkout/success/success.component';
 import { ProductLeftSidebarWithSetComponent } from './product/sidebar/product-left-sidebar-with-set/product-left-sidebar-with-set.component';
 import { ProductLeftSidebarWithBundleComponent } from './product/sidebar/product-left-sidebar-with-bundle/product-left-sidebar-with-bundle.component';
 import { SafePipeModule } from 'safe-pipe';
+import { NgxSpinnerModule } from 'ngx-spinner';
 //import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
+    
     ProductLeftSidebarComponent, 
     //ProductRightSidebarComponent,
    // ProductNoSidebarComponent,
@@ -76,6 +78,7 @@ import { SafePipeModule } from 'safe-pipe';
     ProductLeftSidebarWithBundleComponent
   ],
   imports: [
+    NgxSpinnerModule,
     CommonModule,
     NgxPayPalModule,
     Ng5SliderModule,

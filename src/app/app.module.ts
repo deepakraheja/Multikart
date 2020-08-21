@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
 import { ShopComponent } from './shop/shop.component';
 import { PagesComponent } from './pages/pages.component';
 //import { ElementsComponent } from './elements/elements.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 import 'hammerjs';
 import 'mousetrap';
 import { DatePipe } from '@angular/common';
@@ -38,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     //ElementsComponent
   ],
   imports: [
-    
+    NgxSpinnerModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     
     BrowserAnimationsModule,
