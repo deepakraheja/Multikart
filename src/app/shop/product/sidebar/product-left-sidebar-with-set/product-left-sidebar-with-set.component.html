@@ -75,20 +75,24 @@
                                 <div class="product-right">
                                     <h2>{{ productkart[0]?.productName }}</h2>
                                     <h4>
-                                        <del>{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
-
+                                        <del
+                                            *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">{{  productkart[0]?.productSizeSet[bigProductImageIndex]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
+                                        <span
+                                            *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">
+                                            {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.discount }}%
+                                            off</span>
                                     </h4>
 
                                     <h5>
                                         <span>Price per set</span>
-                                        {{ productkart[0]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
+                                        {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h5>
                                     <h3>
                                         Average price:
-                                        {{ productkart[0]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
+                                        {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h3>
                                     <h4>
-                                        Total pieces: {{ productkart[0]?.piece}}
+                                        Total pieces: {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.piece}}
                                     </h4>
 
 
@@ -114,7 +118,7 @@
                                         <table class="table table-bordered table-hover">
                                             <thead class="thead-dark">
                                                 <tr>
-                                                 
+
                                                     <th class="thead-dark">
                                                         SET
                                                     </th>

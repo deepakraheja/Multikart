@@ -64,6 +64,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
         } else {
 
           this.productkart = product;
+          debugger
 
         }
 
