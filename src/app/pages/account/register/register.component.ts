@@ -179,7 +179,7 @@ export class RegisterComponent implements OnInit {
         return;
       }
       else {
-        this.errorShow = 1;
+        this.errorShow = 1; 
       }
 
     });

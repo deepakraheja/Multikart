@@ -84,7 +84,7 @@ export class ProductLeftSidebarComponent implements OnInit {
         setTimeout(()=> this.spinner.hide(),1000);
       });
     });
-
+ 
   }
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));

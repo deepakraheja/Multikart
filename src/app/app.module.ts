@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShopComponent,
     PagesComponent,
     //ElementsComponent
-  ],
+  ], 
   imports: [
     NgxSpinnerModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

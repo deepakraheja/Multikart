@@ -191,7 +191,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           this.router.navigate(['/shop/checkout']);
       }
     }
-    else {
+    else { 
 
       this.toastr.error("Please select atleast " + minimum + " item.");
     }

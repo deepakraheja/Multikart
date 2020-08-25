@@ -41,7 +41,7 @@ export class UsersService {
   ValidEmail(_Obj: any): Observable<Number> {
     this._methodName = "ValidEmail";
     this._param = _Obj;
-    return this._http.post<Number>(
+    return this._http.post<Number>( 
       this._url + this._methodName, this._param
     );
   }
