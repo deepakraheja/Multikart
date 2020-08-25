@@ -52,7 +52,6 @@ export class UsersService {
       this._url + this._methodName, this._param
     );
   }
-  
   //***********************Mobile OTP***************************** */
   CheckMobileAllReadyRegisteredOrNot(_Obj: any): Observable<any[]> {
     debugger
@@ -77,4 +76,7 @@ export class UsersService {
       this._url + this._methodName, this._param
     );
   }
+
+
+
 }

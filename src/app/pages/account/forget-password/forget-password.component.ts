@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { UsersService } from 'src/app/Service/users.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -6,10 +10,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./forget-password.component.scss']
 })
 export class ForgetPasswordComponent implements OnInit {
+  ResetPasswordForm: FormGroup;
+  constructor(
+    private formBuilder: FormBuilder,
+    private userService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) {
 
-  constructor() { }
+    this.ResetPasswordForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
+    });
+
+  }
 
   ngOnInit(): void {
   }
 
+  ResetPassword() {
+    if (this.ResetPasswordForm.value.email == "") {
+      this.toastr.error('Email is required.');
+      return;
+    }
+    if (this.ResetPasswordForm.invalid) {
+      this.toastr.error('Email is not valid.');
+      return;
+    }
+    this.userService.ValidEmail(this.ResetPasswordForm.value).subscribe(res => {
+      if (res == 1) {
+        this.toastr.success('Password reset link has been sent on emailid.');
+        this.router.navigate(['/home/fashion']);
+      }
+      else {
+        this.toastr.error('Eamil does not exists.');
+      }
+
+    });
+  }
 }

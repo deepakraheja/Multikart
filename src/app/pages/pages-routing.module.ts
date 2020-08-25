@@ -22,6 +22,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ErrorComponent } from './error/error.component';
 //import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { FaqComponent } from './faq/faq.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // import { BlogLeftSidebarComponent } from './blog/blog-left-sidebar/blog-left-sidebar.component';
 // import { BlogRightSidebarComponent } from './blog/blog-right-sidebar/blog-right-sidebar.component';
 // import { BlogNoSidebarComponent } from './blog/blog-no-sidebar/blog-no-sidebar.component';
@@ -94,6 +95,10 @@ const routes: Routes = [
   {
     path: 'order/success',
     component: OrderSuccessComponent
+  },
+  {
+    path: 'ResetPassword/:id',
+    component: ResetPasswordComponent
   },
   // {
   //   path: 'compare/one',
