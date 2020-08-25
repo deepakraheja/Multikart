@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit {
     const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
     let i: number = 0;
     OTPArray.controls.forEach((item: FormControl) => {
-      item.setValue("");
+      item.setValue(""); 
     });
 
     this.toastr.success('OTP has been sent');

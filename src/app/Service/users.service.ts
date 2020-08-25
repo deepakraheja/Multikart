@@ -19,9 +19,9 @@ export class UsersService {
     this._methodName = "UserRegistration";
     this._param = _BrandObj;
     return this._http.post<any>(
-      this._url + this._methodName, this._param
+      this._url + this._methodName, this._param 
     );
-  }
+  } 
 
   ValidLogin(_BrandObj: any): Observable<any[]> {
     this._methodName = "ValidLogin";
