@@ -38,4 +38,43 @@ export class UsersService {
       this._url + this._methodName, this._param
     );
   }
+  ValidEmail(_Obj: any): Observable<Number> {
+    this._methodName = "ValidEmail";
+    this._param = _Obj;
+    return this._http.post<Number>(
+      this._url + this._methodName, this._param
+    );
+  }
+  ResetPassword(_Obj: any): Observable<Number> {
+    this._methodName = "ResetPassword";
+    this._param = _Obj;
+    return this._http.post<Number>(
+      this._url + this._methodName, this._param
+    );
+  }
+  
+  //***********************Mobile OTP***************************** */
+  CheckMobileAllReadyRegisteredOrNot(_Obj: any): Observable<any[]> {
+    debugger
+    this._methodName = "CheckMobileAllReadyRegisteredOrNot";
+    this._param = _Obj;
+    return this._http.post<any[]>(
+      this._url + this._methodName, this._param
+    );
+  }
+
+  sendmobileOtp(_Obj: any): Observable<any[]> {
+    this._methodName = "UpdatePwd";
+    this._param = _Obj;
+    return this._http.post<any[]>(
+      this._url + this._methodName, this._param
+    );
+  }
+  verify_mobile_otp(_Obj: any): Observable<any[]> {
+    this._methodName = "UpdatePwd";
+    this._param = _Obj;
+    return this._http.post<any[]>(
+      this._url + this._methodName, this._param
+    );
+  }
 }

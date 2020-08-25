@@ -91,9 +91,10 @@
                                         Average price:
                                         {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h3>
-                                    <h4>
-                                        Total pieces: {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.piece}}
-                                    </h4>
+                                    <h4></h4>
+                                    <span>
+                                        Total Pieces in this set: {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.piece}}
+                                    </span>
 
 
                                     <div class="product-description border-product">
@@ -152,7 +153,7 @@
                                                                         class="btn quantity-left-minus"
                                                                         data-type="minus"
                                                                         (click)="decrement(myIndex,item)">
-                                                                        <i class="ti-angle-left"></i>
+                                                                        <i class="ti-minus"></i>
                                                                     </button>
                                                                 </span>
                                                                 <input type="text" name="quantity"
@@ -164,7 +165,7 @@
                                                                     <button type="button"
                                                                         class="btn quantity-right-plus" data-type="plus"
                                                                         (click)="increment(myIndex,item,item.qty)">
-                                                                        <i class="ti-angle-right"></i>
+                                                                        <i class="ti-plus"></i>
                                                                     </button>
                                                                 </span>
                                                             </div>
