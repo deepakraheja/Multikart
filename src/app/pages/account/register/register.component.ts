@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
-      mobileNo: ['', [Validators.required, Validators.minLength(10)]],
+      mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       //mobilecode: ['', [Validators.required]],
       OTPArray: new FormArray([]),
     });
@@ -101,9 +101,9 @@ export class RegisterComponent implements OnInit {
     ;
     if (this.f.mobileNo.errors) {
       if (this.f.mobileNo.errors.required) {
-        this.showMessage('Please enter a valid mobile number (10 digits)');
+        this.showMessage('Please, Enter 10 digit Mobile Number.');
       } else {
-        this.showMessage('Invalid mobile');
+        this.showMessage('Please, Enter 10 digit Mobile Number.');
       }
     } else {
 
@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
   //*****************************Check mobile Already Exist in the database or not*********************/
 
   checkMobileAlreadyExist() {
-  
+
     this.spinner.show();
     let obj = {
       "MobileNo": this.RegistrationForm.get('mobileNo').value
@@ -161,7 +161,7 @@ export class RegisterComponent implements OnInit {
     const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
     let i: number = 0;
     OTPArray.controls.forEach((item: FormControl) => {
-      item.setValue(""); 
+      item.setValue("");
     });
 
     this.toastr.success('OTP has been sent');
