@@ -5,6 +5,8 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
@@ -35,7 +37,8 @@ export class RegisterComponent implements OnInit {
   emailOTP: boolean = false;
   mobileOTP: boolean = false;
   mobileotpSendStart: boolean;
-  errorShow: number = 0;
+  errorShow: number = 1;
+  mobilecode: any = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,7 +47,8 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private _SharedDataService: SharedDataService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private modalService: NgbModal
   ) {
 
     //this.RegistrationForm = this.toFormGroup(this.formInput);
@@ -79,7 +83,7 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
       mobileNo: ['', [Validators.required, Validators.minLength(10)]],
-      mobilecode: ['', [Validators.required]],
+      //mobilecode: ['', [Validators.required]],
       OTPArray: new FormArray([]),
     });
 
@@ -111,7 +115,7 @@ export class RegisterComponent implements OnInit {
   //*****************************Check mobile Already Exist in the database or not*********************/
 
   checkMobileAlreadyExist() {
-    this.counter = 600;
+  
     this.spinner.show();
     let obj = {
       "MobileNo": this.RegistrationForm.get('mobileNo').value
@@ -128,7 +132,19 @@ export class RegisterComponent implements OnInit {
       }
       else if (res > 0) {
         this.mobileotpSendStart = false;
-        this.showMessage('This mobile already registered.');
+        this.showMessage('You are already registered. Please log in.');
+
+        this.modalService.open(LoginComponent, {
+          size: 'lg',
+          //ariaLabelledBy: 'Cart-Modal',
+          centered: true,
+          //windowClass: 'theme-modal cart-modal CartModal'
+        }).result.then((result) => {
+          `Result ${result}`
+        }, (reason) => {
+          this.modalService.dismissAll();
+        });
+
       }
       else {
         this.showMessage('OTP sending to this number is denied - Contact customer care');
@@ -142,67 +158,69 @@ export class RegisterComponent implements OnInit {
   //*****************************send mobile OTP************/
   sendMobileOtp() {
 
+    const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
+    let i: number = 0;
+    OTPArray.controls.forEach((item: FormControl) => {
+      item.setValue("");
+    });
+
     this.toastr.success('OTP has been sent');
+    this.counter = 8;
     this.mobileOTP = true;
     this.Set_Time();
-    // let d = {
-    //   "mobile": this.RegistrationForm.value.mobile
-    // }
-    // this.userService.sendmobileOtp(d).subscribe((res: any) => {
-    //   if (res) {
-    //     this.toastr.success('OTP has been sent');
-    //     this.mobileOTP = true;
-    //     //this.otpSendStart = false;
-    //   } else {
-    //     this.mobileotpSendStart = false;
-    //     this.mobileOTP = false;
-    //     //this.validate = true;
-    //     this.showMessage('OTP has not been sent');
-    //   }
-    // }, error => {
-    //   this.mobileotpSendStart = false;
 
-    //   //this.validate = true;
-    //   this.toastr.error(error);
-    // });
   }
   /*****************************verify mobile OTP*********************/
   verifyMobileOtp() {
+
     debugger
     //this.submitted = true;
-
+    this.errorShow = 1;
+    this.mobilecode = ""
     const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
 
     OTPArray.controls.forEach((control, i) => {
-      debugger
+
       if (control.value == "") {
+        this.errorShow = 0;
         return;
       }
       else {
-        this.errorShow = 1; 
+        if (this.mobilecode == "") {
+          this.mobilecode = control.value
+        }
+        else {
+          this.mobilecode = this.mobilecode + control.value;
+        }
       }
 
     });
+
+
 
     if (this.errorShow == 0) {
       this.showMessage('mobile otp required');
     }
     else {
+
+      this.spinner.show();
+
       let d = {
-        "mobile": this.RegistrationForm.value.mobile,
-        //"mobilecode": this.RegistrationForm.get('mobilecode').value
+        "MobileNo": this.RegistrationForm.get('mobileNo').value,
+        "OTP": this.mobilecode
 
       }
 
 
       this.userService.verify_mobile_otp(d).subscribe((res: any) => {
-
-        if (res == 0) {
+        setTimeout(() => this.spinner.hide(), 500);
+        debugger;
+        if (res == 1) {
           this.mobileverified = true;
           this.mobileOTP = false;
           this.mvaldate = false;
-        } else if (res == 1) {
-          this.toastr.error('OTP expired! Please try again');
+        } else if (res == 0) {
+          this.toastr.error('Invalid OTP');
 
         } else if (res == 2) {
 
@@ -226,6 +244,7 @@ export class RegisterComponent implements OnInit {
 
   //****************************** CreateRegistration*************//
   CreateRegistration() {
+    this.spinner.show();
     this.submitted = true;
     if (this.RegistrationForm.invalid) {
       this.toastr.error('All the * marked fields are mandatory');
@@ -234,6 +253,7 @@ export class RegisterComponent implements OnInit {
     else {
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
         if (res > 0) {
+          setTimeout(() => this.spinner.hide(), 500);
           this.toastr.success("Thank you for registering. We will inform you as soon as account gets approved.");
           // let obj = {
           //   LoginId: this.RegistrationForm.value.email,
@@ -259,7 +279,18 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/home/fashion']);
         }
         else {
-          this.toastr.error("email address already exists");
+          setTimeout(() => this.spinner.hide(), 500);
+          this.toastr.error("You are already registered. Please log in.");
+          this.modalService.open(LoginComponent, {
+            size: 'lg',
+            //ariaLabelledBy: 'Cart-Modal',
+            centered: true,
+            //windowClass: 'theme-modal cart-modal CartModal'
+          }).result.then((result) => {
+            `Result ${result}`
+          }, (reason) => {
+            this.modalService.dismissAll();
+          });
           return;
         }
       });

@@ -7,7 +7,7 @@
                 <h3>create account</h3>
                 <div class="theme-card">
 
-                    {{RegistrationForm.value|json}}
+                    <!-- {{RegistrationForm.value|json}} -->
 
                     <form class="theme-form" [formGroup]="RegistrationForm">
 
@@ -35,6 +35,8 @@
                         <div class="form-group" *ngIf="mobileOTP">
                             <label>Verify With OTP sent to {{f.mobileNo.value}} <span class="text-danger">
                                 </span></label>
+                            <br />
+                            <br />
                             <div class="input-group">
                                 <!-- <input type="password" class="form-control" id="exampleInputPassword"
                                     formControlName="mobilecode" placeholder="Enter OTP"> -->
@@ -49,7 +51,7 @@
                                 <div class="input-group-append" style="height: 39px;margin-left: 10px;">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="verifyMobileOtp();">Verify </button>
-                                </div> 
+                                </div>
 
                             </div>
                         </div>
