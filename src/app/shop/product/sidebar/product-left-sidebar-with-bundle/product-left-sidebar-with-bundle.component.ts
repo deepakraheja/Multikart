@@ -28,7 +28,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
 
   //public headers: any = ["", "COLOR", "SIZE", "QUANTITY", "STOCK"];
-  public headers: any = ["", "COLOR", "SIZE", "QUANTITY"];
+  public headers: any = ["SELECT", "COLOR", "SIZE", "QUANTITY"];
   public ProductImage = environment.ProductImage;
 
   index: number;
@@ -52,6 +52,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
   public ProductDetailsThumbConfig: any = ProductDetailsThumbSlider;
   user: any[] = null;
+  totalqty: any = 0;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -81,7 +82,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           this.productkart = product;
 
         }
-        setTimeout(()=> this.spinner.hide(),1000);
+        setTimeout(() => this.spinner.hide(), 1000);
       });
     });
 
@@ -178,10 +179,17 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           Quantity: Number(element.selectedQty)
         })
 
+        this.totalqty = this.totalqty + Number(element.selectedQty);
+
       }
     });
-    // debugger;
-    if (Number(obj.length) >= minimum) {
+    debugger;
+    if (Number(obj.length) == 0) {
+      this.toastr.error("Please select atleast one item");
+      return;
+    }
+
+    if (Number(this.totalqty) >= minimum) {
       const status = await this.productService.addToCartProduct(obj);
 
       if (status) {
@@ -191,9 +199,9 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           this.router.navigate(['/shop/checkout']);
       }
     }
-    else { 
+    else {
 
-      this.toastr.error("Please select atleast " + minimum + " item.");
+      this.toastr.error("Please select atleast " + minimum + " quantity.");
     }
   }
 

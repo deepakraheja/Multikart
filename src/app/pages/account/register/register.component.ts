@@ -165,7 +165,7 @@ export class RegisterComponent implements OnInit {
     });
 
     this.toastr.success('OTP has been sent');
-    this.counter = 8;
+    this.counter = 60;// for OTP time
     this.mobileOTP = true;
     this.Set_Time();
 

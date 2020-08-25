@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,8 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private _SharedDataService: SharedDataService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -49,7 +51,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
+      this.spinner.show();
       this.userService.ValidLogin(this.LoginForm.value).subscribe(res => {
+        setTimeout(() => this.spinner.hide(), 500);
         if (res.length > 0) {
 
           if (res[0].isApproval == 0) {
