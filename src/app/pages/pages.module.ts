@@ -26,6 +26,7 @@ import { OrderSuccessComponent } from './order-success/order-success.component';
 import { ErrorComponent } from './error/error.component';
 //import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { FaqComponent } from './faq/faq.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // Blog Components
 // import { BlogLeftSidebarComponent } from './blog/blog-left-sidebar/blog-left-sidebar.component';
 // import { BlogRightSidebarComponent } from './blog/blog-right-sidebar/blog-right-sidebar.component';
@@ -63,6 +64,7 @@ import { FaqComponent } from './faq/faq.component';
     ErrorComponent,
     //ComingSoonComponent,
     FaqComponent,
+    ResetPasswordComponent,
     // BlogLeftSidebarComponent,
     // BlogRightSidebarComponent,
     // BlogNoSidebarComponent,
