@@ -87,13 +87,14 @@
                                         <span>Price per set</span>
                                         {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h5>
-                                    <h3> 
+                                    <h3>
                                         Average price:
                                         {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
                                     </h3>
                                     <h4></h4>
                                     <span>
-                                        Total Pieces in this set: {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.piece}}
+                                        Total Pieces in this set:
+                                        {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.piece}}
                                     </span>
 
 
@@ -124,6 +125,9 @@
                                                         SET
                                                     </th>
                                                     <th class="thead-dark">
+                                                        Pieces
+                                                    </th>
+                                                    <th class="thead-dark">
                                                         QUANTITY
                                                     </th>
                                                     <th class="thead-dark">
@@ -142,6 +146,9 @@
                                                         <input type="checkbox" style="margin-top: 5px;"
                                                             [(ngModel)]="item.isSelected" [value]="item.setNo"
                                                             name="checkIn" id="{{myIndex}}"> {{item.setNo}}
+                                                    </td>
+                                                    <td>
+                                                           {{item.piece}} 
                                                     </td>
 
                                                     <td style="width: 252px;">

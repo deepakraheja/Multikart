@@ -100,7 +100,7 @@
                                     <div class="product-description border-product">
                                         <h6
                                             style="color: #222222;text-transform: capitalize;font-weight: 400;margin-bottom: 0;font-size: 18px;">
-                                          
+
                                             <span>
                                                 <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size
                                                     chart</a>
@@ -123,9 +123,8 @@
                                                             *ngIf="item?.qty > 0" name="checkIn"
                                                             [value]="item.productSizeId" id="{{myIndex}}"
                                                             (ngModelChange)="fnCheck(item,$event,myIndex)">
-                                                    </td>
-                                                    <td>
                                                         {{item.color}}
+
                                                     </td>
                                                     <td>
                                                         {{item.size}}
