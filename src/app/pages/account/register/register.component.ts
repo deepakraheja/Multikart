@@ -133,7 +133,7 @@ export class RegisterComponent implements OnInit {
       else if (res > 0) {
         this.mobileotpSendStart = false;
         this.showMessage('You are already registered. Please log in.');
-
+        this.router.navigate(['/home/fashion']);
         this.modalService.open(LoginComponent, {
           size: 'lg',
           //ariaLabelledBy: 'Cart-Modal',

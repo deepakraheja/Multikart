@@ -287,7 +287,7 @@ export class ProductService {
       ProductId: product.productId
     };
     this._cartService.DelCartById(obj).subscribe(res => {
-      this.toastrService.success('Product has been deleted successfully.');
+      this.toastrService.success('Product has been removed successfully from your cart.');
       this._SharedDataService.UserCart([]);
     });
     // const index = state.cart.indexOf(product);
