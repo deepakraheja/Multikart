@@ -114,7 +114,7 @@ export class CheckoutComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += element.salePrice * element.quantity + element.gstAmount
+      TotalAmount += (element.salePrice * element.quantity) + element.gstAmount
     });
     return TotalAmount;
   }

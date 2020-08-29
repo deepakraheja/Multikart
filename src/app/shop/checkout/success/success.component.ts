@@ -55,9 +55,10 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   }
 
   getTotal() {
+    debugger
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += element.price * element.quantity + element.gstAmount
+      TotalAmount += (element.price * element.quantity) + element.gstAmount
     });
     return TotalAmount;
   }
