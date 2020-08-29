@@ -11,6 +11,7 @@ import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { CartService } from 'src/app/Service/cart.service';
 import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-cart',
@@ -34,7 +35,8 @@ export class CartComponent implements OnInit {
     private router: Router,
     private _SharedDataService: SharedDataService,
     private _cartService: CartService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private spinner: NgxSpinnerService,
   ) {
 
     // this.productService.ProductcartItems.subscribe(response => {
@@ -67,8 +69,10 @@ export class CartComponent implements OnInit {
       let obj = {
         UserID: this.user[0].userID
       };
+      this.spinner.show();
       this._cartService.GetCartById(obj).subscribe(response => {
         // debugger
+        this.spinner.hide();
         this.productSizeColor = response
       });
     }
@@ -87,6 +91,7 @@ export class CartComponent implements OnInit {
       Quantity: qty,
       SetNo:Number(product.setNo)
     }];
+    this.spinner.show();
     this._cartService.UpdateToCart(obj).subscribe(res => {
       this.toastrService.success("Product quantity has been successfully updated in cart.");
       this.LoadCart();
@@ -105,6 +110,7 @@ export class CartComponent implements OnInit {
         Quantity: qty,
         SetNo:Number(product.setNo)
       }];
+      this.spinner.show();
       this._cartService.UpdateToCart(obj).subscribe(res => {
         this.toastrService.success("Product quantity has been successfully updated in cart.");
         this.LoadCart();

@@ -5,6 +5,7 @@ import { ProductService } from '../../../shared/services/product.service';
 import { OrderService } from 'src/app/Service/order.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-success',
@@ -20,7 +21,8 @@ export class SuccessComponent implements OnInit, AfterViewInit {
     private router: Router,
     public productService: ProductService,
     //private orderService: OrderService
-    private _OrderService: OrderService
+    private _OrderService: OrderService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,11 @@ export class SuccessComponent implements OnInit, AfterViewInit {
         let obj = {
           OrderId: Number(orderId)
         };
+        this.spinner.show();
         this._OrderService.GetOrderByOrderId(obj).subscribe(res => {
-          this.orderDetails = res;
+          this.spinner.hide();
+          if (res > 0)
+            this.orderDetails = res;
           //console.log(res);
         });
       }

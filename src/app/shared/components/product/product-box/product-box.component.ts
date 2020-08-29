@@ -11,6 +11,7 @@ import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/Service/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-product-box',
@@ -38,7 +39,8 @@ export class ProductBoxComponent implements OnInit {
     private _SharedDataService: SharedDataService,
     private router: Router,
     private _CartService: CartService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
@@ -101,12 +103,20 @@ export class ProductBoxComponent implements OnInit {
       });
     }
     else {
-      if (setType == 1)
+      this.spinner.show();
+      if (setType == 1) {
         this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
-      else if (setType == 2)
+        this.spinner.hide();
+      }
+      else if (setType == 2) {
         this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + setNo);
-      if (setType == 3)
+        this.spinner.hide();
+      }
+      if (setType == 3) {
         this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
+        this.spinner.hide();
+      }
+
     }
   }
   addToCart(product: any) {

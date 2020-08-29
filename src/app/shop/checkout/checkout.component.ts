@@ -14,6 +14,7 @@ import { DatePipe } from '@angular/common';
 import { BillingAddressService } from 'src/app/Service/billing-address.service';
 import { OrderService } from 'src/app/Service/order.service';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-checkout',
@@ -42,7 +43,8 @@ export class CheckoutComponent implements OnInit {
     private _datePipe: DatePipe,
     private _billingAddressService: BillingAddressService,
     private _orderService: OrderService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService,
   ) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     this.checkoutForm = this.fb.group({
@@ -78,7 +80,7 @@ export class CheckoutComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.spinner.show();
     this._SharedDataService.lstCart.subscribe(res => {
       this.LoadCart();
       this.LoadBillingAddress();
@@ -129,6 +131,7 @@ export class CheckoutComponent implements OnInit {
       };
       this._cartService.GetCartById(obj).subscribe(response => {
         // debugger
+        this.spinner.hide();
         this.productSizeColor = response
       });
     }
@@ -172,6 +175,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
+      this.spinner.show();
       let obj = {
         billingAddressId: Number(this.checkoutForm.value.billingAddressId),
         userID: Number(this.user[0].userID),
@@ -198,6 +202,7 @@ export class CheckoutComponent implements OnInit {
       // debugger
       this._orderService.SaveOrder(obj).subscribe(res => {
         // debugger
+        this.spinner.hide();
         this._SharedDataService.UserCart([]);
         this.router.navigate(['/shop/checkout/success/' + res]);
       });

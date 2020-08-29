@@ -4,6 +4,7 @@ import { Product } from '../../../shared/classes/product';
 import { ProductService } from '../../../shared/services/product.service';
 import { Productkart } from 'src/app/shared/classes/productkart';
 import { ProductsService } from 'src/app/Service/Products.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-fashion-one',
@@ -24,7 +25,8 @@ export class FashionOneComponent implements OnInit {
   public productskartselling: Productkart[] = [];
 
   constructor(public productService: ProductService,
-    private _prodService: ProductsService
+    private _prodService: ProductsService,
+    private spinner: NgxSpinnerService,
   ) {
 
     // this.productService.getProducts.subscribe(response => {
@@ -53,8 +55,10 @@ export class FashionOneComponent implements OnInit {
       Subcatecode: ''
 
     }
+    this.spinner.show();
     this._prodService.getProductByCategory(productObj).subscribe(products => {
       // debugger;
+      this.spinner.hide();
       this.productskart = products;
       this.productskartselling = products.filter(item => item.topSelling == true);
 

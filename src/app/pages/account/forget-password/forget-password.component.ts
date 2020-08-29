@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, EmailValidator } from '@angular/for
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-forget-password',
@@ -16,7 +17,8 @@ export class ForgetPasswordComponent implements OnInit {
     private userService: UsersService,
     private router: Router,
     private route: ActivatedRoute,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
   ) {
 
     this.ResetPasswordForm = this.formBuilder.group({
@@ -37,7 +39,9 @@ export class ForgetPasswordComponent implements OnInit {
       this.toastr.error('Email is not valid.');
       return;
     }
+    this.spinner.show();
     this.userService.ValidEmail(this.ResetPasswordForm.value).subscribe(res => {
+      this.spinner.hide();
       if (res == 1) {
         this.toastr.success('Password reset link has been sent on emailid.');
         this.router.navigate(['/home/fashion']);

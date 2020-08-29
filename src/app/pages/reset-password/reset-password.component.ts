@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-reset-password',
@@ -19,6 +20,7 @@ export class ResetPasswordComponent implements OnInit {
     private _userService: UsersService,
     private route: ActivatedRoute,
     private router: Router,
+    private spinner: NgxSpinnerService,
   ) {
     this.route.paramMap.subscribe((params: ParamMap) => {
       // debugger
@@ -47,7 +49,9 @@ export class ResetPasswordComponent implements OnInit {
         password: this.ChangePwdForm.value.password,
         NewPassword: this.ChangePwdForm.value.NewPassword
       }
+      this.spinner.show();
       this._userService.ResetPassword(obj).subscribe(res => {
+        this.spinner.hide();
         if (Number(res) > 0) {
           this.toastr.success("Password has been saved successfully.");
           this.router.navigate(['/home/fashion']);

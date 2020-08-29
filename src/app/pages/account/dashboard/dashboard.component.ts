@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
 import { LookupService } from 'src/app/Service/lookup.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -39,6 +40,7 @@ export class DashboardComponent implements OnInit {
     private toastr: ToastrService,
     private _userService: UsersService,
     public _lookupService: LookupService,
+    private spinner: NgxSpinnerService,
   ) {
 
   }
@@ -92,9 +94,11 @@ export class DashboardComponent implements OnInit {
     let obj = {
       UserID: this.LoggedInUser[0].userID
     };
+    this.spinner.show();
     this._OrderService.GetOrderByUserId(obj).subscribe(res => {
+      this.spinner.hide();
       this.lstOrder = res;
-      console.log(res);
+      //console.log(res);
     });
   }
 
@@ -192,8 +196,10 @@ export class DashboardComponent implements OnInit {
       userID: Number(this.LoggedInUser[0].userID),
     }
     // debugger
+    this.spinner.show();
     this._BillingAddressService.DeleteBillingAddress(obj).subscribe(res => {
       // debugger
+      this.spinner.hide();
       this.lstBillingAddress = res;
       this.toastr.success("Billing Address has been deleted successfully.");
       this.modalService.dismissAll();
@@ -222,8 +228,10 @@ export class DashboardComponent implements OnInit {
         zipCode: this.checkoutForm.value.zipCode,
       }
       // debugger
+      this.spinner.show();
       this._BillingAddressService.SaveBillingAddress(obj).subscribe(res => {
         // debugger
+        this.spinner.hide();
         this.lstBillingAddress = res;
         this.toastr.success("Billing Address has been saved successfully.");
         this.modalService.dismissAll();
@@ -264,7 +272,9 @@ export class DashboardComponent implements OnInit {
         password: this.ChangePwdForm.value.password,
         NewPassword: this.ChangePwdForm.value.NewPassword
       }
+      this.spinner.show();
       this._userService.UpdatePwd(obj).subscribe(res => {
+        this.spinner.hide();
         if (Number(res) > 0) {
           this.toastr.success("Password has been saved successfully.");
           this.modalService.dismissAll();

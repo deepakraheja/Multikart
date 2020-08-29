@@ -10,6 +10,7 @@ import { LoginComponent } from 'src/app/pages/account/login/login.component';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from 'src/app/Service/cart.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -31,7 +32,8 @@ export class ProductService {
     private toastrService: ToastrService,
     private _SharedDataService: SharedDataService,
     private modalService: NgbModal,
-    private _cartService: CartService
+    private _cartService: CartService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   /*
@@ -182,7 +184,9 @@ export class ProductService {
       //   ProductSizeId: Number(product.productSizeId),
       //   Quantity: Number(product.quantity)
       // }
+      this.spinner.show();
       this._cartService.AddToCart(product).subscribe(res => {
+        this.spinner.hide();
         this.toastrService.success("Product has been successfully added in cart.");
         this._SharedDataService.UserCart([]);
       });
@@ -286,7 +290,9 @@ export class ProductService {
       SetNo: product.setNo,
       ProductId: product.productId
     };
+    this.spinner.show();
     this._cartService.DelCartById(obj).subscribe(res => {
+      this.spinner.hide();
       this.toastrService.success('Product has been removed successfully from your cart.');
       this._SharedDataService.UserCart([]);
     });
