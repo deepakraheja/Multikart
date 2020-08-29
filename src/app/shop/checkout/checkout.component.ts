@@ -114,11 +114,18 @@ export class CheckoutComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += element.salePrice * element.quantity
+      TotalAmount += element.salePrice * element.quantity + element.gstAmount
     });
     return TotalAmount;
   }
 
+  getTotalGSTAmount() {
+    var TotalGSTAmount = 0;
+    this.productSizeColor.forEach(element => {
+      TotalGSTAmount += element.gstAmount
+    });
+    return TotalGSTAmount;
+  }
   // public get getTotal(): Observable<number> {
   //   return this.productService.productcartTotalAmount();
   // }
@@ -129,7 +136,7 @@ export class CheckoutComponent implements OnInit {
       let obj = {
         UserID: this.user[0].userID
       };
-      this._cartService.GetCartById(obj).subscribe(response => {
+      this._cartService.GetCartProcessedById(obj).subscribe(response => {
         // debugger
         this.spinner.hide();
         this.productSizeColor = response
@@ -160,9 +167,9 @@ export class CheckoutComponent implements OnInit {
       orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
       paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
       subTotal: Number(this.getTotal()),
-      tax: Number(this.getTotal() * (this.GST) / 100),
+      tax: 0,
       shippingCharge: 0,
-      totalAmount: Number(this.getTotal()) + Number(this.getTotal() * (this.GST) / 100) + Number(this.checkoutForm.value.shippingCharge),
+      totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
       notes: '',
       statusId: 1
     });
@@ -193,9 +200,9 @@ export class CheckoutComponent implements OnInit {
         orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
         paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
         subTotal: Number(this.getTotal()),
-        tax: Number(this.getTotal() * (this.GST) / 100),
+        tax: 0,
         shippingCharge: 0,
-        totalAmount: Number(this.getTotal()) + Number(this.getTotal() * (this.GST) / 100) + Number(this.checkoutForm.value.shippingCharge),
+        totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
         notes: '',
         statusId: 1
       }

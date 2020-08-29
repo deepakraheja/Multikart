@@ -29,7 +29,10 @@
                                 </a>
                             </td>
                             <td>
-                                <a>{{ product?.productName| titlecase }}</a>
+                                <a>
+                                    <div [innerHTML]="product?.productName"></div>
+                                    <!-- {{ product?.productName| titlecase }}-->
+                                </a>
                                 <div class="mobile-cart-content row">
                                     <div class="col-xs-3">
                                         <div class="qty-box">

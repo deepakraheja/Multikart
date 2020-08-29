@@ -184,7 +184,7 @@
                         </div>
 
                         <div class="col-lg-7 col-sm-12 col-xs-12">
-                            <div class="checkout-details">
+                            <div class="checkout-details" style="padding:15px !important;">
                                 <div class="order-box">
                                     <table class="table table-bordered table-hover">
                                         <thead class="thead-dark">
@@ -193,7 +193,16 @@
                                                     Product
                                                 </th>
                                                 <th class="thead-dark">
+                                                    Price
+                                                </th>
+                                                <th class="thead-dark">
                                                     Qty
+                                                </th>
+                                                <th class="thead-dark">
+                                                    GST Rate(%)
+                                                </th>
+                                                <th class="thead-dark">
+                                                    GST Amount
                                                 </th>
                                                 <th class="thead-dark">
                                                     Total
@@ -206,52 +215,64 @@
                                                     {{ product?.productName }}
                                                 </td>
                                                 <td>
+                                                    {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td>
                                                     {{ product?.quantity }}
                                                 </td>
                                                 <td>
+                                                    {{ product?.gstRate }}%
+                                                </td>
+                                                <td>
+                                                    {{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td>
                                                     <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
-                                                        {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}</span>
+                                                        {{ (product.salePrice*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
                                                 </td>
                                             </tr>
                                             <tr *ngIf='!productSizeColor.length'>
-                                                <td colspan="3">
+                                                <td colspan="6">
                                                     There are no products in cart
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">
+                                                <td colspan="4">
                                                     <b>Subtotal</b>
+                                                </td>
+                                                <td>
+                                                    <b>{{ getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                                                 </td>
                                                 <td>
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td colspan="2">
+                                            <!-- <tr>
+                                                <td colspan="5">
                                                     <b>GST ({{GST}}%)</b>
                                                 </td>
                                                 <td>
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                         {{ getTotal()*(GST)/100 | currency:productService?.Currency.currency:'symbol'}}</span>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                             <tr>
-                                                <td colspan="2">
+                                                <td colspan="4">
                                                     <b> Shipping</b>
                                                 </td>
-                                                <td>
+                                                <td colspan="2">
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                          <b>Free Shipping</b></span>
                                                 </td>
                                             </tr>
                                             <tr class="total">
-                                                <td colspan="2">
+                                                <td colspan="5">
                                                     <b>Total</b>
                                                 </td>
                                                 <td>
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
-                                                        {{ getTotal()+(getTotal()*(GST)/100) | currency:productService?.Currency.currency:'symbol'}}</span>
+                                                        {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                                                 </td>
                                             </tr>
                                         </tbody>
