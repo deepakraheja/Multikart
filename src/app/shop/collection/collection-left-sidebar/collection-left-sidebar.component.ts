@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Router, Params, ParamMap } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { ProductService } from "../../../shared/services/product.service";
 import { Product } from '../../../shared/classes/product';
@@ -78,9 +78,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   //Added on 08/07/2020
   BindProductByCategory() {
-this.spinner.show();
+    this.spinner.show();
     this.route.queryParams.subscribe((params: Params) => {
-
+      debugger
       const category = params['category'];
       let productObj = {
         Active: 1,
@@ -88,20 +88,30 @@ this.spinner.show();
 
       }
       this._prodService.getProductByCategory(productObj).subscribe(products => {
+        let FilteredProduct = products;
+        this.route.paramMap.subscribe((params: ParamMap) => {
+          debugger
+          let type = params.get('type');
+          if (type == 'Refilling') {
+            FilteredProduct = products.filter(a => a.featured == true);
+          }
+          else if (type == 'BestSellers') {
+            FilteredProduct = products.filter(a => a.topSelling == true);
+          }
+          else
+            this.productskart = products;
 
-        this.productskart = products;
+          // Sorting Filter
+          this.productskart = this.productService.sortProducts(FilteredProduct, this.sortBy);
+          // Price Filter
+          this.productskart = this.productskart.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
+          //// debugger
+          // Paginate Products
+          this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
+          this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
+          setTimeout(() => this.spinner.hide(), 1000);
+        });
 
-        // Sorting Filter
-        this.productskart = this.productService.sortProducts(products, this.sortBy);
-        // Price Filter
-        this.productskart = this.productskart.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
-        //// debugger
-        // Paginate Products
-        this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
-        this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-        setTimeout(()=> this.spinner.hide(),1000);
-        
-       
       });
     });
   }

@@ -162,6 +162,12 @@ export class NavService {
 				{ path: '/pages/faq', title: 'faq', type: 'link' }
 			]
 		},
+		{
+			title: 'Refilling', type: 'link', active: false, path: '/shop/collection/left/sidebar/Refilling'
+		},
+		{
+			title: 'Best Sellers', type: 'link', active: false, path: '/shop/collection/left/sidebar/BestSellers'
+		}
 		// {
 		// 	title: 'blogs', type: 'sub', active: false, children: [
 		// 		{ path: '/pages/blog/left/sidebar', title: 'left-sidebar', type: 'link' },
