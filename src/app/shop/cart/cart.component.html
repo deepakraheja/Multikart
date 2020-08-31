@@ -26,7 +26,7 @@
                     <tbody *ngFor="let product of productSizeColor">
                         <tr>
                             <td>
-                                <a>
+                                <a (click)="GoToDetail(product.rowID,product?.productSizeId,product?.setType,product?.setNo);">
                                     <img *ngIf="product?.setNo>0" [src]="ProductImage+product?.productId+'/productSetImage/'+product?.setNo+'/'+product?.productImg[0]">
                                     <img *ngIf="product?.setNo==0" [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]">
                                 </a>

@@ -143,4 +143,23 @@ export class CartComponent implements OnInit {
     //   }
     // });
   }
+
+  GoToDetail(rowID, productSizeColorId, setType, setNo) {
+    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    // debugger
+      this.spinner.show();
+      if (setType == 1) {
+        this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
+        this.spinner.hide();
+      }
+      else if (setType == 2) {
+        this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + setNo);
+        this.spinner.hide();
+      }
+      if (setType == 3) {
+        this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
+        this.spinner.hide();
+      }
+
+  }
 }
