@@ -54,7 +54,7 @@ export class CartComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += element.salePrice * element.quantity
+      TotalAmount += element.salePrice
     });
     return TotalAmount;
   }

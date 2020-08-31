@@ -9,6 +9,7 @@ export class productSizeColor {
     selectedQty?: number;
     isSelected?: boolean;
     gstAmount?: number;
+    discount?: number;
 
     constructor(
         productSizeColorId?: number,

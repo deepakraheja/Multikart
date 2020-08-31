@@ -14,10 +14,13 @@
                         <tr class="table-head">
                             <th scope="col">image</th>
                             <th scope="col">product name</th>
-                            <th scope="col">price</th>
-                            <th scope="col">quantity</th>
-                            <th scope="col">action</th>
+                            <th scope="col">MRP</th>
+                            <th scope="col">No of Set/Pcs</th>
+                            <th scope="col">Total Pieces</th>
+                            <th scope="col">Discount</th>
+                            <th scope="col">Sale price</th>
                             <th scope="col">total</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let product of productSizeColor">
@@ -57,7 +60,7 @@
                             </td>
                             <td>
                                 <h2>
-                                    {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
+                                    {{ product.price | currency:productService?.Currency.currency:'symbol' }}
                                 </h2>
                             </td>
                             <td>
@@ -80,14 +83,30 @@
                                 </div>
                             </td>
                             <td>
+                                <h2>
+                                    {{ product.totalPieces}}
+                                </h2>
+                            </td>
+                            <td>
+                                <h2>
+                                    {{ product.discount | currency:productService?.Currency.currency:'symbol' }}
+                                </h2>
+                            </td>
+                            <td>
+                                <h2>
+                                    {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
+                                </h2>
+                            </td>
+
+                            <td>
+                                <h2 class="td-color">
+                                    {{ (product.salePrice) | currency:productService?.Currency.currency:'symbol' }}
+                                </h2>
+                            </td>
+                            <td>
                                 <a href="javascript:void(0)" (click)="removeItem(product)" class="icon">
                                     <i class="ti-close"></i>
                                 </a>
-                            </td>
-                            <td>
-                                <h2 class="td-color">
-                                    {{ (product.salePrice * product.quantity) | currency:productService?.Currency.currency:'symbol' }}
-                                </h2>
                             </td>
                         </tr>
                     </tbody>
