@@ -6,6 +6,7 @@ import { Product } from '../../../shared/classes/product';
 import { Productkart } from '../../../shared/classes/productkart';
 import { ProductsService } from 'src/app/Service/Products.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BrandService } from 'src/app/Service/Brand.service';
 
 @Component({
   selector: 'app-collection-left-sidebar',
@@ -19,7 +20,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public products: Product[] = [];
 
   public productskart: Productkart[] = [];
-
+  public Allproductskart: Productkart[] = [];
   public brands: any[] = [];
   public colors: any[] = [];
   public size: any[] = [];
@@ -33,10 +34,14 @@ export class CollectionLeftSidebarComponent implements OnInit {
   public mobileSidebar: boolean = false;
   public loader: boolean = true;
 
-  constructor(private route: ActivatedRoute, private router: Router,
-    private viewScroller: ViewportScroller, public productService: ProductService,
+  constructor(private route: ActivatedRoute,
+    private router: Router,
+    private viewScroller: ViewportScroller,
+    public productService: ProductService,
     private _prodService: ProductsService,
-    private spinner: NgxSpinnerService) {
+    private spinner: NgxSpinnerService,
+    private Brand: BrandService
+  ) {
     // Get Query params..
     this.route.queryParams.subscribe(params => {
 
@@ -70,11 +75,23 @@ export class CollectionLeftSidebarComponent implements OnInit {
       // debugger
       if (params.category == undefined || params.category) {
         this.BindProductByCategory();
+        //this.BindBrand();
       }
 
       //})
     })
   }
+
+  // BindBrand() {
+  //   let obj = {
+  //     Active: 1
+  //   }
+  //   debugger
+  //   this.Brand.GetAllBrand(obj).subscribe(res => {
+  //     debugger
+  //     this.brands = res;
+  //   });
+  // }
 
   //Added on 08/07/2020
   BindProductByCategory() {
@@ -89,6 +106,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
       }
       this._prodService.getProductByCategory(productObj).subscribe(products => {
         let FilteredProduct = products;
+        this.Allproductskart = products;
         this.route.paramMap.subscribe((params: ParamMap) => {
           debugger
           let type = params.get('type');
@@ -100,7 +118,20 @@ export class CollectionLeftSidebarComponent implements OnInit {
           }
           else
             this.productskart = products;
-
+          debugger
+          let BrandFilter: any[] = [];
+          if (this.brands.length > 0) {
+            (this.brands).forEach(element => {
+              FilteredProduct.forEach(ele => {
+                if (ele.brandName == element) {
+                  BrandFilter.push(ele);
+                }
+              });
+            });
+            FilteredProduct = BrandFilter;
+          }
+          // Brand Filter
+          //this.productskart = this.productService.filter(FilteredProduct, this.sortBy);
           // Sorting Filter
           this.productskart = this.productService.sortProducts(FilteredProduct, this.sortBy);
           // Price Filter
@@ -109,7 +140,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
           // Paginate Products
           this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
           this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
-          setTimeout(() => this.spinner.hide(), 1000);
+          setTimeout(() => this.spinner.hide(), 2000);
         });
 
       });
@@ -123,6 +154,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // Append filter value to Url
   updateFilter(tags: any) {
+    debugger
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,

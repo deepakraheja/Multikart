@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../../../shared/classes/product';
+import { Productkart } from 'src/app/shared/classes/productkart';
 
 @Component({
   selector: 'app-brands',
@@ -9,6 +10,7 @@ import { Product } from '../../../../shared/classes/product';
 export class BrandsComponent implements OnInit {
 
   @Input() products: Product[] = [];
+  @Input() productskart: Productkart[] = [];
   @Input() brands: any[] = [];
 
   @Output() brandsFilter: EventEmitter<any> = new EventEmitter<any>();
@@ -22,17 +24,20 @@ export class BrandsComponent implements OnInit {
   }
 
   get filterbyBrand() {
+    debugger
     const uniqueBrands = [];
-    this.products.filter((product) => {
-      if (product.brand) {
-        const index = uniqueBrands.indexOf(product.brand)
-        if (index === -1) uniqueBrands.push(product.brand)
+    this.productskart.filter((product) => {
+      debugger
+      if (product.brandName) {
+        const index = uniqueBrands.indexOf(product.brandName)
+        if (index === -1) uniqueBrands.push(product.brandName)
       }
     })
     return uniqueBrands
   }
 
   appliedFilter(event) {
+    debugger
     let index = this.brands.indexOf(event.target.value);  // checked and unchecked value
     if (event.target.checked)   
       this.brands.push(event.target.value); // push in array cheked value
