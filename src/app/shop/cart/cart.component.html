@@ -7,18 +7,21 @@
             <h3><strong>Your Cart is Empty</strong></h3>
             <h4>Add something to make me happy :)</h4>
         </div>
-        <div class="row" *ngIf="productSizeColor.length"  style="overflow-y: scroll;">
+        <div class="row" *ngIf="productSizeColor.length" style="overflow-y: scroll;">
             <div class="col-sm-12">
                 <table class="table cart-table table-responsive-xs">
                     <thead>
                         <tr class="table-head">
                             <th scope="col">image</th>
                             <th scope="col">product name</th>
-                            <th scope="col">MRP</th>
+
                             <th scope="col">No of Set/Pcs</th>
-                            <th scope="col">Total Pieces</th>
-                            <th scope="col">Discount</th>
-                            <th scope="col">Sale price</th>
+
+                            <th scope="col">Qty</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Discount(%)</th>
+
                             <th scope="col">total</th>
                             <th scope="col">Delete</th>
                         </tr>
@@ -59,11 +62,6 @@
                                 </div>
                             </td>
                             <td>
-                                <h2>
-                                    {{ product.price | currency:productService?.Currency.currency:'symbol' }}
-                                </h2>
-                            </td>
-                            <td>
                                 <div class="qty-box">
                                     <div class="input-group">
                                         <span class="input-group-prepend">
@@ -89,14 +87,22 @@
                             </td>
                             <td>
                                 <h2>
-                                    {{ product.discount | currency:productService?.Currency.currency:'symbol' }}
+                                    {{ product.price/product.totalPieces | currency:productService?.Currency.currency:'symbol' }}
                                 </h2>
                             </td>
                             <td>
                                 <h2>
-                                    {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
+                                    {{ product.price | currency:productService?.Currency.currency:'symbol' }}
                                 </h2>
                             </td>
+
+                            <td>
+                                <h2>
+                                    <!-- {{ product.discount | currency:productService?.Currency.currency:'symbol' }}  -->
+                                    {{ product.perDiscount/product.totalPieces | number:'1.2-2' }}%
+                                </h2>
+                            </td>
+
 
                             <td>
                                 <h2 class="td-color">
@@ -110,17 +116,31 @@
                             </td>
                         </tr>
                     </tbody>
-                </table>
-                <table class="table cart-table table-responsive-md">
                     <tfoot>
                         <tr>
-                            <td>total price :</td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <h2> {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</h2>
+                                <b>Total</b>
                             </td>
+                            <td>
+                                <h2> {{TotalPieces}}</h2>
+                            </td>
+                            <td></td>
+                            <td>
+                                <h2> {{ Price | currency:productService?.Currency.currency:'symbol'}}</h2>
+                            </td>
+                            <td>
+                                <h2> {{ Discount | currency:productService?.Currency.currency:'symbol'}}</h2>
+                            </td>
+                            <td>
+                                <h2> {{ TotalAmount | currency:productService?.Currency.currency:'symbol'}}</h2>
+                            </td>
+                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
+
             </div>
         </div>
         <div class="row cart-buttons" *ngIf='productSizeColor.length'>

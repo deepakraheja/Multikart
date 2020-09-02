@@ -10,6 +10,8 @@ export class productSizeColor {
     isSelected?: boolean;
     gstAmount?: number;
     discount?: number;
+    totalPieces?: number;
+    price?: number;
 
     constructor(
         productSizeColorId?: number,
@@ -22,6 +24,8 @@ export class productSizeColor {
         selectedQty?: number,
         isSelected?: boolean,
         gstAmount?: number,
+        totalPieces?: number,
+        price?: number,
     ) {
         this.productSizeColorId = productSizeColorId;
         this.productSizeId = productSizeId;
@@ -33,6 +37,8 @@ export class productSizeColor {
         this.selectedQty = selectedQty;
         this.isSelected = isSelected;
         this.gstAmount = gstAmount;
+        this.totalPieces = totalPieces;
+        this.price = price;
     }
 
 }

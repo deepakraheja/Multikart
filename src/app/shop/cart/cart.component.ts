@@ -26,6 +26,7 @@ export class CartComponent implements OnInit {
 
   public ProductImage = environment.ProductImage;
   user: any[] = null;
+  public TotalAmount = 0; TotalPieces = 0; Price = 0; Discount = 0;
   //commented on 13 july 2020
   // constructor(public productService: ProductService) {
   //   this.productService.cartItems.subscribe(response => this.products = response);
@@ -52,13 +53,39 @@ export class CartComponent implements OnInit {
   }
 
   getTotal() {
-    var TotalAmount = 0;
+    //var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += element.salePrice
+      this.TotalAmount += element.salePrice;
+      this.TotalPieces += element.totalPieces;
+      this.Price += element.price;
+      this.Discount += element.discount
     });
-    return TotalAmount;
+    //return TotalAmount;
   }
 
+  // getTotalPcs() {
+  //   var TotalPieces = 0;
+  //   this.productSizeColor.forEach(element => {
+  //     TotalPieces += element.totalPieces
+  //   });
+  //   return TotalPieces;
+  // }
+
+  // getTotalAmount() {
+  //   var Price = 0;
+  //   this.productSizeColor.forEach(element => {
+  //     Price += element.price
+  //   });
+  //   return Price;
+  // }
+
+  // getTotalDiscount() {
+  //   var Discount = 0;
+  //   this.productSizeColor.forEach(element => {
+  //     Discount += element.discount
+  //   });
+  //   return Discount;
+  // }
   // public get getTotal(): Observable<number> {
   //   return this.productService.productcartTotalAmount();
   // }
@@ -73,11 +100,13 @@ export class CartComponent implements OnInit {
       this._cartService.GetCartById(obj).subscribe(response => {
         // debugger
         this.spinner.hide();
-        this.productSizeColor = response
+        this.productSizeColor = response;
+        this.getTotal();
       });
     }
     else {
       this.productSizeColor = [];
+      this.getTotal();
     }
 
   }
@@ -89,7 +118,7 @@ export class CartComponent implements OnInit {
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
       Quantity: qty,
-      SetNo:Number(product.setNo)
+      SetNo: Number(product.setNo)
     }];
     this.spinner.show();
     this._cartService.UpdateToCart(obj).subscribe(res => {
@@ -108,7 +137,7 @@ export class CartComponent implements OnInit {
         UserID: Number(this.user[0].userID),
         ProductSizeId: Number(product.productSizeId),
         Quantity: qty,
-        SetNo:Number(product.setNo)
+        SetNo: Number(product.setNo)
       }];
       this.spinner.show();
       this._cartService.UpdateToCart(obj).subscribe(res => {
@@ -147,19 +176,19 @@ export class CartComponent implements OnInit {
   GoToDetail(rowID, productSizeColorId, setType, setNo) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     // debugger
-      this.spinner.show();
-      if (setType == 1) {
-        this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
-        this.spinner.hide();
-      }
-      else if (setType == 2) {
-        this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + setNo);
-        this.spinner.hide();
-      }
-      if (setType == 3) {
-        this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
-        this.spinner.hide();
-      }
+    this.spinner.show();
+    if (setType == 1) {
+      this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);
+      this.spinner.hide();
+    }
+    else if (setType == 2) {
+      this.router.navigateByUrl('/shop/product/left/sidebarwithset/' + rowID + '/' + setNo);
+      this.spinner.hide();
+    }
+    if (setType == 3) {
+      this.router.navigateByUrl('/shop/product/left/sidebarwithbundle/' + rowID + '/' + productSizeColorId);
+      this.spinner.hide();
+    }
 
   }
 }
