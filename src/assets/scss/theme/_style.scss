@@ -14209,14 +14209,99 @@ div#loading-bar {
     }
 }
 
-.Logininfo  {
-    color: #2874f0;
-    font-weight: 500;
-    /* background-color: #fff; */
-    cursor: pointer;
-    border-radius: 2px;
-    height: 47px;
-    padding: 5px 40px;
-    /* border: 1px solid #dbdbdb; */
-    font-size: 18px;
-} 
+// .Logininfo  {
+//     color: #2874f0;
+//     font-weight: 500;
+//     cursor: pointer;
+//     border-radius: 2px;
+//     height: 47px;
+//     padding: 5px 40px;
+//     font-size: 18px;
+//     background-color: #fff; 
+//     border: 1px solid #dbdbdb; 
+// } 
+
+// New changes.............................
+
+.top-header .header-contact {
+    padding: 10px 0;
+}
+.top-header .header-dropdown li {
+    padding: 10px 25px;
+}
+.onhover-dropdown .onhover-show-div {
+    box-shadow: 2px 2px 6px 0 rgba(0,0,0,.3);
+}
+.top-header .header-dropdown .onhover-dropdown .onhover-show-div li {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.onhover-dropdown .onhover-show-div {
+    top: 40px;
+}
+.main-menu .menu-left .navbar {
+    padding: 15px 45px 15px 0;
+}
+.main-menu .brand-logo, .onhover-div, header .main-navbar .nav-menu > li > a  {
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+}
+
+.home-slider .home, .center-slider .home {
+    height: 50vh;
+}
+.full-banner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.no-slider .product-box {
+    flex: 0 0 20%;
+    max-width: calc(20% - 30px);
+}
+.collection-banner .contain-banner h2 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,.2);
+}
+
+
+header a {
+    display: inline-block;
+}
+.top-header {
+    .header-dropdown {
+        li:last-child {
+            padding-right: 0;
+        }
+    }
+}
+.Logininfo {
+    padding: 5px 0;
+}
+.top-header {
+    .header-dropdown {
+        li {
+            a {
+                &, i {
+                    color: var(--theme-deafult);
+                    font-size: 1.10rem;
+                  }
+            }
+            
+        }
+    }
+    
+}
+@media (max-width: 577px){
+    .top-header {
+        .header-dropdown {
+            li {
+                a {
+                    font-size: 0;
+                }
+                
+            }
+        }
+        
+    }
+}

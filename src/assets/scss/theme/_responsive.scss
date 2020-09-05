@@ -1816,8 +1816,8 @@
         }
     }
     .full-banner {
-        padding-top: 180px;
-        padding-bottom: 180px;
+        padding-top: 50px;
+        padding-bottom: 50px;
         &.parallax-layout {
             padding-top: 180px;
             padding-bottom: 180px;
@@ -7078,4 +7078,42 @@ Fashion-2 Demo Responsive CSS
             margin-top: 0;
         }
     }
+}
+
+// New changes .............................
+@media (max-width: 991px){
+    .home-slider {
+        .home {
+            &, .slider-contain{
+                height: 35vh;
+            }
+        }
+    }
+}
+
+@media (max-width: 577px){
+    .brand-logo {
+        left: 40%;
+        }
+    }
+@media (max-width: 577px){
+    .cart_qty_cls {
+        top: 5px;
+    }
+    }
+@media (max-width: 577px){
+.main-menu .menu-right .icon-nav .mobile-setting, .main-menu .menu-right .icon-nav .mobile-cart, .main-menu .menu-right .icon-nav .mobile-search {
+    bottom: 5px;
+}
+}
+@media (max-width: 577px){
+.main-menu {
+    .menu-right {
+        .icon-nav {
+            .mobile-cart {
+                right: 16%;
+            }
+        }
+    }
+}
 }

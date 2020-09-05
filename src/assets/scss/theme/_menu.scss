@@ -1583,10 +1583,14 @@ header {
     }
 }
 
-@media (max-width: 480px) {
-    .brand-logo {
-        img {
-            height: 25px;
-        }
-    }
+// @media (max-width: 480px) {
+//     .brand-logo {
+//         img {
+//             height: 25px;
+//         }
+//     }
+// }
+.toggle-nav {
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
