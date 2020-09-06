@@ -44,7 +44,7 @@ export class CartModalComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openModal(product) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    // debugger
+    //  
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
       this.modalService.open(LoginComponent, {

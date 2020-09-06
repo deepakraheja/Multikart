@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-12">
             <div class="product-filter-content">
-                <div class="search-count">
+                <div class="search-count d-none">
                     <h5>Showing Products 1-{{ productskart.length }} of {{ paginate.totalItems }} Result</h5>
                 </div>
-                <div class="collection-view">
+                <div class="collection-view d-none">
                     <ul>
                         <li (click)="setLayoutView('grid-view')">
                             <i class="fa fa-th grid-layout-view"></i>
@@ -15,7 +15,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="collection-grid-view" *ngIf="layoutView == 'grid-view'">
+                <div class="collection-grid-view d-none" *ngIf="layoutView == 'grid-view'">
                     <ul>
                         <li (click)="setGridLayout('col-lg-6')">
                             <img src="assets/images/icon/2.png" class="product-2-layout-view">

@@ -88,7 +88,7 @@ export class CheckoutComponent implements OnInit {
 
     // this.productService.ProductcartItems.subscribe(response => {
     //   this.productSizeColor = response
-    //   // debugger;
+    //   //  ;
     // });
 
     // this.getTotal.subscribe(amount => {
@@ -137,7 +137,7 @@ export class CheckoutComponent implements OnInit {
         UserID: this.user[0].userID
       };
       this._cartService.GetCartProcessedById(obj).subscribe(response => {
-        // debugger
+        //  
         this.spinner.hide();
         this.productSizeColor = response
       });
@@ -206,9 +206,9 @@ export class CheckoutComponent implements OnInit {
         notes: '',
         statusId: 1
       }
-      // debugger
+      //  
       this._orderService.SaveOrder(obj).subscribe(res => {
-        // debugger
+        //  
         this.spinner.hide();
         this._SharedDataService.UserCart([]);
         this.router.navigate(['/shop/checkout/success/' + res]);

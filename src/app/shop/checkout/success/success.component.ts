@@ -28,7 +28,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
 
     this.route.paramMap.subscribe((params: ParamMap) => {
-      // debugger
+      //  
       //this.GetOrderById(Number(params.get('orderId')));
       var orderId = params.get('id');
       if (Number(orderId) != NaN && orderId.length <= 9) {
@@ -38,7 +38,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
         this.spinner.show();
         this._OrderService.GetSuccessOrderByOrderId(obj).subscribe(res => {
           this.spinner.hide();
-          debugger
+           
           //if (res > 0)
             this.orderDetails = res;
           //console.log(res);
@@ -55,7 +55,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   }
 
   getTotal() {
-    debugger
+     
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
       TotalAmount += (element.price * element.quantity) + element.gstAmount

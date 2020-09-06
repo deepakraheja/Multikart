@@ -70,18 +70,18 @@ export class SettingsComponent implements OnInit {
     private _cartService: CartService,
     private toastrService: ToastrService
   ) {
-    // debugger
+    //  
 
 
     // this.productService.ProductcartItems.subscribe(response => {
     //   this.productSizeColor = response
-    //   // debugger;
+    //   //  ;
     // });
   }
 
   ngOnInit(): void {
     this._SharedDataService.lstCart.subscribe(res => {
-      // debugger
+      //  
       this.LoadCart();
     });
   }
@@ -104,14 +104,14 @@ export class SettingsComponent implements OnInit {
   // }
 
   LoadCart() {
-    // debugger
+    //  
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     if (this.user != null) {
       let obj = {
         UserID: this.user[0].userID
       };
       this._cartService.GetCartById(obj).subscribe(response => {
-        // debugger
+        //  
         this.productSizeColor = response;
       });
     }
@@ -129,9 +129,9 @@ export class SettingsComponent implements OnInit {
   }
 
   // ProceedToCheckout(val) {
-  //   // debugger
+  //   //  
   //   this._SharedDataService.currentUser.subscribe(res => {
-  //     // debugger
+  //     //  
   //     if (res == null || res == undefined) {
   //       //this.router.navigate(['/pages/login/cart']);
 

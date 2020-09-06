@@ -72,7 +72,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
       //   this.products = this.products.filter(item => item.type == this.category);
       // }
 
-      // debugger
+      //  
       if (params.category == undefined || params.category) {
         this.BindProductByCategory();
         //this.BindBrand();
@@ -86,9 +86,9 @@ export class CollectionLeftSidebarComponent implements OnInit {
   //   let obj = {
   //     Active: 1
   //   }
-  //   debugger
+  //    
   //   this.Brand.GetAllBrand(obj).subscribe(res => {
-  //     debugger
+  //      
   //     this.brands = res;
   //   });
   // }
@@ -97,7 +97,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
   BindProductByCategory() {
     this.spinner.show();
     this.route.queryParams.subscribe((params: Params) => {
-      debugger
+       
       const category = params['category'];
       let productObj = {
         Active: 1,
@@ -108,7 +108,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
         let FilteredProduct = products;
         this.Allproductskart = products;
         this.route.paramMap.subscribe((params: ParamMap) => {
-          debugger
+           
           let type = params.get('type');
           if (type == 'Refilling') {
             FilteredProduct = products.filter(a => a.featured == true);
@@ -118,7 +118,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
           }
           else
             this.productskart = products;
-          debugger
+           
           let BrandFilter: any[] = [];
           if (this.brands.length > 0) {
             (this.brands).forEach(element => {
@@ -136,7 +136,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
           this.productskart = this.productService.sortProducts(FilteredProduct, this.sortBy);
           // Price Filter
           this.productskart = this.productskart.filter(item => item.price >= this.minPrice && item.price <= this.maxPrice)
-          //// debugger
+          ////  
           // Paginate Products
           this.paginate = this.productService.getPager(this.productskart.length, +this.pageNo);     // get paginate object from service
           this.productskart = this.productskart.slice(this.paginate.startIndex, this.paginate.endIndex + 1); // get current page of items
@@ -154,7 +154,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // Append filter value to Url
   updateFilter(tags: any) {
-    debugger
+     
     tags.page = null; // Reset Pagination
     this.router.navigate([], {
       relativeTo: this.route,
@@ -218,14 +218,14 @@ export class CollectionLeftSidebarComponent implements OnInit {
 
   // product Pagination
   setPage(page: number) {
-    debugger
+     
     this.router.navigate([], {
       relativeTo: this.route,
       queryParams: { page: page },
       queryParamsHandling: 'merge', // preserve the existing query params in the route
       skipLocationChange: false  // do trigger navigation
     }).finally(() => {
-      debugger
+       
       this.viewScroller.setOffset([220, 220]);
       this.viewScroller.scrollToAnchor('productskart'); // Anchore Link
     });

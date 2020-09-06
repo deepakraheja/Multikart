@@ -23,7 +23,7 @@ export class ResetPasswordComponent implements OnInit {
     private spinner: NgxSpinnerService,
   ) {
     this.route.paramMap.subscribe((params: ParamMap) => {
-      // debugger
+      //  
       //this.GetOrderById(Number(params.get('orderId')));
       this.UserId = params.get('id');
     });

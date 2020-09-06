@@ -42,7 +42,7 @@ export class CartComponent implements OnInit {
 
     // this.productService.ProductcartItems.subscribe(response => {
     //   this.productSizeColor = response
-    //   // debugger;
+    //   //  ;
     // });
   }
 
@@ -98,7 +98,7 @@ export class CartComponent implements OnInit {
       };
       this.spinner.show();
       this._cartService.GetCartById(obj).subscribe(response => {
-        // debugger
+        //  
         this.spinner.hide();
         this.productSizeColor = response;
         this.getTotal();
@@ -113,7 +113,7 @@ export class CartComponent implements OnInit {
 
   // Increament
   increment(product, qty = 1) {
-    // debugger
+    //  
     let obj = [{
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
@@ -131,7 +131,7 @@ export class CartComponent implements OnInit {
 
   // Decrement
   decrement(product, qty = -1) {
-    // debugger
+    //  
     if (product.quantity > 1) {
       let obj = [{
         UserID: Number(this.user[0].userID),
@@ -154,11 +154,11 @@ export class CartComponent implements OnInit {
   }
 
   ProceedToCheckout() {
-    // debugger
+    //  
     this.router.navigate(['/shop/checkout']);
 
     // this._SharedDataService.currentUser.subscribe(res => {
-    //   // debugger
+    //   //  
     //   if (res == null || res == undefined) {
     //     this.router.navigate(['/pages/login/cart']);
     //   }
@@ -175,7 +175,7 @@ export class CartComponent implements OnInit {
 
   GoToDetail(rowID, productSizeColorId, setType, setNo) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
-    // debugger
+    //  
     this.spinner.show();
     if (setType == 1) {
       this.router.navigateByUrl('/shop/product/left/sidebar/' + rowID + '/' + productSizeColorId);

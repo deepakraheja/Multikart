@@ -93,7 +93,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   }
 
   changecolor(index: string) {
-    // debugger;
+    //  ;
     this.bigProductImageIndex = Number(index);
     this.activeSlide = Number(index);
   }
@@ -139,7 +139,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   // }
 
   fnCheck(item: productSizeColor, evt: any, rdoId: string) {
-    // debugger;
+    //  ;
     item.isSelected = evt;
   }
 
@@ -149,7 +149,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   // Increament
   increment(myIndex, item: productSizeColor, qty: any) {
-    // debugger;
+    //  ;
     if (item.selectedQty < qty--)
       item.selectedQty++;
 
@@ -163,7 +163,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   // Add to cart
   async addToCart(type: Number, minimum: Number) {
-    // debugger
+    //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;
 
@@ -183,7 +183,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
       }
     });
-    debugger;
+     ;
     if (Number(obj.length) == 0) {
       this.toastr.error("Please select atleast one item");
       return;

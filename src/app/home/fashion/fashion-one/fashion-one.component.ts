@@ -57,7 +57,7 @@ export class FashionOneComponent implements OnInit {
     }
     this.spinner.show();
     this._prodService.getProductByCategory(productObj).subscribe(products => {
-      // debugger;
+      //  ;
       this.spinner.hide();
       this.productskart = products;
       this.productskartselling = products.filter(item => item.topSelling == true);
@@ -155,7 +155,7 @@ export class FashionOneComponent implements OnInit {
   // Product Tab collection
   getCollectionProducts(collection) {
 
-    // debugger;
+    //  ;
     if (collection.name == "featured products")
       return this.productskart.filter(item => item.featured == true)
     else if (collection.name == "new products")

@@ -92,7 +92,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   }
 
   changecolor(index: string) {
-    // debugger;
+    //  ;
     this.bigProductImageIndex = Number(index);
     this.activeSlide = Number(index);
   }
@@ -138,7 +138,7 @@ export class ProductLeftSidebarComponent implements OnInit {
   // }
 
   fnCheck(item: productSizeColor, evt: any, rdoId: string) {
-    // debugger;
+    //  ;
     item.isSelected = evt;
   }
 
@@ -148,7 +148,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Increament
   increment(myIndex, item: productSizeColor, qty: any) {
-    // debugger;
+    //  ;
     if (item.selectedQty < qty--)
       item.selectedQty++;
 
@@ -162,7 +162,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Add to cart
   async addToCart(type: Number) {
-    // debugger
+    //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;
 
@@ -180,7 +180,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
       }
     });
-    // debugger;
+    //  ;
     if (Number(obj.length) > 0) {
       const status = await this.productService.addToCartProduct(obj);
 

@@ -54,7 +54,7 @@ export class UsersService {
   }
   //***********************Mobile OTP***************************** */
   CheckMobileAllReadyRegisteredOrNot(_Obj: any): Observable<any[]> {
-    debugger
+     
     this._methodName = "CheckMobileAllReadyRegisteredOrNot";
     this._param = _Obj;
     return this._http.post<any[]>(
@@ -64,7 +64,7 @@ export class UsersService {
 
   
   verify_mobile_otp(_Obj: any): Observable<any[]> {
-    debugger
+     
     this._methodName = "VerifyMobileOtp";
     this._param = _Obj;
     return this._http.post<any[]>(

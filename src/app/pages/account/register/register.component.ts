@@ -173,7 +173,7 @@ export class RegisterComponent implements OnInit {
   /*****************************verify mobile OTP*********************/
   verifyMobileOtp() {
 
-    debugger
+     
     //this.submitted = true;
     this.errorShow = 1;
     this.mobilecode = ""
@@ -214,7 +214,7 @@ export class RegisterComponent implements OnInit {
 
       this.userService.verify_mobile_otp(d).subscribe((res: any) => {
         setTimeout(() => this.spinner.hide(), 500);
-        debugger;
+         ;
         if (res == 1) {
           this.mobileverified = true;
           this.mobileOTP = false;
@@ -264,7 +264,7 @@ export class RegisterComponent implements OnInit {
 
           //     sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
           //     this._SharedDataService.AssignUser(res);
-          //     // debugger
+          //     //  
           //     this.route.paramMap.subscribe((params: ParamMap) => {
           //       if (params.get('cart') != "" && params.get('cart') != null && params.get('cart') != undefined) {
           //         this.router.navigate(['/shop/cart']);

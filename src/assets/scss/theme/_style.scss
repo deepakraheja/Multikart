@@ -14221,7 +14221,7 @@ div#loading-bar {
 //     border: 1px solid #dbdbdb; 
 // } 
 
-// New changes.............................
+// New changes by .............................
 
 .top-header .header-contact {
     padding: 10px 0;
@@ -14278,13 +14278,19 @@ header a {
 .Logininfo {
     padding: 5px 0;
 }
+.btn-solid-small {
+    padding: 5px 10px;
+    font-weight: normal;
+    border: 1px solid var(--theme-deafult);
+}
 .top-header {
     .header-dropdown {
         li {
             a {
+                font-weight: 700;
                 &, i {
-                    color: var(--theme-deafult);
-                    font-size: 1.10rem;
+                    color: #fff;
+                    font-size: .80rem;
                   }
             }
             
@@ -14304,4 +14310,73 @@ header a {
         }
         
     }
+}
+.breadcrumb-section {
+    padding: 5px 0;
+}
+.section-b-space {
+    padding-bottom: 30px;
+}
+section, .section-t-space {
+    padding-top: 20px;
+}
+.collection-collapse-block .collection-collapse-block-content .collection-brand-filter .category-list li {
+    font-size: 14px;
+}
+.collection-filter-block {
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+.collection-collapse-block .collapse-block-title {
+    margin: 15px 0 0 0;
+}
+.collection-collapse-block .collection-collapse-block-content .collection-brand-filter {
+    margin-top: 20px;
+}
+.collection-product-wrapper .product-top-filter .product-filter-content .product-page-filter select,
+.collection-product-wrapper .product-top-filter .product-filter-content .collection-grid-view,
+.collection-product-wrapper .product-top-filter .product-filter-content .collection-view,
+.collection-product-wrapper .product-top-filter .product-filter-content .search-count {
+    padding: 10px 20px;
+}
+.collection-product-wrapper .product-wrapper-grid .product-box {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.product-pagination {
+    margin: 15px 0;
+}
+.small-section {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.product-wrapper-grid .col-grid-box, .no-slider .product-box {
+        transition: all ease-in-out .3s;
+    }
+
+.product-wrapper-grid .col-grid-box:hover, .no-slider .product-box:hover {
+        box-shadow: 4px 4px 10px rgba(0,0,0,.2);
+    }
+    .product-pagination .pagination .page-item a {
+        padding: 14px 20px;
+    }
+    .top-header .header-dropdown li:hover {
+        color: var(--theme-deafult);
+    }
+    .onhover-dropdown:before {
+        right: -15px;
+    }
+@media (max-width: 577px){
+    .breadcrumb-section .breadcrumb {
+        font-size: .6rem;
+        line-height: 3;
+    }
+}
+
+.collection-product-wrapper .product-top-filter .product-filter-content .product-page-filter {
+    margin-right: 0;
+    margin-left: auto;
+}
+.breadcrumb-section .breadcrumb {
+    justify-content: flex-start;
 }
