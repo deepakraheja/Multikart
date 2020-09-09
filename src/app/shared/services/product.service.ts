@@ -409,7 +409,7 @@ export class ProductService {
     ------------- Product Pagination  -----------
     ---------------------------------------------
   */
-  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 8) {
+  public getPager(totalItems: number, currentPage: number = 1, pageSize: number = 50) {
     // calculate total pages
     //  
     let totalPages = Math.ceil(totalItems / pageSize);
