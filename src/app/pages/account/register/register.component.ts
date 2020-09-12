@@ -85,6 +85,8 @@ export class RegisterComponent implements OnInit {
       mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       //mobilecode: ['', [Validators.required]],
       OTPArray: new FormArray([]),
+      Phone: ['', Validators.required],
+      BusinessType: ['', Validators.required],
     });
 
     this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
@@ -244,13 +246,14 @@ export class RegisterComponent implements OnInit {
 
   //****************************** CreateRegistration*************//
   CreateRegistration() {
-    this.spinner.show();
+  
     this.submitted = true;
     if (this.RegistrationForm.invalid) {
       this.toastr.error('All the * marked fields are mandatory');
       return;
     }
     else {
+      this.spinner.show();
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
         if (res > 0) {
           setTimeout(() => this.spinner.hide(), 500);

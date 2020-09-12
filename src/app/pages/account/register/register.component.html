@@ -60,13 +60,25 @@
                                 <h6 style="color: #969696">Resend OTP in:<b> {{counter}} second(s)</b></h6>
                             </div>
                         </div>
-                        <div *ngIf="mobileverified">
+                        <div *ngIf="!mobileverified">
 
                             <div class="form-group">
 
-                                <label for="email">Name</label>
+                                <label for="email">Your First and Last Name</label>
                                 <input type="text" class="form-control" id="fname" formControlName="name"
                                     placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            </div>
+                            <div class="form-group">
+
+                                <label for="email">Business Phone</label>
+                                <input type="text" class="form-control" id="fname" formControlName="Phone"
+                                    placeholder="Business Phone" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            </div>
+                            <div class="form-group">
+
+                                <label for="email">Business Type</label>
+                                <input type="text" class="form-control" id="fname" formControlName="BusinessType"
+                                    placeholder="Business Phone" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             </div>
 
 

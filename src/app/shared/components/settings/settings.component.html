@@ -52,10 +52,8 @@
                                 <h4>{{ product?.productName }}</h4>
                             </a>
                             <h4>
-                                <span>
-                  {{ product?.quantity }} x
-                  {{ product?.salePrice  | currency:productService?.Currency.currency:'symbol' }}
-                </span>
+                                {{ product?.quantity }} x
+                                {{ product?.salePrice  | currency:productService?.Currency.currency:'symbol' }}
                             </h4>
                         </div>
                     </div>

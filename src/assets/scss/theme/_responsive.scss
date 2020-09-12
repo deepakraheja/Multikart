@@ -7080,7 +7080,7 @@ Fashion-2 Demo Responsive CSS
     }
 }
 
-// New changes by .............................
+// New changes by Subhash.............................
 @media (max-width: 991px){
     .home-slider {
         .home {
@@ -7102,10 +7102,9 @@ Fashion-2 Demo Responsive CSS
     }
     }
 @media (max-width: 577px){
-.main-menu .menu-right .icon-nav .mobile-setting, .main-menu .menu-right .icon-nav .mobile-cart, .main-menu .menu-right .icon-nav .mobile-search,
-.top-header .header-dropdown .mobile-account {
-    bottom: 5px;
-}
+    .main-menu .menu-right .icon-nav .mobile-setting, .main-menu .menu-right .icon-nav .mobile-cart, .main-menu .menu-right .icon-nav .mobile-search {
+        bottom: 5px;
+    }
 }
 @media (max-width: 577px){
 .main-menu {

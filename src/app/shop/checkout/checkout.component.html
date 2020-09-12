@@ -6,26 +6,33 @@
                 <form>
                     <div class="row">
                         <div class="col-lg-7">
-                            <h3 *ngIf="lstBillingAddress?.length>0">Delivery Address</h3>
+                            <h3 *ngIf="lstBillingAddress?.length>0" class="mb-4">Delivery Address</h3>
                             <div class="row">
-                                <div class="col-lg-6" *ngFor="let lstBilling of lstBillingAddress">
+                                <div class="col-md-6" *ngFor="let lstBilling of lstBillingAddress">
                                     <address>
-                                        <b>Name: </b> {{lstBilling.fName}} {{lstBilling.lName}}
-                                        <br>
-                                        <b>Company Name: </b> {{lstBilling.companyName}}
-                                        <br>
-                                        <b>Address: </b> {{lstBilling.address}}, {{lstBilling.city}}
-                                        <!-- <br> -->
-                                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; -->
-                                        {{lstBilling.state}}, {{lstBilling.zipCode}}, {{lstBilling.country}}
-                                        <br>
-                                        <b>Email: </b> {{lstBilling.emailId}}
-                                        <br>
-                                        <b>Mobile No:</b> {{lstBilling.phone}}
-                                        <br>
+                                        <p>
+                                            <b>Name: </b> {{lstBilling.fName}} {{lstBilling.lName}}
+                                        </p>
+                                        <p>
+                                            <b>Company Name: </b> {{lstBilling.companyName}}
+                                        </p>
+                                        
+                                        <p>
+                                            <b>Address: </b> {{lstBilling.address}}, {{lstBilling.city}}
+                                            {{lstBilling.state}}, {{lstBilling.zipCode}}, {{lstBilling.country}}
+                                        </p>
+                                        
+                                        <p>
+                                            <b>Email: </b> {{lstBilling.emailId}}
+                                        </p>
+                                        
+                                        <p>
+                                            <b>Mobile No:</b> {{lstBilling.phone}}
+                                        </p>
+                                        
                                         <!-- <a href="javascript:void(0)" (click)="SelectBillingAddress(lstBilling)">Select
                                             Address</a> -->
-                                            <button type="submit" class="btn-solid btn" (click)="SelectBillingAddress(lstBilling)"
+                                            <button type="submit" class="btn-solid btn mt-3" (click)="SelectBillingAddress(lstBilling)"
                                             [ngStyle]="(checkoutForm.controls['billingAddressId'].value==lstBilling.billingAddressId)?{'background-color':'#6fbd6f','background-image': 'none'}:{'background-color':''}">
                                             {{checkoutForm.controls['billingAddressId'].value==lstBilling.billingAddressId?'Selected Delivery Address':'Deliver to this address'}}  
                                             </button>
@@ -35,7 +42,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="checkout-title">
+                                <div class="checkout-title mt-5">
                                     <h3>Add New Delivery Address</h3>
                                 </div>
                                 <div class="row check-out">
@@ -186,7 +193,7 @@
                         </div>
                         <div class="col-lg-5 col-sm-12 col-xs-12">
                             <div class="checkout-details" style="padding:15px !important;">
-                                <div class="order-box">
+                                <div class="order-box table-responsive">
                                     <table class="table table-bordered table-hover">
                                         <thead class="thead-dark">
                                             <tr>
