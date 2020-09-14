@@ -242,5 +242,9 @@ export let ProductDetailsThumbSlider: any = {
     items: 3,
     loop: true,
     margin: 10,
-    dots:false
+    dots:false,
+    nav: true,
+    navContainerClass: 'owl-nav',
+    navClass: [ 'owl-prev', 'owl-next' ],
+    navText: [ '<i class="ti-angle-left"></i>', '<i class="ti-angle-right"></i>' ],
 }

@@ -49,11 +49,10 @@
                         <div class="media-body">
                             <!-- [routerLink]="['/shop/product/left/sidebar/', product.title.replace(' ', '-')]" -->
                             <a>
-                                <h4>{{ product?.productName }}</h4>
+                                <h4>{{ (product?.productName).split('|')[0] }}</h4>
                             </a>
                             <h4>
-                                {{ product?.quantity }} x
-                                {{ product?.salePrice  | currency:productService?.Currency.currency:'symbol' }}
+                                {{ product?.quantity }} x {{ product?.salePrice | currency:productService?.Currency.currency:'symbol' }}
                             </h4>
                         </div>
                     </div>

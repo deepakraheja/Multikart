@@ -53,7 +53,10 @@ export class CartComponent implements OnInit {
   }
 
   getTotal() {
-    //var TotalAmount = 0;
+    this.TotalAmount = 0;
+    this.TotalPieces = 0;
+    this.Price = 0;
+    this.Discount = 0;
     this.productSizeColor.forEach(element => {
       this.TotalAmount += element.salePrice;
       this.TotalPieces += element.totalPieces;
@@ -62,7 +65,11 @@ export class CartComponent implements OnInit {
     });
     //return TotalAmount;
   }
-
+  ColorSize(product) {
+    debugger
+    var arr = product.split('|');
+    return arr;
+  }
   // getTotalPcs() {
   //   var TotalPieces = 0;
   //   this.productSizeColor.forEach(element => {
