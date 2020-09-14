@@ -201,6 +201,9 @@
                                                                         </span>
                                                                     </div>
                                                                 </div>
+                                                                <div class="a-column a-span1">
+                                                                    <input type="button" id="btn{{lst.orderId}}" value="Show" (click)="ShowDiv(lst.orderId);">
+                                                                </div>
                                                             </div>
                                                         </div>
 
@@ -208,95 +211,97 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="a-box shipment" *ngFor="let lstPro of OrderTrackingListByOrderId(lst.orderId)">
-                                            <div class="a-box-inner">
-                                                <div class="a-row shipment-top-row js-shipment-info-container">
-                                                    <div>
+                                        <div style="display: none;" id="{{lst.orderId}}">
+                                            <div class="a-box shipment" *ngFor="let lstPro of OrderTrackingListByOrderId(lst.orderId)">
+                                                <div class="a-box-inner">
+                                                    <div class="a-row shipment-top-row js-shipment-info-container">
+                                                        <div>
 
-                                                        <div class="a-row">
-                                                            <ul class="col-md-12 steps">
-                                                                <li class="{{lstPro.statusId==1?'active':''}}"><span>New Order</span></li>
-                                                                <li class="{{lstPro.statusId==2?'active':''}}"><span>Processing</span></li>
-                                                                <li class="{{lstPro.statusId==3?'active':''}}"><span>Dispatched</span></li>
-                                                                <li class="{{lstPro.statusId==4?'active':''}}"><span>Delivered</span></li>
-                                                                <li *ngIf="lstPro.statusId==5" class="{{lstPro.statusId==5?'active':''}}"><span>Returned</span></li>
-                                                            </ul>
-                                                            <!-- <span class="a-color-success">
+                                                            <div class="a-row">
+                                                                <ul class="col-md-12 steps">
+                                                                    <li class="{{lstPro.statusId==1?'active':''}}"><span>New Order</span></li>
+                                                                    <li class="{{lstPro.statusId==2?'active':''}}"><span>Processing</span></li>
+                                                                    <li class="{{lstPro.statusId==3?'active':''}}"><span>Dispatched</span></li>
+                                                                    <li class="{{lstPro.statusId==4?'active':''}}"><span>Delivered</span></li>
+                                                                    <li *ngIf="lstPro.statusId==5" class="{{lstPro.statusId==5?'active':''}}"><span>Returned</span></li>
+                                                                </ul>
+                                                                <!-- <span class="a-color-success">
                                                                 Not yet dispatched
                                                             </span>
 
                                                             <span data-isstatuswithwarning="0" data-yodeliveryestimate="Arriving Monday" data-yoshortstatuscode="" data-yostatusstring="Not yet dispatched" class="js-shipment-info aok-hidden">
                                                             </span> -->
+                                                            </div>
                                                         </div>
+
                                                     </div>
+                                                    <div class="a-fixed-right-grid a-spacing-top-medium">
+                                                        <div class="a-fixed-right-grid-inner a-grid-vertical-align a-grid-top">
+                                                            <div class="a-fixed-right-grid-col a-col-left" style="padding-right:3.2%;float:left;">
+                                                                <div class="a-row">
+                                                                    <div class="a-fixed-left-grid a-spacing-none">
+                                                                        <div class="a-fixed-left-grid-inner" style="padding-left:100px">
+                                                                            <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;float:left;">
+                                                                                <div class="item-view-left-col-inner">
+                                                                                    <a class="a-link-normal">
+                                                                                        <!-- <img src="assets/ProductImages/{{lstPro.ImagePath}}" width="150px" height="100px" alt=""> -->
+                                                                                        <!-- <img [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt=""> -->
+                                                                                        <img *ngIf="lstPro?.setNo>0" [src]="ProductImage+lstPro?.productId+'/productSetImage/'+lstPro?.setNo+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
+                                                                                        <img *ngIf="lstPro?.setNo==0" [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
 
-                                                </div>
-                                                <div class="a-fixed-right-grid a-spacing-top-medium">
-                                                    <div class="a-fixed-right-grid-inner a-grid-vertical-align a-grid-top">
-                                                        <div class="a-fixed-right-grid-col a-col-left" style="padding-right:3.2%;float:left;">
-                                                            <div class="a-row">
-                                                                <div class="a-fixed-left-grid a-spacing-none">
-                                                                    <div class="a-fixed-left-grid-inner" style="padding-left:100px">
-                                                                        <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;float:left;">
-                                                                            <div class="item-view-left-col-inner">
-                                                                                <a class="a-link-normal">
-                                                                                    <!-- <img src="assets/ProductImages/{{lstPro.ImagePath}}" width="150px" height="100px" alt=""> -->
-                                                                                    <!-- <img [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt=""> -->
-                                                                                    <img *ngIf="lstPro?.setNo>0" [src]="ProductImage+lstPro?.productId+'/productSetImage/'+lstPro?.setNo+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
-                                                                                    <img *ngIf="lstPro?.setNo==0" [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt="">
-
-                                                                                </a>
+                                                                                    </a>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;float:left;">
-                                                                            <div class="a-row">
-                                                                                <!-- <a class="a-link-normal">
+                                                                            <div class="a-fixed-left-grid-col a-col-right" style="padding-left:1.5%;float:left;">
+                                                                                <div class="a-row">
+                                                                                    <!-- <a class="a-link-normal">
                                                                                     {{lstPro.productName}}
                                                                                 </a> -->
-                                                                                <span class="a-size-small a-color-primary">
+                                                                                    <span class="a-size-small a-color-primary">
                                                                                     {{lstPro.productName}}
                                                                                 </span>
-                                                                            </div>
-                                                                            <div class="a-row">
-                                                                                <span class="a-size-small a-color-secondary">
+                                                                                </div>
+                                                                                <div class="a-row">
+                                                                                    <span class="a-size-small a-color-secondary">
                                                                                     Quantity : {{lstPro.quantity}}
                                                                                 </span>
-                                                                            </div>
-                                                                            <div class="a-row">
-                                                                                <span class="a-size-small">
+                                                                                </div>
+                                                                                <div class="a-row">
+                                                                                    <span class="a-size-small">
                                                                                 </span>
-                                                                            </div>
-                                                                            <div class="a-row">
-                                                                                <span class="a-size-small a-color-price">
+                                                                                </div>
+                                                                                <div class="a-row">
+                                                                                    <span class="a-size-small a-color-price">
                                                                                     <span
                                                                                         style="text-decoration: inherit; white-space: nowrap;">
                                                                                         {{lstPro.price | currency:productService?.Currency.currency:'symbol'}}
                                                                                     </span>
+                                                                                    </span>
+                                                                                </div>
+                                                                                <div class="a-row">
+                                                                                    <span class="a-color-secondary a-text-bold">
                                                                                 </span>
-                                                                            </div>
-                                                                            <div class="a-row">
-                                                                                <span class="a-color-secondary a-text-bold">
+                                                                                    <span class="a-color-secondary">
                                                                                 </span>
-                                                                                <span class="a-color-secondary">
-                                                                                </span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="a-fixed-right-grid-col a-col-right" style="width:230px;margin-right:-230px;float:left;">
-                                                            <div class="a-row">
-                                                                <div class="a-button-stack">
-                                                                    <!-- <span class="a-button a-button-primary track-package-button" id="a-autoid-3"><span class="a-button-inner"><a
+                                                            <div class="a-fixed-right-grid-col a-col-right" style="width:230px;margin-right:-230px;float:left;">
+                                                                <div class="a-row">
+                                                                    <div class="a-button-stack">
+                                                                        <!-- <span class="a-button a-button-primary track-package-button" id="a-autoid-3"><span class="a-button-inner"><a
                                                                                 class="a-button-text" role="button"
                                                                                 id="a-autoid-3-announce">
                                                                                 Track package
                                                                             </a></span></span> -->
-                                                                    <!-- <span class="a-button a-button-normal a-spacing-mini a-button-base" id="a-autoid-4"><span class="a-button-inner"><a id="Cancel-items_1"
+                                                                        <!-- <span class="a-button a-button-normal a-spacing-mini a-button-base" id="a-autoid-4"><span class="a-button-inner"><a id="Cancel-items_1"
                                                                                 class="a-button-text" role="button">
                                                                                 Cancel items
                                                                             </a></span></span> -->
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>

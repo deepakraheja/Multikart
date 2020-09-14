@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
 import { LookupService } from 'src/app/Service/lookup.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+declare var $: any;
 
 @Component({
   selector: 'app-dashboard',
@@ -113,7 +114,7 @@ export class DashboardComponent implements OnInit {
   }
 
   Logout() {
-   
+
     sessionStorage.removeItem('LoggedInUser');
     sessionStorage.removeItem('Token');
     this._SharedDataService.AssignUser(null);
@@ -282,6 +283,18 @@ export class DashboardComponent implements OnInit {
         else
           this.toastr.error("Old Password is invalid.");
       });
+    }
+  }
+
+  ShowDiv(id) {
+    debugger
+    if (document.getElementById(id).style.display == "block") {
+      document.getElementById(id).style.display = "none";
+      document.getElementById("btn" + id)['value'] = "Show";
+    }
+    else {
+      document.getElementById(id).style.display = "block";
+      document.getElementById("btn" + id)['value'] = "Hide";
     }
   }
 }
