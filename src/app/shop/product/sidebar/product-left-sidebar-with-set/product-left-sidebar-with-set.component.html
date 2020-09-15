@@ -38,31 +38,37 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-5 col-xl-4">
-                                    <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar
-                                        class="product-slick">
-                                        <ng-container
-                                            *ngFor="let image of productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i">
-                                            <ng-template carouselSlide [id]="i">
-                                                <div>
-                                                    <img [defaultImage]="'assets/images/product/placeholder.jpg'"
-                                                        [lazyLoad]="ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[i]"
-                                                        [alt]="image.alt" class="img-fluid">
-                                                </div>
-                                            </ng-template>
-                                        </ng-container>
-                                    </owl-carousel-o>
-                                    <div class="product-buttons row">
-                                        <div class="col-6">
-                                            <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false"
-                                                (click)="addToCart(1)">add to cart</a>
-                                        </div>
-                                        <div class="col-6">
-                                            <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false"
-                                                (click)="addToCart(2)">buy now</a>
-                                        </div>
-                                    </div>
+                                <div class="col-xl-5">
                                     <div class="row">
+                                        <div class="col-sm-4 col-xl-3">
+                                            <div *ngFor="let image of  productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i" class="thumbnail-img">
+                                                <div class="owl-thumb" [class.active]="i == activeSlide">
+                                                    <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[i]"
+                                                        [alt]="image.alt" class="img-fluid" (click)="owlCar.to(activeSlide = i.toString())">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-8 col-xl-9">
+                                            <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
+                                                <ng-container *ngFor="let image of productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i">
+                                                    <ng-template carouselSlide [id]="i">
+                                                        <div>
+                                                            <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[i]"
+                                                                [alt]="image.alt" class="img-fluid">
+                                                        </div>
+                                                    </ng-template>
+                                                </ng-container>
+                                            </owl-carousel-o>
+                                            <div class="product-buttons row mt-5">
+                                                <div class="col-6 mb-2">
+                                                    <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(1)">add to cart</a>
+                                                </div>
+                                                <div class="col-6 mb-2">
+                                                    <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(2)">buy now</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
                                         <div class="col-12">
                                             <div class="slider-nav">
                                                 <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
@@ -80,29 +86,25 @@
                                                 </owl-carousel-o>
                                             </div>
                                         </div>
+                                    </div> -->
                                     </div>
-                                    
                                 </div>
 
-                                <div class="col-lg-7 col-xl-8 rtl-text">
+                                <div class="col-xl-7 rtl-text">
                                     <div class="product-right">
                                         <h2>{{ productkart[0]?.productName }}</h2>
                                         <h4>
-                                            <del
-                                                *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">{{  productkart[0]?.productSizeSet[bigProductImageIndex]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
-                                            <span
-                                                *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">
+                                            <del *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">{{  productkart[0]?.productSizeSet[bigProductImageIndex]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
+                                            <span *ngIf="productkart[0]?.productSizeSet[bigProductImageIndex]?.discount > 0">
                                                 {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.discount }}%
                                                 off</span>
                                         </h4>
 
                                         <h5>
-                                            <span>Price per set</span>
-                                            {{  productkart[0]?.productSizeSet[bigProductImageIndex]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
+                                            <span>Price per set</span> {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.salePrice | currency: productService.Currency?.currency:'symbol' }}
                                         </h5>
                                         <h3>
-                                            Average price:
-                                            {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
+                                            Average price: {{ productkart[0]?.productSizeSet[bigProductImageIndex]?.averagePrice | currency: productService.Currency?.currency:'symbol' }}
                                         </h3>
                                         <h4></h4>
                                         <span>
@@ -122,8 +124,7 @@
 
                                             <div class="size-box">
                                                 <ul>
-                                                    <li [class.active]="selectedSize == list"
-                                                        *ngFor="let list of SetList(productkart[0]?.productSizeSet);index as i">
+                                                    <li [class.active]="selectedSize == list" *ngFor="let list of SetList(productkart[0]?.productSizeSet);index as i">
                                                         <a href="javascript:void(0)" (click)="selectSize(i)">
                                                             {{ list }}
                                                         </a>
@@ -150,18 +151,15 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr
-                                                        *ngFor="let item of productkart[0]?.productSizeSet; let myIndex  = index">
+                                                    <tr *ngFor="let item of productkart[0]?.productSizeSet; let myIndex  = index">
                                                         <!-- <td>
                                 <input type="checkbox" [(ngModel)]="item.isSelected"   [value]="item.setNo" name="checkIn" id="{{myIndex}}">
                             </td> -->
                                                         <td>
-                                                            <input type="checkbox" style="margin-top: 5px;"
-                                                                [(ngModel)]="item.isSelected" [value]="item.setNo"
-                                                                name="checkIn" id="{{myIndex}}"> {{item.setNo}}
+                                                            <input type="checkbox" style="margin-top: 5px;" [(ngModel)]="item.isSelected" [value]="item.setNo" name="checkIn" id="{{myIndex}}"> {{item.setNo}}
                                                         </td>
                                                         <td>
-                                                            {{item.piece}} 
+                                                            {{item.piece}}
                                                         </td>
 
                                                         <td style="width: 252px;">
@@ -176,11 +174,7 @@
                                                                             <i class="ti-minus"></i>
                                                                         </button>
                                                                     </span>
-                                                                    <input type="text" name="quantity"
-                                                                        id="{{ 'txtqty' + myIndex}}"
-                                                                        style="width: 45px; height: 27px;"
-                                                                        class="form-control input-number"
-                                                                        [value]="item.selectedQty" disabled />
+                                                                    <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}" style="width: 45px; height: 27px;" class="form-control input-number" [value]="item.selectedQty" disabled />
                                                                     <span class="input-group-prepend">
                                                                         <button type="button"
                                                                             class="btn quantity-right-plus" data-type="plus"
@@ -230,7 +224,7 @@
                         </div>
                         </div> -->
                                         </div>
-                                        
+
                                         <div class="border-product">
                                             <h6 class="product-title">product details</h6>
                                             <p>{{ productkart[0]?.description }}</p>
@@ -269,9 +263,7 @@
                                         <ng-template ngbTabTitle>Video</ng-template>
                                         <ng-template ngbTabContent>
                                             <div class="mt-3 text-center">
-                                                <iframe width="560" height="315"
-                                                    src="https://www.youtube.com/embed/BUWzX78Ye_8"
-                                                    allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/BUWzX78Ye_8" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                                             </div>
                                         </ng-template>
                                     </ngb-tab>
