@@ -14465,3 +14465,14 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     color: #000000;
     background-color: #ffffff;
 }
+.thumbnail-img {
+    margin-bottom: 10px;
+}
+@media (max-width: 767px){
+.thumbnail-img {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+    max-width: 120px;
+}
+}
