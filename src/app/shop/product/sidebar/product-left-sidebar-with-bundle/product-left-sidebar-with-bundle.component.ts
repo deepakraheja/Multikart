@@ -46,7 +46,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   activeSlide1: any = 0;
   public selectedSize: any;
   public mobileSidebar: boolean = false;
-
+  public RowId: any;
   @ViewChild("sizeChart") SizeChart: SizeModalComponent;
 
   public ProductDetailsMainSliderConfig: any = ProductDetailsMainSlider;
@@ -68,6 +68,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
     this.spinner.show();
     this.route.params.subscribe(params => {
       const productid = params['productId'];
+      this.RowId = params['productId'];
       const productSizeId = params['productSizeId'];
 
       let productObj = {
@@ -188,21 +189,32 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
       this.toastr.error("Please select atleast one item");
       return;
     }
-
-    if (Number(this.totalqty) >= minimum) {
-      const status = await this.productService.addToCartProduct(obj);
-
-      if (status) {
-        if (type == 1)
-          this.router.navigate(['/shop/cart']);
-        else
-          this.router.navigate(['/shop/checkout']);
+    let productObj = {
+      rowID: this.RowId
+    }
+    debugger
+    this._prodService.GetProductCartQuantity(productObj).subscribe(res => {
+      debugger
+      if (res.length > 0) {
+        this.totalqty += res[0].qty
       }
-    }
-    else {
+      if (Number(this.totalqty) >= minimum) {
+        const status = this.productService.addToCartProduct(obj);
+        debugger
+        if (status) {
+          if (type == 1)
+            this.router.navigate(['/shop/cart']);
+          else
+            this.router.navigate(['/shop/checkout']);
+        }
+      }
+      else {
 
-      this.toastr.error("Please select atleast " + minimum + " quantity.");
-    }
+        this.toastr.error("Please select atleast " + minimum + " quantity.");
+      }
+    });
+
+
   }
 
   // Buy Now
