@@ -30,14 +30,14 @@
                                         <div class="qty-box">
                                             <div class="input-group">
                                                 <span class="input-group-prepend">
-                                                    <button type="button" class="btn quantity-left-minus"
+                                                    <button type="button" class="btn quantity-left-minus" [disabled]="product?.setType==3"
                                                         data-type="minus" (click)="decrement(product)">
                                                         <i class="ti-minus"></i>
                                                     </button>
                                                 </span>
                                                 <input type="text" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
                                                 <span class="input-group-prepend">
-                                                    <button type="button" class="btn quantity-right-plus"
+                                                    <button type="button" class="btn quantity-right-plus" [disabled]="product?.setType==3"
                                                         data-type="plus" (click)="increment(product)">
                                                         <i class="ti-plus"></i>
                                                     </button>
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="product-details">
-                                        <div *ngIf="product?.setType==2">
+                                        <div *ngIf="product?.setType>=2">
                                             <span *ngFor="let lst of ColorSize(product?.productName); let i =index;">
                                                 <p *ngIf="i>0">
                                                 {{lst}}

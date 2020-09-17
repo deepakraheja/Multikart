@@ -166,7 +166,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
     //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;
-
+    this.totalqty = 0;
     var obj: any[] = [];
     var array: any[] = this.productkart[0].productSizeColor;
     (array).forEach(element => {
@@ -183,7 +183,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
       }
     });
-     ;
+    ;
     if (Number(obj.length) == 0) {
       this.toastr.error("Please select atleast one item");
       return;

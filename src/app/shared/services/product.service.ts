@@ -288,6 +288,7 @@ export class ProductService {
       CartId: product.cartId,
       UserID: this.user[0].userID,
       SetNo: product.setNo,
+      SetType: product.setType,
       ProductId: product.productId
     };
     this.spinner.show();
