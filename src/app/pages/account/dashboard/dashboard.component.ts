@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { SharedDataService } from 'src/app/Service/shared-data.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BillingAddressService } from 'src/app/Service/billing-address.service';
 import { OrderService } from 'src/app/Service/order.service';
 import { environment } from 'src/environments/environment';
@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router,
+    private route: ActivatedRoute,
     private _BillingAddressService: BillingAddressService,
     private _OrderService: OrderService,
     public productService: ProductService,
@@ -100,6 +101,11 @@ export class DashboardComponent implements OnInit {
       this.spinner.hide();
       this.lstOrder = res;
       //console.log(res);
+      this.route.paramMap.subscribe((params: ParamMap) => {
+        if (params.get('myorder') != null && params.get('myorder') != undefined) {
+          this.ShowTabName = 'MyOrder';
+        }
+      });
     });
   }
 

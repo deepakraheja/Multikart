@@ -55,7 +55,10 @@ export class LoginComponent implements OnInit {
       this.userService.ValidLogin(this.LoginForm.value).subscribe(res => {
         setTimeout(() => this.spinner.hide(), 500);
         if (res.length > 0) {
-
+          if (res[0].isAgent == 1) {
+            this.toastr.error('You are an agent.');
+            return;
+          }
           if (res[0].isApproval == 0) {
             this.toastr.error('Your login is pending. Please wait for approval');
             return;

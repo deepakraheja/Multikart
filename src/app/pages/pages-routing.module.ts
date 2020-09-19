@@ -49,6 +49,10 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
+    path: 'dashboard/:myorder',
+    component: DashboardComponent
+  },
+  {
     path: 'login',
     component: LoginComponent
   },
