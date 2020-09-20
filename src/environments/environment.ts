@@ -21,10 +21,14 @@ export const environment = {
   //BASE_API_URL: 'http://ecomapi.uccnoida.com/api/',
   //ProductImage: 'http://ecomapi.uccnoida.com/ProductImage/',
 
-  //ProductImage: 'http://localhost:5205/ProductImage/',
-  //BASE_API_URL: 'http://localhost:5205/api/',
-  BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
-  ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
+//*********************Local Server************* */
+
+  ProductImage: 'http://localhost:5205/ProductImage/',
+  BASE_API_URL: 'http://localhost:5205/api/',
+  
+  //*********************Production Server************* */
+  //BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
+  //ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
 
 
 };

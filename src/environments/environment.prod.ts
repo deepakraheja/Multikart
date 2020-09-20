@@ -9,6 +9,8 @@ export const environment = {
   // ProductImage: 'http://ecomapi.uccnoida.com/ProductImage/',
 
 
+  //*********************Production Server************* */
+
   BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
   ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
 };

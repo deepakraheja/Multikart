@@ -58,15 +58,21 @@ export class CartComponent implements OnInit {
     this.Price = 0;
     this.Discount = 0;
     this.productSizeColor.forEach(element => {
-      this.TotalAmount += element.salePrice;
       this.TotalPieces += element.totalPieces;
-      this.Price += element.price;
+      if (element.setType != 3) {
+        this.Price += element.price * element.totalPieces;
+      }
+      else {
+        this.Price += element.price;
+      }
+
+      //this.TotalAmount += element.salePrice;
       this.Discount += element.discount
     });
     //return TotalAmount;
   }
   ColorSize(product) {
-    debugger
+
     var arr = product.split('|');
     return arr;
   }

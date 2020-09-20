@@ -190,7 +190,8 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
       return;
     }
     let productObj = {
-      rowID: this.RowId
+      rowID: this.RowId,
+      UserId: this.user[0].userID
     }
     debugger
     this._prodService.GetProductCartQuantity(productObj).subscribe(res => {
