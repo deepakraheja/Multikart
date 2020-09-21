@@ -56,6 +56,10 @@ export class ResetPasswordComponent implements OnInit {
           this.toastr.success("Password has been saved successfully.");
           this.router.navigate(['/home/fashion']);
         }
+        else {
+          this.toastr.error("Something went wrong. please try again");
+          return;
+        }
       });
     }
   }
