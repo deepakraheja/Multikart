@@ -59,15 +59,15 @@ export class LoginComponent implements OnInit {
             this.toastr.error('You are an agent.');
             return;
           }
-          if (res[0].isApproval == 0) {
+          if (res[0].statudId == 1) {
             this.toastr.error('Your login is pending. Please wait for approval');
             return;
           }
-          else if (res[0].isApproval == 2) {
+          else if (res[0].statudId == 3) {
             this.toastr.error('Your login approval is denied');
             return;
           }
-          else if (res[0].isApproval == 1 && res[0].isActive == 1) {
+          else if (res[0].statudId == 2) {
             sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
             sessionStorage.setItem('Token', res[0].token);
 
