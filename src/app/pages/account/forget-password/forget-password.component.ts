@@ -47,7 +47,7 @@ export class ForgetPasswordComponent implements OnInit {
         this.router.navigate(['/home/fashion']);
       }
       else {
-        this.toastr.error('Eamil does not exists.');
+        this.toastr.error('Email does not exists.');
       }
 
     });
