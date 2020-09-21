@@ -85,8 +85,20 @@ export class RegisterComponent implements OnInit {
       mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       //mobilecode: ['', [Validators.required]],
       OTPArray: new FormArray([]),
-      Phone: ['', Validators.required],
+
       BusinessType: ['', Validators.required],
+      Industry: ['', Validators.required],
+      businessLicenseType: ['', Validators.required],
+      GSTNo: ['', Validators.required],
+      PANNo: ['', Validators.required],
+
+      BusinessName: ['', Validators.required],
+      BusinessPhone: ['', Validators.required],
+      Address1: ['', Validators.required],
+      Address2: ['', Validators.required],
+      pinCode: ['', Validators.required],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
     });
 
     this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
@@ -96,7 +108,29 @@ export class RegisterComponent implements OnInit {
 
   get f() { return this.RegistrationForm.controls; }
 
+  formControlValueChanged() {
+    debugger
+    const businessLicenseType = this.RegistrationForm.get('businessLicenseType');
+    const gstNo = this.RegistrationForm.get('GSTNo');
+    const panNo = this.RegistrationForm.get('PANNo');
 
+
+    if (businessLicenseType.value == 'GSTIN') {
+      gstNo.setValidators([Validators.required]);
+      panNo.clearValidators();
+
+      gstNo.updateValueAndValidity();
+      panNo.updateValueAndValidity();
+    }
+    if (businessLicenseType.value == 'BusinessPAN') {
+      panNo.setValidators([Validators.required]);
+      gstNo.clearValidators();
+
+      gstNo.updateValueAndValidity();
+      panNo.updateValueAndValidity();
+    }
+
+  }
 
   //*****************************Validate mobile && call checkMobileAlreadyExist function************/
   validateAndCheckMobile() {
@@ -175,7 +209,7 @@ export class RegisterComponent implements OnInit {
   /*****************************verify mobile OTP*********************/
   verifyMobileOtp() {
 
-     
+
     //this.submitted = true;
     this.errorShow = 1;
     this.mobilecode = ""
@@ -216,7 +250,7 @@ export class RegisterComponent implements OnInit {
 
       this.userService.verify_mobile_otp(d).subscribe((res: any) => {
         setTimeout(() => this.spinner.hide(), 500);
-         ;
+        ;
         if (res == 1) {
           this.mobileverified = true;
           this.mobileOTP = false;
@@ -246,18 +280,24 @@ export class RegisterComponent implements OnInit {
 
   //****************************** CreateRegistration*************//
   CreateRegistration() {
-  
+    debugger
+    this.formControlValueChanged();
     this.submitted = true;
     if (this.RegistrationForm.invalid) {
+      this.RegistrationForm.markAllAsTouched();
       this.toastr.error('All the * marked fields are mandatory');
       return;
     }
     else {
       this.spinner.show();
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
-        if (res > 0) {
+        if (res <= 0) { 
           setTimeout(() => this.spinner.hide(), 500);
-          this.toastr.success("Thank you for registering. We will inform you as soon as account gets approved.");
+          this.toastr.error("Something went wrong. please try again");
+        }
+        else if (res > 1) {
+          setTimeout(() => this.spinner.hide(), 500);
+          this.toastr.success("Thank you for registering. We will inform you as soon as your account will be approved.");
           // let obj = {
           //   LoginId: this.RegistrationForm.value.email,
           //   password: this.RegistrationForm.value.password
