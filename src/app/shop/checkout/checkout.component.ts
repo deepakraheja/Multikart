@@ -62,7 +62,7 @@ export class CheckoutComponent implements OnInit {
       zipCode: ['', Validators.required],
       orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
       orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
-      paymentTypeId: [2],
+      paymentTypeId: [this.user[0].isVIPMember == true ? 3 : 1],
       subTotal: [0],
       tax: [18],
       shippingCharge: [0],

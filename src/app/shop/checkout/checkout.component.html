@@ -267,11 +267,11 @@
                                             </tr> -->
                                             <tr>
                                                 <td colspan="4">
-                                                    <b> Shipping</b>
+                                                    <b> Packing</b>
                                                 </td>
                                                 <td colspan="2">
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
-                                                         <b>Free Shipping</b></span>
+                                                         <b>Free Packing</b></span>
                                                 </td>
                                             </tr>
                                             <tr class="total">
@@ -327,14 +327,21 @@
                                                 <li>
                                                     <div class="radio-option">
                                                         <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="1" name="payment-group" id="payment-1">
-                                                        <label for="payment-1">Cash on Delivery (COD)
+                                                        <label for="payment-1">Online Payment
                                                         </label>
                                                     </div>
                                                 </li>
-                                                <li>
+                                                <li *ngIf="user[0].isAgentCustomer">
                                                     <div class="radio-option">
                                                         <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="2" name="payment-group" id="payment-2">
-                                                        <label for="payment-2">Online Payment
+                                                        <label for="payment-2">Credit to Agent
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                <li *ngIf="user[0].isVIPMember">
+                                                    <div class="radio-option">
+                                                        <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="3" name="payment-group" id="payment-3">
+                                                        <label for="payment-3">Direct Credit
                                                         </label>
                                                     </div>
                                                 </li>
