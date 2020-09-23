@@ -7178,16 +7178,13 @@ footer {
     h2 {
         text-transform: uppercase;
         margin-bottom: 15px;
-        font-size: 25px;
         line-height: 1.2em;
     }
     h3 {
-        font-size: 26px;
         color: $dark-font;
         margin-bottom: 15px;
     }
     h4 {
-        font-size: 16px;
         margin-bottom: 7px;
         del {
             color: $grey;
@@ -14317,9 +14314,9 @@ header a {
 .section-b-space {
     padding-bottom: 30px;
 }
-section, .section-t-space {
-    padding-top: 20px;
-}
+// section, .section-t-space {
+//     padding-top: 20px;
+// }
 .collection-collapse-block .collection-collapse-block-content .collection-brand-filter .category-list li {
     font-size: 14px;
 }
@@ -14360,9 +14357,6 @@ section, .section-t-space {
     .product-pagination .pagination .page-item a {
         padding: 14px 20px;
     }
-    // .top-header .header-dropdown li:hover {
-    //     color: var(--theme-deafult);
-    // }
     .onhover-dropdown:before {
         right: -15px;
     }
@@ -14465,6 +14459,19 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     color: #000000;
     background-color: #ffffff;
 }
+.thumbnail-img-container {
+    max-height: 625px;
+    overflow: auto;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+@media (max-width: 576px){
+    .thumbnail-img-container {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+}
 .thumbnail-img {
     margin-bottom: 10px;
 }
@@ -14475,4 +14482,39 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     float: left;
     max-width: 120px;
 }
+}
+.footer-contant p {
+    font-size: small;
+    line-height: 1.5;
+    font-weight: normal;
+}
+.uppercase ul li a {
+    text-transform: uppercase;
+}
+.footer-dark {
+    background: #141111;
+}
+.footer-dark h4, .footer-theme .sub-title h4, .footer-social i {
+    color: #fff;
+}
+.toast-top-right {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+}
+.logo-size {
+    max-width: 160px;
+}
+@media (max-width: 577px){
+    .dashboard-right .dashboard {
+        padding: 1rem;
+    }
+}
+.color-variant li {
+    border: 1px solid #ccc;
+}
+.tab-content {
+    padding: 1.5rem 1rem;
 }

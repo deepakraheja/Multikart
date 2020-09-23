@@ -1582,15 +1582,12 @@ header {
         }
     }
 }
-
-// @media (max-width: 480px) {
-//     .brand-logo {
-//         img {
-//             height: 25px;
-//         }
-//     }
-// }
 .toggle-nav {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+// @media (max-width: 577px) {
+//     .top-header .header-dropdown .mobile-account {
+//         bottom: 5px;
+//     }
+// }

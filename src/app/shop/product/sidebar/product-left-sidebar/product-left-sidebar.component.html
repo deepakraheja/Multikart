@@ -54,7 +54,7 @@
                                 </div> -->
                                 <div class="col-xl-5">
                                     <div class="row">
-                                        <div class="col-sm-4 col-xl-3">
+                                        <div class="col-sm-4 col-xl-3 thumbnail-img-container">
                                             <div *ngFor="let image of  productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i"
                                                 class="thumbnail-img">
                                                 <div class="owl-thumb" [class.active]="i == activeSlide">
@@ -80,16 +80,16 @@
                                                     </ng-template>
                                                 </ng-container>
                                             </owl-carousel-o>
-                                            <div class="product-buttons row mt-5">
-                                                <div class="col-md-6 mb-2">
-                                                    <a href="javascrip:void(0)" class="btn btn-solid w-100"
-                                                        [class.disabled]="false" (click)="addToCart(1)">add to cart</a>
-                                                </div>
-                                                <div class="col-md-6 mb-2">
-                                                    <a href="javascrip:void(0)" class="btn btn-solid w-100"
-                                                        [class.disabled]="false" (click)="addToCart(2)">buy now</a>
-                                                </div>
-                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-buttons row mt-5">
+                                        <div class="col-md-6 mb-2">
+                                            <a href="javascrip:void(0)" class="btn btn-solid w-100"
+                                                [class.disabled]="false" (click)="addToCart(1)">add to cart</a>
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <a href="javascrip:void(0)" class="btn btn-solid w-100"
+                                                [class.disabled]="false" (click)="addToCart(2)">buy now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
 
                                 <div class="col-xl-7 rtl-text">
                                     <div class="product-right">
-                                        <h2>{{ productkart[0]?.productName }}</h2>
+                                        <h4><b>{{ productkart[0]?.productName }}</b></h4>
                                         <h4>
                                             <del
                                                 *ngIf="productkart[0]?.discount > 0">{{  productkart[0]?.price | currency: productService.Currency?.currency:'symbol' }}</del>
@@ -132,15 +132,11 @@
                                             </li>
                                         </ul>
                                         <!-- <app-stock-inventory [stock]="productkart[0]?.qty"></app-stock-inventory> commented on 22 july by deepak -->
-                                        <div class="product-description border-product">
-                                            <h6
-                                                style="color: #222222;text-transform: capitalize;font-weight: 400;margin-bottom: 0;font-size: 18px;">
+                                        <div class="product-description border-product mt-5">
+                                            <h4 class="clearfix" style="color: #222222;text-transform: capitalize;">
                                                 select size
-                                                <span>
-                                                    <a href="javascrip:void(0)" (click)="SizeChart.openModal()">size
-                                                        chart</a>
-                                                </span>
-                                            </h6>
+                                                <a href="javascrip:void(0)" (click)="SizeChart.openModal()" class="float-right">size chart</a>
+                                            </h4>
                                             <br>
                                             <table class="table table-bordered table-hover">
                                                 <thead class="thead-dark">
