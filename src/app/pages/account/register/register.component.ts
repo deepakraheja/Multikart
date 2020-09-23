@@ -7,6 +7,7 @@ import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
+import { ThanksComponent } from '../thanks/thanks.component';
 
 @Component({
   selector: 'app-register',
@@ -291,13 +292,13 @@ export class RegisterComponent implements OnInit {
     else {
       this.spinner.show();
       this.userService.UserRegistration(this.RegistrationForm.value).subscribe(res => {
-        if (res <= 0) { 
+        if (res <= 0) {
           setTimeout(() => this.spinner.hide(), 500);
           this.toastr.error("Something went wrong. please try again");
         }
         else if (res > 1) {
           setTimeout(() => this.spinner.hide(), 500);
-          this.toastr.success("Thank you for registering. We will inform you as soon as your account will be approved.");
+          //this.toastr.success("Thank you for registering. We will inform you as soon as your account will be approved.");
           // let obj = {
           //   LoginId: this.RegistrationForm.value.email,
           //   password: this.RegistrationForm.value.password
@@ -320,6 +321,16 @@ export class RegisterComponent implements OnInit {
           // });
 
           this.router.navigate(['/home/fashion']);
+          this.modalService.open(ThanksComponent, {
+            size: 'md',
+            //ariaLabelledBy: 'Cart-Modal',
+            centered: true,
+            //windowClass: 'theme-modal cart-modal CartModal'
+          }).result.then((result) => {
+            `Result ${result}`
+          }, (reason) => {
+            this.modalService.dismissAll();
+          });
         }
         else {
           setTimeout(() => this.spinner.hide(), 500);
