@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
       Address2: ['', Validators.required],
       pinCode: ['', Validators.required],
       city: ['', Validators.required],
-      state: ['', Validators.required],
+      state: ['', Validators.required]
     });
 
     this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
