@@ -59,7 +59,7 @@
                             <div class="form-group">
 
                                 <label for="email">Your First and Last Name</label>
-                                <input type="text" class="form-control" id="fname" formControlName="name" maxlength="50" placeholder="First And Last Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                <input type="text" class="form-control" id="fname" formControlName="name" maxlength="50" placeholder="First and Last Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             </div>
 
 
@@ -82,7 +82,7 @@
                                 <label>Industry</label>
                                 <select class="custom-select" formControlName="Industry" [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
                                     <option value="">Select Industry</option>
-                                    <option value="Retail"> Accessories Retail (fashion)</option>
+                                    <option value="Retail"> Retail (Fashion / Accessories)</option>
                                     <option value="Wholesale">Wholesale</option>
                                     <option value="Other">Other</option>
 
@@ -125,13 +125,13 @@
                             <div class="form-group">
 
                                 <label for="email">Address1</label>
-                                <input type="text" class="form-control" id="Address1" formControlName="Address1" maxlength="100" placeholder="Address2" [ngClass]="{ 'is-invalid': submitted && f.Address1.errors }">
+                                <input type="text" class="form-control" id="Address1" formControlName="Address1" maxlength="100" placeholder="Address1" [ngClass]="{ 'is-invalid': submitted && f.Address1.errors }">
                             </div>
 
                             <div class="form-group">
 
                                 <label for="email">Address2</label>
-                                <input type="text" class="form-control" id="Address2" formControlName="Address2" maxlength="100" placeholder="Address2" [ngClass]="{ 'is-invalid': submitted && f.Address2.errors }">
+                                <input type="text" class="form-control" id="Address2" formControlName="Address2" maxlength="100" placeholder="Address2">
                             </div>
 
                             <div class="form-group">

@@ -95,7 +95,7 @@ export class RegisterComponent implements OnInit {
       BusinessName: ['', Validators.required],
       BusinessPhone: ['', Validators.required],
       Address1: ['', Validators.required],
-      Address2: ['', Validators.required],
+      Address2: [''],
       pinCode: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required]
