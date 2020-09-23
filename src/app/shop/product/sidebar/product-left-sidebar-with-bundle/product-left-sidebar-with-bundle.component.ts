@@ -198,11 +198,11 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
       debugger
       if (res.length > 0) {
         this.totalqty += res[0].qty
-      }
+      } 
       if (Number(this.totalqty) >= minimum) {
         const status = this.productService.addToCartProduct(obj);
         debugger
-        if (status) {
+        if (status) { 
           if (type == 1)
             this.router.navigate(['/shop/cart']);
           else
