@@ -211,7 +211,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
       }
       else {
 
-        this.toastr.error("Please select atleast " + minimum + " quantity.");
+        this.toastr.error("Please select atleast " + minimum + " pieces.");
       }
     });
 
