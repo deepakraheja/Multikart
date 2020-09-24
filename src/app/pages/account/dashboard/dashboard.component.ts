@@ -20,6 +20,7 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
   public ProductImage = environment.ProductImage;
+  public Report_Path = environment.Report_Path;
   public openDashboard: boolean = false;
   public ShowTabName: string = "AccountInfor";
   public LoggedInUser: any[] = [];

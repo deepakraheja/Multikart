@@ -143,7 +143,10 @@
                                     </span>
                                 </div>
                                 <div class="order-parts">
-                                    <span class="badge badge-success">Delivered</span>
+                                    <span class="badge badge-success">{{lst.statusName}}</span>
+                                </div>
+                                <div class="order-parts">
+                                    <a href="{{Report_Path}}OrderId={{lst.orderId}}" target="_blank">Download Invoice</a>
                                 </div>
                                 <div class="order-parts">
                                     <input type="button" id="btn{{lst.orderId}}" value="Show" class="btn btn-primary" (click)="ShowDiv(lst.orderId);">
