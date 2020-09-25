@@ -4840,10 +4840,10 @@ footer {
             padding-top: 13px;
             text-transform: capitalize;
             font-size: 14px;
-            color: $grey;
+            color: $grey-lighter;
             a {
                 position: relative;
-                color: $grey;
+                color: #c1c1c1;
                 &:before {
                     position: absolute;
                     top: 20px;
@@ -6433,7 +6433,6 @@ footer {
     }
     .theme-card {
         padding: 30px;
-        border: 1px solid $round-border;
         line-height: 1;
         .theme-form {
             label {
@@ -14517,4 +14516,77 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
 }
 .tab-content {
     padding: 1.5rem 1rem;
+}
+.login-left-bg {
+    background-color: #eaeaea;
+}
+.login-page .red-bg h3 {
+    color: #fff;
+}
+.login-page .theme-card .theme-form input{
+    background-color: transparent !important;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding-left: 0;
+    color: #000;
+    font-weight: bold;
+}
+.login-page .theme-card .theme-form input:focus{
+    border: 0;
+    border-bottom: 2px solid crimson;
+    box-shadow: none;
+    outline: none;
+}
+.close {
+    position: absolute;
+    right: -1rem;
+    top: -1rem;
+    display: block;
+    width: 30px;
+    background: #fff;
+    padding: 8px;
+    border-radius: 50%;
+    opacity: 1;
+    height: 30px;
+    line-height: 10px;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.2);
+    cursor: pointer;
+}
+.login-page h5 {
+    color: #fff;
+}
+.login-left {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 100%;
+    flex-direction: column;
+}
+.login-page {
+    .btn-solid {
+        background-size: 1000px;
+        transition: background 100ms ease-in-out;
+    }
+}
+
+.main-menu .menu-right .icon-nav .onhover-div .show-div.shopping-cart li .close-circle {
+    top: auto;
+    right: 0;
+    bottom: 22px;
+}
+.main-menu .menu-right .icon-nav .onhover-div .show-div.shopping-cart li .close-circle a i {
+    color: var(--theme-deafult);
+}
+.otp-number {
+    display: flex;
+    justify-content: center;
+}
+.success-check{
+    color: #28a745;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+footer p {
+    color: #c1c1c1;
 }
