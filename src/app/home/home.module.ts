@@ -10,11 +10,11 @@ import { FashionOneComponent } from './fashion/fashion-one/fashion-one.component
 
 // Widgest Components
 import { SliderComponent } from './widgets/slider/slider.component';
-import { BlogComponent } from './widgets/blog/blog.component';
+//import { BlogComponent } from './widgets/blog/blog.component';
 import { LogoComponent } from './widgets/logo/logo.component';
-import { InstagramComponent } from './widgets/instagram/instagram.component';
-import { ServicesComponent } from './widgets/services/services.component';
-import { CollectionComponent } from './widgets/collection/collection.component';
+//import { InstagramComponent } from './widgets/instagram/instagram.component';
+//import { ServicesComponent } from './widgets/services/services.component';
+//import { CollectionComponent } from './widgets/collection/collection.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +24,11 @@ import { CollectionComponent } from './widgets/collection/collection.component';
    
     // Widgest Components
     SliderComponent,
-    BlogComponent,
+    //BlogComponent,
     LogoComponent,
-    InstagramComponent,
-    ServicesComponent,
-    CollectionComponent
+    //InstagramComponent,
+    //ServicesComponent,
+    //CollectionComponent
   ],
   imports: [
     CommonModule,

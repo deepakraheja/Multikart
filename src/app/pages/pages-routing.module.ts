@@ -7,14 +7,14 @@ import { DashboardComponent } from './account/dashboard/dashboard.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ForgetPasswordComponent } from './account/forget-password/forget-password.component';
-import { ProfileComponent } from './account/profile/profile.component';
+//import { ProfileComponent } from './account/profile/profile.component';
 import { ContactComponent } from './account/contact/contact.component';
 import { CheckoutComponent } from './account/checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
 import { TypographyComponent } from './typography/typography.component';
 //import { ReviewComponent } from './review/review.component';
-import { OrderSuccessComponent } from './order-success/order-success.component';
+//import { OrderSuccessComponent } from './order-success/order-success.component';
 // import { CompareOneComponent } from './compare/compare-one/compare-one.component';
 // import { CompareTwoComponent } from './compare/compare-two/compare-two.component';
 //import { CollectionComponent } from './collection/collection.component';
@@ -68,10 +68,10 @@ const routes: Routes = [
     path: 'forget/password',
     component: ForgetPasswordComponent
   },
-  {
-    path: 'profile',
-    component: ProfileComponent
-  },
+  // {
+  //   path: 'profile',
+  //   component: ProfileComponent
+  // },
   {
     path: 'contact',
     component: ContactComponent
@@ -96,10 +96,10 @@ const routes: Routes = [
   //   path: 'review',
   //   component: ReviewComponent
   // },
-  {
-    path: 'order/success',
-    component: OrderSuccessComponent
-  },
+  // {
+  //   path: 'order/success',
+  //   component: OrderSuccessComponent
+  // },
   {
     path: 'ResetPassword/:id',
     component: ResetPasswordComponent

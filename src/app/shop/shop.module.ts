@@ -15,7 +15,7 @@ import { ProductLeftSidebarComponent } from './product/sidebar/product-left-side
 // import { ImageOutsideComponent } from './product/image-outside/image-outside.component';
 
 // Product Details Widgest Components
-import { ServicesComponent } from './product/widgets/services/services.component';
+//import { ServicesComponent } from './product/widgets/services/services.component';
 import { CountdownComponent } from './product/widgets/countdown/countdown.component';
 import { SocialComponent } from './product/widgets/social/social.component';
 import { StockInventoryComponent } from './product/widgets/stock-inventory/stock-inventory.component';
@@ -55,7 +55,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     // FourImageComponent,
     // BundleProductComponent,
     // ImageOutsideComponent,
-    ServicesComponent,
+    //ServicesComponent,
     CountdownComponent,
     SocialComponent,
     StockInventoryComponent,

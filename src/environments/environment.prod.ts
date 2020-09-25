@@ -13,5 +13,5 @@ export const environment = {
 
   BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
   ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
-  Report_Path: 'http://localhost:44391/ReportHandler.ashx?'
+  Report_Path: 'http://34.67.65.213/ecomm/ReportHandler.ashx?'
 };

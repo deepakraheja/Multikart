@@ -25,19 +25,19 @@ import { MenuComponent } from './components/menu/menu.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
+//import { ProductBoxOneComponent } from './components/product/product-box-one/product-box-one.component';
 // import { ProductBoxTwoComponent } from './components/product/product-box-two/product-box-two.component';
 // import { ProductBoxThreeComponent } from './components/product/product-box-three/product-box-three.component';
 // import { ProductBoxFourComponent } from './components/product/product-box-four/product-box-four.component';
 // import { ProductBoxFiveComponent } from './components/product/product-box-five/product-box-five.component';
-import { ProductBoxVerticalComponent } from './components/product/product-box-vertical/product-box-vertical.component';
+//import { ProductBoxVerticalComponent } from './components/product/product-box-vertical/product-box-vertical.component';
 import { ProductBoxVerticalSliderComponent } from './components/product/product-box-vertical-slider/product-box-vertical-slider.component';
 
 // Modals Components
-import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
+//import { NewsletterComponent } from './components/modal/newsletter/newsletter.component';
 import { QuickViewComponent } from './components/modal/quick-view/quick-view.component';
 import { CartModalComponent } from './components/modal/cart-modal/cart-modal.component';
-import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
+//import { CartVariationComponent } from './components/modal/cart-variation/cart-variation.component';
 import { VideoModalComponent } from './components/modal/video-modal/video-modal.component';
 import { SizeModalComponent } from './components/modal/size-modal/size-modal.component';
 import { AgeVerificationComponent } from './components/modal/age-verification/age-verification.component';
@@ -70,17 +70,17 @@ import { ProductBoxComponent } from './components/product/product-box/product-bo
     SettingsComponent,
     BreadcrumbComponent,
     CategoriesComponent,
-    ProductBoxOneComponent,
+    //ProductBoxOneComponent,
     // ProductBoxTwoComponent,
     // ProductBoxThreeComponent,
     // ProductBoxFourComponent,
     // ProductBoxFiveComponent,
-    ProductBoxVerticalComponent,
+    //ProductBoxVerticalComponent,
     ProductBoxVerticalSliderComponent,
-    NewsletterComponent,
+    //NewsletterComponent,
     QuickViewComponent,
     CartModalComponent,
-    CartVariationComponent,
+    // CartVariationComponent,
     VideoModalComponent,
     SizeModalComponent,
     AgeVerificationComponent,
@@ -124,17 +124,17 @@ import { ProductBoxComponent } from './components/product/product-box/product-bo
     //FooterFourComponent,
     BreadcrumbComponent,
     CategoriesComponent,
-    ProductBoxOneComponent,
+    //ProductBoxOneComponent,
     // ProductBoxTwoComponent,
     // ProductBoxThreeComponent,
     // ProductBoxFourComponent,
     // ProductBoxFiveComponent,
-    ProductBoxVerticalComponent,
+    //ProductBoxVerticalComponent,
     ProductBoxVerticalSliderComponent,
-    NewsletterComponent,
+    // NewsletterComponent,
     QuickViewComponent,
     CartModalComponent,
-    CartVariationComponent,
+    // CartVariationComponent,
     VideoModalComponent,
     SizeModalComponent,
     AgeVerificationComponent,
