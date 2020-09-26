@@ -186,7 +186,7 @@ button {
 
 section,
 .section-t-space {
-    padding-top: 10px;
+    padding-top: 30px;
 }
 
 :focus {
@@ -869,6 +869,7 @@ button {
 
 header {
     background-color: $white;
+    box-shadow: 0px 2px 6px rgba(0,0,0,.2);
 }
 
 .left-header {
@@ -1031,11 +1032,13 @@ header {
 
 .top-header {
     background-color: $top-header;
+    padding: 0;
     .header-contact {
-        padding: 15px 0;
+        padding: 0;
         li {
             color: $header-font;
             font-size: 14px;
+            padding-top: 5px;
             padding-right: 25px;
             i {
                 color: var(--theme-deafult);
@@ -1047,7 +1050,7 @@ header {
         li {
             cursor: pointer;
             color: $header-font;
-            padding: 15px 25px;
+            padding: 0;
             &:first-child {
                 padding-right: 0;
             }
@@ -6484,14 +6487,13 @@ footer {
             label {
                 text-transform: capitalize;
                 color: $font-color;
-                font-size: 14px;
+                font-size: 12px;
                 font-weight: 600;
             }
             input {
                 border-color: $round-border;
                 font-size: 12px;
-                padding: 17px 25px;
-                margin-bottom: 30px;
+                padding: 12px;
                 height: inherit;
             }
         }
@@ -7863,7 +7865,6 @@ footer {
 
 .order-box {
     position: relative;
-    margin-bottom: 50px;
     .title-box {
         position: relative;
         padding-bottom: 25px;
@@ -8211,10 +8212,9 @@ footer {
     h2 {
         margin-top: 10px;
         margin-bottom: 15px;
+        text-transform: capitalize;
     }
     p {
-        font-size: 18px;
-        text-transform: capitalize;
         &:last-child {
             margin-bottom: 0;
         }
@@ -8236,7 +8236,6 @@ footer {
             display: flex;
             text-transform: capitalize;
             line-height: 28px;
-            font-size: 16px;
         }
     }
     .payment-mode {
@@ -14458,15 +14457,19 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     color: #000000;
     background-color: #ffffff;
 }
-.thumbnail-img-container {
-    max-height: 625px;
+// .thumbnail-img-container {
+//     display: flex;
+//     justify-content: flex-end;
+//     height: 100%;
+// }
+.thumbnail-imgs {
+    height: 100%;
+    max-height: 416px;
     overflow: auto;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
 }
 @media (max-width: 576px){
-    .thumbnail-img-container {
+    .thumbnail-imgs{
+        display: flex;
         flex-direction: row;
         justify-content: flex-start;
     }
@@ -14534,7 +14537,7 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
 }
 .login-page .theme-card .theme-form input:focus{
     border: 0;
-    border-bottom: 2px solid crimson;
+    border-bottom: 1px solid crimson;
     box-shadow: none;
     outline: none;
 }
@@ -14589,4 +14592,65 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
 }
 footer p {
     color: #c1c1c1;
+}
+.custom-select {
+    font-size: 12px;
+    height: auto;
+    padding: 12px;
+    border-radius: 0;
+}
+.top-header .header-dropdown li, .top-header .header-contact  {
+    padding: 0;
+}
+.top-header .header-dropdown li {
+    padding-top: 5px;
+    padding-bottom: 1rem;
+}
+a.btn-solid:not([href]) {
+    color: #fff;
+}
+a.btn-solid:not([href]):hover {
+    color: #000;
+}
+.order-success-sec {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.left-sec, .right-sec {
+    width: 100%;
+}
+.success-text {
+    padding-bottom: 30px;
+}
+
+.order-detail li span {
+    font-weight: bold;
+    padding-right: 5px;
+}
+.success-text img {
+    max-width: 6rem;
+}
+@media(min-width:1199px) {
+    .order-success-sec {
+        flex-direction: row;
+        align-items: center;
+    }
+    .left-sec, .right-sec {
+        width: auto;
+        flex: 1;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+.breadcrumb-section {
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.product-carousel .owl-carousel .owl-item img {
+    max-width: 416px;
+    max-height: 416px;
+    object-fit: contain;
 }

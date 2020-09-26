@@ -19,14 +19,14 @@
                                     [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }"
                                     formControlName="mobileNo">
                                 <div *ngIf="mobileverified" class="input-group-append">
-                                    <span class="input-group-text success-check" style="height: 54px;">
+                                    <span class="input-group-text success-check">
                                         <i class="fa fa-check"></i>
                                     </span>
                                 </div>
 
                                 <div *ngIf="!mobileverified" class="input-group-append">
                                     <button class="btn btn-sm btn-success" type="button"
-                                        (click)="validateAndCheckMobile();" style="height: 54px;">Send OTP</button>
+                                        (click)="validateAndCheckMobile();">Send OTP</button>
                                 </div>
                             </div>
 
