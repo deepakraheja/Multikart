@@ -165,7 +165,7 @@ export class ProductService {
   //Add to Cart 
   public addToCartProduct(product: any[]): any {
     //  ;
-    console.log(product);
+    //console.log(product);
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     //  
     if (this.user == null || this.user == undefined) {

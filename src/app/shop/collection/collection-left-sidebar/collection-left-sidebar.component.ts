@@ -73,6 +73,7 @@ export class CollectionLeftSidebarComponent implements OnInit {
       // }
 
       //  
+      debugger
       if (params.category == undefined || params.category) {
         this.BindProductByCategory();
         //this.BindBrand();
@@ -100,10 +101,11 @@ export class CollectionLeftSidebarComponent implements OnInit {
        
       const category = params['category'];
       let productObj = {
-        Active: 1,
+        Active: true,
         Subcatecode: category == 'fashion' ? '' : category
 
       }
+      debugger
       this._prodService.getProductByCategory(productObj).subscribe(products => {
         let FilteredProduct = products;
         this.Allproductskart = products;

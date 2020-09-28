@@ -51,7 +51,7 @@ export class FashionOneComponent implements OnInit {
   BindProductByCategory() {
 
     let productObj = {
-      Active: 1,
+      Active: true,
       Subcatecode: ''
 
     }

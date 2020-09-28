@@ -41,7 +41,7 @@ export class ProductBoxVerticalSliderComponent implements OnInit {
   BindProductByCategory() {
 
     let productObj = {
-      Active: 1,
+      Active: true,
       Subcatecode: ''
     }
     this._prodService.getProductByCategory(productObj).subscribe(products => {
