@@ -71,7 +71,7 @@ export class ProductLeftSidebarComponent implements OnInit {
 
       let productObj = {
         rowID: productid,
-        productSizeId: productSizeId
+        productSizeId: Number(productSizeId)
       }
       this._prodService.GetWithoutSetProductByRowID(productObj).subscribe(product => {
         if (!product) { // When product is empty redirect 404
@@ -119,7 +119,7 @@ export class ProductLeftSidebarComponent implements OnInit {
         }
       }
      
-      console.log(imageColor);
+      //console.log(imageColor);
       return imageColor
     }
   }
