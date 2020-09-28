@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChildren, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 import { UsersService } from 'src/app/Service/users.service';
 import { ActivatedRoute, Router, ParamMap } from '@angular/router';
@@ -9,16 +9,24 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../login/login.component';
 import { ThanksComponent } from '../thanks/thanks.component';
 
+declare var $: any;
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  public inputType = 'password';
+  public class = 'fa fa-eye';
 
   RegistrationForm: FormGroup;
 
-
+  @ViewChild("otp") nameField: ElementRef;
+  editName(): void {
+    this.nameField.nativeElement.focus();
+  }
+  
   formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
   @ViewChildren('formRow') rows: any;
 
@@ -192,19 +200,45 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+
+
+  
   //*****************************send mobile OTP************/
   sendMobileOtp() {
 
     const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
     let i: number = 0;
+
     OTPArray.controls.forEach((item: FormControl) => {
       item.setValue("");
-    });
 
-    this.toastr.success('OTP has been sent');
+    });
+debugger
+    // let pos = 0;
+    // if (pos > -1 && pos < this.formInput.length) {
+    //   this.rows._results[pos].nativeElement.focus();
+    // }
+    $('#0').focus();
+
+
+    this.toastr.success('OTP has been sent.');
     this.counter = 60;// for OTP time
     this.mobileOTP = true;
     this.Set_Time();
+
+  }
+
+
+  hideShowPassword(): void {
+
+    if (this.inputType == 'password') {
+      this.inputType = 'text';
+      this.class = 'fa fa-eye-slash';
+    }
+    else {
+      this.inputType = 'password';
+      this.class = 'fa fa-eye';
+    }
 
   }
   /*****************************verify mobile OTP*********************/

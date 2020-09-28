@@ -3,19 +3,26 @@
 <section class="register-page section-b-space">
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
+            <div class="col-md-6 offset-md-3 mb-5">
                 <h4 class="mb-5"><b>Let's start creating your new account.</b></h4>
                 <div class="theme-card">
 
                     <!-- {{RegistrationForm.value|json}}  -->
 
                     <form class="theme-form" [formGroup]="RegistrationForm">
-
+                        <div class="form-group "><input autocomplete="new-password" id="" type="tel"
+                                class="form-control mobileNumberInput" placeholder="" maxlength="10"><span
+                                class="placeholderAlternative mobileNumber">+91<span
+                                    style="padding: 0px 10px; position: relative; bottom: 1px;">|</span><span
+                                    class="mobileNumberPlacholder">Mobile Number<span
+                                        style="color: rgb(255, 87, 34);">*</span></span> </span><i class="bar"></i>
+                        </div>
                         <div class="form-group">
-                            <label *ngIf="!mobileOTP">Mobile</label>
+                            <label *ngIf="!mobileOTP">Mobile Number</label>
                             <div class="input-group" *ngIf="!mobileOTP">
 
-                                <input type="text" class="form-control" placeholder="Mobile" maxlength="10"
+                                <input type="text" id="MobileNumber" class="form-control" placeholder="Mobile Number"
+                                    maxlength="10" autocomplete="off"
                                     [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }"
                                     formControlName="mobileNo">
                                 <div *ngIf="mobileverified" class="input-group-append">
@@ -25,7 +32,7 @@
                                 </div>
 
                                 <div *ngIf="!mobileverified" class="input-group-append">
-                                    <button class="btn btn-sm btn-success" type="button"
+                                    <button #otp class="btn btn-sm btn-success" type="button"
                                         (click)="validateAndCheckMobile();">Send OTP</button>
                                 </div>
                             </div>
@@ -34,7 +41,7 @@
 
                         <div class="form-group text-center" *ngIf="mobileOTP">
                             <h6 class="mb-4"><b>Verify With OTP sent to {{f.mobileNo.value}} <span class="text-danger">
-                                </span></b></h6>
+                                    </span></b></h6>
 
                             <!-- <input type="password" class="form-control" id="exampleInputPassword"
                                     formControlName="mobilecode" placeholder="Enter OTP"> -->
@@ -42,14 +49,16 @@
                             <div class="otp-number">
                                 <div formArrayName="OTPArray" class="otpContainer"
                                     *ngFor="let input of OTPFormArray.controls;  index as i">
-                                    <input #formRow type="text" [formControlName]="i" class="form-control" maxlength="1"
-                                        (keypress)="keyUpEvent($event, i)">
+                                    <input #formRow type="text" [formControlName]="i" id={{i}} class="form-control"
+                                        maxlength="1" (keypress)="keyUpEvent($event, i)">
                                 </div>
                             </div>
-                            <button class="btn btn-success mt-4" type="button" (click)="verifyMobileOtp();">Verify</button>
+                            <button class="btn btn-success mt-4" type="button"
+                                (click)="verifyMobileOtp();">Verify</button>
                         </div>
                         <div class="form-group" *ngIf="mobileOTP">
-                            <h6 class="text-center" style="color: #969696">Resend OTP in:<b> {{counter}} second(s)</b></h6>
+                            <h6 class="text-center" style="color: #969696">Resend OTP in:<b> {{counter}} second(s)</b>
+                            </h6>
                         </div>
                         <div *ngIf="mobileverified">
 
@@ -57,7 +66,7 @@
 
                                 <label for="email">Your First and Last Name</label>
                                 <input type="text" class="form-control" id="fname" formControlName="name" maxlength="50"
-                                    placeholder="First and Last Name"
+                                    autocomplete="off" placeholder="First and Last Name"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             </div>
 
@@ -106,7 +115,7 @@
 
                                 <label for="email">GST No</label>
                                 <input type="text" class="form-control" id="PANNo" formControlName="GSTNo"
-                                    maxlength="25" placeholder="GST No"
+                                    autocomplete="off" maxlength="25" placeholder="GST No"
                                     [ngClass]="{ 'is-invalid': submitted && f.GSTNo.errors }">
                             </div>
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='BusinessPAN'">
@@ -120,7 +129,7 @@
 
                                 <label for="email">Business Name</label>
                                 <input type="text" class="form-control" id="BusinessName" formControlName="BusinessName"
-                                    maxlength="100" placeholder="Business Name"
+                                    autocomplete="off" maxlength="100" placeholder="Business Name"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessName.errors }">
                             </div>
 
@@ -131,12 +140,12 @@
                                 <input type="text" class="form-control" id="BusinessPhone" maxlength="10"
                                     formControlName="BusinessPhone" placeholder="Business Phone"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessPhone.errors }">
-                            </div> 
+                            </div>
                             <div class="form-group">
 
                                 <label for="email">Address1</label>
                                 <input type="text" class="form-control" id="Address1" formControlName="Address1"
-                                    maxlength="100" placeholder="Address1"
+                                    autocomplete="off" maxlength="100" placeholder="Address1"
                                     [ngClass]="{ 'is-invalid': submitted && f.Address1.errors }">
                             </div>
 
@@ -144,14 +153,14 @@
 
                                 <label for="email">Address2</label>
                                 <input type="text" class="form-control" id="Address2" formControlName="Address2"
-                                    maxlength="100" placeholder="Address2">
+                                    autocomplete="off" maxlength="100" placeholder="Address2">
                             </div>
 
                             <div class="form-group">
 
                                 <label for="email">Pin Code</label>
                                 <input type="text" class="form-control" id="PinCode" formControlName="pinCode"
-                                    maxlength="6" placeholder="PinCode"
+                                    autocomplete="off" maxlength="6" placeholder="PinCode"
                                     [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }">
                             </div>
 
@@ -159,7 +168,8 @@
 
                                 <label for="email">City</label>
                                 <input type="text" class="form-control" id="City" formControlName="city" maxlength="50"
-                                    placeholder="City" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                                    autocomplete="off" placeholder="City"
+                                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
                             </div>
 
                             <div class="form-group">
@@ -212,7 +222,7 @@
                                 <label>Email ID</label>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Email ID" maxlength="50"
-                                        formControlName="email"
+                                        autocomplete="off" formControlName="email"
                                         [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
 
                                 </div>
@@ -221,10 +231,13 @@
                             <div class="form-group">
 
                                 <label for="review">Password</label>
-                                <input type="password" class="form-control" id="review" formControlName="password"
-                                    maxlength="20" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                    placeholder="Enter your password" required="">
-
+                                <input  type="{{inputType}}"  class="form-control" id="review" formControlName="password"
+                                    autocomplete="off" maxlength="20"
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="password"
+                                    required="">
+                                <div class="input-group-addon frm-icon"></div>
+                                <div class="input-group-addon frm-icon" (click)="hideShowPassword()"><i
+                                        class="{{class}}"></i></div>
                             </div>
 
 

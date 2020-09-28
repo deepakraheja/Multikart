@@ -6485,14 +6485,14 @@ footer {
         line-height: 1;
         .theme-form {
             label {
-                text-transform: capitalize;
+                // text-transform: capitalize;
                 color: $font-color;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: 600;
             }
             input {
                 border-color: $round-border;
-                font-size: 12px;
+                font-size: 14px;
                 padding: 12px;
                 height: inherit;
             }
