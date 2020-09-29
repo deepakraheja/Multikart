@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UsersService } from 'src/app/Service/users.service';
 import { LookupService } from 'src/app/Service/lookup.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ReportService } from 'src/app/Service/report.service';
 declare var $: any;
 
 @Component({
@@ -44,6 +45,7 @@ export class DashboardComponent implements OnInit {
     private _userService: UsersService,
     public _lookupService: LookupService,
     private spinner: NgxSpinnerService,
+    private _ReportService: ReportService
   ) {
 
   }
@@ -95,7 +97,7 @@ export class DashboardComponent implements OnInit {
 
   LoadAllOrder() {
     let obj = {
-      UserID: this.LoggedInUser[0].userID
+      UserID: Number(this.LoggedInUser[0].userID)
     };
     this.spinner.show();
     this._OrderService.GetOrderByUserId(obj).subscribe(res => {
@@ -303,5 +305,16 @@ export class DashboardComponent implements OnInit {
       document.getElementById(id).style.display = "block";
       document.getElementById("btn" + id)['value'] = "Hide";
     }
+  }
+
+  DownloadInvoice(orderId) {
+    let obj = {
+      OrderId: Number(orderId)
+    }
+    this.spinner.show();
+    this._ReportService.GenerateOrderInvoice(obj).subscribe(res => {
+      this.spinner.hide();
+      this.toastr.success("The invoice has been downloaded successfully.");
+    });
   }
 }

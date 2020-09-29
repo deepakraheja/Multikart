@@ -146,7 +146,8 @@
                                     <span class="badge badge-success">{{lst.statusName}}</span>
                                 </div>
                                 <div class="order-parts">
-                                    <a href="{{Report_Path}}OrderId={{lst.orderId}}&ReportType=1" target="_blank">Download Invoice</a>
+                                    <!-- <a href="{{Report_Path}}OrderId={{lst.orderId}}&ReportType=1" target="_blank">Download Invoice</a> -->
+                                    <a href="javascript:void(0)" (click)="DownloadInvoice(lst.orderId)">Download Invoice</a>
                                 </div>
                                 <div class="order-parts">
                                     <input type="button" id="btn{{lst.orderId}}" value="Show" class="btn btn-primary" (click)="ShowDiv(lst.orderId);">
