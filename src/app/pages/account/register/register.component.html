@@ -10,17 +10,19 @@
                     <!-- {{RegistrationForm.value|json}}  -->
 
                     <form class="theme-form" [formGroup]="RegistrationForm">
-                        <div class="form-group "><input autocomplete="new-password" id="" type="tel"
+                        <!-- <div class="form-group "><input autocomplete="new-password" id="" type="tel"
                                 class="form-control mobileNumberInput" placeholder="" maxlength="10"><span
                                 class="placeholderAlternative mobileNumber">+91<span
                                     style="padding: 0px 10px; position: relative; bottom: 1px;">|</span><span
                                     class="mobileNumberPlacholder">Mobile Number<span
                                         style="color: rgb(255, 87, 34);">*</span></span> </span><i class="bar"></i>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <label *ngIf="!mobileOTP">Mobile Number</label>
                             <div class="input-group" *ngIf="!mobileOTP">
-
+                                <div class="input-group-prepend india-code">
+                                    <div class="input-group-text">+91</div>
+                                </div>
                                 <input type="text" id="MobileNumber" class="form-control" placeholder="Mobile Number"
                                     maxlength="10" autocomplete="off"
                                     [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }"
@@ -76,7 +78,7 @@
                                 <label>Business Type</label>
                                 <select class="custom-select" formControlName="BusinessType"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
-                                    <option value="">Select Business Type</option>
+                                    <option value=""></option>
                                     <option value="Sole Proprietorship">Sole Proprietorship</option>
                                     <option value="Partnership">Partnership</option>
                                     <option value="PublicLimitedCompany">PublicLimitedCompany</option>
@@ -91,7 +93,7 @@
                                 <label>Industry</label>
                                 <select class="custom-select" formControlName="Industry"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
-                                    <option value="">Select Industry</option>
+                                    <option value=""></option>
                                     <option value="Retail"> Retail (Fashion / Accessories)</option>
                                     <option value="Wholesale">Wholesale</option>
                                     <option value="Other">Other</option>
@@ -103,7 +105,7 @@
                                 <label>Business License Type</label>
                                 <select class="custom-select" formControlName="businessLicenseType"
                                     [ngClass]="{ 'is-invalid': submitted && f.businessLicenseType.errors }">
-                                    <option value="">Select business license type</option>
+                                    <option value=""></option>
                                     <option value="GSTIN"> Goods & Services Tax Number (GSTIN)</option>
                                     <option value="BusinessPAN">Business PAN</option>
 
@@ -176,7 +178,7 @@
                                 <label>State</label>
                                 <select class="custom-select" formControlName="state"
                                     [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
-                                    <option value="">Select State</option>
+                                    <option value=""></option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
                                     <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -231,13 +233,18 @@
                             <div class="form-group">
 
                                 <label for="review">Password</label>
-                                <input  type="{{inputType}}"  class="form-control" id="review" formControlName="password"
-                                    autocomplete="off" maxlength="20"
-                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="password"
-                                    required="">
-                                <div class="input-group-addon frm-icon"></div>
-                                <div class="input-group-addon frm-icon" (click)="hideShowPassword()"><i
-                                        class="{{class}}"></i></div>
+                                <div class="input-group">
+                                    <input type="{{inputType}}" class="form-control" id="review"
+                                        formControlName="password" autocomplete="off" maxlength="20"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                        placeholder="password" required="">
+                                    <div class="input-group-append frm-icon" (click)="hideShowPassword()">
+                                        <span class="input-group-text">
+                                            <i class="{{class}}"></i>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
 
 

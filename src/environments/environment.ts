@@ -30,9 +30,12 @@ export const environment = {
 
 
   //*********************Production Server************* */
-  BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
-  ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
+  //BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
+  //ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
 
+  BASE_API_URL: 'http://34.67.65.213/EcommApiV3/api/',
+  ProductImage: 'http://34.67.65.213/EcommApiV3/ProductImage/',
+  
 
 };
 

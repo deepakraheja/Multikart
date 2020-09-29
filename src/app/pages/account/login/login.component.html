@@ -1,6 +1,6 @@
 <!-- <app-breadcrumb [title]="'Login'" [breadcrumb]="'Login'"></app-breadcrumb> -->
 <!-- section start -->
-<div class="login-page">
+<div class="login-page container-fluid">
     <div class="row">
         <div class="col-lg-4 login-left-bg theme-card">
             <div class="login-left">
@@ -8,8 +8,7 @@
                 <img src="assets/images/icon/shopping-cart.svg" alt="VIKRAM CREATION" class="img-fluid">
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="theme-card">
+        <div class="col-lg-8 login-right-bg theme-card">
                 <form class="theme-form" [formGroup]="LoginForm">
                     <div class="form-group">
                         <label for="email">Email <span style="color: red;">*</span></label>
@@ -30,12 +29,9 @@
                 </form>
                 <div class="authentication-right text-center mt-5">
                     <p> <button class="btn btn-link" (click)="Register();">Create new Account</button></p>
-                    
-                </div>
-                <a class="close" (click)="close()"><img src="assets/images/icon/close.svg" alt="Close" ></a>
-                
-            </div>
+                </div>  
         </div>
     </div>
+    <a class="close" (click)="close()"><img src="assets/images/icon/close.svg" alt="Close" ></a>
 </div>
 <!--Section ends-->

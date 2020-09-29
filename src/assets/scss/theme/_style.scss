@@ -14543,7 +14543,7 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
 }
 .close {
     position: absolute;
-    right: -1rem;
+    right: 0rem;
     top: -1rem;
     display: block;
     width: 30px;
@@ -14568,7 +14568,7 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
 }
 .login-page {
     .btn-solid {
-        background-size: 1000px;
+        background-size: 1100px;
         transition: background 100ms ease-in-out;
     }
 }
@@ -14654,3 +14654,73 @@ a.btn-solid:not([href]):hover {
     max-height: 416px;
     object-fit: contain;
 }
+.login-right-bg {
+    background-color: $white;
+}
+.login-left img {
+    display: none;
+    max-width: 6rem;
+    margin: 0 auto;
+}
+.login-left h3 {
+    margin-bottom: 0;
+}
+@media(min-width: 576px) {
+    .close {
+        right: -2rem;
+    }
+}
+@media(min-width: 1024px) {
+    .login-left img {
+        display: block;
+    }
+}
+
+.india-code .input-group-text {
+    background: transparent;
+}
+.india-code + input {
+    border-left: 0;
+}
+.india-code + input:focus {
+    box-shadow: none;
+}
+input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: transparent;
+  }
+  input[type="text"]::-moz-placeholder, input[type="password"]::-moz-placeholder { /* Firefox 19+ */
+    color: transparent;
+  }
+  input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder { /* IE 10+ */
+    color: transparent;
+  }
+  input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder { /* Firefox 18- */
+    color: transparent;
+  }
+.custom-select {
+    //background-image: none;
+    //background-image: url('../../images/icon/down-arrow.svg');
+     background-image: url('~src/assets/images/icon/down-arrow.svg');
+     background-repeat: no-repeat;
+     background-position: center right 10px;
+}
+/* width */
+.thumbnail-imgs::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  /* Track */
+  .thumbnail-imgs::-webkit-scrollbar-track {
+    background: #ccc; 
+  }
+   
+  /* Handle */
+  .thumbnail-imgs::-webkit-scrollbar-thumb {
+    background: red; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+//   .thumbnail-imgs::-webkit-scrollbar-thumb:hover {
+//     background: #555; 
+//   }
