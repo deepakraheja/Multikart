@@ -12,29 +12,20 @@ export const environment = {
 
 
   isContentLoading: false,
-  //BASE_API_URL: 'https://esssrv.schedulingsite.com/essservice/Service.svc/',
-  //BASE_API_URL: 'http://localhost:61397/ESSServicetest/Service.svc/',
-
-
-  //Domain: 'http://localhost:4200/',
-
-  //BASE_API_URL: 'http://ecomapi.uccnoida.com/api/',
-  //ProductImage: 'http://ecomapi.uccnoida.com/ProductImage/',
-
+  
+ 
   Report_Path: 'http://localhost:44391/ReportHandler.ashx?',
 
   //*********************Local Server************* */
 
-  //ProductImage: 'http://localhost:56283/ProductImage/',
-  // BASE_API_URL: 'http://localhost:56283/api/',
+  ProductImage: 'http://localhost:56283/ProductImage/',
+   BASE_API_URL: 'http://localhost:56283/api/',
 
 
   //*********************Production Server************* */
-  //BASE_API_URL: 'http://34.67.65.213/ecommapi/api/',
-  //ProductImage: 'http://34.67.65.213/ecommapi/ProductImage/',
-
-  BASE_API_URL: 'http://34.67.65.213/EcommApiV3/api/',
-  ProductImage: 'http://34.67.65.213/EcommApiV3/ProductImage/',
+ 
+  //BASE_API_URL: 'http://34.67.65.213/EcommApiV3/api/',
+  //ProductImage: 'http://34.67.65.213/EcommApiV3/ProductImage/',
   
 
 };

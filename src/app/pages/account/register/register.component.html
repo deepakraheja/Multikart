@@ -23,8 +23,8 @@
                                 <div class="input-group-prepend india-code">
                                     <div class="input-group-text">+91</div>
                                 </div>
-                                <input type="text" id="MobileNumber" class="form-control" placeholder="Mobile Number"
-                                    maxlength="10" autocomplete="off"
+                                <input type="text" id="MobileNumber" class="form-control" [readonly]="mobileverified"
+                                    placeholder="Mobile Number" maxlength="10" autocomplete="off"
                                     [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }"
                                     formControlName="mobileNo">
                                 <div *ngIf="mobileverified" class="input-group-append">
@@ -79,10 +79,10 @@
                                 <select class="custom-select" formControlName="BusinessType"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
                                     <option value=""></option>
-                                    <option value="Sole Proprietorship">Sole Proprietorship</option>
+                                    <option value="SoleProprietorship">Sole Proprietorship</option>
                                     <option value="Partnership">Partnership</option>
-                                    <option value="PublicLimitedCompany">PublicLimitedCompany</option>
-                                    <option value="PrivateLimitedCompany">PrivateLimitedCompany</option>
+                                    <option value="PublicLimitedCompany">Public Limited Company</option>
+                                    <option value="PrivateLimitedCompany">Private Limited Company</option>
                                     <option value="Other">Other</option>
 
 
@@ -106,26 +106,33 @@
                                 <select class="custom-select" formControlName="businessLicenseType"
                                     [ngClass]="{ 'is-invalid': submitted && f.businessLicenseType.errors }">
                                     <option value=""></option>
-                                    <option value="GSTIN"> Goods & Services Tax Number (GSTIN)</option>
+                                    <option value="GSTIN"> Goods and Services Tax Identification Number (GSTIN)</option>
                                     <option value="BusinessPAN">Business PAN</option>
-
+                                    <option value="AadharCard">Aadhar Card</option>
                                 </select>
 
                             </div>
 
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='GSTIN'">
 
-                                <label for="email">GST No</label>
+                                <label for="email">GST Number</label>
                                 <input type="text" class="form-control" id="PANNo" formControlName="GSTNo"
-                                    autocomplete="off" maxlength="25" placeholder="GST No"
+                                    autocomplete="off" maxlength="15" placeholder="GST No"
                                     [ngClass]="{ 'is-invalid': submitted && f.GSTNo.errors }">
                             </div>
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='BusinessPAN'">
 
-                                <label for="email">PAN No</label>
+                                <label for="email">PAN Number</label>
                                 <input type="text" class="form-control" id="PANNo" formControlName="PANNo"
-                                    maxlength="20" placeholder="PAN No"
+                                    maxlength="10" placeholder="PAN No"
                                     [ngClass]="{ 'is-invalid': submitted && f.PANNo.errors }">
+                            </div>
+                            <div class="form-group" *ngIf="f.businessLicenseType.value=='AadharCard'">
+
+                                <label for="email">Aadhar Card</label>
+                                <input type="text" class="form-control" id="AadharCard" formControlName="AadharCard"
+                                    autocomplete="off" maxlength="12" placeholder="GST No"
+                                    [ngClass]="{ 'is-invalid': submitted && f.AadharCard.errors }">
                             </div>
                             <div class="form-group">
 
@@ -139,7 +146,7 @@
                             <div class="form-group">
 
                                 <label for="email">Business Phone</label>
-                                <input type="text" class="form-control" id="BusinessPhone" maxlength="10"
+                                <input type="text" class="form-control" id="BusinessPhone" maxlength="12"
                                     formControlName="BusinessPhone" placeholder="Business Phone"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessPhone.errors }">
                             </div>

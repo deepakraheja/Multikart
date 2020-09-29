@@ -19,6 +19,7 @@ declare var $: any;
 export class RegisterComponent implements OnInit {
   public inputType = 'password';
   public class = 'fa fa-eye';
+  public validate: boolean = false;
 
   RegistrationForm: FormGroup;
 
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
   editName(): void {
     this.nameField.nativeElement.focus();
   }
-  
+
   formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
   @ViewChildren('formRow') rows: any;
 
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
   public verified: boolean = false;
   public mobileverified: boolean = false;
 
-  public validate: boolean = true;
+  //public validate: boolean = true;
   public counter;
 
   loginStart = false;
@@ -100,7 +101,7 @@ export class RegisterComponent implements OnInit {
       businessLicenseType: ['', Validators.required],
       GSTNo: ['', Validators.required],
       PANNo: ['', Validators.required],
-
+      AadharCard: ['', Validators.required],
       BusinessName: ['', Validators.required],
       BusinessPhone: ['', Validators.required],
       Address1: ['', Validators.required],
@@ -122,23 +123,41 @@ export class RegisterComponent implements OnInit {
     const businessLicenseType = this.RegistrationForm.get('businessLicenseType');
     const gstNo = this.RegistrationForm.get('GSTNo');
     const panNo = this.RegistrationForm.get('PANNo');
+    const AadharCard = this.RegistrationForm.get('AadharCard');
 
 
     if (businessLicenseType.value == 'GSTIN') {
       gstNo.setValidators([Validators.required]);
+
       panNo.clearValidators();
+      AadharCard.clearValidators();
 
       gstNo.updateValueAndValidity();
       panNo.updateValueAndValidity();
+      AadharCard.updateValueAndValidity();
     }
-    if (businessLicenseType.value == 'BusinessPAN') {
+    else if (businessLicenseType.value == 'BusinessPAN') {
+
       panNo.setValidators([Validators.required]);
+
+      gstNo.clearValidators();
+      AadharCard.clearValidators();
+
+      gstNo.updateValueAndValidity();
+      panNo.updateValueAndValidity();
+      AadharCard.updateValueAndValidity();
+    }
+    else if (businessLicenseType.value == 'AadharCard') {
+
+      AadharCard.setValidators([Validators.required]);
+
+      panNo.clearValidators();
       gstNo.clearValidators();
 
+      AadharCard.updateValueAndValidity();
       gstNo.updateValueAndValidity();
       panNo.updateValueAndValidity();
     }
-
   }
 
   //*****************************Validate mobile && call checkMobileAlreadyExist function************/
@@ -169,7 +188,7 @@ export class RegisterComponent implements OnInit {
       ;
     this.mobileotpSendStart = true;
     this.userService.CheckMobileAllReadyRegisteredOrNot(obj).subscribe((res: any) => {
-      setTimeout(() => this.spinner.hide(), 500);
+      setTimeout(() => this.spinner.hide(), 200);
 
       if (res == 0) {
         this.sendMobileOtp();
@@ -202,7 +221,7 @@ export class RegisterComponent implements OnInit {
 
 
 
-  
+
   //*****************************send mobile OTP************/
   sendMobileOtp() {
 
@@ -213,7 +232,7 @@ export class RegisterComponent implements OnInit {
       item.setValue("");
 
     });
-debugger
+    debugger
     // let pos = 0;
     // if (pos > -1 && pos < this.formInput.length) {
     //   this.rows._results[pos].nativeElement.focus();
@@ -284,10 +303,11 @@ debugger
 
 
       this.userService.verify_mobile_otp(d).subscribe((res: any) => {
-        setTimeout(() => this.spinner.hide(), 500);
+        setTimeout(() => this.spinner.hide(), 200);
         ;
         if (res == 1) {
           this.mobileverified = true;
+          //this.validate = true;
           this.mobileOTP = false;
           this.mvaldate = false;
         } else if (res == 0) {
