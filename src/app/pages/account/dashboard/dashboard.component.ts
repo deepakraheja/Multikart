@@ -306,7 +306,7 @@ export class DashboardComponent implements OnInit {
       document.getElementById("btn" + id)['value'] = "Hide";
     }
   }
-
+ 
   DownloadInvoice(orderId) {
     let obj = {
       OrderId: Number(orderId)

@@ -9,15 +9,15 @@ import { Observable } from 'rxjs';
 export class ReportService {
   private BASE_API_URL = environment.BASE_API_URL;
   private _controllerName: string = "Report/";
-  private _url: string = this.BASE_API_URL + this._controllerName;
+  private _url: string = this.BASE_API_URL + this._controllerName; 
   private _methodName: string = "";
   private _param: {};
-
-  constructor(private _http: HttpClient) { }
+ 
+  constructor(private _http: HttpClient) { } 
 
   GenerateOrderInvoice(_Obj: any): Observable<string> {
     this._methodName = "GenerateOrderInvoice";
-    this._param = _Obj;
+    this._param = _Obj; 
     return this._http.post<string>(
       this._url + this._methodName, this._param
     );
