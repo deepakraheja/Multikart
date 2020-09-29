@@ -15,10 +15,10 @@ export class ReportService {
 
   constructor(private _http: HttpClient) { }
 
-  GenerateOrderInvoice(_Obj: any): Observable<any> {
+  GenerateOrderInvoice(_Obj: any): Observable<string> {
     this._methodName = "GenerateOrderInvoice";
     this._param = _Obj;
-    return this._http.post<any>(
+    return this._http.post<string>(
       this._url + this._methodName, this._param
     );
   }

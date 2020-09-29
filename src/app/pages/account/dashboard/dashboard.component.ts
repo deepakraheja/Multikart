@@ -312,8 +312,11 @@ export class DashboardComponent implements OnInit {
       OrderId: Number(orderId)
     }
     this.spinner.show();
+    debugger;
     this._ReportService.GenerateOrderInvoice(obj).subscribe(res => {
+      debugger;
       this.spinner.hide();
+      window.open(this.Report_Path + res, "_blank");
       this.toastr.success("The invoice has been downloaded successfully.");
     });
   }
