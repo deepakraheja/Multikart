@@ -23,10 +23,10 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-10">
-                                    <p style="color:red" *ngIf="product?.setType==3">Note*: If you want to add
+                                    <!-- <p style="color:red" *ngIf="product?.setType==3">Note*: If you want to add
                                         quantity of this
                                         product please click on the
-                                        product image</p>
+                                        product image</p> -->
                                     <div class="d-flex justify-content-between mobile-column">
                                         <h5 [innerHTML]="(product?.productName).split('|')[0]"></h5>
 
@@ -37,9 +37,9 @@
                                             <div class="input-group">
                                                 <span class="input-group-prepend">
                                                     <button *ngIf="product?.setType==3" type="button"
-                                                        class="btn quantity-left-minus" [disabled]="product?.setType==3"
-                                                        data-type="minus">
-
+                                                        class="btn quantity-left-minus" data-type="minus"
+                                                        (click)="UpdateCart(templateMinimumProduct,product);">
+                                                        <i class="ti-minus"></i>
                                                     </button>
                                                     <button type="button" class="btn quantity-left-minus"
                                                         *ngIf="product?.setType!=3" data-type="minus"
@@ -54,9 +54,9 @@
                                                 <span class="input-group-prepend">
 
                                                     <button *ngIf="product?.setType==3" type="button"
-                                                        class="btn quantity-left-minus" [disabled]="product?.setType==3"
-                                                        data-type="plus">
-
+                                                        class="btn quantity-left-plus" data-type="plus"
+                                                        (click)="UpdateCart(templateMinimumProduct,product);">
+                                                        <i class="ti-plus"></i>
                                                     </button>
 
 
@@ -165,3 +165,60 @@
     </div>
 </section>
 <!--section end-->
+<ng-template #templateMinimumProduct>
+    <div class="login-page container-fluid">
+        <br>
+        <h4>{{lstCartProduct[0].productName}}</h4>
+        <table class="table table-bordered table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th *ngFor="let column of headers" class="thead-dark">
+                        {{column}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of lstCartProduct; let myIndex  = index">
+                    <td>
+                        {{item.color}}
+                    </td>
+                    <td>
+                        {{item.size}}
+                    </td>
+                    <td>
+                        <div class="qty-box" style="margin-top: 0px !important;">
+                            <div *ngIf="item?.qty > 0" class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn quantity-left-minus" data-type="minus"
+                                    (click)="Min_decrement(item)">
+                                        <i class="ti-minus"></i>
+                                    </button>
+                                </span>
+                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}"
+                                    style="width: 45px; height: 27px;" class="form-control input-number"
+                                    [value]="item.quantity" disabled />
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn quantity-right-plus" data-type="plus"
+                                    (click)="Min_increment(item)">
+                                        <i class="ti-plus"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <h5 class="avalibility" *ngIf="item?.qty==0"><span>Out
+                                    of
+                                    Stock</span></h5>
+                        </div>
+                    </td>
+                    <td>
+
+                        <a href="javascript:void(0)" (click)="Min_removeItem(item)" class="icon">
+                            <i class="ti-trash text-red" style="font-size:1.5rem;"></i></a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="close" (click)="close()"><img src="assets/images/icon/close.svg" alt="Close"></a>
+    </div>
+
+</ng-template>

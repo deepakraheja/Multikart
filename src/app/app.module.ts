@@ -50,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       timeOut: 3000,
       progressBar: false,
       enableHtml: true,
+      preventDuplicates: true
     }),
     TranslateModule.forRoot({
         loader: {

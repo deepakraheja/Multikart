@@ -69,5 +69,11 @@ export class ProductsService {
       this._url + this._methodName, this._param
     );
   }
-
+  GetProductInCartById(_productObj: any): Observable<Productkart[]> {
+    this._methodName = "GetProductInCartById";
+    this._param = _productObj;
+    return this._http.post<Productkart[]>(
+      this._url + this._methodName, this._param
+    );
+  }
 }

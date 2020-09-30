@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductService } from "../../shared/services/product.service";
 import { Product } from "../../shared/classes/product";
@@ -12,6 +12,8 @@ import { CartService } from 'src/app/Service/cart.service';
 import { response } from 'express';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductsService } from 'src/app/Service/Products.service';
 
 @Component({
   selector: 'app-cart',
@@ -19,9 +21,9 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-
+  public headers: any = ["COLOR", "SIZE", "QUANTITY", "DELETE"];
   public products: Product[] = [];
-
+  public lstCartProduct: any[] = [];
   public productSizeColor: productSizeColor[] = [];
 
   public ProductImage = environment.ProductImage;
@@ -32,12 +34,15 @@ export class CartComponent implements OnInit {
   //   this.productService.cartItems.subscribe(response => this.products = response);
   // }
 
-  constructor(public productService: ProductService,
+  constructor(
+    public productService: ProductService,
     private router: Router,
     private _SharedDataService: SharedDataService,
     private _cartService: CartService,
     private toastrService: ToastrService,
     private spinner: NgxSpinnerService,
+    private modalService: NgbModal,
+    private _productService: ProductsService
   ) {
 
     // this.productService.ProductcartItems.subscribe(response => {
@@ -127,6 +132,7 @@ export class CartComponent implements OnInit {
   // Increament
   increment(product, qty = 1) {
     //  
+    debugger
     let obj = [{
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
@@ -136,6 +142,7 @@ export class CartComponent implements OnInit {
     this.spinner.show();
     this._cartService.UpdateToCart(obj).subscribe(res => {
       this.toastrService.success("Product quantity has been successfully updated in cart.");
+
       this.LoadCart();
       this._SharedDataService.UserCart(this.productSizeColor);
     });
@@ -145,6 +152,7 @@ export class CartComponent implements OnInit {
   // Decrement
   decrement(product, qty = -1) {
     //  
+    debugger
     if (product.quantity > 1) {
       let obj = [{
         UserID: Number(this.user[0].userID),
@@ -203,5 +211,95 @@ export class CartComponent implements OnInit {
       this.spinner.hide();
     }
 
+  }
+  close() {
+    this.modalService.dismissAll();
+  }
+  UpdateCart(template: TemplateRef<any>, lst) {
+    debugger
+    let obj = {
+      UserID: Number(this.user[0].userID),
+      ProductID: Number(lst.productId)
+    }
+    this._productService.GetProductInCartById(obj).subscribe(res => {
+      this.lstCartProduct = res;
+      this.modalService.open(template, {
+        size: 'md',
+        //ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        //windowClass: 'theme-modal cart-modal CartModal'
+      }).result.then((result) => {
+        `Result ${result}`
+      }, (reason) => {
+        this.modalService.dismissAll();
+      });
+    });
+
+  }
+  LoadCartProductData(productID) {
+    let obj1 = {
+      UserID: Number(this.user[0].userID),
+      ProductID: Number(productID)
+    }
+    this._productService.GetProductInCartById(obj1).subscribe(res1 => {
+      this.lstCartProduct = res1;
+    });
+  }
+
+  // Increament
+  Min_increment(product, qty = 1) {
+    //  
+    debugger
+    let obj = [{
+      UserID: Number(this.user[0].userID),
+      ProductSizeId: Number(product.productSizeId),
+      Quantity: qty,
+      SetNo: Number(product.setNo)
+    }];
+    this.spinner.show();
+    this._cartService.UpdateToCart(obj).subscribe(res => {
+      this.toastrService.success("Product quantity has been successfully updated in cart.");
+      debugger
+      this.LoadCartProductData(product.productID);
+
+      this.LoadCart();
+      this._SharedDataService.UserCart(this.productSizeColor);
+    });
+    this.productService.updateCartQuantity(product, qty);
+  }
+
+  // Decrement
+  Min_decrement(product, qty = -1) {
+    //  
+    debugger
+    if (product.quantity > 1 && product.cartProductQty > product.minimum) {
+      let obj = [{
+        UserID: Number(this.user[0].userID),
+        ProductSizeId: Number(product.productSizeId),
+        Quantity: qty,
+        SetNo: Number(product.setNo)
+      }];
+      this.spinner.show();
+      this._cartService.UpdateToCart(obj).subscribe(res => {
+        this.toastrService.success("Product quantity has been successfully updated in cart.");
+        this.LoadCartProductData(product.productID);
+        this.LoadCart();
+        this._SharedDataService.UserCart(this.productSizeColor);
+      });
+    }
+    else {
+      this.toastrService.error("Product should be atleast " + product.minimum + " pieces.");
+    }
+    this.productService.updateCartQuantity(product, qty);
+  }
+  public Min_removeItem(product: any) {
+    if ((product.cartProductQty - product.quantity) > product.minimum) {
+      if (this.productService.removeCartItem(product)) {
+        this.LoadCartProductData(product.productID);
+      }
+    }
+    else {
+      this.toastrService.error("Product should be atleast " + product.minimum + " pieces after delete.");
+    }
   }
 }
