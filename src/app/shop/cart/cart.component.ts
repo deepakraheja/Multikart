@@ -281,7 +281,7 @@ export class CartComponent implements OnInit {
       }];
       this.spinner.show();
       this._cartService.UpdateToCart(obj).subscribe(res => {
-        this.toastrService.success("Product quantity has been successfully updated in cart.");
+        this.toastrService.success("Product quantity has been successfully updated in the cart.");
         this.LoadCartProductData(product.productID);
         this.LoadCart();
         this._SharedDataService.UserCart(this.productSizeColor);
@@ -293,13 +293,13 @@ export class CartComponent implements OnInit {
     this.productService.updateCartQuantity(product, qty);
   }
   public Min_removeItem(product: any) {
-    if ((product.cartProductQty - product.quantity) > product.minimum) {
+    if ((product.cartProductQty - product.quantity) >= product.minimum) {
       if (this.productService.removeCartItem(product)) {
         this.LoadCartProductData(product.productID);
       }
     }
     else {
-      this.toastrService.error("Product should be atleast " + product.minimum + " pieces after delete.");
+      this.toastrService.error("Product should be atleast " + product.minimum + " pieces.");
     }
   }
 }

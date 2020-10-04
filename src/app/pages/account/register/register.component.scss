@@ -1,12 +1,62 @@
+.otpContainer {
+    margin-right: 10px;
+	width: 40px;
+	border: none;
+} 
 .otpContainer input {
     padding: 9px 0;
-    border: 1px solid #d4d5d9;
-    font-size: 14px;
-    text-align: center;
-    margin: 0 16px 0 0;
-    width: 30px; 
-    border-radius: 2px;
+    font-size: 22px;
+	text-align: center;
+	border: none;
+	border-bottom: 1px solid #d4d5d9;
+} 
+.otpContainer input:focus {
+	box-shadow: none;
+	border-bottom: 1px solid var(--theme-deafult);
 } 
 .register-page .theme-card .theme-form label {
     color: #646363;
+}
+
+// $num-of-char: 6;
+// $char-width: 3ch;
+// $gap: .3 * $char-width;
+// $in-w: $num-of-char * ($char-width + ($gap));
+
+// .register-page .theme-card .theme-form .inputOTP {
+// 	padding-right: 0;
+// 	display: block;
+// 	border: none;
+// 	width: $in-w;
+// 	background: repeating-linear-gradient(90deg, #000 0, #000 $char-width, transparent 0, transparent $char-width + $gap) 0 100%/ #{$in-w - $gap} 2px no-repeat;
+// 	letter-spacing: $gap*3.25;
+// 	font-size: $char-width;
+// 	margin: auto;
+// 	&:focus {
+// 		outline: none;
+// 	}
+// }
+
+/* loading state */
+.btn-loading {
+    position: relative;
+
+    /* hide button content */
+    &,
+    /* hover */
+    &:hover,
+    /* focus */
+    &.focus,
+    &:focus,
+    /* active */
+    &:not(:disabled):not(.disabled).active,
+    &:not(:disabled):not(.disabled):active,
+    /* disabled */
+    &.disabled,
+    &:disabled {
+        color: transparent;
+        fill: transparent;
+    }
+
+    
 }

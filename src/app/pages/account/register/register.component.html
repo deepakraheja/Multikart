@@ -10,6 +10,10 @@
                     <!-- {{RegistrationForm.value|json}}  -->
 
                     <form class="theme-form" [formGroup]="RegistrationForm">
+
+
+
+
                         <!-- <div class="form-group "><input autocomplete="new-password" id="" type="tel"
                                 class="form-control mobileNumberInput" placeholder="" maxlength="10"><span
                                 class="placeholderAlternative mobileNumber">+91<span
@@ -35,7 +39,8 @@
 
                                 <div *ngIf="!mobileverified" class="input-group-append">
                                     <button #otp class="btn btn-sm btn-success" type="button"
-                                        (click)="validateAndCheckMobile();">Send OTP</button>
+                                        [ngClass]="{'btn-loading': loginStart}" (click)="validateAndCheckMobile();">Send
+                                        OTP</button>
                                 </div>
                             </div>
 
@@ -47,26 +52,30 @@
 
                             <!-- <input type="password" class="form-control" id="exampleInputPassword"
                                     formControlName="mobilecode" placeholder="Enter OTP"> -->
-
+                            <!-- <p> <input maxlength='6' class="inputOTP" id="inputOTP" />
+                            </p> -->
                             <div class="otp-number">
+
                                 <div formArrayName="OTPArray" class="otpContainer"
                                     *ngFor="let input of OTPFormArray.controls;  index as i">
                                     <input #formRow type="text" [formControlName]="i" id={{i}} class="form-control"
-                                        maxlength="1" (keypress)="keyUpEvent($event, i)">
+                                        maxlength="1" (keypress)="keyUpEvent($event, i)"
+                                        (keyup)="keyupEvent($event, i)">
                                 </div>
                             </div>
-                            <button class="btn btn-success mt-4" type="button"
+                            <button class=" btn btn-success mt-4" type="button"
                                 (click)="verifyMobileOtp();">Verify</button>
                         </div>
                         <div class="form-group" *ngIf="mobileOTP">
-                            <h6 class="text-center" style="color: #969696">Resend OTP in:<b> {{counter}} second(s)</b>
+                            <h6 class="text-center" style="color: #969696">Resend OTP in:<b> {{counter}}
+                                    second(s)</b>
                             </h6>
                         </div>
                         <div *ngIf="mobileverified">
 
                             <div class="form-group">
 
-                                <label for="email">Your First and Last Name</label>
+                                <label for="email">Your First and Last Name</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="fname" formControlName="name" maxlength="50"
                                     autocomplete="off" placeholder="First and Last Name"
                                     [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
@@ -75,7 +84,7 @@
 
                             <div class="form-group">
 
-                                <label>Business Type</label>
+                                <label>Business Type</label><span style="color:red">*</span>
                                 <select class="custom-select" formControlName="BusinessType"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
                                     <option value=""></option>
@@ -90,7 +99,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Industry</label>
+                                <label>Industry</label><span style="color:red">*</span>
                                 <select class="custom-select" formControlName="Industry"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
                                     <option value=""></option>
@@ -102,41 +111,42 @@
 
                             </div>
                             <div class="form-group">
-                                <label>Business License Type</label>
+                                <label>Business License Type</label><span style="color:red">*</span>
                                 <select class="custom-select" formControlName="businessLicenseType"
                                     [ngClass]="{ 'is-invalid': submitted && f.businessLicenseType.errors }">
                                     <option value=""></option>
-                                    <option value="GSTIN"> Goods and Services Tax Identification Number (GSTIN)</option>
+                                    <option value="GSTIN"> Goods and Services Tax Identification Number (GSTIN)
+                                    </option>
                                     <option value="BusinessPAN">Business PAN</option>
                                     <option value="AadharCard">Aadhar Card</option>
                                 </select>
 
                             </div>
- 
+
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='GSTIN'">
 
-                                <label for="email">GST Number</label>
+                                <label for="email">GST Number</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="PANNo" formControlName="GSTNo"
                                     autocomplete="off" maxlength="15" placeholder="GST No"
                                     [ngClass]="{ 'is-invalid': submitted && f.GSTNo.errors }">
                             </div>
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='BusinessPAN'">
 
-                                <label for="email">PAN Number</label>
+                                <label for="email">PAN Number</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="PANNo" formControlName="PANNo"
                                     maxlength="10" placeholder="PAN No"
                                     [ngClass]="{ 'is-invalid': submitted && f.PANNo.errors }">
                             </div>
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='AadharCard'">
 
-                                <label for="email">Aadhar Card</label>
+                                <label for="email">Aadhar Card</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="AadharCard" formControlName="AadharCard"
                                     autocomplete="off" maxlength="12" placeholder="GST No"
                                     [ngClass]="{ 'is-invalid': submitted && f.AadharCard.errors }">
                             </div>
                             <div class="form-group">
 
-                                <label for="email">Business Name</label>
+                                <label for="email">Business Name</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="BusinessName" formControlName="BusinessName"
                                     autocomplete="off" maxlength="100" placeholder="Business Name"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessName.errors }">
@@ -145,14 +155,14 @@
 
                             <div class="form-group">
 
-                                <label for="email">Business Phone</label>
+                                <label for="email">Business Phone</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="BusinessPhone" maxlength="12"
                                     formControlName="BusinessPhone" placeholder="Business Phone"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessPhone.errors }">
                             </div>
                             <div class="form-group">
 
-                                <label for="email">Address1</label>
+                                <label for="email">Address1</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="Address1" formControlName="Address1"
                                     autocomplete="off" maxlength="100" placeholder="Address1"
                                     [ngClass]="{ 'is-invalid': submitted && f.Address1.errors }">
@@ -167,7 +177,7 @@
 
                             <div class="form-group">
 
-                                <label for="email">Pin Code</label>
+                                <label for="email">Pin Code</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="PinCode" formControlName="pinCode"
                                     autocomplete="off" maxlength="6" placeholder="PinCode"
                                     [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }">
@@ -175,19 +185,20 @@
 
                             <div class="form-group">
 
-                                <label for="email">City</label>
+                                <label for="email">City</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="City" formControlName="city" maxlength="50"
                                     autocomplete="off" placeholder="City"
                                     [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
                             </div>
 
                             <div class="form-group">
-                                <label>State</label>
+                                <label>State</label><span style="color:red">*</span>
                                 <select class="custom-select" formControlName="state"
                                     [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
                                     <option value=""></option>
                                     <option value="Andhra Pradesh">Andhra Pradesh</option>
-                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                    <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                    </option>
                                     <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                     <option value="Assam">Assam</option>
                                     <option value="Bihar">Bihar</option>
@@ -228,7 +239,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Email ID</label>
+                                <label>Email ID</label><span style="color:red">*</span>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Email ID" maxlength="50"
                                         autocomplete="off" formControlName="email"
@@ -239,7 +250,7 @@
 
                             <div class="form-group">
 
-                                <label for="review">Password</label>
+                                <label for="review">Password</label><span style="color:red">*</span>
                                 <div class="input-group">
                                     <input type="{{inputType}}" class="form-control" id="review"
                                         formControlName="password" autocomplete="off" maxlength="20"

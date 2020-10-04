@@ -14500,7 +14500,7 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     color: #fff;
 }
 .toast-top-right {
-    position: absolute;
+    position: fixed;
     top: 15px;
     left: 50%;
     right: auto;
@@ -14635,13 +14635,16 @@ a.btn-solid:not([href]):hover {
 @media(min-width:1199px) {
     .order-success-sec {
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
     }
     .left-sec, .right-sec {
         width: auto;
         flex: 1;
         padding-top: 15px;
         padding-bottom: 15px;
+    }
+    .order-success-sec .left-sec, .order-success-sec .right-sec {
+        flex: none;
     }
 }
 .breadcrumb-section {
@@ -14698,11 +14701,9 @@ input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-i
     color: transparent;
   }
 .custom-select {
-    //background-image: none;
-    //background-image: url('../../images/icon/down-arrow.svg');
-     background-image: url('~src/assets/images/icon/down-arrow.svg');
-     background-repeat: no-repeat;
-     background-position: center right 10px;
+    background-image: url(~/assets/images/icon/down-arrow.svg) ;
+    background-repeat: no-repeat;
+    background-position: center right 10px;
 }
 /* width */
 .thumbnail-imgs::-webkit-scrollbar {

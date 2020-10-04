@@ -74,7 +74,21 @@ export class RegisterComponent implements OnInit {
     return this.RegistrationForm.controls.OTPArray as FormArray;
   }
 
+  keyupEvent(event, index) {
+    ;
+    let pos = index;
+    if (event.keyCode === 8 && event.which === 8) {
+      pos = index - 1;
+
+    }
+    if (pos > -1 && pos < this.formInput.length) {
+      this.rows._results[pos].nativeElement.focus();
+    }
+
+  }
+
   keyUpEvent(event, index) {
+    ;
     let pos = index;
     if (event.keyCode === 8 && event.which === 8) {
       pos = index - 1;
@@ -108,18 +122,36 @@ export class RegisterComponent implements OnInit {
       Address2: [''],
       pinCode: ['', Validators.required],
       city: ['', Validators.required],
-      state: ['', Validators.required]
+      state: ['', Validators.required],
+
+      otp1: ['',],
+      otp2: ['',],
+      otp4: ['',],
+      otp5: ['',],
+      otp6: ['',]
     });
 
     this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
 
   }
+  onInputEntry(event, nextInput) {
+    
+    const input = event.target;
+    const length = input.value.length;
+    const maxLength = input.attributes.maxlength.value;
 
+    if (length >= maxLength) {
+
+      $('#' + nextInput).focus();
+      //$('#input2').focus();
+      // nextInput.focus();
+    }
+  }
 
   get f() { return this.RegistrationForm.controls; }
 
   formControlValueChanged() {
-    debugger
+    
     const businessLicenseType = this.RegistrationForm.get('businessLicenseType');
     const gstNo = this.RegistrationForm.get('GSTNo');
     const panNo = this.RegistrationForm.get('PANNo');
@@ -179,6 +211,8 @@ export class RegisterComponent implements OnInit {
   //*****************************Check mobile Already Exist in the database or not*********************/
 
   checkMobileAlreadyExist() {
+  ;
+    this.loginStart = true;
 
     this.spinner.show();
     let obj = {
@@ -188,6 +222,9 @@ export class RegisterComponent implements OnInit {
       ;
     this.mobileotpSendStart = true;
     this.userService.CheckMobileAllReadyRegisteredOrNot(obj).subscribe((res: any) => {
+      this.loginStart = false;
+
+
       setTimeout(() => this.spinner.hide(), 200);
 
       if (res == 0) {
@@ -224,7 +261,6 @@ export class RegisterComponent implements OnInit {
 
   //*****************************send mobile OTP************/
   sendMobileOtp() {
-
     const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
     let i: number = 0;
 
@@ -232,7 +268,7 @@ export class RegisterComponent implements OnInit {
       item.setValue("");
 
     });
-    debugger
+    
     // let pos = 0;
     // if (pos > -1 && pos < this.formInput.length) {
     //   this.rows._results[pos].nativeElement.focus();
@@ -335,11 +371,14 @@ export class RegisterComponent implements OnInit {
 
   //****************************** CreateRegistration*************//
   CreateRegistration() {
-    debugger
+    
     this.formControlValueChanged();
     this.submitted = true;
     if (this.RegistrationForm.invalid) {
-      this.RegistrationForm.markAllAsTouched();
+      if ($('#fname').val() == '') {
+        $('#fname').focus();
+      }
+      //this.RegistrationForm.markAllAsTouched();
       this.toastr.error('All the * marked fields are mandatory');
       return;
     }
