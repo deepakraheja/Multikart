@@ -214,7 +214,7 @@ export class RegisterComponent implements OnInit {
   ;
     this.loginStart = true;
 
-    this.spinner.show();
+    //this.spinner.show();
     let obj = {
       "MobileNo": this.RegistrationForm.get('mobileNo').value
     }
@@ -225,7 +225,7 @@ export class RegisterComponent implements OnInit {
       this.loginStart = false;
 
 
-      setTimeout(() => this.spinner.hide(), 200);
+      //setTimeout(() => this.spinner.hide(), 200);
 
       if (res == 0) {
         this.sendMobileOtp();

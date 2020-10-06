@@ -57,23 +57,23 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
       let productObj = {
         rowID: this.productId,
-        productSizeId: productSizeId
+        productSizeId: Number(productSizeId)
       }
       this._prodService.GetWithSetProductByRowID(productObj).subscribe(product => {
-     
+
         //  ;
         if (!product) { // When product is empty redirect 404
           this.router.navigateByUrl('/pages/404', { skipLocationChange: true });
         } else {
 
           this.productkart = product;
-           
+
 
         }
-        setTimeout(()=> this.spinner.hide(),1000);
+        setTimeout(() => this.spinner.hide(), 1000);
       });
     });
- 
+
   }
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
@@ -130,7 +130,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   }
 
   selectSize(size) {
-     
+
     this.selectedSize = size + 1;
     this.bigProductImageIndex = Number(size);
 
