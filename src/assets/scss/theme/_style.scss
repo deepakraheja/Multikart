@@ -14688,23 +14688,6 @@ a.btn-solid:not([href]):hover {
 .india-code + input:focus {
     box-shadow: none;
 }
-input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: transparent;
-  }
-  input[type="text"]::-moz-placeholder, input[type="password"]::-moz-placeholder { /* Firefox 19+ */
-    color: transparent;
-  }
-  input[type="text"]:-ms-input-placeholder, input[type="password"]:-ms-input-placeholder { /* IE 10+ */
-    color: transparent;
-  }
-  input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder { /* Firefox 18- */
-    color: transparent;
-  }
-.custom-select {
-    background-image: url(~/assets/images/icon/down-arrow.svg) ;
-    background-repeat: no-repeat;
-    background-position: center right 10px;
-}
 /* width */
 .thumbnail-imgs::-webkit-scrollbar {
     width: 6px;
