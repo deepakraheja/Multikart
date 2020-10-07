@@ -1,6 +1,6 @@
 <div class="invoice-container">
     <h4 class="text-center mb-4">
-        Invoice
+        Order
     </h4>
     <div class="invoice box-padding">
         <div class="addresses">
@@ -76,7 +76,7 @@
                 <tr>
                     <td class="">
                         <span>Invoice No.</span>
-                        <h5 style="font-weight: 700;">VCPL/00407/20-21</h5>
+                        <h5 style="font-weight: 700;"></h5>
                     </td>
                     <td class="">
                         <span>Dated</span>
@@ -106,7 +106,9 @@
                 <tr>
                     <td class="">
                         <span>Buyer’s Order No</span>
-                        <h5></h5>
+                        <h5>
+                            {{ orderDetails[0].orderNumber }}
+                        </h5>
                     </td>
                     <td class="">
                         <span>Dated</span>
@@ -130,7 +132,7 @@
                     </td>
                     <td class="">
                         <span>Destination</span>
-                        <h5></h5>
+                        <h5>Consignee</h5>
                     </td>
                 </tr>
             </table>
@@ -161,14 +163,18 @@
         <table class="table product-table table-bdr">
             <thead>
                 <tr>
-                    <th>Sl No.</th>
+                    <th>S.No.</th>
                     <th>Description of Goods</th>
                     <th>HSN/SAC</th>
-                    <th>Quantity</th>
-                    <th>Rate</th>
-                    <th>Per</th>
+                    <th>Qty</th>
+                    <th>Unit</th>
+                    <th>Rate Per Pc.</th>
                     <th>Disc %</th>
-                    <th class="text-right">Amount</th>
+                    <th>Discounted Rate</th>
+                    <th>Amount (Without GST)</th>
+                    <th>GST Rate in %</th>
+                    <th>IGST</th>
+                    <th class="text-right">Grand Total (Amount)</th>
                 </tr>
             </thead>
             <tbody>
@@ -178,10 +184,18 @@
                         <b>{{ product?.productName }}</b>
                     </td>
                     <td class="text-right">6104</td>
-                    <td class="text-right"><b>{{ product?.quantity }} pcs</b></td>
+                    <td class="text-right"><b>{{ product?.quantity }}</b></td>
+                    <td>PCS</td>
                     <td class="text-right">{{ product?.price | currency:productService?.Currency.currency:'symbol'}}</td>
-                    <td>pcs</td>
-                    <td>{{ product?.discount }}%</td>
+                    <td>{{ product?.discount }}</td>
+                    <td class="text-right">{{ (product?.price-product?.discount) | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td class="text-right">
+                        <b>
+                            {{ (product.price*product?.quantity) | currency:productService?.Currency.currency:'symbol' }}
+                        </b>
+                    </td>
+                    <td class="text-right">{{ product?.gstRate}}</td>
+                    <td class="text-right">{{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td class="text-right">
                         <b>
                             {{ (product.price*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}
@@ -201,6 +215,10 @@
                     <td class="text-right"></td>
                     <td></td>
                     <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td class="text-right">
 
                         <div class="mt-4 mb-4">
@@ -216,6 +234,10 @@
                     <td class="text-right">Total</td>
                     <td></td>
                     <td class="text-right"><b>{{getQty()}} pcs</b></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

@@ -178,7 +178,7 @@ export class CheckoutComponent implements OnInit {
   ProcessCheckOut() {
     this.Submitted = true;
     if (this.checkoutForm.invalid) {
-      this.toastr.error("All fields are mandatory.");
+      this.toastr.error("All * fields are mandatory.");
       return;
     }
     else {

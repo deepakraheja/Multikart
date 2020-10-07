@@ -25,7 +25,7 @@ export class CartComponent implements OnInit {
   public products: Product[] = [];
   public lstCartProduct: any[] = [];
   public productSizeColor: productSizeColor[] = [];
-
+  public IsEmptyCart = false;
   public ProductImage = environment.ProductImage;
   user: any[] = null;
   public TotalAmount = 0; TotalPieces = 0; Price = 0; Discount = 0;
@@ -117,12 +117,19 @@ export class CartComponent implements OnInit {
       this.spinner.show();
       this._cartService.GetCartById(obj).subscribe(response => {
         //  
+        debugger
+        if (response.length == 0)
+          this.IsEmptyCart = true;
+        else
+          this.IsEmptyCart = false;
         this.spinner.hide();
         this.productSizeColor = response;
         this.getTotal();
+
       });
     }
     else {
+      this.IsEmptyCart = true;
       this.productSizeColor = [];
       this.getTotal();
     }

@@ -3,7 +3,7 @@
 <!-- breadcrumb End -->
 
 <!-- section start -->
-<section class="p-0" *ngIf="orderDetails?.length==0">
+<section class="p-0" *ngIf="IsInvalidOrder==true">
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -39,8 +39,7 @@
                             <ul class="order-detail">
                                 <li><span>order ID:</span> {{ orderDetails[0].orderNumber }}</li>
                                 <li><span>Order Date:</span> {{ orderDetails[0].orderDate | date : 'MMM dd, yyyy'}}</li>
-                                <li><span>Order Total:</span>
-                                    {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
+                                <li><span>Order Total:</span> {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
                                 </li>
                                 <!-- <li><span>Payment Method:</span> Credit Card (**3569)</li> -->
                             </ul>
@@ -100,8 +99,7 @@
                                         {{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}
                                     </td>
                                     <td>
-                                        <span
-                                            style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
+                                        <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
                                             {{ (product.price*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
                                     </td>
                                 </tr>
@@ -118,8 +116,7 @@
                                         <b>{{ getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                                     </td>
                                     <td>
-                                        <span
-                                            style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                        <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                             {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                                     </td>
                                 </tr>
@@ -129,8 +126,7 @@
                                         <b> Packing</b>
                                     </td>
                                     <td colspan="2">
-                                        <span
-                                            style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                        <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                             <b>Free Packing</b></span>
                                     </td>
                                 </tr>
@@ -139,8 +135,7 @@
                                         <b>Total</b>
                                     </td>
                                     <td>
-                                        <span
-                                            style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                        <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                             {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                                     </td>
                                 </tr>

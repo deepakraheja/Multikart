@@ -67,6 +67,10 @@ export class LoginComponent implements OnInit {
             this.toastr.error('Your login approval is denied');
             return;
           }
+          else if (res[0].statusId == 4) {
+            this.toastr.error('Your account has been hold.');
+            return;
+          }
           else if (res[0].statusId == 2) {
             sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
             sessionStorage.setItem('Token', res[0].token);

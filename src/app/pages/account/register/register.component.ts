@@ -469,5 +469,13 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  Login(){
+    this.modalService.open(LoginComponent, {
+      size: 'lg',
+      ariaLabelledBy: 'Cart-Modal',
+      centered: true,
+      windowClass: 'theme-modal cart-modal CartModal'
+    });
+  }
 
 }

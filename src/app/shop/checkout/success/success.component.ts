@@ -16,6 +16,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   public ProductImage = environment.ProductImage;
   public orderDetails: any[] = [];
   user: any[] = [];
+  public IsInvalidOrder = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -38,9 +39,12 @@ export class SuccessComponent implements OnInit, AfterViewInit {
         this.spinner.show();
         this._OrderService.GetSuccessOrderByOrderId(obj).subscribe(res => {
           this.spinner.hide();
-           
-          //if (res > 0)
-            this.orderDetails = res;
+
+          if (res.length == 0)
+            this.IsInvalidOrder = true;
+          else
+            this.IsInvalidOrder = false;
+          this.orderDetails = res;
           //console.log(res);
         });
       }
@@ -55,7 +59,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   }
 
   getTotal() {
-     
+
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
       TotalAmount += (element.price * element.quantity) + element.gstAmount
