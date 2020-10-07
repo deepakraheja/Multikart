@@ -10,5 +10,5 @@ export const environment = {
   BASE_API_URL: 'http://34.67.65.213/EcommApiV3/api/',
   ProductImage: 'http://34.67.65.213/EcommApiV3/ProductImage/',
   Report_Path: 'http://34.67.65.213/EcommApiV3/ReportGenerate/',
-  WebSite_URL: 'http://34.67.65.213/'
+  WebSite_URL: 'http://34.67.65.213/Ecom/'
 };
