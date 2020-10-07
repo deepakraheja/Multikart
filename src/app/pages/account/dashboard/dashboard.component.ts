@@ -22,6 +22,7 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
   public ProductImage = environment.ProductImage;
   public Report_Path = environment.Report_Path;
+  public WebSite_URL = environment.WebSite_URL;
   public openDashboard: boolean = false;
   public ShowTabName: string = "AccountInfor";
   public LoggedInUser: any[] = [];
@@ -306,13 +307,14 @@ export class DashboardComponent implements OnInit {
       document.getElementById("btn" + id)['value'] = "Hide";
     }
   }
- 
+
   DownloadInvoice(orderId) {
     let obj = {
       OrderId: Number(orderId)
     }
     this.spinner.show();
     debugger;
+    //window.open(this.WebSite_URL + 'report/orderInvoice/' + orderId, "_blank");
     this._ReportService.GenerateOrderInvoice(obj).subscribe(res => {
       debugger;
       this.spinner.hide();
