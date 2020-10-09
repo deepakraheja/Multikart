@@ -56,7 +56,7 @@
                             <div class="otp-number">
 
                                 <div formArrayName="OTPArray" class="otpContainer" *ngFor="let input of OTPFormArray.controls;  index as i">
-                                    <input #formRow type="text" autofocus [formControlName]="i" id={{i}} class="form-control" maxlength="1" (keypress)="keyUpEvent($event, i)" (keyup)="keyUpEvent($event, i)">
+                                    <input #formRow type="text" autofocus [formControlName]="i" id={{i}} class="form-control" maxlength="1" (keypress)="keyUpEvent($event, i)" (keyup)="keyupEvent($event, i)">
                                 </div>
                             </div>
                             <button class=" btn btn-success mt-4" type="button" (click)="verifyMobileOtp();">Verify</button>
