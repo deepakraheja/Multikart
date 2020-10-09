@@ -44,4 +44,18 @@ export class OrderService {
       this._url + this._methodName, this._param
     );
   }
+  GetSuccessPrintOrderByGUID(_Obj: any): Observable<any> {
+    this._methodName = "GetSuccessPrintOrderByGUID";
+    this._param = _Obj;
+    return this._http.post<any>(
+      this._url + this._methodName, this._param
+    );
+  }
+  GetNewOrderByGUID(_Obj: any): Observable<any> {
+    this._methodName = "GetNewOrderByGUID";
+    this._param = _Obj;
+    return this._http.post<any>(
+      this._url + this._methodName, this._param
+    );
+  }
 }

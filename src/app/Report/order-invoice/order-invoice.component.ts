@@ -26,31 +26,31 @@ export class OrderInvoiceComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       //this.GetOrderById(Number(params.get('orderId')));
-      var orderId = params.get('id');
-      if (Number(orderId) != NaN && orderId.length <= 9) {
+      var GUID = params.get('id');
+      //if (GUID != null) {
         let obj = {
-          OrderId: Number(orderId)
+          GUID: GUID
         };
         this.spinner.show();
-        this._OrderService.GetSuccessOrderByOrderId(obj).subscribe(res => {
+        this._OrderService.GetSuccessPrintOrderByGUID(obj).subscribe(res => {
           this.spinner.hide();
 
           //if (res > 0)
           this.orderDetails = res;
           //console.log(res);
           setTimeout(() => {
-            window.print();
-          }, 500);
+            //window.print();
+          }, 1000);
           
         });
-      }
+      //}
     });
   }
 
   getTotal() {
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += (element.price * element.quantity) + element.gstAmount
+      TotalAmount += (element.salePrice * element.quantity) + element.gstAmount
     });
     return TotalAmount;
   }
@@ -61,6 +61,14 @@ export class OrderInvoiceComponent implements OnInit {
       TotalQty += element.quantity
     });
     return TotalQty;
+  }
+
+  getTotalAmountWithOutGST() {
+    var TotalAmountWithOutGST = 0;
+    (this.orderDetails[0].orderDetails).forEach(element => {
+      TotalAmountWithOutGST += (element.salePrice * element.quantity)
+    });
+    return TotalAmountWithOutGST;
   }
 
 

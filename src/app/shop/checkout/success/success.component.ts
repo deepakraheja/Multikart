@@ -31,13 +31,13 @@ export class SuccessComponent implements OnInit, AfterViewInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       //  
       //this.GetOrderById(Number(params.get('orderId')));
-      var orderId = params.get('id');
-      if (Number(orderId) != NaN && orderId.length <= 9) {
+      var GUID = params.get('id');
+      //if (Number(orderId) != NaN && orderId.length <= 9) {
         let obj = {
-          OrderId: Number(orderId)
+          GUID: GUID
         };
         this.spinner.show();
-        this._OrderService.GetSuccessOrderByOrderId(obj).subscribe(res => {
+        this._OrderService.GetNewOrderByGUID(obj).subscribe(res => {
           this.spinner.hide();
 
           if (res.length == 0)
@@ -47,7 +47,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
           this.orderDetails = res;
           //console.log(res);
         });
-      }
+      //}
     });
     //this.orderService.checkoutItems.subscribe(response => this.orderDetails = response);
     //this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
@@ -62,7 +62,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
 
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += (element.price * element.quantity) + element.gstAmount
+      TotalAmount += (element.salePrice * element.quantity) + element.gstAmount
     });
     return TotalAmount;
   }

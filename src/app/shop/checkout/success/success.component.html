@@ -87,7 +87,7 @@
                                         {{ product?.productName }}
                                     </td>
                                     <td>
-                                        {{ product?.price | currency:productService?.Currency.currency:'symbol'}}
+                                        {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
                                     </td>
                                     <td>
                                         {{ product?.quantity }}
@@ -100,7 +100,7 @@
                                     </td>
                                     <td>
                                         <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
-                                            {{ (product.price*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
+                                            {{ (product.salePrice*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
                                     </td>
                                 </tr>
                                 <tr *ngIf='!orderDetails.length'>

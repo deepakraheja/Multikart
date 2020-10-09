@@ -43,6 +43,7 @@ export class HeaderOneComponent implements OnInit {
 
   Logout() {
     sessionStorage.removeItem('LoggedInUser');
+    sessionStorage.removeItem('Token');
     this.LoggedInUser = [];
     this._SharedDataService.AssignUser(null);
     this.router.navigate(['/home/fashion']);
