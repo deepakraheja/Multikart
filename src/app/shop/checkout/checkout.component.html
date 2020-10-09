@@ -11,7 +11,7 @@
                                 <div class="col-md-6" *ngFor="let lstBilling of lstBillingAddress">
                                     <address>
                                         <p>
-                                            <b>Name: </b> {{lstBilling.fName}} {{lstBilling.lName}}
+                                            <b>Full Name: </b> {{lstBilling.fName}}
                                         </p>
                                         <p>
                                             <b>Company Name: </b> {{lstBilling.companyName}}
@@ -48,16 +48,16 @@
                                 </div>
                                 <div class="row check-out">
                                     <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <div class="field-label">First Name <span style="color:red">*</span></div>
+                                        <div class="field-label">Full Name <span style="color:red">*</span></div>
                                         <input type="text" name="fName" [formControl]="checkoutForm.controls['fName']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.required" class="text text-danger">
-                                            First Name is required.
+                                            Full Name is required.
                                         </div>
                                         <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.pattern" class="text text-danger">
-                                            First Name must be an alphabates.
+                                            Full Name must be an alphabates.
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">Last Name <span style="color:red">*</span></div>
                                         <input type="text" name="lName" [formControl]="checkoutForm.controls['lName']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(checkoutForm.controls.lName.touched || Submitted) && checkoutForm.controls.lName.errors?.required" class="text text-danger">
@@ -66,8 +66,8 @@
                                         <div *ngIf="(checkoutForm.controls.lName.touched || Submitted) && checkoutForm.controls.lName.errors?.pattern" class="text text-danger">
                                             Last Name must be an alphabates.
                                         </div>
-                                    </div>
-                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
+                                    </div> -->
+                                    <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                         <div class="field-label">Company Name </div>
                                         <input type="text" name="companyName" [formControl]="checkoutForm.controls['companyName']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.required" class="text text-danger">
