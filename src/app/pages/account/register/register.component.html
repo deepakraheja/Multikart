@@ -27,7 +27,7 @@
                                 <div class="input-group-prepend india-code">
                                     <div class="input-group-text">+91</div>
                                 </div>
-                                <input type="text" id="MobileNumber" class="form-control" [readonly]="mobileverified" placeholder="Mobile Number" maxlength="10" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" formControlName="mobileNo">
+                                <input type="text" autofocus id="MobileNumber" class="form-control" [readonly]="mobileverified" placeholder="Mobile Number" maxlength="10" autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" formControlName="mobileNo">
                                 <div *ngIf="mobileverified" class="input-group-append">
                                     <span class="input-group-text success-check">
                                         <i class="fa fa-check"></i>
@@ -43,7 +43,10 @@
                         </div>
 
                         <div class="form-group text-center" *ngIf="mobileOTP">
-                            <h6 class="mb-4"><b>Verify With OTP sent to {{f.mobileNo.value}} <span class="text-danger">
+                            <h6 class="mb-4">
+                                <b>Verify With OTP sent to {{f.mobileNo.value}}. 
+                                    <a href="javaScript:void(0);" (click)="mobileOTP=false">Change</a>
+                                    <span class="text-danger">
                                     </span></b></h6>
 
                             <!-- <input type="password" class="form-control" id="exampleInputPassword"
@@ -53,7 +56,7 @@
                             <div class="otp-number">
 
                                 <div formArrayName="OTPArray" class="otpContainer" *ngFor="let input of OTPFormArray.controls;  index as i">
-                                    <input #formRow type="text" [formControlName]="i" id={{i}} class="form-control" maxlength="1" (keypress)="keyUpEvent($event, i)" (keyup)="keyupEvent($event, i)">
+                                    <input #formRow type="text" autofocus [formControlName]="i" id={{i}} class="form-control" maxlength="1" (keypress)="keyUpEvent($event, i)" (keyup)="keyupEvent($event, i)">
                                 </div>
                             </div>
                             <button class=" btn btn-success mt-4" type="button" (click)="verifyMobileOtp();">Verify</button>
