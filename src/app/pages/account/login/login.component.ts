@@ -13,7 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  loginStart = false;
   LoginForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -51,9 +51,12 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      this.spinner.show();
+      //this.spinner.show();
+
+      this.loginStart = true;
       this.userService.ValidLogin(this.LoginForm.value).subscribe(res => {
-        setTimeout(() => this.spinner.hide(), 500);
+        this.loginStart = false;
+        //setTimeout(() => this.spinner.hide(), 500);
         if (res.length > 0) {
           if (res[0].isAgent == 1) {
             this.toastr.error('You are an agent.');
@@ -68,7 +71,7 @@ export class LoginComponent implements OnInit {
             return;
           }
           else if (res[0].statusId == 4) {
-            this.toastr.error('Your account has been hold.');
+            this.toastr.error('Your account has been put on hold');
             return;
           }
           else if (res[0].statusId == 2) {

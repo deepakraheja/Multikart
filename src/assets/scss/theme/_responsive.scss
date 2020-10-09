@@ -7102,9 +7102,12 @@ Fashion-2 Demo Responsive CSS
     }
     }
 @media (max-width: 577px){
-    .main-menu .menu-right .icon-nav .mobile-setting, .main-menu .menu-right .icon-nav .mobile-cart, .main-menu .menu-right .icon-nav .mobile-search,
-    .top-header .header-dropdown .mobile-account {
+    .main-menu .menu-right .icon-nav .mobile-setting, .main-menu .menu-right .icon-nav .mobile-cart, .main-menu .menu-right .icon-nav .mobile-search {
         bottom: 5px;
+    }
+    .top-header .header-dropdown .mobile-account .Logininfo a{
+        padding: 0;
+        line-height: 0;
     }
 }
 @media (max-width: 577px){

@@ -20,7 +20,7 @@
                         <input type="password" class="form-control" id="review" formControlName="password"
                             placeholder="Enter your password" required>
                     </div>
-                    <button class="btn btn-solid w-100" (click)="Login()">Login</button>
+                    <button  [ngClass]="{'btn-loading': loginStart}" class="btn btn-solid w-100" (click)="Login()">Login</button>
                     <div class="form-group text-center mt-5">
                         <a data-lng="en" href='pages/forget/password'>
                             Forgot Password?

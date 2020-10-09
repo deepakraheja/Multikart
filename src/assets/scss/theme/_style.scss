@@ -14703,7 +14703,9 @@ a.btn-solid:not([href]):hover {
     background: red; 
     border-radius: 10px;
   }
-  
+  .top-header .header-dropdown li  ul li a {
+    font-size: .80rem;
+}  
   /* Handle on hover */
 //   .thumbnail-imgs::-webkit-scrollbar-thumb:hover {
 //     background: #555; 
