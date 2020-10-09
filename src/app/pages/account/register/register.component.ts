@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  keyUpEvent(event, index) {
+  keypressEvent(event, index) {
     ;
     let pos = index;
     if (event.keyCode === 8 && event.which === 8) {
