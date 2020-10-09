@@ -37,7 +37,7 @@
                         </div>
                         <div class="welcome-msg">
                             <p>Hello, {{LoggedInUser[0].name}}!</p>
-                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</p>
+                            <p>From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information.</p>
                         </div>
                         <div class="box-account box-info">
                             <div class="box-head">
@@ -51,8 +51,9 @@
                                             <!-- <a href="javascript:void(0)">Edit</a> -->
                                         </div>
                                         <div class="box-content">
-                                            <h6>Name : {{LoggedInUser[0].name}}</h6>
-                                            <h6>Email : {{LoggedInUser[0].email}}</h6>
+                                            <h6><b>Name : </b>{{lstUserData[0].name}}</h6>
+                                            <h6><b>Email : </b>{{lstUserData[0].email}}</h6>
+                                            <h6><b>Mobile No : </b>{{lstUserData[0].mobileNo}}</h6>
                                             <h6><a href="javascript:void(0)" (click)="ChangePassword(templateChangePwd)">Change Password</a></h6>
                                         </div>
                                     </div>
@@ -60,12 +61,31 @@
                                 <div class="col-sm-6">
                                     <div class="box">
                                         <div class="box-title">
-                                            &nbsp;
+                                            Business Detail
                                         </div>
                                         <div class="box-content">
-                                            <p>
-                                                Mobile No : {{LoggedInUser[0].mobileNo}}
-                                            </p>
+                                            <h6><b>Business Name : </b>{{lstUserData[0].businessName}}</h6>
+                                            <h6><b>Business Type : </b>{{getBusineesType(lstUserData[0].businessType)}}</h6>
+                                            <h6><b>Industry : </b>{{lstUserData[0].industry}}</h6>
+                                            <h6>
+                                                <b>Business LicenseType : </b>{{ getBusineesLicenseType(lstUserData[0].businessLicenseType)}}
+                                            </h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='GSTIN'"><b>GSTNo : </b>{{lstUserData[0].gstNo}}</h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='BusinessPAN'"><b>PANNo : </b>{{lstUserData[0].panNo}}</h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='AadharCard'"><b>AadharCard : </b>{{lstUserData[0].aadharCard}}</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="box">
+                                        <div class="box-title">
+                                            Business Address Detail
+                                        </div>
+                                        <div class="box-content">
+                                            <h6><b>Address : </b>{{lstUserData[0].address1}} {{lstUserData[0].address2}}</h6>
+                                            <h6><b>City : </b>{{lstUserData[0].city}}</h6>
+                                            <h6><b>State : </b>{{lstUserData[0].state}}</h6>
+                                            <h6><b>PinCode : </b>{{lstUserData[0].pinCode}}</h6>
                                         </div>
                                     </div>
                                 </div>

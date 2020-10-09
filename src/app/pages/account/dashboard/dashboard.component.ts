@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   public SelectedBillingAddressId: number = 0;
   public ChangePwdForm: FormGroup;
   public lstOrderStatus: any = [];
+  public lstUserData: any[] = [];
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router,
@@ -75,13 +76,40 @@ export class DashboardComponent implements OnInit {
         NewPassword: ['', [Validators.required, Validators.minLength(8)]],
         ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
       });
-
+      this.LoadUserData();
       this.LoadBillingAddress();
       this.LoadAllOrder();
       this.LoadOrderStatus();
     });
   }
 
+  LoadUserData() {
+    this._userService.GetUserInfo().subscribe(res => {
+      this.lstUserData = res;
+    });
+  }
+
+  getBusineesType(val) {
+    debugger
+    if (val == 'SoleProprietorship')
+      return 'Sole Proprietorship';
+    if (val == 'PublicLimitedCompany')
+      return 'Public Limited Company';
+    if (val == 'PrivateLimitedCompany')
+      return 'Private Limited Company';
+    if (val == 'Other')
+      return 'Other';
+  }
+
+  getBusineesLicenseType(val) {
+    debugger
+    if (val == 'GSTIN')
+      return 'GSTIN';//'Goods and Services Tax Identification Number (GSTIN)';
+    if (val == 'BusinessPAN')
+      return 'Business PAN';
+    if (val == 'AadharCard')
+      return 'Aadhar Card';
+  }
   LoadOrderStatus() {
     this._lookupService.GetOrderStatus().subscribe(res => {
       this.lstOrderStatus = res;
