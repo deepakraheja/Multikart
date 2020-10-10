@@ -144,7 +144,8 @@ export class CartComponent implements OnInit {
       UserID: Number(this.user[0].userID),
       ProductSizeId: Number(product.productSizeId),
       Quantity: qty,
-      SetNo: Number(product.setNo)
+      SetNo: Number(product.setNo),
+      ProductId:Number(product.productId)
     }];
     this.spinner.show();
     this._cartService.UpdateToCart(obj).subscribe(res => {
@@ -165,7 +166,8 @@ export class CartComponent implements OnInit {
         UserID: Number(this.user[0].userID),
         ProductSizeId: Number(product.productSizeId),
         Quantity: qty,
-        SetNo: Number(product.setNo)
+        SetNo: Number(product.setNo),
+        ProductId:Number(product.productId)
       }];
       this.spinner.show();
       this._cartService.UpdateToCart(obj).subscribe(res => {
