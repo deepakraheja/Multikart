@@ -40,6 +40,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     //ElementsComponent
   ], 
   imports: [
+   
     NgxSpinnerModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     
@@ -48,6 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgbModule,
     LoadingBarHttpClientModule,
     LoadingBarRouterModule,
+    
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: false,
@@ -65,6 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule,
   
     //NgxImageZoomModule, // <-- Add this line
+     
   ],
   providers: [DatePipe,
     {
