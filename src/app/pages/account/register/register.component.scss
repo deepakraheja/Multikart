@@ -1,19 +1,19 @@
 .otpContainer {
-    margin-right: 10px;
-	width: 40px;
+    // margin-right: 10px;
+	// width: 40px;
 	border: none;
 } 
 .otpContainer input {
     padding: 9px 0;
-    font-size: 22px;
+    font-size: 26px;
 	text-align: center;
-	border: none;
-	border-bottom: 1px solid #d4d5d9;
+    border: none;
+    letter-spacing: 4px;
 } 
-.otpContainer input:focus {
-	box-shadow: none;
-	border-bottom: 1px solid var(--theme-deafult);
-} 
+// .otpContainer input:focus {
+// 	box-shadow: none;
+// 	border-bottom: 1px solid var(--theme-deafult);
+// } 
 .register-page .theme-card .theme-form label {
     color: #646363;
 }
@@ -30,11 +30,11 @@
 //   input[type="text"]:-moz-placeholder, input[type="password"]:-moz-placeholder { /* Firefox 18- */
 //     color: transparent;
 //   }
-.custom-select {
-    background-image: url(~/assets/images/icon/down-arrow.svg) ;
-    background-repeat: no-repeat;
-    background-position: center right 10px;
-}
+// .custom-select {
+//     background-image: url(~/assets/images/icon/down-arrow.svg) ;
+//     background-repeat: no-repeat;
+//     background-position: center right 10px;
+// }
 
 /* loading state */
 .btn-loading {

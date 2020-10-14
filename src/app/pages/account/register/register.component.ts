@@ -21,6 +21,10 @@ export class RegisterComponent implements OnInit {
   public class = 'fa fa-eye';
   public validate: boolean = false;
 
+  //showMask = false;
+  NumberMask = null;
+
+
   RegistrationForm: FormGroup;
 
   @ViewChild("otp") nameField: ElementRef;
@@ -75,7 +79,7 @@ export class RegisterComponent implements OnInit {
   }
 
   keyupEvent(event, index) {
-    ;
+    debugger;
     let pos = index;
     if (event.keyCode === 8 && event.which === 8) {
       pos = index - 1;
@@ -88,7 +92,7 @@ export class RegisterComponent implements OnInit {
   }
 
   keypressEvent(event, index) {
-    ;
+    debugger;
     let pos = index;
     if (event.keyCode === 8 && event.which === 8) {
       pos = index - 1;
@@ -100,6 +104,13 @@ export class RegisterComponent implements OnInit {
     }
 
   }
+  addMask(obj: Object) {
+    //this.DecimalMask = "0*.00";
+    this.NumberMask = "0 0 0 0 0 0";
+    this.showMask = true;
+  }
+
+
 
   ngOnInit(): void {
     this.RegistrationForm = this.formBuilder.group({
@@ -123,7 +134,7 @@ export class RegisterComponent implements OnInit {
       pinCode: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-
+      mobileotp: [''],
       otp1: ['',],
       otp2: ['',],
       otp4: ['',],
@@ -135,7 +146,7 @@ export class RegisterComponent implements OnInit {
 
   }
   onInputEntry(event, nextInput) {
-    
+
     const input = event.target;
     const length = input.value.length;
     const maxLength = input.attributes.maxlength.value;
@@ -151,7 +162,7 @@ export class RegisterComponent implements OnInit {
   get f() { return this.RegistrationForm.controls; }
 
   formControlValueChanged() {
-    
+
     const businessLicenseType = this.RegistrationForm.get('businessLicenseType');
     const gstNo = this.RegistrationForm.get('GSTNo');
     const panNo = this.RegistrationForm.get('PANNo');
@@ -211,7 +222,7 @@ export class RegisterComponent implements OnInit {
   //*****************************Check mobile Already Exist in the database or not*********************/
 
   checkMobileAlreadyExist() {
-  ;
+    ;
     this.loginStart = true;
 
     //this.spinner.show();
@@ -268,7 +279,7 @@ export class RegisterComponent implements OnInit {
       item.setValue("");
 
     });
-    
+
     // let pos = 0;
     // if (pos > -1 && pos < this.formInput.length) {
     //   this.rows._results[pos].nativeElement.focus();
@@ -371,7 +382,7 @@ export class RegisterComponent implements OnInit {
 
   //****************************** CreateRegistration*************//
   CreateRegistration() {
-    
+
     this.formControlValueChanged();
     this.submitted = true;
     if (this.RegistrationForm.invalid) {
@@ -469,7 +480,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  Login(){
+  Login() {
     this.modalService.open(LoginComponent, {
       size: 'lg',
       ariaLabelledBy: 'Cart-Modal',
