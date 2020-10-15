@@ -180,8 +180,8 @@
                     <th>Rate Per Pc.</th>
                     <th>Disc %</th>
                     <th>Discounted Rate</th>
-                    <th>Add. Discount (%)</th>
-                    <th>Add. Discount Amount</th>
+                    <th *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">Add. Discount (%)</th>
+                    <th *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">Add. Discount Amount</th>
                     <th>Amount (Without GST)</th>
                     <th>GST Rate in %</th>
                     <th>IGST</th>
@@ -202,8 +202,8 @@
                     <td class="text-right">{{ product?.price | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td>{{ product?.discount }}</td>
                     <td class="text-right">{{ (product?.salePrice) | currency:productService?.Currency.currency:'symbol'}}</td>
-                    <td class="text-right">{{ product?.additionalDiscount}}</td>
-                    <td class="text-right">{{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td class="text-right" *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">{{ product?.additionalDiscount}}</td>
+                    <td class="text-right" *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">{{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}</td>
 
                     <td class="text-right">
                         <b>
@@ -253,8 +253,8 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0"></td>
+                    <td *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0"></td>
                     <td></td>
                     <td>
                         <b>{{getTotalAmountWithOutGST() | currency:productService?.Currency.currency:'symbol'}}</b>

@@ -23,7 +23,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CheckoutComponent implements OnInit {
 
-  public productSizeColor: productSizeColor[] = [];
+  public productSizeColor: any[] = [];
 
   public checkoutForm: FormGroup;
   public products: Product[] = [];
@@ -156,7 +156,7 @@ export class CheckoutComponent implements OnInit {
     return TotalAdditionalDiscountAmount;
   }
 
-  getTotalAmountWithDis(){
+  getTotalAmountWithDis() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
       TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
@@ -227,6 +227,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   SelectdeliverAddress(lst) {
+    debugger
     this.Address1 = false;
     this.Address2 = true;
 
@@ -240,6 +241,10 @@ export class CheckoutComponent implements OnInit {
     this.OrderSummary2 = true;
 
     this.Continuebtn = true;
+
+    const billingAddressId = this.checkoutForm.get('billingAddressId');
+    billingAddressId.setValue(lst.billingAddressId);
+    billingAddressId.updateValueAndValidity();
 
     /* this.checkoutForm = this.fb.group({
        billingAddressId: [lst.billingAddressId],
@@ -306,6 +311,9 @@ export class CheckoutComponent implements OnInit {
         this.spinner.hide();
         this.lstBillingAddress = res;
         this.toastr.success("Delivery Address has been saved successfully!");
+        this.cancel();
+        debugger
+        this.AddressId=this.lstBillingAddress[this.lstBillingAddress.length-1].billingAddressId;
 
         //this.LoadBillingAddress();
       });
@@ -328,9 +336,10 @@ export class CheckoutComponent implements OnInit {
     // }
     // else {
     this.spinner.show();
+    debugger
     let obj = {
-      // billingAddressId: Number(this.checkoutForm.value.billingAddressId),
-      userID: Number(this.user[0].userID),
+      billingAddressId: Number(this.checkoutForm.value.billingAddressId),
+      //userID: Number(this.user[0].userID),
       //fName: this.checkoutForm.value.fName,
       //lName: this.checkoutForm.value.lName,
       //companyName: this.checkoutForm.value.companyName,

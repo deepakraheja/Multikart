@@ -7,14 +7,11 @@
                 <!-- {{lstBillingAddress|json}} -->
                 <form>
                     <div class="checkout-steps" *ngIf="Address1">
-                        <h4 *ngIf="lstBillingAddress?.length>0" class="step-heading"><span
-                                class="Sequence">1</span>Delivery Address</h4>
+                        <h4 *ngIf="lstBillingAddress?.length>0" class="step-heading"><span class="Sequence">1</span>Delivery Address</h4>
                         <div *ngFor="let lstBilling of lstBillingAddress;let idx = index" class="delivery-address">
                             <div class="d-flex justify-content-start">
                                 <div class="pr-4">
-                                    <input type="radio" [checked]="lstBilling.billingAddressId==AddressId"
-                                        name="selectAddress" (change)="onItemChange(lstBilling)"
-                                        value="{{lstBilling.billingAddressId}}">
+                                    <input type="radio" [checked]="lstBilling.billingAddressId==AddressId" name="selectAddress" (change)="onItemChange(lstBilling)" value="{{lstBilling.billingAddressId}}">
                                 </div>
                                 <address>
                                     <div>
@@ -58,8 +55,7 @@
                         <h4 class="step-heading"><span class="Sequence">1</span>Delivery Address
                             <i class="fa fa-check"></i>
                         </h4>
-                        {{SelectedAddress}}<button type="submit" (click)="ChangeAddress()"
-                            class="btn-solid btn mt-3">Change</button>
+                        {{SelectedAddress}}<button type="submit" (click)="ChangeAddress()" class="btn-solid btn mt-3">Change</button>
 
                     </div>
 
@@ -79,15 +75,11 @@
                         <div class="row check-out">
                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                 <div class="field-label">Full Name<span style="color: red;">*</span> </div>
-                                <input autofocus type="text" name="fName" maxlength="50"
-                                    [formControl]="checkoutForm.controls['fName']" value="" placeholder=""
-                                    autocomplete="off">
-                                <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.required"
-                                    class="text text-danger">
+                                <input autofocus type="text" name="fName" maxlength="50" [formControl]="checkoutForm.controls['fName']" value="" placeholder="" autocomplete="off">
+                                <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.required" class="text text-danger">
                                     Full Name is required.
                                 </div>
-                                <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.pattern"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.pattern" class="text text-danger">
                                     Full Name must be an alphabates.
                                 </div>
                             </div>
@@ -95,30 +87,22 @@
 
                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                 <div class="field-label">Company Name </div>
-                                <input type="text" name="companyName" maxlength="150"
-                                    [formControl]="checkoutForm.controls['companyName']" value="" placeholder=""
-                                    autocomplete="off">
-                                <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.required"
-                                    class="text text-danger">
+                                <input type="text" name="companyName" maxlength="150" [formControl]="checkoutForm.controls['companyName']" value="" placeholder="" autocomplete="off">
+                                <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.required" class="text text-danger">
                                     Company Name is required.
                                 </div>
-                                <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.pattern"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.pattern" class="text text-danger">
                                     Company Name must be an alphabates
                                 </div>
                             </div>
 
                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                 <div class="field-label">Phone <span style="color: red;">*</span></div>
-                                <input type="text" name="phone" maxlength="10"
-                                    [formControl]="checkoutForm.controls['phone']" value="" placeholder=""
-                                    autocomplete="off">
-                                <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.required"
-                                    class="text text-danger">
+                                <input type="text" name="phone" maxlength="10" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
+                                <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.required" class="text text-danger">
                                     Phone No is required.
                                 </div>
-                                <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.pattern"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.pattern" class="text text-danger">
                                     Phone No must be number
                                 </div>
                             </div>
@@ -137,15 +121,11 @@
                                 </div> -->
                             <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                 <div class="field-label">Address <span style="color: red;">*</span></div>
-                                <textarea maxlength="200" name="address"
-                                    [formControl]="checkoutForm.controls['address']" style="height: 65px;" value=""
-                                    placeholder="" autocomplete="off"></textarea>
-                                <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.required"
-                                    class="text text-danger">
+                                <textarea maxlength="200" name="address" [formControl]="checkoutForm.controls['address']" style="height: 65px;" value="" placeholder="" autocomplete="off"></textarea>
+                                <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.required" class="text text-danger">
                                     Address is required
                                 </div>
-                                <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.maxlength"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
                                     Maximum 50 character
                                 </div>
                             </div>
@@ -157,8 +137,7 @@
                                     <!-- <option value="USA">USA</option>
                                         <option value="Australia">Australia</option> -->
                                 </select>
-                                <div *ngIf="(checkoutForm.controls.country.touched || Submitted) && checkoutForm.controls.country.errors?.required"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.country.touched || Submitted) && checkoutForm.controls.country.errors?.required" class="text text-danger">
                                     Country is required
                                 </div>
                             </div>
@@ -206,8 +185,7 @@
                                     <option value="West Bengal">West Bengal</option>
 
                                 </select>
-                                <div *ngIf="(checkoutForm.controls.state.touched || Submitted) && checkoutForm.controls.state.errors?.required"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.state.touched || Submitted) && checkoutForm.controls.state.errors?.required" class="text text-danger">
                                     State is required
                                 </div>
                             </div>
@@ -215,26 +193,19 @@
 
                             <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                 <div class="field-label">City <span style="color: red;">*</span></div>
-                                <input maxlength="100" type="text" name="city"
-                                    [formControl]="checkoutForm.controls['city']" value="" placeholder=""
-                                    autocomplete="off">
-                                <div *ngIf="(checkoutForm.controls.city.touched || Submitted) && checkoutForm.controls.city.errors?.required"
-                                    class="text text-danger">
+                                <input maxlength="100" type="text" name="city" [formControl]="checkoutForm.controls['city']" value="" placeholder="" autocomplete="off">
+                                <div *ngIf="(checkoutForm.controls.city.touched || Submitted) && checkoutForm.controls.city.errors?.required" class="text text-danger">
                                     City is required
                                 </div>
                             </div>
                             <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                 <div class="field-label">Pin Code <span style="color: red;">*</span></div>
-                                <input maxlength="6" type="text" name="zipCode"
-                                    [formControl]="checkoutForm.controls['zipCode']" value="" placeholder=""
-                                    autocomplete="off">
-                                <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.required"
-                                    class="text text-danger">
+                                <input maxlength="6" type="text" name="zipCode" [formControl]="checkoutForm.controls['zipCode']" value="" placeholder="" autocomplete="off">
+                                <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.required" class="text text-danger">
                                     Pin Code is required
                                 </div>
 
-                                <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.pattern"
-                                    class="text text-danger">
+                                <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.pattern" class="text text-danger">
                                     Pin Code must be number
                                 </div>
                             </div>
@@ -275,10 +246,10 @@
                                             <th class="thead-dark">
                                                 Qty
                                             </th>
-                                            <th class="thead-dark">
+                                            <th class="thead-dark" *ngIf="productSizeColor[0]?.additionalDiscount>0">
                                                 Add. Discount (%)
                                             </th>
-                                            <th class="thead-dark">
+                                            <th class="thead-dark" *ngIf="productSizeColor[0]?.additionalDiscount>0">
                                                 Add. Discount Amount
                                             </th>
                                             <th class="thead-dark">
@@ -306,10 +277,10 @@
                                             <td>
                                                 {{ product?.quantity }}
                                             </td>
-                                            <td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0">
                                                 {{ product?.additionalDiscount }}%
                                             </td>
-                                            <td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0">
                                                 {{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}
                                             </td>
                                             <td>
@@ -332,10 +303,11 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4">
+                                            <td colspan="3">
                                                 <b>Subtotal</b>
                                             </td>
-                                            <td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0"></td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0">
                                                 <b>{{ getTotalAdditionalDiscountAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                                             </td>
                                             <td>
@@ -360,18 +332,22 @@
                                             </td>
                                         </tr> -->
                                         <tr>
-                                            <td colspan="7">
+                                            <td colspan="5">
                                                 <b> Packing</b>
                                             </td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0"></td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0"></td>
                                             <td colspan="2">
                                                 <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                     <b>Free Packing</b></span>
                                             </td>
                                         </tr>
                                         <tr class="total">
-                                            <td colspan="7">
+                                            <td colspan="5">
                                                 <b>Total</b>
                                             </td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0"></td>
+                                            <td *ngIf="productSizeColor[0]?.additionalDiscount>0"></td>
                                             <td colspan="2">
                                                 <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
@@ -421,8 +397,7 @@
                         <div class="step-heading">
                             <div>
                                 <span>Order confirmation email will be sent to
-                                    deepakrahejain@gmail.com</span> <button class="btn btn-solid"
-                                    (click)="Continue()">Continue</button>
+                                    deepakrahejain@gmail.com</span> <button class="btn btn-solid" (click)="Continue()">Continue</button>
                             </div>
                         </div>
                     </div>
@@ -447,27 +422,21 @@
                                     <ul>
                                         <li>
                                             <div class="radio-option">
-                                                <input type="radio"
-                                                    [formControl]="checkoutForm.controls['paymentTypeId']" [value]="1"
-                                                    name="payment-group" id="payment-1">
+                                                <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="1" name="payment-group" id="payment-1">
                                                 <label for="payment-1">Online Payment
                                                 </label>
                                             </div>
                                         </li>
                                         <li *ngIf="user[0].isAgentCustomer">
                                             <div class="radio-option">
-                                                <input type="radio"
-                                                    [formControl]="checkoutForm.controls['paymentTypeId']" [value]="2"
-                                                    name="payment-group" id="payment-2">
+                                                <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="2" name="payment-group" id="payment-2">
                                                 <label for="payment-2">Credit to Agent
                                                 </label>
                                             </div>
                                         </li>
                                         <li *ngIf="user[0].isVIPMember">
                                             <div class="radio-option">
-                                                <input type="radio"
-                                                    [formControl]="checkoutForm.controls['paymentTypeId']" [value]="3"
-                                                    name="payment-group" id="payment-3">
+                                                <input type="radio" [formControl]="checkoutForm.controls['paymentTypeId']" [value]="3" name="payment-group" id="payment-3">
                                                 <label for="payment-3">Direct Credit
                                                 </label>
                                             </div>
