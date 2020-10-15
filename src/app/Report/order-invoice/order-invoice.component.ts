@@ -50,7 +50,7 @@ export class OrderInvoiceComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) + element.gstAmount
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
     });
     return TotalAmount;
   }
@@ -63,10 +63,26 @@ export class OrderInvoiceComponent implements OnInit {
     return TotalQty;
   }
 
+  getTotalAdditionalDiscountAmount() {
+    var TotalAdditionalDiscountAmount = 0;
+    (this.orderDetails[0].orderDetails).forEach(element => {
+      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+    });
+    return TotalAdditionalDiscountAmount;
+  }
+
+  getTotalAmountWithDis(){
+    var TotalAmount = 0;
+    (this.orderDetails[0].orderDetails).forEach(element => {
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
+    });
+    return TotalAmount;
+  }
+
   getTotalAmountWithOutGST() {
     var TotalAmountWithOutGST = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmountWithOutGST += (element.salePrice * element.quantity)
+      TotalAmountWithOutGST += (element.salePrice * element.quantity) - element.additionalDiscountAmount
     });
     return TotalAmountWithOutGST;
   }

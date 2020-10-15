@@ -34,6 +34,25 @@ export class CheckoutComponent implements OnInit {
   public lstBillingAddress: any[] = [];
   user: any[] = [];
   GST: any = 18;
+  AddressId: any;
+  SelectedAddress: any;
+
+  Address1: boolean = true;
+  Address2: boolean = false;
+
+  OrderSummary1: boolean = true;
+  OrderSummary2: boolean = false;
+
+  PaymentOption1: boolean = true;
+  PaymentOption2: boolean = false;
+
+  fafaCheck: boolean = false;
+
+  Continuebtn: boolean = false;
+
+  addnewaddress: boolean = true;
+  addaddress: boolean = false;
+
   constructor(private fb: FormBuilder,
     public productService: ProductService,
     //private orderService: OrderService,
@@ -54,12 +73,12 @@ export class CheckoutComponent implements OnInit {
       //lName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       companyName: [''],
       phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      emailId: ['', [Validators.required, Validators.email]],
+      //emailId: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
       country: ['', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
-      zipCode: ['', Validators.required],
+      zipCode: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
       orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
       paymentTypeId: [this.user[0].isVIPMember == true ? 3 : 1],
@@ -96,6 +115,14 @@ export class CheckoutComponent implements OnInit {
     // });
     //this.initConfig();
   }
+  onItemChange(item) {
+    debugger
+    //alert(item.billingAddressId)
+
+    this.AddressId = item.billingAddressId
+    this.SelectedAddress = item.address + ' ' + item.city + ' ' + item.state + ' ' + item.zipCode + ' ' + item.country
+
+  }
 
   LoadBillingAddress() {
     if (this.user != null) {
@@ -104,6 +131,8 @@ export class CheckoutComponent implements OnInit {
       };
       this._billingAddressService.GetBillingAddress(obj).subscribe(res => {
         this.lstBillingAddress = res;
+        this.AddressId = res[0].billingAddressId;
+        this.SelectedAddress = res[0].address + ' ' + res[0].city + ' ' + res[0].state + ' ' + res[0].zipCode + ' ' + res[0].country
       });
     }
     else {
@@ -114,7 +143,23 @@ export class CheckoutComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) + element.gstAmount
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
+    });
+    return TotalAmount;
+  }
+
+  getTotalAdditionalDiscountAmount() {
+    var TotalAdditionalDiscountAmount = 0;
+    this.productSizeColor.forEach(element => {
+      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+    });
+    return TotalAdditionalDiscountAmount;
+  }
+
+  getTotalAmountWithDis(){
+    var TotalAmount = 0;
+    this.productSizeColor.forEach(element => {
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
     });
     return TotalAmount;
   }
@@ -147,22 +192,155 @@ export class CheckoutComponent implements OnInit {
     }
 
   }
+  ChangeAddress() {
+    this.Address1 = true;
+    this.Address2 = false;
+    this.addnewaddress = true;
 
-  SelectBillingAddress(lst) {
+    this.OrderSummary1 = true;
+    this.OrderSummary2 = false;
+
+  }
+
+  cancel() {
+    this.addnewaddress = true;
+    this.addaddress = false;
+
+  }
+
+
+  Continue() {
+    this.OrderSummary1 = true;
+    this.OrderSummary2 = false;
+    this.fafaCheck = true;
+
+    this.Continuebtn = false;
+
+    this.PaymentOption1 = false;
+    this.PaymentOption2 = true;
+
+  }
+
+  AddNewAddress() {
+    this.addnewaddress = false;
+    this.addaddress = true;
+
+  }
+  SelectdeliverAddress(lst) {
+    this.Address1 = false;
+    this.Address2 = true;
+
+    this.addnewaddress = false;
+    this.addaddress = false;
+
     this.Submitted = false;
-    this.checkoutForm = this.fb.group({
-      billingAddressId: [lst.billingAddressId],
-      userID: this.user[0].userID,
-      fName: [lst.fName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      //lName: [lst.lName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      companyName: [lst.companyName],
-      phone: [lst.phone, [Validators.required, Validators.pattern('[0-9]+')]],
-      emailId: [lst.emailId, [Validators.required, Validators.email]],
-      address: [lst.address, [Validators.required, Validators.maxLength(200)]],
-      country: [lst.country, Validators.required],
-      city: [lst.city, Validators.required],
-      state: [lst.state, Validators.required],
-      zipCode: [lst.zipCode, Validators.required],
+
+
+    this.OrderSummary1 = false;
+    this.OrderSummary2 = true;
+
+    this.Continuebtn = true;
+
+    /* this.checkoutForm = this.fb.group({
+       billingAddressId: [lst.billingAddressId],
+       userID: this.user[0].userID,
+       fName: [lst.fName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+       //lName: [lst.lName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+       companyName: [lst.companyName],
+       phone: [lst.phone, [Validators.required, Validators.pattern('[0-9]+')]],
+       emailId: [lst.emailId, [Validators.required, Validators.email]],
+       address: [lst.address, [Validators.required, Validators.maxLength(200)]],
+       country: [lst.country, Validators.required],
+       city: [lst.city, Validators.required],
+       state: [lst.state, Validators.required],
+       zipCode: [lst.zipCode, Validators.required],
+       
+       orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
+       orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
+       paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
+       subTotal: Number(this.getTotal()),
+       tax: 0,
+       shippingCharge: 0,
+       totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
+       notes: '',
+       statusId: 1
+     });
+     */
+  }
+
+
+  SaveAddress() {
+    this.Submitted = true;
+    if (this.checkoutForm.invalid) {
+      this.toastr.error("All * fields are mandatory.");
+      return;
+    }
+    else {
+      this.spinner.show();
+      let obj = {
+        //billingAddressId: Number(this.checkoutForm.value.billingAddressId),
+        userID: Number(this.user[0].userID),
+        fName: this.checkoutForm.value.fName,
+        //lName: this.checkoutForm.value.lName,
+        companyName: this.checkoutForm.value.companyName,
+        phone: this.checkoutForm.value.phone,
+        //emailId: this.checkoutForm.value.emailId,
+        address: this.checkoutForm.value.address,
+        country: this.checkoutForm.value.country,
+        city: this.checkoutForm.value.city,
+        state: this.checkoutForm.value.state,
+        zipCode: this.checkoutForm.value.zipCode,
+        //orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
+        //orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
+        //paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
+        //subTotal: Number(this.getTotal()),
+        //tax: 0,
+        //shippingCharge: 0,
+        //totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
+        //notes: '',
+        //statusId: 1
+      }
+
+      this._billingAddressService.SaveBillingAddress(obj).subscribe(res => {
+        //  
+        this.spinner.hide();
+        this.lstBillingAddress = res;
+        this.toastr.success("Delivery Address has been saved successfully!");
+
+        //this.LoadBillingAddress();
+      });
+      //  
+      // this._orderService.SaveOrder(obj).subscribe(res => {
+      //   //  
+      //   this.spinner.hide();
+      //   this._SharedDataService.UserCart([]);
+      //   this.router.navigate(['/shop/checkout/success/' + res]);
+      // });
+    }
+  }
+
+
+  ProcessCheckOut() {
+    // this.Submitted = true;
+    // if (this.checkoutForm.invalid) {
+    //   this.toastr.error("All * fields are mandatory.");
+    //   return;
+    // }
+    // else {
+    this.spinner.show();
+    let obj = {
+      // billingAddressId: Number(this.checkoutForm.value.billingAddressId),
+      userID: Number(this.user[0].userID),
+      //fName: this.checkoutForm.value.fName,
+      //lName: this.checkoutForm.value.lName,
+      //companyName: this.checkoutForm.value.companyName,
+      //phone: this.checkoutForm.value.phone,
+      //emailId: this.checkoutForm.value.emailId,
+      //address: this.checkoutForm.value.address,
+      //country: this.checkoutForm.value.country,
+      //city: this.checkoutForm.value.city,
+      //state: this.checkoutForm.value.state,
+      //zipCode: this.checkoutForm.value.zipCode,
       orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
       orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
       paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
@@ -172,48 +350,15 @@ export class CheckoutComponent implements OnInit {
       totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
       notes: '',
       statusId: 1
-    });
-  }
-
-  ProcessCheckOut() {
-    this.Submitted = true;
-    if (this.checkoutForm.invalid) {
-      this.toastr.error("All * fields are mandatory.");
-      return;
     }
-    else {
-      this.spinner.show();
-      let obj = {
-        billingAddressId: Number(this.checkoutForm.value.billingAddressId),
-        userID: Number(this.user[0].userID),
-        fName: this.checkoutForm.value.fName,
-        //lName: this.checkoutForm.value.lName,
-        companyName: this.checkoutForm.value.companyName,
-        phone: this.checkoutForm.value.phone,
-        emailId: this.checkoutForm.value.emailId,
-        address: this.checkoutForm.value.address,
-        country: this.checkoutForm.value.country,
-        city: this.checkoutForm.value.city,
-        state: this.checkoutForm.value.state,
-        zipCode: this.checkoutForm.value.zipCode,
-        orderNumber: this._datePipe.transform(new Date().toString(), 'yyyyMMddHHmmss'),
-        orderDate: this._datePipe.transform(new Date().toString(), 'yyyy-MM-dd HH:mm:ss'),
-        paymentTypeId: Number(this.checkoutForm.value.paymentTypeId),
-        subTotal: Number(this.getTotal()),
-        tax: 0,
-        shippingCharge: 0,
-        totalAmount: Number(this.getTotal()) + Number(this.checkoutForm.value.shippingCharge),
-        notes: '',
-        statusId: 1
-      }
+    //  
+    this._orderService.SaveOrder(obj).subscribe(res => {
       //  
-      this._orderService.SaveOrder(obj).subscribe(res => {
-        //  
-        this.spinner.hide();
-        this._SharedDataService.UserCart([]);
-        this.router.navigate(['/shop/checkout/success/' + res]);
-      });
-    }
+      this.spinner.hide();
+      this._SharedDataService.UserCart([]);
+      this.router.navigate(['/shop/checkout/success/' + res]);
+    });
+    //}
   }
 
   // // Stripe Payment Gateway

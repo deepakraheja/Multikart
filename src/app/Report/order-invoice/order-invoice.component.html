@@ -180,6 +180,8 @@
                     <th>Rate Per Pc.</th>
                     <th>Disc %</th>
                     <th>Discounted Rate</th>
+                    <th>Add. Discount (%)</th>
+                    <th>Add. Discount Amount</th>
                     <th>Amount (Without GST)</th>
                     <th>GST Rate in %</th>
                     <th>IGST</th>
@@ -192,22 +194,27 @@
                     <td>
                         <b>{{ product?.productName }}</b>
                     </td>
-                    <td class="text-right">6104</td>
+                    <td class="text-right">
+                        {{ product?.hsnCode }}
+                    </td>
                     <td class="text-right"><b>{{ product?.quantity }}</b></td>
                     <td>PCS</td>
                     <td class="text-right">{{ product?.price | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td>{{ product?.discount }}</td>
                     <td class="text-right">{{ (product?.salePrice) | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td class="text-right">{{ product?.additionalDiscount}}</td>
+                    <td class="text-right">{{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}</td>
+
                     <td class="text-right">
                         <b>
-                            {{ (product.salePrice*product?.quantity) | currency:productService?.Currency.currency:'symbol' }}
+                            {{ (product?.salePrice*product?.quantity)-product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol' }}
                         </b>
                     </td>
                     <td class="text-right">{{ product?.gstRate}}</td>
                     <td class="text-right">{{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td class="text-right">
                         <b>
-                            {{ (product.salePrice*product?.quantity+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}
+                            {{ (product.salePrice*product?.quantity-product?.additionalDiscountAmount+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}
                         </b>
                     </td>
                 </tr>
@@ -243,6 +250,8 @@
                     <td class="text-right">Total</td>
                     <td></td>
                     <td class="text-right"><b>{{getQty()}} pcs</b></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
