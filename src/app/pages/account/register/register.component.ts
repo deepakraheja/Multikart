@@ -27,13 +27,18 @@ export class RegisterComponent implements OnInit {
 
   RegistrationForm: FormGroup;
 
-  @ViewChild("otp") nameField: ElementRef;
-  editName(): void {
-    this.nameField.nativeElement.focus();
-  }
+  //@ViewChild("otp") nameField: ElementRef;
 
-  formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
-  @ViewChildren('formRow') rows: any;
+  GSTNo: any;
+  PANNo: any;
+  AadharCard: any;
+
+  // editName(): void {
+  //   this.nameField.nativeElement.focus();
+  // }
+
+  // formInput = ['input1', 'input2', 'input3', 'input4', 'input5', 'input6'];
+  // @ViewChildren('formRow') rows: any;
 
   phoneMask = null;
   showMask: boolean = false;
@@ -43,8 +48,9 @@ export class RegisterComponent implements OnInit {
   //public validate: boolean = true;
   public counter;
 
-  loginStart = false;
-  submitted = false;
+  loginStart: boolean = false;
+  submitted: boolean = false;
+  VerifyStart: boolean = false;
 
   public mvaldate: boolean = true;
 
@@ -53,6 +59,10 @@ export class RegisterComponent implements OnInit {
   mobileotpSendStart: boolean;
   errorShow: number = 1;
   mobilecode: string = "";
+  PhoneMask: string;
+  BusinessPhone: any;
+  PinCodeMask: string;
+  txtPinCode: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -78,48 +88,64 @@ export class RegisterComponent implements OnInit {
     return this.RegistrationForm.controls.OTPArray as FormArray;
   }
 
-  keyupEvent(event, index) {
-    debugger;
-    let pos = index;
-    if (event.keyCode === 8 && event.which === 8) {
-      pos = index - 1;
+  // keyupEvent(event, index) {
+  //   debugger;
+  //   let pos = index;
+  //   if (event.keyCode === 8 && event.which === 8) {
+  //     pos = index - 1;
 
-    }
-    if (pos > -1 && pos < this.formInput.length) {
-      this.rows._results[pos].nativeElement.focus();
-    }
+  //   }
+  //   if (pos > -1 && pos < this.formInput.length) {
+  //     this.rows._results[pos].nativeElement.focus();
+  //   }
 
-  }
+  // }
 
-  keypressEvent(event, index) {
-    debugger;
-    let pos = index;
-    if (event.keyCode === 8 && event.which === 8) {
-      pos = index - 1;
-    } else {
-      pos = index + 1;
-    }
-    if (pos > -1 && pos < this.formInput.length) {
-      this.rows._results[pos].nativeElement.focus();
-    }
+  // keypressEvent(event, index) {
+  //   debugger;
+  //   let pos = index;
+  //   if (event.keyCode === 8 && event.which === 8) {
+  //     pos = index - 1;
+  //   } else {
+  //     pos = index + 1;
+  //   }
+  //   if (pos > -1 && pos < this.formInput.length) {
+  //     this.rows._results[pos].nativeElement.focus();
+  //   }
 
-  }
+  // }
+
   addMask(obj: Object) {
     //this.DecimalMask = "0*.00";
     this.NumberMask = "0 0 0 0 0 0";
     this.showMask = true;
   }
 
+  addPhoneMask(obj: Object) {
+    //this.DecimalMask = "0*.00";
+    this.PhoneMask = "0000000000";
+    //this.showMask = true;
+  }
 
+  addPinCodeMask(obj: Object) {
+    //this.DecimalMask = "0*.00";
+    this.PinCodeMask = "000000";
+    //this.showMask = true;
+  }
+
+  // @ViewChild("SetFocus") nameField: ElementRef
+  // setFocus(): void {
+  //   this.nameField.nativeElement.focus();
+  // }
 
   ngOnInit(): void {
     this.RegistrationForm = this.formBuilder.group({
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(9)]],
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
       mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
       //mobilecode: ['', [Validators.required]],
-      OTPArray: new FormArray([]),
+      //OTPArray: new FormArray([]),
 
       BusinessType: ['', Validators.required],
       Industry: ['', Validators.required],
@@ -135,14 +161,15 @@ export class RegisterComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       mobileotp: [''],
-      otp1: ['',],
-      otp2: ['',],
-      otp4: ['',],
-      otp5: ['',],
-      otp6: ['',]
+
+      //otp1: ['',],
+      //otp2: ['',],
+      //otp4: ['',],
+      //otp5: ['',],
+      //otp6: ['',]
     });
 
-    this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
+    //this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
 
   }
 
@@ -151,19 +178,65 @@ export class RegisterComponent implements OnInit {
     //this.RegistrationForm.setValue('mobileotp') = '';
 
   }
-  onInputEntry(event, nextInput) {
 
+
+  ChangeLicenseType() {
+
+    debugger;
+    // $('#txtGSTNo').val("");
+
+    $('#txtGSTNo').attr("value", "");
+    $('#txtPANNo').attr("value", "");
+    $('#txtAadharCard').attr("value", "");
+
+    //const gstNo = this.RegistrationForm.get('GSTNo');
+    //gstNo.updateValueAndValidity();
+  }
+
+  keytab(event) {
+    debugger
     const input = event.target;
     const length = input.value.length;
-    const maxLength = input.attributes.maxlength.value;
 
-    if (length >= maxLength) {
+    if (length >= 10) {
+      let element = event.srcElement.nextElementSibling; // get the sibling element
 
-      $('#' + nextInput).focus();
-      //$('#input2').focus();
-      // nextInput.focus();
+      if (element == null)  // check if its null
+        return;
+      else
+        element.focus();   // focus if not null
     }
   }
+
+  keytabVerify(event) {
+    debugger
+    const input = event.target;
+    const length = input.value.length;
+
+    if (length >= 5) {
+      let element = event.srcElement.nextElementSibling; // get the sibling element
+
+      if (element == null)  // check if its null
+        return;
+      else
+        element.focus();   // focus if not null
+    }
+  }
+
+
+  // onInputEntry(event, nextInput) {
+
+  //   const input = event.target;
+  //   const length = input.value.length;
+  //   const maxLength = input.attributes.maxlength.value;
+
+  //   if (length >= maxLength) {
+
+  //     $('#' + nextInput).focus();
+  //     //$('#input2').focus();
+  //     // nextInput.focus();
+  //   }
+  // }
 
   get f() { return this.RegistrationForm.controls; }
 
@@ -211,15 +284,18 @@ export class RegisterComponent implements OnInit {
 
   //*****************************Validate mobile && call checkMobileAlreadyExist function************/
   validateAndCheckMobile() {
-    ;
+    this.submitted = true;
     if (this.f.mobileNo.errors) {
+
       if (this.f.mobileNo.errors.required) {
         this.showMessage('Please, Enter 10 digit Mobile Number.');
+        return;
       } else {
         this.showMessage('Please, Enter 10 digit Mobile Number.');
+        return;
       }
     } else {
-
+      this.submitted = false;
       this.checkMobileAlreadyExist();
     }
   }
@@ -239,8 +315,9 @@ export class RegisterComponent implements OnInit {
       ;
     this.mobileotpSendStart = true;
     this.userService.CheckMobileAllReadyRegisteredOrNot(obj).subscribe((res: any) => {
+      debugger
       this.loginStart = false;
-
+      $('#txtverify').focus();
 
       //setTimeout(() => this.spinner.hide(), 200);
 
@@ -278,19 +355,20 @@ export class RegisterComponent implements OnInit {
 
   //*****************************send mobile OTP************/
   sendMobileOtp() {
-    const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
-    let i: number = 0;
+    debugger;
+    // const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
+    // let i: number = 0;
 
-    OTPArray.controls.forEach((item: FormControl) => {
-      item.setValue("");
+    // OTPArray.controls.forEach((item: FormControl) => {
+    //   item.setValue("");
 
-    });
+    // });
 
     // let pos = 0;
     // if (pos > -1 && pos < this.formInput.length) {
     //   this.rows._results[pos].nativeElement.focus();
     // }
-    $('#0').focus();
+    $('#txtverify').focus();
 
 
     this.toastr.success('OTP has been sent.');
@@ -343,11 +421,19 @@ export class RegisterComponent implements OnInit {
 
     if (this.RegistrationForm.get('mobileotp').value == '') {
       this.showMessage('mobile otp required');
+      $('#txtverify').focus();
+      return
     }
     else {
 
       this.mobilecode = this.RegistrationForm.get('mobileotp').value
-      this.spinner.show();
+      if (this.mobilecode.length < 11) {
+        this.showMessage('please enter 6 digit otp');
+        $('#txtverify').focus();
+        return
+      }
+      //this.spinner.show();
+      this.VerifyStart = true;
 
       let d = {
         "MobileNo": this.RegistrationForm.get('mobileNo').value,
@@ -357,8 +443,8 @@ export class RegisterComponent implements OnInit {
 
 
       this.userService.verify_mobile_otp(d).subscribe((res: any) => {
-        setTimeout(() => this.spinner.hide(), 200);
-        ;
+        //setTimeout(() => this.spinner.hide(), 200);
+        this.VerifyStart = false;
         if (res == 1) {
           this.mobileverified = true;
           //this.validate = true;
@@ -387,18 +473,116 @@ export class RegisterComponent implements OnInit {
     this.toastr.error(str);
   }
 
-  //****************************** CreateRegistration*************//
+  //****************************** Create Registration into database*************//
   CreateRegistration() {
-
+    debugger
     this.formControlValueChanged();
+
     this.submitted = true;
+
     if (this.RegistrationForm.invalid) {
       if ($('#fname').val() == '') {
+        this.toastr.error('Please fill in all the * required fields.');
         $('#fname').focus();
+        return;
       }
+
+      if ($('#LicenseType option:selected').val() == 'GSTIN') {
+
+        this.GSTNo = $("#txtGSTNo").val().length;//this.RegistrationForm.get('GSTNo').value
+        if (this.GSTNo < 15) {
+          this.showMessage('Please, Enter 15-digit GST number');
+          $('#txtGSTNo').focus();
+          return
+        }
+      }
+      else if ($('#LicenseType option:selected').val() == 'BusinessPAN') {
+
+        this.PANNo = $("#txtPANNo").val().length;//this.RegistrationForm.get('PANNo').value
+        if (this.PANNo < 10) {
+          this.showMessage('Please, Enter 10-digit PAN number');
+          $('#txtPANNo').focus();
+          return
+        }
+      }
+      else if ($('#LicenseType option:selected').val() == 'AadharCard') {
+
+        this.AadharCard = $("#txtAadharCard").val().length;//this.RegistrationForm.get('AadharCard').value
+        if (this.AadharCard < 12) {
+          this.showMessage('Please, Enter 12-digit  Aadhar Card number');
+          $('#txtAadharCard').focus();
+          return
+        }
+      }
+
+      // if (this.f.GSTNo.errors) {
+
+      //   if (this.f.GSTNo.errors.required) {
+      //     this.showMessage('Please, Enter 15-digit number GST number.');
+      //     return;
+      //   } else {
+      //     this.showMessage('Please, Enter 15-digit number GST number.');
+      //     return;
+      //   }
+      // }
+
+      if ($('#BusinessName').val() == '') {
+        $('#BusinessName').focus();
+        return;
+      }
+
+      if ($('#BusinessPhone').val() == '') {
+        $('#BusinessPhone').focus();
+        return;
+      }
+
+      this.BusinessPhone = $("#txtBusinessPhone").val().length;//this.RegistrationForm.get('GSTNo').value
+      if (this.BusinessPhone < 10) {
+        this.showMessage('Please, Enter 10-digit Business Phone');
+        $('#txtBusinessPhone').focus();
+        return
+      }
+
+      if ($('#Address1').val() == '') {
+        $('#Address1').focus();
+        return;
+      }
+      if ($('#PinCode').val() == '') {
+        $('#PinCode').focus();
+        return;
+      }
+
+
+      this.txtPinCode = $("#txtPinCode").val().length;//this.RegistrationForm.get('GSTNo').value
+      if (this.txtPinCode < 6) {
+        this.showMessage('Please, Enter 6-digit Pin Code');
+        $('#txtPinCode').focus();
+        return
+      }
+
+
+      if ($('#City').val() == '') {
+        $('#City').focus();
+        return;
+      }
+
+      if ($('#City').val() == '') {
+        $('#City').focus();
+        return;
+      }
+      if ($('#EmailID').val() == '') {
+        $('#EmailID').focus();
+        return;
+      }
+
+      if ($('#password').val() == '') {
+        $('#password').focus();
+        return;
+      }
+
+
       //this.RegistrationForm.markAllAsTouched();
-      this.toastr.error('All the * marked fields are mandatory');
-      return;
+
     }
     else {
       this.spinner.show();

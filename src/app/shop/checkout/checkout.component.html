@@ -7,8 +7,8 @@
                 <!-- {{lstBillingAddress|json}} -->
                 <form>
                     <div class="checkout-steps" *ngIf="Address1">
-                        <h4 *ngIf="lstBillingAddress?.length>0" class="step-heading"><span
-                                class="Sequence">1</span>Delivery Address</h4>
+                        <h4 *ngIf="lstBillingAddress?.length>0" class="step-heading active"><span
+                                class="Sequence">1</span>Delivery Address1</h4>
                         <div *ngFor="let lstBilling of lstBillingAddress;let idx = index" class="delivery-address">
                             <div class="d-flex justify-content-start">
                                 <div class="pr-4">
@@ -18,23 +18,23 @@
                                 </div>
                                 <address>
                                     <div>
-                                        <b>Full Name : </b>
+                                        <!-- <b>Full Name : </b> -->
                                         <p>{{lstBilling.fName}} {{lstBilling.lName}}</p>
-                                        <br>
+                                      
                                         <b>Mobile : </b>
                                         <p>{{lstBilling.phone}}</p>
                                     </div>
-                                    <p>
+                                    <!-- <p>
                                         <b>Company Name: </b>
                                         {{lstBilling.companyName}}
 
-                                    </p>
+                                    </p> -->
                                     <br>
-                                    <p>
+                                    <!-- <p>
 
                                         <b>Email : </b>
                                         {{lstBilling.emailId}}
-                                    </p>
+                                    </p> -->
                                     <div>
                                         <b>Address : </b> {{lstBilling.address}}, {{lstBilling.city}}
                                         {{lstBilling.state}}, {{lstBilling.zipCode}}, {{lstBilling.country}}
@@ -257,7 +257,7 @@
                     </div>
 
                     <div class="checkout-steps" *ngIf="OrderSummary2">
-                        <h4 class="step-heading">
+                        <h4 class="step-heading active">
                             <span class="Sequence">2</span>Order Summary
                         </h4>
                         <div class="checkout-details">
@@ -443,7 +443,7 @@
 
                     </div>
                     <div class="checkout-steps" *ngIf="PaymentOption2">
-                        <h4 class="step-heading">
+                        <h4 class="step-heading active">
                             <span class="Sequence">3</span> <span>Payment Options</span>
                         </h4>
                         <div class="payment-box" *ngIf='productSizeColor?.length'>

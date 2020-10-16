@@ -31,7 +31,7 @@ export class ResetPasswordComponent implements OnInit {
       NewPassword: ['', [Validators.required, Validators.minLength(8)]],
       ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
     });
-  }
+  } 
 
   ngOnInit(): void {
 
