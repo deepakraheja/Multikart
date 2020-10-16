@@ -48,10 +48,11 @@ export class CheckoutComponent implements OnInit {
 
   fafaCheck: boolean = false;
 
-  Continuebtn: boolean = false;
+  btnContinue: boolean = false;
 
   addnewaddress: boolean = true;
   addaddress: boolean = false;
+  email: any;
 
   constructor(private fb: FormBuilder,
     public productService: ProductService,
@@ -132,6 +133,7 @@ export class CheckoutComponent implements OnInit {
       this._billingAddressService.GetBillingAddress(obj).subscribe(res => {
         this.lstBillingAddress = res;
         this.AddressId = res[0].billingAddressId;
+        this.email = res[0].emailId;
         this.SelectedAddress = res[0].address + ' ' + res[0].city + ' ' + res[0].state + ' ' + res[0].zipCode + ' ' + res[0].country
       });
     }
@@ -199,6 +201,14 @@ export class CheckoutComponent implements OnInit {
 
     this.OrderSummary1 = true;
     this.OrderSummary2 = false;
+   
+    this.fafaCheck = false;
+
+    this.PaymentOption1 = true;
+    this.PaymentOption2 = false;
+
+    this.btnContinue=false;
+  
 
   }
 
@@ -214,7 +224,7 @@ export class CheckoutComponent implements OnInit {
     this.OrderSummary2 = false;
     this.fafaCheck = true;
 
-    this.Continuebtn = false;
+    this.btnContinue = false;
 
     this.PaymentOption1 = false;
     this.PaymentOption2 = true;
@@ -224,6 +234,8 @@ export class CheckoutComponent implements OnInit {
   AddNewAddress() {
     this.addnewaddress = false;
     this.addaddress = true;
+
+    this.btnContinue = false;
 
   }
   SelectdeliverAddress(lst) {
@@ -240,7 +252,7 @@ export class CheckoutComponent implements OnInit {
     this.OrderSummary1 = false;
     this.OrderSummary2 = true;
 
-    this.Continuebtn = true;
+    this.btnContinue = true;
 
     const billingAddressId = this.checkoutForm.get('billingAddressId');
     billingAddressId.setValue(lst.billingAddressId);
@@ -271,6 +283,18 @@ export class CheckoutComponent implements OnInit {
        statusId: 1
      });
      */
+  }
+
+  ShowOrder() {
+
+    this.OrderSummary1 = false;
+    this.OrderSummary2 = true;
+
+    this.btnContinue = true;
+
+    this.PaymentOption2=false;
+
+    this.PaymentOption1=true;
   }
 
 
@@ -313,7 +337,7 @@ export class CheckoutComponent implements OnInit {
         this.toastr.success("Delivery Address has been saved successfully!");
         this.cancel();
         debugger
-        this.AddressId=this.lstBillingAddress[this.lstBillingAddress.length-1].billingAddressId;
+        this.AddressId = this.lstBillingAddress[this.lstBillingAddress.length - 1].billingAddressId;
 
         //this.LoadBillingAddress();
       });
