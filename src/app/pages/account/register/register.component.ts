@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
   mobileOTP: boolean = false;
   mobileotpSendStart: boolean;
   errorShow: number = 1;
-  mobilecode: any = "";
+  mobilecode: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
@@ -143,6 +143,12 @@ export class RegisterComponent implements OnInit {
     });
 
     this.formInput.forEach(() => this.OTPFormArray.push(new FormControl('')));
+
+  }
+
+  Change() {
+    this.mobileOTP = false
+    //this.RegistrationForm.setValue('mobileotp') = '';
 
   }
   onInputEntry(event, nextInput) {
@@ -310,41 +316,42 @@ export class RegisterComponent implements OnInit {
   /*****************************verify mobile OTP*********************/
   verifyMobileOtp() {
 
+    debugger;
+    // //this.submitted = true;
+    // this.errorShow = 1;
+    // this.mobilecode = ""
+    // const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
 
-    //this.submitted = true;
-    this.errorShow = 1;
-    this.mobilecode = ""
-    const OTPArray: FormArray = this.RegistrationForm.get('OTPArray') as FormArray;
+    // OTPArray.controls.forEach((control, i) => {
 
-    OTPArray.controls.forEach((control, i) => {
+    //   if (control.value == "") {
+    //     this.errorShow = 0;
+    //     return;
+    //   }
+    //   else {
+    //     if (this.mobilecode == "") {
+    //       this.mobilecode = control.value
+    //     }
+    //     else {
+    //       this.mobilecode = this.mobilecode + control.value;
+    //     }
+    //   }
 
-      if (control.value == "") {
-        this.errorShow = 0;
-        return;
-      }
-      else {
-        if (this.mobilecode == "") {
-          this.mobilecode = control.value
-        }
-        else {
-          this.mobilecode = this.mobilecode + control.value;
-        }
-      }
-
-    });
+    // });
 
 
 
-    if (this.errorShow == 0) {
+    if (this.RegistrationForm.get('mobileotp').value == '') {
       this.showMessage('mobile otp required');
     }
     else {
 
+      this.mobilecode = this.RegistrationForm.get('mobileotp').value
       this.spinner.show();
 
       let d = {
         "MobileNo": this.RegistrationForm.get('mobileNo').value,
-        "OTP": this.mobilecode
+        "OTP": this.mobilecode.replace(/\s/g, "")
 
       }
 

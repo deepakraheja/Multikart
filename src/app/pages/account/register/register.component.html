@@ -45,7 +45,7 @@
                         <div class="form-group text-center" *ngIf="mobileOTP">
                             <h6 class="mb-4">
                                 <b>Verify With OTP sent to {{f.mobileNo.value}}.
-                                    <a href="javaScript:void(0);" (click)="mobileOTP=false">Change</a>
+                                    <a href="javaScript:void(0);" (click)="Change()">Change</a>
                                     <span class="text-danger">
                                     </span></b></h6>
 
@@ -63,7 +63,7 @@
 
                                 </div> -->
                                 <div class="otpContainer">
-                                    <input type="text"  [mask]="NumberMask" [dropSpecialCharacters]="false"
+                                    <input type="text" [mask]="NumberMask" [dropSpecialCharacters]="false"
                                         formControlName="mobileotp" [showMaskTyped]="showMask"
                                         (focus)="addMask($event);">
                                 </div>
@@ -82,8 +82,7 @@
 
                                 <label for="email">Your First and Last Name</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="fname" formControlName="name" maxlength="50"
-                                    autocomplete="off" placeholder="First and Last Name"
-                                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             </div>
 
 
@@ -146,14 +145,14 @@
 
                                 <label for="email">Aadhar Card</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="AadharCard" formControlName="AadharCard"
-                                    autocomplete="off" maxlength="12" placeholder="GST No"
+                                    autocomplete="off" maxlength="12" placeholder="Aadhar Card"
                                     [ngClass]="{ 'is-invalid': submitted && f.AadharCard.errors }">
                             </div>
                             <div class="form-group">
 
                                 <label for="email">Business Name</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="BusinessName" formControlName="BusinessName"
-                                    autocomplete="off" maxlength="100" placeholder="Business Name"
+                                    autocomplete="off" maxlength="100"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessName.errors }">
                             </div>
 
@@ -162,14 +161,14 @@
 
                                 <label for="email">Business Phone</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="BusinessPhone" maxlength="12"
-                                    formControlName="BusinessPhone" placeholder="Business Phone"
+                                    formControlName="BusinessPhone"
                                     [ngClass]="{ 'is-invalid': submitted && f.BusinessPhone.errors }">
                             </div>
                             <div class="form-group">
 
                                 <label for="email">Address1</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="Address1" formControlName="Address1"
-                                    autocomplete="off" maxlength="100" placeholder="Address1"
+                                    autocomplete="off" maxlength="100"
                                     [ngClass]="{ 'is-invalid': submitted && f.Address1.errors }">
                             </div>
 
@@ -177,14 +176,14 @@
 
                                 <label for="email">Address2</label>
                                 <input type="text" class="form-control" id="Address2" formControlName="Address2"
-                                    autocomplete="off" maxlength="100" placeholder="Address2">
+                                    autocomplete="off" maxlength="100">
                             </div>
 
                             <div class="form-group">
 
                                 <label for="email">Pin Code</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="PinCode" formControlName="pinCode"
-                                    autocomplete="off" maxlength="6" placeholder="PinCode"
+                                    autocomplete="off" maxlength="6"
                                     [ngClass]="{ 'is-invalid': submitted && f.pinCode.errors }">
                             </div>
 
@@ -192,8 +191,7 @@
 
                                 <label for="email">City</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="City" formControlName="city" maxlength="50"
-                                    autocomplete="off" placeholder="City"
-                                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                                    autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
                             </div>
 
                             <div class="form-group">
@@ -247,8 +245,7 @@
                                 <label>Email ID</label><span style="color:red">*</span>
                                 <div class="input-group">
                                     <input type="text" class="form-control" placeholder="Email ID" maxlength="50"
-                                        autocomplete="off" formControlName="email"
-                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                        autocomplete="off" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
 
                                 </div>
                             </div>
@@ -259,8 +256,7 @@
                                 <div class="input-group">
                                     <input type="{{inputType}}" class="form-control" id="review"
                                         formControlName="password" autocomplete="off" maxlength="20"
-                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
-                                        placeholder="password" required="">
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" required="">
                                     <div class="input-group-append frm-icon" (click)="hideShowPassword()">
                                         <span class="input-group-text">
                                             <i class="{{class}}"></i>
