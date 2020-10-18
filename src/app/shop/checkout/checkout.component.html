@@ -9,8 +9,8 @@
                         <!-- {{lstBillingAddress|json}} -->
                         <form>
                             <div class="checkout-steps" *ngIf="Address1">
-                                <h4 *ngIf="lstBillingAddress?.length>0" class="step-heading active"><span
-                                        class="Sequence">1</span>Delivery Address</h4>
+                                <h5 *ngIf="lstBillingAddress?.length>0" class="step-heading active"><span
+                                        class="Sequence">1</span>Delivery Address</h5>
                                 <div *ngFor="let lstBilling of lstBillingAddress;let idx = index"
                                     class="delivery-address">
                                     <div class="d-flex justify-content-start">
@@ -67,11 +67,11 @@
                             </div>
 
                             <div class="checkout-steps" *ngIf="Address2">
-                                <h4 class="step-heading"><span class="Sequence">1</span>Delivery Address
+                                <h5 class="step-heading"><span class="Sequence">1</span>Delivery Address
                                     <i class="fa fa-check"></i>
-                                </h4>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div>{{SelectedAddress}}</div>
+                                </h5>
+                                <div class="d-flex justify-content-between align-items-center align">
+                                    <div class="left-margin">{{SelectedAddress}}</div>
                                     <button type="submit" (click)="ChangeAddress()"
                                         class="btn-solid btn">Change</button>
                                 </div>
@@ -265,19 +265,19 @@
 
                             <div class="checkout-steps" *ngIf="OrderSummary1">
                                 <div class="step-heading d-flex justify-content-between align-items-center">
-                                    <h4>
+                                    <h5>
                                         <span class="Sequence">2</span><span>Order Summary</span>
                                         <i class="fa fa-check" *ngIf="fafaCheck"></i>
-                                    </h4>
+                                    </h5>
                                     <button class="btn btn-solid" *ngIf="fafaCheck" (click)=ShowOrder()>Show</button>
                                 </div>
 
                             </div>
 
                             <div class="checkout-steps" *ngIf="OrderSummary2">
-                                <h4 class="step-heading active">
+                                <h5 class="step-heading active">
                                     <span class="Sequence">2</span><span>Order Summary</span>
-                                </h4>
+                                </h5>
                                 <div class="checkout-details">
                                     <div class="order-box table-responsive">
                                         <table class="table table-bordered table-hover checkout-product-table">
@@ -318,7 +318,7 @@
                                                 <tr *ngFor="let product of productSizeColor">
                                                     <td>
                                                         <img src="assets/images/product/fashion/19.jpg" alt="Product"
-                                                            class="checkout-prouduct-img">
+                                                            style="display:none" class="checkout-prouduct-img">
                                                         {{ product?.productName }}
 
                                                     </td>
@@ -459,15 +459,15 @@
 
                             <!--*********************Payment Options****************-->
                             <div class="checkout-steps" *ngIf="PaymentOption1">
-                                <h4 class="step-heading">
+                                <h5 class="step-heading">
                                     <span class="Sequence">3</span><span> Payment Options</span>
-                                </h4>
+                                </h5>
 
                             </div>
                             <div class="checkout-steps" *ngIf="PaymentOption2">
-                                <h4 class="step-heading active">
+                                <h5 class="step-heading active">
                                     <span class="Sequence">3</span> <span>Payment Options</span>
-                                </h4>
+                                </h5>
                                 <div class="payment-box" *ngIf='productSizeColor?.length'>
                                     <div class="upper-box">
                                         <div class="payment-options">
@@ -516,7 +516,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="p-4 price-details">
-                        <h4 class="mb-4">Price Details</h4>
+                        <h5 class="mb-4">Price Details</h5>
                         <!-- <p class="d-flex justify-content-between">
                             <span>Total Pieces: </span>
                             <span><b>{{TotalPieces}}</b></span>

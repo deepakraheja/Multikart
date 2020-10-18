@@ -14732,7 +14732,7 @@ address p {
 @media (min-width: 578px) {
     .checkout-steps {
         .step-heading, .step-heading+div, .delivery-address {
-            padding: 1.5rem;
+            padding: 1rem 1.5rem;
         }
     }
 }
@@ -14766,4 +14766,30 @@ address p {
     width: 30px;
     float: left;
     margin-right: 1rem;
+}
+@media (min-width: 768px) {
+    .modal-open .modal {
+        overflow: hidden;
+    }
+}
+.section-b-space, .body-section {
+    margin-top: 118px;
+}
+.checkout-prouduct-img {
+    width: 50px;
+    margin-right:10px;
+    float: left;
+}
+.checkout-product-table tr th:first-child {
+    min-width: 200px;
+}
+
+.checkout-product-table thead th {
+    vertical-align: top;
+}
+.order-summary h4 {
+    font-weight: bold;
+}
+.left-margin {
+    padding-left: 39px;
 }
