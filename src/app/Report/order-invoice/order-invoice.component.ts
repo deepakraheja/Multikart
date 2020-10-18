@@ -39,7 +39,7 @@ export class OrderInvoiceComponent implements OnInit {
           this.orderDetails = res;
           //console.log(res);
           setTimeout(() => {
-            //window.print();
+            window.print();
           }, 1000);
           
         });
