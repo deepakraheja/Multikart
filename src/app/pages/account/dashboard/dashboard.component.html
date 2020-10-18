@@ -162,12 +162,30 @@
                                         {{lst.totalAmount | currency:productService?.Currency.currency:'symbol'}}
                                     </span>
                                 </div>
+                                <!-- <div class="order-parts">
+                                    <span>Ship To</span>
+                                    <span>
+                                        {{lst.fName}} {{lst.lName}}
+                                    </span>
+                                </div>
+                                <div class="order-parts">
+                                    <span>Ship Address</span>
+                                    <span>
+                                        {{lst.address}} {{lst.city}},
+                                    </span>
+                                    <span>
+                                        {{lst.state}}, {{lst.zipCode}}, {{lst.country}}
+                                    </span>
+                                </div> -->
                                 <div class="order-parts">
                                     <span class="badge badge-success">{{lst.statusName}}</span>
                                 </div>
                                 <div class="order-parts">
+                                    <!-- <span> -->
                                     <a href="{{WebSite_URL}}report/orderInvoice/{{lst.guid}}" target="_blank">Print Order</a>
-                                    <!-- <a href="javascript:void(0)" (click)="DownloadInvoice(lst.orderId)">Download Orders</a> -->
+                                    <!-- </span> -->
+
+                                    <!-- <span class="badge badge-success">{{lst.statusName}}</span> -->
                                 </div>
                                 <div class="order-parts">
                                     <input type="button" id="btn{{lst.orderId}}" value="Show" class="btn btn-primary" (click)="ShowDiv(lst.orderId);">
@@ -254,11 +272,9 @@
                                     </div> -->
                             <div style="display: none;" id="{{lst.orderId}}">
                                 <div class="shipment-details">
-                                    <div class="shipment" *ngFor="let lstPro of OrderTrackingListByOrderId(lst.orderId)">
-                                        <div class="product-name-img">
+                                    <div class="shipment">
+                                        <!-- <div class="product-name-img">
                                             <a class="a-link-normal">
-                                                <!-- <img src="assets/ProductImages/{{lstPro.ImagePath}}" width="150px" height="100px" alt=""> -->
-                                                <!-- <img [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" width="150px" height="100px" alt=""> -->
                                                 <img *ngIf="lstPro?.setNo>0" [src]="ProductImage+lstPro?.productId+'/productSetImage/'+lstPro?.setNo+'/'+lstPro?.productImg[0]" alt="">
                                                 <img *ngIf="lstPro?.setNo==0" [src]="ProductImage+lstPro?.productId+'/productColorImage/'+lstPro?.productSizeColorId+'/'+lstPro?.productImg[0]" alt="">
                                             </a>
@@ -269,31 +285,148 @@
                                                     {{lstPro.price | currency:productService?.Currency.currency:'symbol'}}
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="shipping-address">
                                             <p> <b>Shipping Address</b></p>
                                             <div> <b>To:</b> {{lst.fName}} {{lst.lName}}</div>
                                             {{lst.address}} {{lst.city}}, {{lst.state}}, {{lst.zipCode}}, {{lst.country}}
                                         </div>
                                         <ul class="steps">
-                                            <li class="{{lstPro.statusId==1?'active':''}}">
+                                            <li class="{{lst.statusId==1?'active':''}}">
                                                 <span>New Order</span>
                                             </li>
-                                            <li class="{{lstPro.statusId==2?'active':''}}">
+                                            <li class="{{lst.statusId==2?'active':''}}">
                                                 <span>Processing</span>
                                             </li>
-                                            <li class="{{lstPro.statusId==3?'active':''}}">
+                                            <li class="{{lst.statusId==3?'active':''}}">
                                                 <span>Dispatched</span>
                                             </li>
 
-                                            <li class="{{lstPro.statusId==4?'active':''}}">
+                                            <li class="{{lst.statusId==4?'active':''}}">
                                                 <span>Delivered</span>
                                             </li>
-                                            <li *ngIf="lstPro.statusId==5" class="{{lstPro.statusId==5?'active':''}}">
+                                            <li *ngIf="lst.statusId==5" class="{{lst.statusId==5?'active':''}}">
                                                 <span>Returned</span>
                                             </li>
                                         </ul>
                                     </div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th class="thead-dark">
+                                                    Product
+                                                </th>
+                                                <th class="thead-dark">
+                                                    Price
+                                                </th>
+                                                <th class="thead-dark">
+                                                    Qty
+                                                </th>
+                                                <th class="thead-dark" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                    Add. Discount (%)
+                                                </th>
+                                                <th class="thead-dark" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                    Add. Discount Amount
+                                                </th>
+                                                <th class="thead-dark">
+                                                    Total Amount
+                                                </th>
+                                                <th class="thead-dark">
+                                                    GST Rate(%)
+                                                </th>
+                                                <th class="thead-dark">
+                                                    GST Amount
+                                                </th>
+                                                <th class="thead-dark">
+                                                    Total
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let product of OrderTrackingListByOrderId(lst.orderId)">
+                                                <td>
+                                                    <img *ngIf="product?.setNo>0" [src]="ProductImage+product?.productId+'/productSetImage/'+product?.setNo+'/'+product?.productImg[0]" alt="">
+                                                    <img *ngIf="product?.setNo==0" [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]" alt=""> {{ product?.productName }}
+                                                </td>
+                                                <td>
+                                                    {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td>
+                                                    {{ product?.quantity }}
+                                                </td>
+                                                <td *ngIf="product?.additionalDiscount>0">
+                                                    {{ product?.additionalDiscount }}%
+                                                </td>
+                                                <td *ngIf="product?.additionalDiscountAmount>0">
+                                                    {{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td>
+                                                    {{ (product?.salePrice*product?.quantity-product?.additionalDiscountAmount) | currency:productService?.Currency.currency:'symbol' }}
+                                                </td>
+                                                <td>
+                                                    {{ product?.gstRate }}%
+                                                </td>
+                                                <td>
+                                                    {{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td>
+                                                    <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
+                                                        {{ (product.salePrice*product?.quantity-product?.additionalDiscountAmount+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf='!OrderTrackingListByOrderId(lst.orderId).length'>
+                                                <td colspan="9" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td colspan="7" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount==0">
+                                                    There are no products in cart
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <b>Subtotal</b>
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                    <b>{{ getTotalAdditionalDiscountAmount(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</b>
+                                                </td>
+                                                <td>
+                                                    {{ getTotalAmountWithDis(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}
+                                                </td>
+                                                <td></td>
+                                                <td>
+                                                    <b>{{ getTotalGSTAmount(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</b>
+                                                </td>
+                                                <td>
+                                                    <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                                        {{ getTotal(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td colspan="5">
+                                                    <b> Packing</b>
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td colspan="2">
+                                                    <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                                        <b>Free Packing</b></span>
+                                                </td>
+                                            </tr>
+                                            <tr class="total">
+                                                <td colspan="5">
+                                                    <b>Total</b>
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td colspan="2">
+                                                    <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                                        {{ getTotal(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
 
                             </div>

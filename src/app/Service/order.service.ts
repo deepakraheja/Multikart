@@ -30,9 +30,9 @@ export class OrderService {
       this._url + this._methodName, this._param
     );
   }
-  GetOrderByUserId(_Obj: any): Observable<any> {
+  GetOrderByUserId(): Observable<any> {
     this._methodName = "GetOrderByUserId";
-    this._param = _Obj;
+    this._param = {};
     return this._http.post<any>(
       this._url + this._methodName, this._param
     );

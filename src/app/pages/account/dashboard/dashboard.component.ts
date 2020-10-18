@@ -125,11 +125,11 @@ export class DashboardComponent implements OnInit {
   }
 
   LoadAllOrder() {
-    let obj = {
-      UserID: Number(this.LoggedInUser[0].userID)
-    };
+    // let obj = {
+    //   UserID: Number(this.LoggedInUser[0].userID)
+    // };
     this.spinner.show();
-    this._OrderService.GetOrderByUserId(obj).subscribe(res => {
+    this._OrderService.GetOrderByUserId().subscribe(res => {
       this.spinner.hide();
       this.lstOrder = res;
       //console.log(res);
@@ -145,6 +145,51 @@ export class DashboardComponent implements OnInit {
     ////  
     let res = this.lstOrder[0].orderDetails;
     return res.filter(x => (x.orderId == null || x.orderId == OrderId));
+  }
+
+  getTotal(OrderId) {
+    var lst=this.OrderTrackingListByOrderId(OrderId);
+    var TotalAmount = 0;
+    lst.forEach(element => {
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
+    });
+    return TotalAmount;
+  }
+
+  getTotalQty(OrderId) {
+    var lst=this.OrderTrackingListByOrderId(OrderId);
+    var TotalQty = 0;
+    lst.forEach(element => {
+      TotalQty += element.quantity
+    });
+    return TotalQty;
+  }
+
+  getTotalAdditionalDiscountAmount(OrderId) {
+    var lst=this.OrderTrackingListByOrderId(OrderId);
+    var TotalAdditionalDiscountAmount = 0;
+    lst.forEach(element => {
+      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+    });
+    return TotalAdditionalDiscountAmount;
+  }
+
+  getTotalAmountWithDis(OrderId) {
+    var lst=this.OrderTrackingListByOrderId(OrderId);
+    var TotalAmount = 0;
+    lst.forEach(element => {
+      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
+    });
+    return TotalAmount;
+  }
+
+  getTotalGSTAmount(OrderId) {
+    var lst=this.OrderTrackingListByOrderId(OrderId);
+    var TotalGSTAmount = 0;
+    lst.forEach(element => {
+      TotalGSTAmount += element.gstAmount
+    });
+    return TotalGSTAmount;
   }
 
   ToggleDashboard() {
