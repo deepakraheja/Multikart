@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
   BusinessPhone: any;
   PinCodeMask: string;
   txtPinCode: any;
+  AadharNumberMask: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -121,10 +122,16 @@ export class RegisterComponent implements OnInit {
     this.showMask = true;
   }
 
+  addAadharMask(obj: object) {
+    this.AadharNumberMask = "0000 0000 0000";
+    this.showMask = false;
+
+  }
+
   addPhoneMask(obj: Object) {
     //this.DecimalMask = "0*.00";
     this.PhoneMask = "0000000000";
-    //this.showMask = true;
+    this.showMask = false;
   }
 
   addPinCodeMask(obj: Object) {
@@ -185,20 +192,43 @@ export class RegisterComponent implements OnInit {
     debugger;
     // $('#txtGSTNo').val("");
 
-    $('#txtGSTNo').attr("value", "");
-    $('#txtPANNo').attr("value", "");
-    $('#txtAadharCard').attr("value", "");
+    const gstNo = this.RegistrationForm.get('GSTNo');
+    const panNo = this.RegistrationForm.get('PANNo');
+    const AadharCard = this.RegistrationForm.get('AadharCard');
+
+    gstNo.reset();
+    panNo.reset();
+    AadharCard.reset();
+    // $('#txtGSTNo').attr("value", "");
+    // $('#txtPANNo').attr("value", "");
+    // $('#txtAadharCard').attr("value", "");
 
     //const gstNo = this.RegistrationForm.get('GSTNo');
     //gstNo.updateValueAndValidity();
   }
 
+  keydownEvent(event) {
+    debugger
+    if (this.mobileverified) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      return false;
+
+    }
+
+  }
+
   keytab(event) {
     debugger
+    if (this.mobileverified)
+      event.preventDefault();
+
     const input = event.target;
     const length = input.value.length;
 
-    if (length >= 10) {
+    if (length >= 11) {
       let element = event.srcElement.nextElementSibling; // get the sibling element
 
       if (element == null)  // check if its null
@@ -318,6 +348,7 @@ export class RegisterComponent implements OnInit {
       debugger
       this.loginStart = false;
       $('#txtverify').focus();
+      $('#txtverify').val('0')
 
       //setTimeout(() => this.spinner.hide(), 200);
 
@@ -508,7 +539,7 @@ export class RegisterComponent implements OnInit {
       else if ($('#LicenseType option:selected').val() == 'AadharCard') {
 
         this.AadharCard = $("#txtAadharCard").val().length;//this.RegistrationForm.get('AadharCard').value
-        if (this.AadharCard < 12) {
+        if (this.AadharCard < 14) {
           this.showMessage('Please, Enter 12-digit  Aadhar Card number');
           $('#txtAadharCard').focus();
           return
@@ -570,8 +601,8 @@ export class RegisterComponent implements OnInit {
         $('#City').focus();
         return;
       }
-      if ($('#EmailID').val() == '') {
-        $('#EmailID').focus();
+      if ($('#txtemail').val() == '') {
+        $('#txtemail').focus();
         return;
       }
 

@@ -85,15 +85,25 @@
 
                                     <div class="d-flex justify-content-between final-rate-offer">
                                         <div class="d-flex justify-content-start">
-                                            <h4 class="text-black">
+                                            <h4 *ngIf="product?.setType==2" class="text-black">
+
+                                                {{ (product.salePrice*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}
+                                            </h4>&nbsp;
+                                            <del
+                                                *ngIf="product?.setType==2">{{ (product.price*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}</del>
+
+
+                                            <h4 *ngIf="product?.setType!=2" class="text-black">
+
                                                 {{ (product.salePrice) | currency:productService?.Currency.currency:'symbol' }}
                                             </h4>&nbsp;
-                                            <del>{{ product.price | currency:productService?.Currency.currency:'symbol' }}</del>
+                                            <del
+                                                *ngIf="product?.setType!=2">{{ product.price | currency:productService?.Currency.currency:'symbol' }}</del>
                                             &nbsp;
-                                            <h5 class="text-red">
+                                            <h5 class="text-red" *ngIf="product?.setType!=2">
                                                 {{ product.perDiscount/product.totalPieces | number:'1.2-2' }}%</h5>
                                         </div>
-                                        
+
                                         <a href="javascript:void(0)" (click)="removeItem(product)" class="icon">
                                             <i class="ti-trash text-red" style="font-size:1.5rem;"></i>
                                         </a>
@@ -102,15 +112,19 @@
                                     <div class="d-flex justify-content-between mt-3">
                                         <h5>Total Pieces: {{ product.totalPieces  }}</h5>
                                         <div>
-                                            <h3 *ngIf="product?.setType!=3">
+
+                                            <h3 *ngIf="product?.setType==1">
                                                 {{ product.salePrice*product.totalPieces | currency:productService?.Currency.currency:'symbol' }}
+                                            </h3>
+                                            <h3 *ngIf="product?.setType==2">
+                                                {{ (product.salePrice*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}
                                             </h3>
                                             <h3 *ngIf="product?.setType==3">
                                                 {{ product.salePrice
                                                      | currency:productService?.Currency.currency:'symbol' }}
                                             </h3>
                                         </div>
-                                        
+
                                     </div>
                                     <!-- <div class="qty-box">
                                         <div class="input-group">
@@ -134,7 +148,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="p-4" style="border: 1px solid #dddddd;">
+                    <div class="p-4 price-details">
                         <h4 class="mb-4">Price Details</h4>
                         <p class="d-flex justify-content-between">
                             <span>Total Pieces: </span>
@@ -150,7 +164,7 @@
                         </p>
                         <hr>
                         <p class="d-flex justify-content-between">
-                            <span>Total Amount: </span>
+                            <span><b>Total Amount: </b></span>
                             <span><b>{{ Price-Discount | currency:productService?.Currency.currency:'symbol'}}</b></span>
                         </p>
                         <hr>
@@ -194,7 +208,7 @@
                             <div *ngIf="item?.qty > 0" class="input-group">
                                 <span class="input-group-prepend">
                                     <button type="button" class="btn quantity-left-minus" data-type="minus"
-                                    (click)="Min_decrement(item)">
+                                        (click)="Min_decrement(item)">
                                         <i class="ti-minus"></i>
                                     </button>
                                 </span>
@@ -203,7 +217,7 @@
                                     [value]="item.quantity" disabled />
                                 <span class="input-group-prepend">
                                     <button type="button" class="btn quantity-right-plus" data-type="plus"
-                                    (click)="Min_increment(item)">
+                                        (click)="Min_increment(item)">
                                         <i class="ti-plus"></i>
                                     </button>
                                 </span>

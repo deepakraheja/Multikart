@@ -150,6 +150,14 @@ export class CheckoutComponent implements OnInit {
     return TotalAmount;
   }
 
+  getTotalQty() {
+    var TotalQty = 0;
+    this.productSizeColor.forEach(element => {
+      TotalQty += element.quantity
+    });
+    return TotalQty;
+  }
+
   getTotalAdditionalDiscountAmount() {
     var TotalAdditionalDiscountAmount = 0;
     this.productSizeColor.forEach(element => {

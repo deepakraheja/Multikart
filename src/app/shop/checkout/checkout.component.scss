@@ -1,13 +1,46 @@
 .Sequence {
     font-size: 15px;
-    color: #322fdb;
-    background-color: #aca3a3;
+    color: #c62127;
+    background-color: #cecece;
     border-radius: 2px;
     padding: 5px 7px;
     vertical-align: baseline;
     margin-right: 17px;
 }
+.step-heading {
+    margin-bottom: 0;
+}
 .step-heading.active {
-    background: blue;
+    background: #c62127;
     color: #fff;
+}
+address {
+    width: 100%;
+}
+.checkout-prouduct-img {
+    width: 50px;
+    margin-right:10px;
+    float: left;
+}
+.table thead th {
+    vertical-align: top;
+}
+.checkout-product-table tr th:first-child {
+    min-width: 200px;
+}
+.row-column {
+    flex-direction: column;
+}
+@media (min-width: 578px) {
+    .row-column {
+        flex-direction: row;
+    }
+}
+.step-heading  h4 {
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 0;
+}
+.step-heading  .btn-link{
+    padding: 0;
 }
