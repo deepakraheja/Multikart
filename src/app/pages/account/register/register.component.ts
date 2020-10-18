@@ -85,6 +85,11 @@ export class RegisterComponent implements OnInit {
   //   return new FormGroup(group);
   // }
 
+  @ViewChild("SetFocus") nameField: ElementRef
+  setFocus(): void {
+    this.nameField.nativeElement.focus();
+  }
+
   get OTPFormArray() {
     return this.RegistrationForm.controls.OTPArray as FormArray;
   }
@@ -347,8 +352,9 @@ export class RegisterComponent implements OnInit {
     this.userService.CheckMobileAllReadyRegisteredOrNot(obj).subscribe((res: any) => {
       debugger
       this.loginStart = false;
-      $('#txtverify').focus();
-      $('#txtverify').val('0')
+      // $('#txtverify').focus();
+      //this.setFocus();
+      //$('#txtverify').val('0')
 
       //setTimeout(() => this.spinner.hide(), 200);
 
@@ -399,14 +405,18 @@ export class RegisterComponent implements OnInit {
     // if (pos > -1 && pos < this.formInput.length) {
     //   this.rows._results[pos].nativeElement.focus();
     // }
-    $('#txtverify').focus();
-
+    //$('#txtverify').focus();
+    const mobileotp = this.RegistrationForm.get('mobileotp');
+    mobileotp.setValue('');
+    mobileotp.updateValueAndValidity();
 
     this.toastr.success('OTP has been sent.');
     this.counter = 60;// for OTP time
     this.mobileOTP = true;
     this.Set_Time();
-
+    setTimeout(() => {
+      this.setFocus();
+    }, 500);
   }
 
 
@@ -452,7 +462,8 @@ export class RegisterComponent implements OnInit {
 
     if (this.RegistrationForm.get('mobileotp').value == '') {
       this.showMessage('mobile otp required');
-      $('#txtverify').focus();
+      //$('#txtverify').focus();
+      this.setFocus();
       return
     }
     else {
@@ -460,7 +471,8 @@ export class RegisterComponent implements OnInit {
       this.mobilecode = this.RegistrationForm.get('mobileotp').value
       if (this.mobilecode.length < 11) {
         this.showMessage('please enter 6 digit otp');
-        $('#txtverify').focus();
+        // $('#txtverify').focus();
+        this.setFocus();
         return
       }
       //this.spinner.show();
