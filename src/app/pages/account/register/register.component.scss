@@ -6,16 +6,27 @@
 .otpContainer input {
     padding: 9px 0;
     font-size: 26px;
-	text-align: center;
+	text-align: left;
     border: none;
+    //border-bottom: 1 px solid;
     letter-spacing: 4px;
 } 
-// .otpContainer input:focus {
-// 	box-shadow: none;
-// 	border-bottom: 1px solid var(--theme-deafult);
-// } 
+.otpContainer input {
+	box-shadow: none;
+	border-bottom: 1px solid var(--theme-deafult);
+} 
 .register-page .theme-card .theme-form label {
     color: #646363;
+}
+
+.Customerror
+{
+
+    display: none;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
 }
 
 

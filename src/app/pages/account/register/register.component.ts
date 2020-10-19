@@ -94,37 +94,40 @@ export class RegisterComponent implements OnInit {
     return this.RegistrationForm.controls.OTPArray as FormArray;
   }
 
-  // keyupEvent(event, index) {
-  //   debugger;
-  //   let pos = index;
-  //   if (event.keyCode === 8 && event.which === 8) {
-  //     pos = index - 1;
+  keyupEvent(event) {
+    debugger;
+    //$('#txtverify').selectionStart = 1
+    // let pos = index;
+    // if (event.keyCode === 8 && event.which === 8) {
+    //   pos = index - 1;
 
-  //   }
-  //   if (pos > -1 && pos < this.formInput.length) {
-  //     this.rows._results[pos].nativeElement.focus();
-  //   }
+    // }
+    // if (pos > -1 && pos < this.formInput.length) {
+    //   this.rows._results[pos].nativeElement.focus();
+    // }
 
-  // }
+  }
 
-  // keypressEvent(event, index) {
-  //   debugger;
-  //   let pos = index;
-  //   if (event.keyCode === 8 && event.which === 8) {
-  //     pos = index - 1;
-  //   } else {
-  //     pos = index + 1;
-  //   }
-  //   if (pos > -1 && pos < this.formInput.length) {
-  //     this.rows._results[pos].nativeElement.focus();
-  //   }
+  keypressEvent(event) {
+    debugger;
+    // let pos = index;
+    // if (event.keyCode === 8 && event.which === 8) {
+    //   pos = index - 1;
+    // } else {
+    //   pos = index + 1;
+    // }
+    // if (pos > -1 && pos < this.formInput.length) {
+    //   this.rows._results[pos].nativeElement.focus();
+    // }
 
-  // }
+  }
 
-  addMask(obj: Object) {
-    //this.DecimalMask = "0*.00";
-    this.NumberMask = "0 0 0 0 0 0";
+  addMask(args) {
+
+    this.NumberMask = "000000";
     this.showMask = true;
+
+    args.selectionEnd = args.selectionStart;
   }
 
   addAadharMask(obj: object) {
@@ -469,8 +472,8 @@ export class RegisterComponent implements OnInit {
     else {
 
       this.mobilecode = this.RegistrationForm.get('mobileotp').value
-      if (this.mobilecode.length < 11) {
-        this.showMessage('please enter 6 digit otp');
+      if (this.mobilecode.length < 5) {
+        this.showMessage('please enter 6 digit OTP');
         // $('#txtverify').focus();
         this.setFocus();
         return
@@ -533,10 +536,25 @@ export class RegisterComponent implements OnInit {
       if ($('#ddlBusinessType option:selected').val() == '') {
         this.toastr.error('Please fill in all the * required fields.');
         $('#ddlBusinessType').focus();
+
         return;
       }
 
-      if ($('#LicenseType option:selected').val() == 'GSTIN') {
+      if ($('#ddlIndustry option:selected').val() == '') {
+        this.toastr.error('Please fill in all the * required fields.');
+        $('#ddlIndustry').focus();
+
+        return;
+      }
+
+      if ($('#ddlLicenseType option:selected').val() == '') {
+        this.toastr.error('Please fill in all the * required fields.');
+        $('#ddlLicenseType').focus();
+
+        return;
+      }
+
+      if ($('#ddlLicenseType option:selected').val() == 'GSTIN') {
         this.GSTNo = $("#txtGSTNo").val().length;//this.RegistrationForm.get('GSTNo').value
         if (this.GSTNo < 15) {
           this.showMessage('Please, Enter 15-digit GST number');
@@ -544,7 +562,7 @@ export class RegisterComponent implements OnInit {
           return
         }
       }
-      else if ($('#LicenseType option:selected').val() == 'BusinessPAN') {
+      else if ($('#ddlLicenseType option:selected').val() == 'BusinessPAN') {
         this.PANNo = $("#txtPANNo").val().length;//this.RegistrationForm.get('PANNo').value
         if (this.PANNo < 10) {
           this.showMessage('Please, Enter 10-digit PAN number');
@@ -552,7 +570,7 @@ export class RegisterComponent implements OnInit {
           return
         }
       }
-      else if ($('#LicenseType option:selected').val() == 'AadharCard') {
+      else if ($('#ddlLicenseType option:selected').val() == 'AadharCard') {
 
         this.AadharCard = $("#txtAadharCard").val().length;//this.RegistrationForm.get('AadharCard').value
         if (this.AadharCard < 14) {
@@ -613,10 +631,13 @@ export class RegisterComponent implements OnInit {
         return;
       }
 
-      if ($('#City').val() == '') {
-        $('#City').focus();
+      if ($('#ddlState option:selected').val() == '') {
+        this.toastr.error('Please fill in all the * required fields.');
+        $('#ddlState').focus();
+
         return;
       }
+
       if ($('#txtemail').val() == '') {
         $('#txtemail').focus();
         return;
