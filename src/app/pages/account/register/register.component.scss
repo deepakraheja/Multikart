@@ -1,35 +1,33 @@
 .otpContainer {
     // margin-right: 10px;
-	// width: 40px;
-	border: none;
-} 
+    // width: 40px;
+    border: none;
+}
+
 .otpContainer input {
     padding: 9px 0;
     font-size: 26px;
-	text-align: left;
+    text-align: left;
     border: none;
     //border-bottom: 1 px solid;
     letter-spacing: 4px;
-} 
+}
+
 .otpContainer input {
-	box-shadow: none;
-	border-bottom: 1px solid var(--theme-deafult);
-} 
+    box-shadow: none;
+    border-bottom: 1px solid var(--theme-deafult);
+}
+
 .register-page .theme-card .theme-form label {
     color: #646363;
 }
 
-.Customerror
-{
-
-    display: none;
+.Customerror {
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
     color: #dc3545;
 }
-
-
 
 // input[type="text"]::-webkit-input-placeholder, input[type="password"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 //     color: transparent;
@@ -50,9 +48,9 @@
 // }
 
 /* loading state */
+
 .btn-loading {
     position: relative;
-
     /* hide button content */
     &,
     /* hover */
@@ -66,31 +64,30 @@
     /* disabled */
     &.disabled,
     &:disabled {
-        color: rgba(255,255,255,.3);
-        fill: rgba(255,255,255,.3);
+        color: rgba(255, 255, 255, .3);
+        fill: rgba(255, 255, 255, .3);
     }
 }
+
 .btn-loading::after {
-  content: "";
-  position: absolute; 
-  top: 25%; 
-  left: 40%; 
-  transform: translate(-40%, -50%); 
-  animation: effect 1s linear infinite; 
-  width: 26px; 
-  height: 26px; 
-  border-radius: 50%; 
-  border: 3px solid rgba(255, 255, 255, 0.3); 
-  border-top-color: #fff; 
+    content: "";
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    transform: translate(-40%, -50%);
+    animation: effect 1s linear infinite;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
 }
-@keyframes effect { 
-    0% { 
-        transform: rotate(0deg); 
-    } 
 
-    100% { 
-        transform: rotate(360deg); 
-    } 
-
-
+@keyframes effect {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

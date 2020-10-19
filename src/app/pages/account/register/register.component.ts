@@ -522,9 +522,8 @@ export class RegisterComponent implements OnInit {
   //****************************** Create Registration into database*************//
   CreateRegistration() {
     debugger
-    this.formControlValueChanged();
-
     this.submitted = true;
+    this.formControlValueChanged();
 
     if (this.RegistrationForm.invalid) {
       if ($('#fname').val() == '') {
