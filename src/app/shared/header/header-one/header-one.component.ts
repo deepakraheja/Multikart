@@ -46,6 +46,7 @@ export class HeaderOneComponent implements OnInit {
     sessionStorage.removeItem('Token');
     this.LoggedInUser = [];
     this._SharedDataService.AssignUser(null);
+    this._SharedDataService.UserCart(null);
     this.router.navigate(['/home/fashion']);
   }
   Login() {

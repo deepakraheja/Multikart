@@ -90,7 +90,7 @@
 
                             <div class="form-group">
                                 <label>Business Type</label><span style="color:red">*</span>
-                                <select #SetFocus name="ddlBusinessType" class="custom-select" formControlName="BusinessType" [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
+                                <select id="ddlBusinessType" name="ddlBusinessType" class="custom-select" formControlName="BusinessType" [ngClass]="{ 'is-invalid': submitted && f.BusinessType.errors }">
                                     <option value="">select</option>
                                     <option value="SoleProprietorship">Sole Proprietorship</option>
                                     <option value="Partnership">Partnership</option>
@@ -139,17 +139,29 @@
 
                                 <label for="email">GST Number</label><span style="color:red">*</span>
                                 <input #GSTNo type="text" class="form-control input-upper" id="txtGSTNo" autocomplete="off" (input)="GSTNo.value = GSTNo.value.toUpperCase()" formControlName="GSTNo" maxlength="15" placeholder="GST No">
+                                <div *ngIf="submitted && f.GSTNo.errors" class="invalid-feedback">
+                                    <div>GST Number is required
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='BusinessPAN'">
 
                                 <label for="email">PAN Number</label><span style="color:red">*</span>
                                 <input type="text" #PANNo class="form-control" id="txtPANNo" maxlength="10" formControlName="PANNo" (input)="PANNo.value = PANNo.value.toUpperCase()" placeholder="PAN No">
+                                <div *ngIf="submitted && f.PANNo.errors" class="invalid-feedback">
+                                    <div>PAN Number is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group" *ngIf="f.businessLicenseType.value=='AadharCard'">
 
                                 <label for="email">Aadhar Card</label><span style="color:red">*</span>
                                 <input type="text" class="form-control" id="txtAadharCard" autocomplete="off" formControlName="AadharCard" maxlength="14" placeholder="Aadhar Card" [mask]="AadharNumberMask" [showMaskTyped]="showMask" (focus)="addAadharMask($event);" [dropSpecialCharacters]="false">
+                                <div *ngIf="submitted && f.AadharCard.errors" class="invalid-feedback">
+                                    <div>Aadhar Card is required
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
 
@@ -289,12 +301,11 @@
                                 </div>
 
                                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                    <div *ngIf="f.password.errors.required">Password is required</div>
-
+                                    <div>Password is required</div>
                                 </div>
                                 <br>
-                                <div *ngIf="(submitted) && RegistrationForm.controls.password.errors?.minlength" class="text text-danger">
-                                    Password must be greater than 8 character.
+                                <div *ngIf="(submitted) && RegistrationForm.controls.password.errors?.minlength" class="invalid-feedback">
+                                    Password must be at least 8 characters long.
                                 </div>
 
                             </div>

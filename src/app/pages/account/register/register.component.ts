@@ -152,7 +152,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.RegistrationForm = this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(9)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       email: ['', [Validators.required, Validators.email]],
       name: ['', Validators.required],
       mobileNo: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^[0-9]*$")]],
@@ -530,8 +530,13 @@ export class RegisterComponent implements OnInit {
         return;
       }
 
-      if ($('#LicenseType option:selected').val() == 'GSTIN') {
+      if ($('#ddlBusinessType option:selected').val() == '') {
+        this.toastr.error('Please fill in all the * required fields.');
+        $('#ddlBusinessType').focus();
+        return;
+      }
 
+      if ($('#LicenseType option:selected').val() == 'GSTIN') {
         this.GSTNo = $("#txtGSTNo").val().length;//this.RegistrationForm.get('GSTNo').value
         if (this.GSTNo < 15) {
           this.showMessage('Please, Enter 15-digit GST number');
@@ -540,7 +545,6 @@ export class RegisterComponent implements OnInit {
         }
       }
       else if ($('#LicenseType option:selected').val() == 'BusinessPAN') {
-
         this.PANNo = $("#txtPANNo").val().length;//this.RegistrationForm.get('PANNo').value
         if (this.PANNo < 10) {
           this.showMessage('Please, Enter 10-digit PAN number');
