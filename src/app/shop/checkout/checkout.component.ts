@@ -53,7 +53,8 @@ export class CheckoutComponent implements OnInit {
   addnewaddress: boolean = true;
   addaddress: boolean = false;
   email: any;
-
+  PinCodeMask: string;
+  IsEmptyCart:boolean=false;
   constructor(private fb: FormBuilder,
     public productService: ProductService,
     //private orderService: OrderService,
@@ -73,10 +74,10 @@ export class CheckoutComponent implements OnInit {
       fName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       //lName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       companyName: [''],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      //phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       //emailId: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
-      country: ['', Validators.required],
+      country: ['India', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       zipCode: ['', [Validators.required, Validators.pattern('[0-9]+')]],
@@ -98,6 +99,9 @@ export class CheckoutComponent implements OnInit {
   //   this.initConfig();
   // }
 
+  addPinCodeMask(obj: Object) {
+    this.PinCodeMask = "000000";
+  }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -188,13 +192,20 @@ export class CheckoutComponent implements OnInit {
   LoadCart() {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     if (this.user != null) {
-      let obj = {
-        UserID: this.user[0].userID
-      };
-      this._cartService.GetCartProcessedById(obj).subscribe(response => {
+      // let obj = {
+      //   UserID: this.user[0].userID
+      // };
+      this._cartService.GetCartProcessedById().subscribe(response => {
         //  
-        this.spinner.hide();
-        this.productSizeColor = response
+        if (response.length > 0) {
+          this.IsEmptyCart=false;
+          this.spinner.hide();
+          this.productSizeColor = response;
+        }
+        else{
+          this.IsEmptyCart=true;
+          this.productSizeColor = [];
+        }
       });
     }
     else {
@@ -209,23 +220,21 @@ export class CheckoutComponent implements OnInit {
 
     this.OrderSummary1 = true;
     this.OrderSummary2 = false;
-   
+
     this.fafaCheck = false;
 
     this.PaymentOption1 = true;
     this.PaymentOption2 = false;
 
-    this.btnContinue=false;
-  
+    this.btnContinue = false;
+
 
   }
 
   cancel() {
     this.addnewaddress = true;
     this.addaddress = false;
-
   }
-
 
   Continue() {
     this.OrderSummary1 = true;
@@ -300,9 +309,9 @@ export class CheckoutComponent implements OnInit {
 
     this.btnContinue = true;
 
-    this.PaymentOption2=false;
+    this.PaymentOption2 = false;
 
-    this.PaymentOption1=true;
+    this.PaymentOption1 = true;
   }
 
 
@@ -320,7 +329,7 @@ export class CheckoutComponent implements OnInit {
         fName: this.checkoutForm.value.fName,
         //lName: this.checkoutForm.value.lName,
         companyName: this.checkoutForm.value.companyName,
-        phone: this.checkoutForm.value.phone,
+        //phone: this.checkoutForm.value.phone,
         //emailId: this.checkoutForm.value.emailId,
         address: this.checkoutForm.value.address,
         country: this.checkoutForm.value.country,
@@ -398,6 +407,7 @@ export class CheckoutComponent implements OnInit {
       this.spinner.hide();
       this._SharedDataService.UserCart([]);
       this.router.navigate(['/shop/checkout/success/' + res]);
+      
     });
     //}
   }

@@ -1,8 +1,16 @@
 <!-- <app-breadcrumb [title]="'Checkout'" [breadcrumb]="'Checkout'"></app-breadcrumb> -->
 <section class="section-b-space" style="padding-top: 20px !important;">
     <div class="container">
+        <div class="col-sm-12 empty-cart-cls text-center" *ngIf="IsEmptyCart==true">
+            <img src="assets/images/icon-empty-cart.png" class="img-fluid mb-4">
+            <h3><strong>Your Cart is Empty</strong></h3>
+            <h4>Add something to make me happy :)</h4>
+            <div class="text-center">
+                <a [routerLink]="['/shop/collection/left/sidebar']" class="btn btn-solid">continue shopping</a>
+            </div>
+        </div>
         <!--*********************Delivery Address****************-->
-        <div class="checkout-page">
+        <div class="checkout-page" *ngIf="productSizeColor.length">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="checkout-form">
@@ -110,7 +118,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                         <div class="field-label">Phone <span style="color: red;">*</span></div>
                                         <input type="text" name="phone" maxlength="10" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.required" class="text text-danger">
@@ -119,7 +127,7 @@
                                         <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.pattern" class="text text-danger">
                                             Phone No must be number
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- <div class="form-group col-md-6 col-sm-6 col-xs-12">
                                             <div class="field-label">Email Address <span style="color: red;">*</span></div>
                                             <input type="text" name="emailId" [formControl]="checkoutForm.controls['emailId']"
@@ -133,7 +141,7 @@
                                                 Invalid email address
                                             </div>
                                         </div> -->
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <div class="field-label">Address <span style="color: red;">*</span></div>
                                         <textarea maxlength="200" name="address" [formControl]="checkoutForm.controls['address']" style="height: 65px;" value="" placeholder="" autocomplete="off"></textarea>
                                         <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.required" class="text text-danger">
@@ -146,7 +154,7 @@
                                     <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                         <div class="field-label">Country <span style="color: red;">*</span></div>
                                         <select name="country" [formControl]="checkoutForm.controls['country']">
-                                            <option value="" selected>Select Country</option>
+                                            <!-- <option value="" selected>Select Country</option> -->
                                             <option value="India">India</option>
                                             <!-- <option value="USA">USA</option>
                                                 <option value="Australia">Australia</option> -->
@@ -214,7 +222,7 @@
                                     </div>
                                     <div class="form-group col-md-6 col-sm-6 col-xs-6">
                                         <div class="field-label">Pin Code <span style="color: red;">*</span></div>
-                                        <input maxlength="6" type="text" name="zipCode" [formControl]="checkoutForm.controls['zipCode']" value="" placeholder="" autocomplete="off">
+                                        <input type="text" name="zipCode" [formControl]="checkoutForm.controls['zipCode']" value="" placeholder="" autocomplete="off" maxlength="6" [mask]="PinCodeMask" [dropSpecialCharacters]="false" (focus)="addPinCodeMask($event);">
                                         <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.required" class="text text-danger">
                                             Pin Code is required
                                         </div>

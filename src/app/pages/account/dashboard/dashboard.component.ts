@@ -34,6 +34,7 @@ export class DashboardComponent implements OnInit {
   public ChangePwdForm: FormGroup;
   public lstOrderStatus: any = [];
   public lstUserData: any[] = [];
+  PinCodeMask: string;
   constructor(
     private _SharedDataService: SharedDataService,
     private router: Router,
@@ -52,6 +53,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  addPinCodeMask(obj: Object) {
+    this.PinCodeMask = "000000";
+  }
+
   ngOnInit(): void {
     this._SharedDataService.currentUser.subscribe(a => {
       this.LoggedInUser = a;
@@ -61,8 +66,8 @@ export class DashboardComponent implements OnInit {
         fName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
         //lName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
         companyName: [''],
-        phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-        emailId: ['', [Validators.required, Validators.email]],
+        //phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+        //emailId: ['', [Validators.required, Validators.email]],
         address: ['', [Validators.required, Validators.maxLength(200)]],
         country: ['', Validators.required],
         city: ['', Validators.required],
@@ -213,10 +218,10 @@ export class DashboardComponent implements OnInit {
       fName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       //lName: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       companyName: [''],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      emailId: ['', [Validators.required, Validators.email]],
+      // phone: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+      // emailId: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
-      country: ['', Validators.required],
+      country: ['India', Validators.required],
       city: ['', Validators.required],
       state: ['', Validators.required],
       zipCode: ['', Validators.required],
@@ -241,8 +246,8 @@ export class DashboardComponent implements OnInit {
       fName: [lst.fName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       //lName: [lst.lName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
       companyName: [lst.companyName],
-      phone: [lst.phone, [Validators.required, Validators.pattern('[0-9]+')]],
-      emailId: [lst.emailId, [Validators.required, Validators.email]],
+      // phone: [lst.phone, [Validators.required, Validators.pattern('[0-9]+')]],
+      // emailId: [lst.emailId, [Validators.required, Validators.email]],
       address: [lst.address, [Validators.required, Validators.maxLength(200)]],
       country: [lst.country, Validators.required],
       city: [lst.city, Validators.required],
@@ -304,8 +309,8 @@ export class DashboardComponent implements OnInit {
         fName: this.checkoutForm.value.fName,
         //lName: this.checkoutForm.value.lName,
         companyName: this.checkoutForm.value.companyName,
-        phone: this.checkoutForm.value.phone,
-        emailId: this.checkoutForm.value.emailId,
+        // phone: this.checkoutForm.value.phone,
+        // emailId: this.checkoutForm.value.emailId,
         address: this.checkoutForm.value.address,
         country: this.checkoutForm.value.country,
         city: this.checkoutForm.value.city,
