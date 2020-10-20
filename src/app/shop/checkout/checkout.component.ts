@@ -145,7 +145,7 @@ export class CheckoutComponent implements OnInit {
   getTotal() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount).toFixed(2));
     });
     return TotalAmount;
   }
@@ -153,7 +153,7 @@ export class CheckoutComponent implements OnInit {
   getTotalQty() {
     var TotalQty = 0;
     this.productSizeColor.forEach(element => {
-      TotalQty += element.quantity
+      TotalQty += Number((element.quantity).toFixed(2));
     });
     return TotalQty;
   }
@@ -161,7 +161,7 @@ export class CheckoutComponent implements OnInit {
   getTotalAdditionalDiscountAmount() {
     var TotalAdditionalDiscountAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+      TotalAdditionalDiscountAmount += Number((element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAdditionalDiscountAmount;
   }
@@ -169,7 +169,7 @@ export class CheckoutComponent implements OnInit {
   getTotalAmountWithDis() {
     var TotalAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAmount;
   }
@@ -177,7 +177,7 @@ export class CheckoutComponent implements OnInit {
   getTotalGSTAmount() {
     var TotalGSTAmount = 0;
     this.productSizeColor.forEach(element => {
-      TotalGSTAmount += element.gstAmount
+      TotalGSTAmount += Number((element.gstAmount).toFixed(2));
     });
     return TotalGSTAmount;
   }

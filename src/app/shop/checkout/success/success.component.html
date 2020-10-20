@@ -22,17 +22,17 @@
 <section class="section-b-space light-layout" *ngIf="orderDetails?.length>0">
     <div class="container">
 
-        <div class="success-text mb-5">
-            <img class="mb-4" src="assets/images/icon/check.svg" alt="Success!">
+        <div class="success-text mb-1">
+            <img class="mb-2" src="assets/images/icon/check.svg" alt="Success!">
             <h2>Thank you!</h2>
 
-            <p class="mt-5">Payment has been received and Order Placed Successfully</p>
+            <p class="mt-2">Payment has been received and Order Placed Successfully</p>
             <p><b>Order ID:{{ orderDetails[0].orderNumber }}</b></p>
         </div>
 
-        <div class="order-summary mb-2">
+        <div class="order-summary mb-1">
             <div class="row">
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-2">
                     <h4>summery</h4>
                     <ul class="order-detail">
                         <li><span>order ID:</span> {{ orderDetails[0].orderNumber }}</li>
@@ -42,7 +42,7 @@
                         <!-- <li><span>Payment Method:</span> Credit Card (**3569)</li> -->
                     </ul>
                 </div>
-                <div class="col-md-6 mb-3">
+                <div class="col-md-6 mb-2">
                     <h4>shipping address</h4>
                     <ul class="order-detail">
                         <li>{{ orderDetails[0].address }}, {{orderDetails[0].city}}</li>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <h4 class="mb-4">Your Order Details</h4>
+        <h4 class="mb-2" style="font-weight: 700;">Your Order Details</h4>
         <div class="order-box">
             <div class="table-responsive">
                 <table class="table table-bordered table-hover checkout-product-table">
@@ -94,55 +94,60 @@
                             <td>
                                 <img src="assets/images/product/fashion/19.jpg" alt="Product" style="display:none;" class="checkout-prouduct-img"> {{ product?.productName }}
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
                             </td>
                             <td>
                                 {{ product?.quantity }}
                             </td>
-                            <td *ngIf="product?.additionalDiscount>0">
+                            <td *ngIf="product?.additionalDiscount>0" style="text-align: right;">
                                 {{ product?.additionalDiscount }}%
                             </td>
-                            <td *ngIf="product?.additionalDiscountAmount>0">
+                            <td *ngIf="product?.additionalDiscountAmount>0" style="text-align: right;">
                                 {{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 {{ (product?.salePrice*product?.quantity-product?.additionalDiscountAmount) | currency:productService?.Currency.currency:'symbol' }}
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 {{ product?.gstRate }}%
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 {{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
                                     {{ (product.salePrice*product?.quantity-product?.additionalDiscountAmount+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
                             </td>
                         </tr>
                         <tr *ngIf='!orderDetails.length'>
-                            <td colspan="9" *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
+                            <td colspan="9" *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
+                                There are no products in cart
+                            </td>
                             <td colspan="7" *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount==0">
                                 There are no products in cart
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 <b>Subtotal</b>
                             </td>
-                            <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
+                            <td style="text-align: right;">
+                                <b>{{getTotalQty()}}</b>
                             </td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
+                            </td>
+                            <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0" style="text-align: right;">
                                 <b>{{ getTotalAdditionalDiscountAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                             </td>
-                            <td>
-                                {{ getTotalAmountWithDis() | currency:productService?.Currency.currency:'symbol'}}
+                            <td style="text-align: right;">
+                                <b>{{ getTotalAmountWithDis() | currency:productService?.Currency.currency:'symbol'}}</b>
                             </td>
                             <td></td>
-                            <td>
+                            <td style="text-align: right;">
                                 <b>{{ getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                             </td>
-                            <td>
+                            <td style="text-align: right;">
                                 <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                             </td>
@@ -166,7 +171,7 @@
                             </td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
-                            <td colspan="2">
+                            <td colspan="2" style="text-align: right;">
                                 <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                             </td>

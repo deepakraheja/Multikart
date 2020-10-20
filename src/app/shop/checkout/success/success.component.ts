@@ -62,15 +62,24 @@ export class SuccessComponent implements OnInit, AfterViewInit {
 
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount).toFixed(2));
     });
     return TotalAmount;
   }
 
+  getTotalQty() {
+    var TotalQty = 0;
+    (this.orderDetails[0].orderDetails).forEach(element => {
+      TotalQty += Number((element.quantity).toFixed(2));
+    });
+    return TotalQty;
+  }
+
+
   getTotalAdditionalDiscountAmount() {
     var TotalAdditionalDiscountAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+      TotalAdditionalDiscountAmount += Number((element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAdditionalDiscountAmount;
   }
@@ -78,7 +87,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   getTotalAmountWithDis(){
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAmount;
   }
@@ -86,7 +95,7 @@ export class SuccessComponent implements OnInit, AfterViewInit {
   getTotalGSTAmount() {
     var TotalGSTAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
-      TotalGSTAmount += element.gstAmount
+      TotalGSTAmount += Number((element.gstAmount).toFixed(2));
     });
     return TotalGSTAmount;
   }

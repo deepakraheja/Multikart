@@ -65,14 +65,19 @@
                                         </div>
                                         <div class="box-content">
                                             <h6><b>Business Name : </b>{{lstUserData[0].businessName}}</h6>
-                                            <h6><b>Business Type : </b>{{getBusineesType(lstUserData[0].businessType)}}</h6>
+                                            <h6><b>Business Type : </b>{{getBusineesType(lstUserData[0].businessType)}}
+                                            </h6>
                                             <h6><b>Industry : </b>{{lstUserData[0].industry}}</h6>
                                             <h6>
-                                                <b>Business LicenseType : </b>{{ getBusineesLicenseType(lstUserData[0].businessLicenseType)}}
+                                                <b>Business LicenseType :
+                                                </b>{{ getBusineesLicenseType(lstUserData[0].businessLicenseType)}}
                                             </h6>
-                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='GSTIN'"><b>GSTNo : </b>{{lstUserData[0].gstNo}}</h6>
-                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='BusinessPAN'"><b>PANNo : </b>{{lstUserData[0].panNo}}</h6>
-                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='AadharCard'"><b>AadharCard : </b>{{lstUserData[0].aadharCard}}</h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='GSTIN'"><b>GSTNo :
+                                                </b>{{lstUserData[0].gstNo}}</h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='BusinessPAN'"><b>PANNo :
+                                                </b>{{lstUserData[0].panNo}}</h6>
+                                            <h6 *ngIf="lstUserData[0].businessLicenseType=='AadharCard'"><b>AadharCard :
+                                                </b>{{lstUserData[0].aadharCard}}</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +87,8 @@
                                             Business Address Detail
                                         </div>
                                         <div class="box-content">
-                                            <h6><b>Address : </b>{{lstUserData[0].address1}} {{lstUserData[0].address2}}</h6>
+                                            <h6><b>Address : </b>{{lstUserData[0].address1}} {{lstUserData[0].address2}}
+                                            </h6>
                                             <h6><b>City : </b>{{lstUserData[0].city}}</h6>
                                             <h6><b>State : </b>{{lstUserData[0].state}}</h6>
                                             <h6><b>PinCode : </b>{{lstUserData[0].pinCode}}</h6>
@@ -182,7 +188,8 @@
                                 </div>
                                 <div class="order-parts">
                                     <!-- <span> -->
-                                    <a href="{{WebSite_URL}}report/orderInvoice/{{lst.guid}}" target="_blank">Print Order</a>
+                                    <a href="{{WebSite_URL}}report/orderInvoice/{{lst.guid}}" target="_blank">Print
+                                        Order</a>
                                     <!-- </span> -->
 
                                     <!-- <span class="badge badge-success">{{lst.statusName}}</span> -->
@@ -349,55 +356,61 @@
                                                     <img *ngIf="product?.setNo==0" [src]="ProductImage+product?.productId+'/productColorImage/'+product?.productSizeColorId+'/'+product?.productImg[0]" alt="">  -->
                                                     {{ product?.productName }}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
                                                 </td>
                                                 <td>
                                                     {{ product?.quantity }}
                                                 </td>
-                                                <td *ngIf="product?.additionalDiscount>0">
+                                                <td *ngIf="product?.additionalDiscount>0" style="text-align: right;">
                                                     {{ product?.additionalDiscount }}%
                                                 </td>
-                                                <td *ngIf="product?.additionalDiscountAmount>0">
+                                                <td *ngIf="product?.additionalDiscountAmount>0" style="text-align: right;">
                                                     {{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     {{ (product?.salePrice*product?.quantity-product?.additionalDiscountAmount) | currency:productService?.Currency.currency:'symbol' }}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     {{ product?.gstRate }}%
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     {{ product?.gstAmount | currency:productService?.Currency.currency:'symbol'}}
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     <span style="float: right; font-size: 16px; line-height: 20px;  font-weight: 400;">
                                                         {{ (product.salePrice*product?.quantity-product?.additionalDiscountAmount+product?.gstAmount) | currency:productService?.Currency.currency:'symbol' }}</span>
                                                 </td>
                                             </tr>
                                             <tr *ngIf='!OrderTrackingListByOrderId(lst.orderId).length'>
-                                                <td colspan="9" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td colspan="9" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                    There are no products in cart
+                                                </td>
                                                 <td colspan="7" *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount==0">
                                                     There are no products in cart
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3">
+                                                <td colspan="2">
                                                     <b>Subtotal</b>
                                                 </td>
-                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                <td>
+                                                    <b>{{getTotalQty(lst.orderId)}}</b>
                                                 </td>
                                                 <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0" style="text-align: right;">
                                                     <b>{{ getTotalAdditionalDiscountAmount(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</b>
                                                 </td>
-                                                <td>
-                                                    {{ getTotalAmountWithDis(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}
+                                                <td style="text-align: right;">
+                                                    <b>
+                                                        {{ getTotalAmountWithDis(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</b>
                                                 </td>
                                                 <td></td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     <b>{{ getTotalGSTAmount(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</b>
                                                 </td>
-                                                <td>
+                                                <td style="text-align: right;">
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                         {{ getTotal(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</span>
                                                 </td>
@@ -408,8 +421,10 @@
                                                 <td colspan="5">
                                                     <b> Packing</b>
                                                 </td>
-                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
-                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
                                                 <td colspan="2">
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                         <b>Free Packing</b></span>
@@ -419,9 +434,11 @@
                                                 <td colspan="5">
                                                     <b>Total</b>
                                                 </td>
-                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
-                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0"></td>
-                                                <td colspan="2">
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
+                                                <td *ngIf="OrderTrackingListByOrderId(lst.orderId)[0]?.additionalDiscount>0">
+                                                </td>
+                                                <td colspan="2" style="text-align: right;">
                                                     <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                                         {{ getTotal(lst.orderId) | currency:productService?.Currency.currency:'symbol'}}</span>
                                                 </td>

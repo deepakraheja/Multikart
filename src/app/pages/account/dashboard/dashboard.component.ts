@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
     var lst=this.OrderTrackingListByOrderId(OrderId);
     var TotalAmount = 0;
     lst.forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount).toFixed(2));
     });
     return TotalAmount;
   }
@@ -160,7 +160,7 @@ export class DashboardComponent implements OnInit {
     var lst=this.OrderTrackingListByOrderId(OrderId);
     var TotalQty = 0;
     lst.forEach(element => {
-      TotalQty += element.quantity
+      TotalQty += Number((element.quantity).toFixed(2));
     });
     return TotalQty;
   }
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
     var lst=this.OrderTrackingListByOrderId(OrderId);
     var TotalAdditionalDiscountAmount = 0;
     lst.forEach(element => {
-      TotalAdditionalDiscountAmount += element.additionalDiscountAmount
+      TotalAdditionalDiscountAmount += Number((element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAdditionalDiscountAmount;
   }
@@ -178,7 +178,7 @@ export class DashboardComponent implements OnInit {
     var lst=this.OrderTrackingListByOrderId(OrderId);
     var TotalAmount = 0;
     lst.forEach(element => {
-      TotalAmount += (element.salePrice * element.quantity) - element.additionalDiscountAmount
+      TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount).toFixed(2));
     });
     return TotalAmount;
   }
@@ -187,8 +187,9 @@ export class DashboardComponent implements OnInit {
     var lst=this.OrderTrackingListByOrderId(OrderId);
     var TotalGSTAmount = 0;
     lst.forEach(element => {
-      TotalGSTAmount += element.gstAmount
+      TotalGSTAmount += Number((element.gstAmount).toFixed(2));
     });
+    debugger
     return TotalGSTAmount;
   }
 
