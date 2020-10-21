@@ -48,7 +48,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="text-right">
-                                                    <button class="btn btn-link"> Edit</button>
+                                                    <button class="btn btn-link" (click)="EditBillingAddress(templateBillingAddress,lstBilling)"> Edit</button>
                                                 </div>
                                             </div>
 
@@ -532,3 +532,169 @@
         </div>
     </div>
 </section>
+<ng-template class="theme-modal" #templateBillingAddress let-modal>
+    <div class="modal-content quick-view-modal">
+        <div class="modal-body">
+            <button type="button" class="close" style="background-color: white;" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="checkout-page">
+                <div class="checkout-form">
+                    <form>
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="checkout-title">
+                                    <h3>Delivery Details</h3>
+                                </div>
+                                <div class="row check-out">
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Full Name <span style="color:red">*</span></div>
+                                        <input type="text" name="fName" [formControl]="checkoutForm.controls['fName']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.required" class="text text-danger">
+                                            Full Name is required.
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.fName.touched || Submitted) && checkoutForm.controls.fName.errors?.pattern" class="text text-danger">
+                                            Full Name must be an alphabates.
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Last Name </div>
+                                        <input type="text" name="lName" [formControl]="checkoutForm.controls['lName']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.lName.touched || Submitted) && checkoutForm.controls.lName.errors?.required" class="text text-danger">
+                                            Last Name is required.
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.lName.touched || Submitted) && checkoutForm.controls.lName.errors?.pattern" class="text text-danger">
+                                            Last Name must be an alphabates.
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Company Name </div>
+                                        <input type="text" name="companyName" [formControl]="checkoutForm.controls['companyName']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.required" class="text text-danger">
+                                            Company Name is required.
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.companyName.touched || Submitted) && checkoutForm.controls.companyName.errors?.pattern" class="text text-danger">
+                                            Company Name must be an alphabates.
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Phone <span style="color:red">*</span></div>
+                                        <input type="text" name="phone" maxlength="10" [formControl]="checkoutForm.controls['phone']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.required" class="text text-danger">
+                                            Phone No is required.
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.phone.touched || Submitted) && checkoutForm.controls.phone.errors?.pattern" class="text text-danger">
+                                            Phone No is must be number.
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Email Address <span style="color:red">*</span></div>
+                                        <input type="text" name="emailId" [formControl]="checkoutForm.controls['emailId']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.emailId.touched || Submitted) && checkoutForm.controls.emailId.errors?.required" class="text text-danger">
+                                            Email address is required
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.emailId.touched || Submitted) && checkoutForm.controls.emailId.errors?.emailId" class="text text-danger">
+                                            Invalid Email Address
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Country <span style="color:red">*</span></div>
+                                        <select name="country" [formControl]="checkoutForm.controls['country']">
+                                            <!-- <option value="" selected>Select Country</option> -->
+                                            <option value="India">India</option>
+                                            <!-- <option value="USA">USA</option>
+                                            <option value="Australia">Australia</option> -->
+                                        </select>
+                                        <div *ngIf="(checkoutForm.controls.country.touched || Submitted) && checkoutForm.controls.country.errors?.required" class="text text-danger">
+                                            Country is required
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-8 col-sm-8 col-xs-8">
+                                        <div class="field-label">Address <span style="color:red">*</span></div>
+                                        <input type="text" name="address" [formControl]="checkoutForm.controls['address']" value="" placeholder="Address" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.required" class="text text-danger">
+                                            Address is required
+                                        </div>
+                                        <div *ngIf="(checkoutForm.controls.address.touched || Submitted) && checkoutForm.controls.address.errors?.maxlength" class="text text-danger">
+                                            Maximum 50 character
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">State <span style="color:red">*</span></div>
+                                        <!-- <input type="text" name="state" [formControl]="checkoutForm.controls['state']" value="" placeholder="" autocomplete="off"> -->
+                                        <select name="country" [formControl]="checkoutForm.controls['state']">
+                                            <option value="">Select State</option>
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands
+                                            </option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                            <option value="Daman and Diu">Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                        </select>
+                                        <div *ngIf="(checkoutForm.controls.state.touched || Submitted) && checkoutForm.controls.state.errors?.required" class="text text-danger">
+                                            State is required
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">City <span style="color:red">*</span></div>
+                                        <input type="text" name="city" [formControl]="checkoutForm.controls['city']" value="" placeholder="" autocomplete="off">
+                                        <div *ngIf="(checkoutForm.controls.city.touched || Submitted) && checkoutForm.controls.city.errors?.required" class="text text-danger">
+                                            City is required
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">Pin Code <span style="color:red">*</span></div>
+                                        <input type="text" name="zipCode" [formControl]="checkoutForm.controls['zipCode']" value="" placeholder="" autocomplete="off" maxlength="6" [mask]="PinCodeMask" [dropSpecialCharacters]="false" (focus)="addPinCodeMask($event);">
+                                        <div *ngIf="(checkoutForm.controls.zipCode.touched || Submitted) && checkoutForm.controls.zipCode.errors?.required" class="text text-danger">
+                                            Pin Code is required
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                                        <div class="field-label">&nbsp;</div>
+                                        <button type="submit" class="btn-solid btn" (click)="SaveBillingAddress()">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
@@ -15,6 +15,7 @@ import { BillingAddressService } from 'src/app/Service/billing-address.service';
 import { OrderService } from 'src/app/Service/order.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-checkout',
@@ -66,6 +67,7 @@ export class CheckoutComponent implements OnInit {
     private _orderService: OrderService,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private modalService: NgbModal,
   ) {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     this.checkoutForm = this.fb.group({
@@ -99,6 +101,68 @@ export class CheckoutComponent implements OnInit {
   //   this.initConfig();
   // }
 
+  EditBillingAddress(template: TemplateRef<any>, lst) {
+    this.Submitted = false;
+    this.checkoutForm = this.fb.group({
+      billingAddressId: [lst.billingAddressId],
+      userID: Number(this.user[0].userID),
+      fName: [lst.fName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      //lName: [lst.lName, [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      companyName: [lst.companyName],
+      // phone: [lst.phone, [Validators.required, Validators.pattern('[0-9]+')]],
+      // emailId: [lst.emailId, [Validators.required, Validators.email]],
+      address: [lst.address, [Validators.required, Validators.maxLength(200)]],
+      country: [lst.country, Validators.required],
+      city: [lst.city, Validators.required],
+      state: [lst.state, Validators.required],
+      zipCode: [lst.zipCode, Validators.required],
+    });
+    this.modalService.open(template, {
+      size: 'lg',
+      //ariaLabelledBy: 'Cart-Modal',
+      centered: true,
+      //windowClass: 'theme-modal cart-modal CartModal'
+    }).result.then((result) => {
+      `Result ${result}`
+    }, (reason) => {
+      this.modalService.dismissAll();
+    });
+  }
+
+  SaveBillingAddress() {
+    this.Submitted = true;
+    if (this.checkoutForm.invalid) {
+      this.toastr.error("All * fields are mandatory.");
+      return;
+    }
+    else {
+      let obj = {
+        billingAddressId: Number(this.checkoutForm.value.billingAddressId),
+        userID: Number(this.user[0].userID),
+        fName: this.checkoutForm.value.fName,
+        //lName: this.checkoutForm.value.lName,
+        companyName: this.checkoutForm.value.companyName,
+        // phone: this.checkoutForm.value.phone,
+        // emailId: this.checkoutForm.value.emailId,
+        address: this.checkoutForm.value.address,
+        country: this.checkoutForm.value.country,
+        city: this.checkoutForm.value.city,
+        state: this.checkoutForm.value.state,
+        zipCode: this.checkoutForm.value.zipCode,
+      }
+      //  
+      this.spinner.show();
+      this._billingAddressService.SaveBillingAddress(obj).subscribe(res => {
+        //  
+        this.spinner.hide();
+        this.lstBillingAddress = res;
+        this.toastr.success("Billing Address has been saved successfully.");
+        this.modalService.dismissAll();
+        //this.LoadBillingAddress();
+      });
+    }
+  }
+  
   addPinCodeMask(obj: Object) {
     this.PinCodeMask = "000000";
   }
