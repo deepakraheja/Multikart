@@ -9,6 +9,7 @@ if (environment.production) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  debugger
   platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 });
