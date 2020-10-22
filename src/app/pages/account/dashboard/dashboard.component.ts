@@ -353,12 +353,12 @@ export class DashboardComponent implements OnInit {
   UpdatePassword() {
     this.Submitted = true;
     if (this.ChangePwdForm.invalid) {
-      this.toastr.error("All fields are mandatory.");
+      this.toastr.error("All * fields are mandatory.");
       return;
     }
     else {
       let obj = {
-        userID: this.LoggedInUser[0].userID,
+        //userID: this.LoggedInUser[0].userID,
         password: this.ChangePwdForm.value.password,
         NewPassword: this.ChangePwdForm.value.NewPassword
       }
@@ -370,7 +370,7 @@ export class DashboardComponent implements OnInit {
           this.modalService.dismissAll();
         }
         else
-          this.toastr.error("Old Password is invalid.");
+          this.toastr.error("Old Password is incorrect.");
       });
     }
   }

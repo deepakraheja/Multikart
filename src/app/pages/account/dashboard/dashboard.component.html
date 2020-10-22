@@ -688,7 +688,7 @@
                                 </div>
                                 <div class="row check-out">
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <div class="field-label">Old Paswword</div>
+                                        <div class="field-label">Old Paswword <span style="color:red">*</span></div>
                                         <input type="password" name="password" [formControl]="ChangePwdForm.controls['password']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(ChangePwdForm.controls.password.touched || Submitted) && ChangePwdForm.controls.password.errors?.required" class="text text-danger">
                                             Old Password is required.
@@ -698,7 +698,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <div class="field-label">New Password </div>
+                                        <div class="field-label">New Password <span style="color:red">*</span></div>
                                         <input type="password" name="NewPassword" [formControl]="ChangePwdForm.controls['NewPassword']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(ChangePwdForm.controls.NewPassword.touched || Submitted) && ChangePwdForm.controls.NewPassword.errors?.required" class="text text-danger">
                                             New Password is required.
@@ -708,7 +708,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <div class="field-label">Confirm Password </div>
+                                        <div class="field-label">Confirm Password <span style="color:red">*</span></div>
                                         <input type="password" name="ConfirmPwd" [formControl]="ChangePwdForm.controls['ConfirmPwd']" value="" placeholder="" autocomplete="off">
                                         <div *ngIf="(ChangePwdForm.controls.ConfirmPwd.touched || Submitted) && ChangePwdForm.controls.ConfirmPwd.errors?.required" class="text text-danger">
                                             Confirm Password is required.

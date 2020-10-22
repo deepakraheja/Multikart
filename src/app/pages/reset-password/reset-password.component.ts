@@ -13,7 +13,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class ResetPasswordComponent implements OnInit {
   public ChangePwdForm: FormGroup;
   public Submitted: boolean = false;
-  public UserId: any;
+  public GUID: any;
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -25,13 +25,13 @@ export class ResetPasswordComponent implements OnInit {
     this.route.paramMap.subscribe((params: ParamMap) => {
       //  
       //this.GetOrderById(Number(params.get('orderId')));
-      this.UserId = params.get('id');
+      this.GUID = params.get('id');
     });
     this.ChangePwdForm = this.fb.group({
       NewPassword: ['', [Validators.required, Validators.minLength(8)]],
       ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
     });
-  } 
+  }
 
   ngOnInit(): void {
 
@@ -40,13 +40,16 @@ export class ResetPasswordComponent implements OnInit {
   ResetPassword() {
     this.Submitted = true;
     if (this.ChangePwdForm.invalid) {
-      this.toastr.error("All fields are mandatory.");
+      this.toastr.error("All * fields are mandatory.");
+      return;
+    }
+    else if (this.ChangePwdForm.value.NewPassword != this.ChangePwdForm.value.ConfirmPwd) {
+      this.toastr.error("New Password must be same Confirm password.");
       return;
     }
     else {
       let obj = {
-        userID: Number(this.UserId),
-        password: this.ChangePwdForm.value.password,
+        GUID: this.GUID,
         NewPassword: this.ChangePwdForm.value.NewPassword
       }
       this.spinner.show();
