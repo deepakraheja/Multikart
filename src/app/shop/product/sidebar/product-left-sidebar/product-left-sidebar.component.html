@@ -43,7 +43,7 @@
                             </owl-carousel-o>
                         </div>
                     </div> -->
-                <div class="col-xl-5">
+                <div class="col-lg-5">
                     <div class="row">
                         <div class="col-sm-4 col-xl-3">
                             <div class="thumbnail-imgs">
@@ -74,7 +74,7 @@
                             </owl-carousel-o>
                         </div>
                     </div>
-                    <div class="product-buttons row mt-5">
+                    <div class="product-buttons row mt-2">
                         <div class="col-md-6 mb-2">
                             <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false"
                                 (click)="addToCart(1)">add to cart</a>
@@ -103,7 +103,7 @@
                         </div> -->
 
 
-                <div class="col-xl-7 rtl-text">
+                <div class="col-lg-7 rtl-text">
                     <div class="product-right">
                         <h4><b>{{ productkart[0]?.productName }}</b></h4>
                         <h4>
@@ -123,69 +123,78 @@
                             </li>
                         </ul>
                         <!-- <app-stock-inventory [stock]="productkart[0]?.qty"></app-stock-inventory> commented on 22 july by deepak -->
-                        <div class="product-description border-product mt-5">
-                            <h4 class="clearfix" style="color: #222222;text-transform: capitalize;">
-                                select size
-                                <a href="javascrip:void(0)" (click)="SizeChart.openModal()" class="float-right">size
-                                    chart</a>
-                            </h4>
-                            <br>
-                            <table class="table table-bordered table-hover">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th *ngFor="let column of headers" class="thead-dark">
-                                            {{column}}
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of productkart[0]?.productSizeColor; let myIndex  = index">
-                                        <td>
-                                            <input type="checkbox" [(ngModel)]="item.isSelected" *ngIf="item?.qty > 0"
-                                                name="checkIn" [value]="item.productSizeId" id="{{myIndex}}"
-                                                (ngModelChange)="fnCheck(item,$event,myIndex)">
-                                            {{item.color}}
-                                        </td>
-                                        <!-- <td>
-                                                {{item.color}}
-                                            </td> -->
-                                        <td>
-                                            {{item.size}}
-                                        </td>
-                                        <td>
+                        <div class="product-description border-product mt-2">
+                            
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <h6 class="clearfix product-title size-text mb-3">
+                                        select size
+                                        <a href="javascrip:void(0)" (click)="SizeChart.openModal()" class="float-right">size
+                                            chart</a>
+                                    </h6>
+                                    <table class="table table-bordered table-hover">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th *ngFor="let column of headers" class="thead-dark">
+                                                    {{column}}
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                *ngFor="let item of productkart[0]?.productSizeColor; let myIndex  = index">
+                                                <td>
+                                                    <input type="checkbox" [(ngModel)]="item.isSelected"
+                                                        *ngIf="item?.qty > 0" name="checkIn"
+                                                        [value]="item.productSizeId" id="{{myIndex}}"
+                                                        (ngModelChange)="fnCheck(item,$event,myIndex)">
+                                                    {{item.color}}
+                                                </td>
+                                                <!-- <td>
+                                                        {{item.color}}
+                                                    </td> -->
+                                                <td>
+                                                    {{item.size}}
+                                                </td>
+                                                <td>
 
-                                            <div class="qty-box" style="margin-top: 0px !important;">
-                                                <div *ngIf="item?.qty > 0" class="input-group">
-                                                    <span class="input-group-prepend">
-                                                        <button type="button" class="btn quantity-left-minus"
-                                                            data-type="minus" (click)="decrement(myIndex,item)">
-                                                            <i class="ti-minus"></i>
-                                                        </button>
-                                                    </span>
-                                                    <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}"
-                                                        style="width: 45px; height: 27px;"
-                                                        class="form-control input-number" [value]="item.selectedQty"
-                                                        disabled />
-                                                    <span class="input-group-prepend">
-                                                        <button type="button" class="btn quantity-right-plus"
-                                                            data-type="plus" (click)="increment(myIndex,item,item.qty)">
-                                                            <i class="ti-plus"></i>
-                                                        </button>
-                                                    </span>
-                                                </div>
-                                                <h5 class="avalibility" *ngIf="item?.qty==0"><span>Out
-                                                        of
-                                                        Stock</span></h5>
-                                            </div>
-                                        </td>
-                                        <!-- <td>
-                    <h5 class="avalibility" *ngIf="item.selectedQty <=item?.qty"><span>In Stock</span></h5>
-                    <h5 class="avalibility" *ngIf="item.selectedQty > item?.qty"><span>Out of Stock</span></h5>
-                </td> -->
-                                    </tr>
-                                </tbody>
+                                                    <div class="qty-box" style="margin-top: 0px !important;">
+                                                        <div *ngIf="item?.qty > 0" class="input-group">
+                                                            <span class="input-group-prepend">
+                                                                <button type="button" class="btn quantity-left-minus"
+                                                                    data-type="minus" (click)="decrement(myIndex,item)">
+                                                                    <i class="ti-minus"></i>
+                                                                </button>
+                                                            </span>
+                                                            <input type="text" name="quantity"
+                                                                id="{{ 'txtqty' + myIndex}}"
+                                                                style="width: 45px; height: 27px;"
+                                                                class="form-control input-number"
+                                                                [value]="item.selectedQty" disabled />
+                                                            <span class="input-group-prepend">
+                                                                <button type="button" class="btn quantity-right-plus"
+                                                                    data-type="plus"
+                                                                    (click)="increment(myIndex,item,item.qty)">
+                                                                    <i class="ti-plus"></i>
+                                                                </button>
+                                                            </span>
+                                                        </div>
+                                                        <h5 class="avalibility" *ngIf="item?.qty==0"><span>Out
+                                                                of
+                                                                Stock</span></h5>
+                                                    </div>
+                                                </td>
+                                                <!-- <td>
+                            <h5 class="avalibility" *ngIf="item.selectedQty <=item?.qty"><span>In Stock</span></h5>
+                            <h5 class="avalibility" *ngIf="item.selectedQty > item?.qty"><span>Out of Stock</span></h5>
+                        </td> -->
+                                            </tr>
+                                        </tbody>
 
-                            </table>
+                                    </table>
+                                </div>
+                            </div>
+
 
                             <!-- <div class="size-box">
             <ul>

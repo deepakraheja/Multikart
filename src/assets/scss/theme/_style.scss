@@ -1032,6 +1032,7 @@ header {
 .top-header {
     background-color: $top-header;
     padding: 0;
+    padding-top: 5px;
     .header-contact {
         padding: 0;
         li {
@@ -2370,6 +2371,7 @@ header {
         flex: 0 0 25%;
         max-width: calc(25% - 30px);
         margin: 0 15px 30px;
+        // border: 1px solid #ececec;
         &:nth-last-child(-n+4) {
             margin: 0 15px 0;
         }
@@ -14278,6 +14280,9 @@ header a {
     font-weight: normal;
     border-width: 1px;
 }
+.btn-solid-small .fa-user {
+    margin-right: 7px;
+}
 .top-header {
     .header-dropdown {
         li {
@@ -14413,9 +14418,9 @@ header a {
 .dashboard .box address:hover {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
-.cart-product-details {
-    border-bottom: 1px solid #ddd;
-}
+// .cart-product-details {
+//     border-bottom: 1px solid #ddd;
+// }
 .text-black {
     color: #000;
 }
@@ -14467,6 +14472,11 @@ a.btn-solid-small:not([href]):hover, a.btn-solid-small:not([href]):focus {
     max-height: 416px;
     overflow: auto;
 }
+@media only screen and (min-width: 1024px) and (max-width: 1199px) {
+    .thumbnail-imgs {
+        max-height: 323px;
+    }
+  }
 @media (max-width: 576px){
     .thumbnail-imgs{
         display: flex;
@@ -14621,9 +14631,6 @@ a.btn-solid:not([href]):hover {
 .left-sec, .right-sec {
     width: 100%;
 }
-.success-text {
-    padding-bottom: 30px;
-}
 
 .order-detail li span {
     font-weight: bold;
@@ -14748,11 +14755,12 @@ address p {
 .price-details {
     border: 1px solid #dddddd;
     position: relative;
+    width: 100%;
 }
 @media (min-width: 1024px) {
     .price-details {
         position: fixed;
-        width: 25%;
+        max-width: 435px;
     }
 }
 
@@ -14773,7 +14781,7 @@ address p {
     }
 }
 .section-b-space, .body-section {
-    margin-top: 118px;
+    margin-top: 112px;
 }
 .checkout-prouduct-img {
     width: 50px;
@@ -14792,4 +14800,31 @@ address p {
 }
 .left-margin {
     padding-left: 39px;
+}
+.theme-tab .product-box .product-detail {
+    padding: 0 10px 10px 10px; 
+}
+.product-description table {
+    margin-bottom: 0;
+}
+.product-description table td {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+}
+.confirmation-buttuns .btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border: 1px solid;
+    margin: 5px;
+}
+.confirm-pmodal .close {
+    background: #fff;
+    right: -1rem;
+    opacity: 1;
+}
+.min-height-cart {
+    min-height: 320px;
+}
+.collection-product-wrapper .product-top-filter .product-filter-content .product-page-filter select {
+    background-position: 95%;
 }

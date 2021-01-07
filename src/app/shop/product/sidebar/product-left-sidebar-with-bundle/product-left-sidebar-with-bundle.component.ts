@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
 import { Product } from '../../../../shared/classes/product';
@@ -63,6 +63,46 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) {
     // this.route.data.subscribe(response => this.product = response.data );
+  }
+
+  ngAfterViewInit() {
+    $(document).ready(function () {
+
+      function scrollSticky() {
+        if ($('.sticky-scroll').length) {
+          
+          var el = $('.sticky-scroll');
+          var stickyTop = el.offset().top - 142;
+
+          $(window).scroll(function () {
+
+            var footerPosition = $('.unsticky').offset().top;
+            var limit = footerPosition - 600 - 20;
+            var windowTop = $(window).scrollTop();
+
+            if (stickyTop < windowTop) {
+              el.addClass('fixed-section');
+              el.css({
+                position: 'fixed',
+                top: 142
+              });
+            } else {
+              el.css('position', 'static');
+              el.removeClass('fixed-section');
+            }
+            if (limit < windowTop) {
+              var diff = limit - windowTop;
+              el.css({
+                top: diff + 142
+              })
+            }
+          });
+        }
+      }
+      if($(window).width() >= 1024) {
+        scrollSticky();
+      }
+    });
   }
   BindProduct(): void {
     this.spinner.show();
