@@ -29,19 +29,21 @@
             </div>
             <div class="row">
                 <div class="col-lg-5">
-                    <div class="row">
-                        <div class="col-sm-4 col-xl-3">
-                            <div class="thumbnail-imgs">
-                                <div *ngFor="let image of  productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i" class="thumbnail-img">
-                                    <div class="owl-thumb" [class.active]="i == activeSlide">
-                                        <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[i]"
-                                            [alt]="image.alt" class="img-fluid" (click)="owlCar.to(activeSlide = i.toString())">
+                    <div class="sticky-scroll">
+                        <div class="row">
+                            <div class="col-sm-4 col-xl-3">
+                                <div class="thumbnail-imgs">
+                                    <div *ngFor="let image of  productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i" class="thumbnail-img">
+                                        <div class="owl-thumb" [class.active]="i == activeSlide">
+                                            <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[i]"
+                                                [alt]="image.alt" class="img-fluid" (click)="activeSlide = i.toString();ChangeImage();" (mouseover)="activeSlide = i.toString();ChangeImage();">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-8 col-xl-9 product-carousel">
-                            <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
+                            <div class="col-sm-8 col-xl-9 product-carousel">
+                                <img id="zoom_01" class="img-fluid" src="{{ProductImage+productkart[0]?.productID+'/productSetImage/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.setNo+'/'+productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg[activeSlide]}}" />
+                                <!-- <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
                                 <ng-container *ngFor="let image of productkart[0]?.productSizeSet[bigProductImageIndex]?.productImg; index as i">
                                     <ng-template carouselSlide [id]="i">
                                         <div>
@@ -50,9 +52,9 @@
                                         </div>
                                     </ng-template>
                                 </ng-container>
-                            </owl-carousel-o>
-                        </div>
-                        <!-- <div class="row">
+                            </owl-carousel-o> -->
+                            </div>
+                            <!-- <div class="row">
                             <div class="col-12">
                                 <div class="slider-nav">
                                     <owl-carousel-o [options]="ProductDetailsThumbConfig" class="product-slick">
@@ -71,13 +73,17 @@
                                 </div>
                             </div>
                         </div> -->
-                    </div>
-                    <div class="product-buttons row mt-2">
-                        <div class="col-6 mb-2">
-                            <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(1)">add to cart</a>
                         </div>
-                        <div class="col-6 mb-2">
-                            <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(2)">buy now</a>
+                        <div class="product-buttons row mt-2">
+
+                            <div class="col-6 mb-2">
+                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(2)">
+                                    <i class="fa fa-bolt"></i> buy now</a>
+                            </div>
+                            <div class="col-6 mb-2">
+                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(1)">
+                                    <i class="fa fa-shopping-cart"></i> add to cart</a>
+                            </div>
                         </div>
                     </div>
                 </div>

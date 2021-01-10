@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
 import { Product } from '../../../../shared/classes/product';
@@ -11,8 +11,10 @@ import { productSizeColor } from 'src/app/shared/classes/productsizecolor';
 import { CartService } from 'src/app/Service/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DOCUMENT } from '@angular/common';
 
 declare var $;
+declare function imageZoom(a, b): any; // just change here from arun answer.
 
 export interface image {
   colorindex: number;
@@ -60,17 +62,24 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
     private _prodService: ProductsService,
     private _CartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document
   ) {
+    this.activeSlide = 0;
     // this.route.data.subscribe(response => this.product = response.data );
   }
 
   ngAfterViewInit() {
-    $(document).ready(function () {
 
+    $(document).ready(function () {
+      setTimeout(() => $("#zoom_01").ezPlus({
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }), 3000);
       function scrollSticky() {
         if ($('.sticky-scroll').length) {
-          
+
           var el = $('.sticky-scroll');
           var stickyTop = el.offset().top - 142;
 
@@ -99,7 +108,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           });
         }
       }
-      if($(window).width() >= 1024) {
+      if ($(window).width() >= 1024) {
         scrollSticky();
       }
     });
@@ -131,6 +140,32 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     this.BindProduct();
+    const s = this.renderer2.createElement('script');
+    s.type = 'text/javascript';
+    s.src = 'https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js';
+    //s.text = `imageZoom("zoom_01", "myresult");`;
+    this.renderer2.appendChild(this._document.body, s);
+  }
+  ChangeImage() {
+    debugger;
+    //this.activeSlide = index;
+    setTimeout(() => $("#zoom_01").ezPlus(
+
+      {
+
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }
+    ), 500);
+
+    //  ;
+    debugger
+    // this.bigProductImageIndex = Number(index);
+    // this.activeSlide = Number(index);
+    // this.SelectedColor = [];
+    // this.SelectedColor.push({
+    //   productSizeId: Number(lst.productSizeId)
+    // });
   }
 
   changecolor(index: string) {
@@ -238,11 +273,11 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
       debugger
       if (res.length > 0) {
         this.totalqty += res[0].qty
-      } 
+      }
       if (Number(this.totalqty) >= minimum) {
         const status = this.productService.addToCartProduct(obj);
         debugger
-        if (status) { 
+        if (status) {
           if (type == 1)
             this.router.navigate(['/shop/cart']);
           else

@@ -44,13 +44,15 @@
                                     <div *ngFor="let image of  productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i" class="thumbnail-img">
                                         <div class="owl-thumb" [class.active]="i == activeSlide">
                                             <img [defaultImage]="'assets/images/product/placeholder.jpg'" [lazyLoad]="ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[i]"
-                                                [alt]="image.alt" class="img-fluid" (click)="owlCar.to(activeSlide1 = i.toString())">
+                                                [alt]="image.alt" class="img-fluid" (click)="activeSlide = i.toString();ChangeImage();" (mouseover)="activeSlide = i.toString();ChangeImage();">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-8 col-xl-9 product-carousel">
-                                <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
+                                <img id="zoom_01" class="img-fluid" src="{{ProductImage+productkart[0]?.productID+'/productColorImage/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productSizeColorId+'/'+productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg[activeSlide]}}"
+                                />
+                                <!-- <owl-carousel-o [options]="ProductDetailsMainSliderConfig" #owlCar class="product-slick">
                                     <ng-container *ngFor="let image of productkart[0]?.productSizeColor[bigProductImageIndex]?.productImg; index as i">
                                         <ng-template carouselSlide [id]="i">
                                             <div>
@@ -59,7 +61,7 @@
                                             </div>
                                         </ng-template>
                                     </ng-container>
-                                </owl-carousel-o>
+                                </owl-carousel-o> -->
 
                                 <!-- <div class="row">
                                     <div class="col-12">
@@ -85,11 +87,13 @@
                         </div>
                         <div class="product-buttons row mt-2">
                             <div class="col-6 mb-2">
-                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(1,productkart[0]?.minimum)">add
-                                    to cart</a>
+                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(2,productkart[0]?.minimum)">
+                                    <i class="fa fa-bolt"></i> buy now</a>
                             </div>
                             <div class="col-6 mb-2">
-                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(2,productkart[0]?.minimum)">buy now</a>
+                                <a href="javascrip:void(0)" class="btn btn-solid w-100" [class.disabled]="false" (click)="addToCart(1,productkart[0]?.minimum)"><i
+                                    class="fa fa-shopping-cart"></i> add
+                                    to cart</a>
                             </div>
                         </div>
                     </div>

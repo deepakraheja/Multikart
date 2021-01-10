@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Renderer2, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductDetailsMainSlider, ProductDetailsThumbSlider } from '../../../../shared/data/slider';
 import { Product } from '../../../../shared/classes/product';
@@ -11,8 +11,10 @@ import { productSizeColor } from 'src/app/shared/classes/productsizecolor';
 import { CartService } from 'src/app/Service/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { DOCUMENT } from '@angular/common';
 
 declare var $;
+declare function imageZoom(a, b): any; // just change here from arun answer.
 
 export interface image {
   colorindex: number;
@@ -59,9 +61,59 @@ export class ProductLeftSidebarComponent implements OnInit {
     private _prodService: ProductsService,
     private _CartService: CartService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private renderer2: Renderer2,
+    @Inject(DOCUMENT) private _document
   ) {
+    this.activeSlide = 0;
     // this.route.data.subscribe(response => this.product = response.data );
+  }
+
+  ngAfterViewInit() {
+    //setTimeout(() => imageZoom('zoom_01', 'myresult'), 2000);
+    $(document).ready(function () {
+      setTimeout(() => $("#zoom_01").ezPlus({
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }), 3000);
+    });
+    $(document).ready(function () {
+
+      function scrollSticky() {
+        if ($('.sticky-scroll').length) {
+          
+          var el = $('.sticky-scroll');
+          var stickyTop = el.offset().top - 142;
+
+          $(window).scroll(function () {
+
+            var footerPosition = $('.unsticky').offset().top;
+            var limit = footerPosition - 600 - 20;
+            var windowTop = $(window).scrollTop();
+
+            if (stickyTop < windowTop) {
+              el.addClass('fixed-section');
+              el.css({
+                position: 'fixed',
+                top: 142
+              });
+            } else {
+              el.css('position', 'static');
+              el.removeClass('fixed-section');
+            }
+            if (limit < windowTop) {
+              var diff = limit - windowTop;
+              el.css({
+                top: diff + 142
+              })
+            }
+          });
+        }
+      }
+      if($(window).width() >= 1024) {
+        scrollSticky();
+      }
+    });
   }
   BindProduct(): void {
     this.spinner.show();
@@ -81,16 +133,42 @@ export class ProductLeftSidebarComponent implements OnInit {
           this.productkart = product;
 
         }
-        setTimeout(()=> this.spinner.hide(),1000);
+        setTimeout(() => this.spinner.hide(), 1000);
       });
     });
- 
+
   }
   ngOnInit(): void {
     this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
     this.BindProduct();
+    const s = this.renderer2.createElement('script');
+    s.type = 'text/javascript';
+    s.src = 'https://cdn.rawgit.com/igorlino/elevatezoom-plus/1.1.6/src/jquery.ez-plus.js';
+    //s.text = `imageZoom("zoom_01", "myresult");`;
+    this.renderer2.appendChild(this._document.body, s);
   }
 
+  ChangeImage() {
+    debugger;
+    //this.activeSlide = index;
+    setTimeout(() => $("#zoom_01").ezPlus(
+
+      {
+
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }
+    ), 500);
+
+    //  ;
+    debugger
+    // this.bigProductImageIndex = Number(index);
+    // this.activeSlide = Number(index);
+    // this.SelectedColor = [];
+    // this.SelectedColor.push({
+    //   productSizeId: Number(lst.productSizeId)
+    // });
+  }
   changecolor(index: string) {
     //  ;
     this.bigProductImageIndex = Number(index);
@@ -118,7 +196,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           })
         }
       }
-     
+
       //console.log(imageColor);
       return imageColor
     }

@@ -1,3 +1,21 @@
 .detail-column {
     width: 60%;
 }
+
+@media (min-width:1024px) {
+    .sticky-scroll.fixed-section {
+        width: 36%;
+    }
+}
+
+@media (min-width:1300px) {
+    .sticky-scroll.fixed-section {
+        width: 32.5%;
+    }
+}
+
+@media (min-width:1900px) {
+    .sticky-scroll.fixed-section {
+        width: 29%;
+    }
+}
