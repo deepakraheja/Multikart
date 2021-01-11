@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
   PinCodeMask: string;
   txtPinCode: any;
   AadharNumberMask: string;
-
+  DocumentImg = [];
   constructor(
     private formBuilder: FormBuilder,
     private userService: UsersService,
@@ -176,6 +176,7 @@ export class RegisterComponent implements OnInit {
       city: ['', Validators.required],
       state: ['', Validators.required],
       mobileotp: [''],
+      userDocument: []
 
       //otp1: ['',],
       //otp2: ['',],
@@ -517,6 +518,30 @@ export class RegisterComponent implements OnInit {
   //******************************Show Error message*************//
   showMessage(str) {
     this.toastr.error(str);
+  }
+
+  UploadFile(event) {
+    this.DocumentImg = [];
+    if (event.target.files && event.target.files[0]) {
+      var filesAmount = event.target.files.length;
+      for (let i = 0; i < filesAmount; i++) {
+        var reader = new FileReader();
+        reader.onload = (event: any) => {
+          debugger
+          //console.log(event.target.result);
+          // if (event.total / 1024 > 500) {
+          //   this._toasterService.error('Photo should be less then 500kb.');
+          //   return;
+          // }
+          this.DocumentImg.push(event.target.result);
+          const userDocument = this.RegistrationForm.get('userDocument');
+          userDocument.setValue(this.DocumentImg);
+          userDocument.updateValueAndValidity();
+          //this.PopUpDocumentImg.push(event.target.result);
+        }
+        reader.readAsDataURL(event.target.files[i]);
+      }
+    }
   }
 
   //****************************** Create Registration into database*************//
