@@ -23,18 +23,11 @@
     <div class="container">
 
         <div class="success-text mb-1">
-            <div class="row">
-                <div class="col-md-5 text-right">
-                    <img class="mb-2" src="assets/images/icon/check.svg" alt="Success!">
-                </div>
-                <div class="col-md-7 text-left">
-                    <h2>Thank you!</h2>
+            <img class="mb-2" src="assets/images/icon/check.svg" alt="Success!">
+            <h2>Thank you!</h2>
 
-                    <p class="mt-2">Payment has been received and Order Placed Successfully</p>
-                    <p><b>Order ID:{{ orderDetails[0].orderNumber }}</b></p>
-                </div>
-            </div>
-            <hr>
+            <p style="font-size: 17px;" class="mt-2">Payment has been received and order placed successfully.</p>
+            <p><b>Order Number: {{ orderDetails[0].orderNumber }}</b></p>
         </div>
 
         <div class="order-summary mb-1">
@@ -42,9 +35,10 @@
                 <div class="col-md-6 mb-2">
                     <h4>summery</h4>
                     <ul class="order-detail">
-                        <li><span>order ID:</span> {{ orderDetails[0].orderNumber }}</li>
+                        <li><span>Order Number:</span> {{ orderDetails[0].orderNumber }}</li>
                         <li><span>Order Date:</span> {{ orderDetails[0].orderDate | date : 'MMM dd, yyyy'}}</li>
-                        <li><span>Order Total:</span> {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
+                        <li><span>Order Total:</span>
+                            {{ orderDetails[0].totalAmount | currency:productService?.Currency.currency:'symbol' }}
                         </li>
                         <!-- <li><span>Payment Method:</span> Credit Card (**3569)</li> -->
                     </ul>
@@ -76,22 +70,24 @@
                             <th class="thead-dark">
                                 Qty
                             </th>
-                            <th class="thead-dark" *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
+                            <th style="text-align: right;" class="thead-dark"
+                                *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
                                 Add. Discount (%)
                             </th>
-                            <th class="thead-dark" *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
+                            <th style="text-align: right;" class="thead-dark"
+                                *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
                                 Add. Discount Amount
                             </th>
-                            <th class="thead-dark">
+                            <th style="text-align: right;" class="thead-dark">
                                 Total Amount
                             </th>
-                            <th class="thead-dark">
+                            <th style="text-align: right;" class="thead-dark">
                                 GST Rate(%)
                             </th>
-                            <th class="thead-dark">
+                            <th style="text-align: right;" class="thead-dark">
                                 GST Amount
                             </th>
-                            <th class="thead-dark">
+                            <th style="text-align: right;" class="thead-dark">
                                 Total
                             </th>
                         </tr>
@@ -99,12 +95,13 @@
                     <tbody>
                         <tr *ngFor="let product of orderDetails[0].orderDetails">
                             <td>
-                                <img src="assets/images/product/fashion/19.jpg" alt="Product" style="display:none;" class="checkout-prouduct-img"> {{ product?.productName }}
+                                <img [src]="ProductImage+product?.productId+'/frontImage/'+product?.frontImage"
+                                    alt="Product" class="checkout-prouduct-img"> {{ product?.productName }}
                             </td>
                             <td style="text-align: right;">
                                 {{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}
                             </td>
-                            <td style="text-align: right;">
+                            <td>
                                 {{ product?.quantity }}
                             </td>
                             <td *ngIf="product?.additionalDiscount>0" style="text-align: right;">
@@ -139,12 +136,13 @@
                             <td colspan="2">
                                 <b>Subtotal</b>
                             </td>
-                            <td style="text-align: right;">
+                            <td style="text-align: left;">
                                 <b>{{getTotalQty()}}</b>
                             </td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">
                             </td>
-                            <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0" style="text-align: right;">
+                            <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"
+                                style="text-align: right;">
                                 <b>{{ getTotalAdditionalDiscountAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                             </td>
                             <td style="text-align: right;">
@@ -155,12 +153,13 @@
                                 <b>{{ getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</b>
                             </td>
                             <td style="text-align: right;">
-                                <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                <span
+                                    style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                             </td>
                         </tr>
 
-                        <tr>
+                        <!-- <tr>
 
                             <td colspan="5">
                                 <b> Packing</b>
@@ -168,10 +167,11 @@
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
                             <td colspan="2">
-                                <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                <span
+                                    style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                     <b>Free Packing</b></span>
                             </td>
-                        </tr>
+                        </tr> -->
                         <tr class="total">
                             <td colspan="5">
                                 <b>Total</b>
@@ -179,7 +179,8 @@
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
                             <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
                             <td colspan="2" style="text-align: right;">
-                                <span style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
+                                <span
+                                    style="float: right; font-size: 16px; line-height: 20px; color: var(--theme-deafult); font-weight: 400;">
                                     {{ getTotal() | currency:productService?.Currency.currency:'symbol'}}</span>
                             </td>
                         </tr>
