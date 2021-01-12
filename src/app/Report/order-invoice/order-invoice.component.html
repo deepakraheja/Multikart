@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="consignee bdr-bottom p10">
-                <div class="small">Consignee</div>
+                <div class="small">Bill To</div>
                 <h5 style="font-weight: 700;">{{ orderDetails[0].listUsers[0].name }}</h5>
                 <div class="consignee-address">
                     <span>{{ orderDetails[0].listUsers[0].address1 }}, {{orderDetails[0].listUsers[0].city}} </span>
@@ -82,24 +82,24 @@
                 <tr>
                     <td class="">
                         <span>Invoice No.</span>
-                        <h5 style="font-weight: 700;"></h5>
+                        <h5 style="font-weight: 700;">{{ orderDetails[0].invoiceNo}}</h5>
                     </td>
                     <td class="">
                         <span>Dated</span>
                         <h5 style="font-weight: 700;">{{ orderDetails[0].orderDate | date : 'dd-MMM-yyyy'}}</h5>
                     </td>
                 </tr>
-                <tr>
+                <!-- <tr>
                     <td class="">
                         <span>Delivery Note</span>
                         <h5></h5>
                     </td>
                     <td class="">
-                        <span>Mode/Terms of Payment</span>
+                        <span>Dated</span>
                         <h5></h5>
                     </td>
-                </tr>
-                <tr>
+                </tr> -->
+                <!-- <tr>
                     <td class="">
                         <span>Supplier’s Ref.</span>
                         <h5 style="font-weight: 700;">00407</h5>
@@ -108,7 +108,7 @@
                         <span>Other Reference(s)</span>
                         <h5>00407</h5>
                     </td>
-                </tr>
+                </tr> -->
                 <tr>
                     <td class="">
                         <span>Buyer’s Order No</span>
@@ -117,24 +117,33 @@
                         </h5>
                     </td>
                     <td class="">
-                        <span>Dated</span>
-                        <h5></h5>
+
+                        <span>Mode/Terms of Payment</span>
+                        <h5 style="font-weight: 700;">
+                            {{ orderDetails[0].paymentTypeId=='1'?'Online Payment':(orderDetails[0].paymentTypeId=='2'?'Credit to Agent':(orderDetails[0].paymentTypeId=='3'?'Direct Credit':'')) }}
+                        </h5>
                     </td>
                 </tr>
                 <tr>
                     <td class="">
                         <span>Despatch Document No.</span>
-                        <h5></h5>
+                        <h5 style="font-weight: 700;">
+                            {{ orderDetails[0].orderDetails[0].bilty}}
+                        </h5>
                     </td>
                     <td class="">
                         <span>Delivery Note Date</span>
-                        <h5></h5>
+                        <h5 style="font-weight: 700;">
+                            {{ orderDetails[0].orderDetails[0].dispatchDate | date : 'dd-MMM-yyyy'}}
+                        </h5>
                     </td>
                 </tr>
                 <tr>
                     <td class="">
                         <span>Despatched Through</span>
-                        <h5></h5>
+                        <h5 style="font-weight: 700;">
+                            {{ orderDetails[0].orderDetails[0].transportName}}
+                        </h5>
                     </td>
                     <td class="">
                         <span>Destination</span>
@@ -174,14 +183,15 @@
                 <tr>
                     <th>S.No.</th>
                     <th>Description of Goods</th>
-                    <th>HSN/SAC</th>
+                    <th>HSN / SAC</th>
+                    <th>Price</th>
                     <th>Qty</th>
-                    <th>Unit</th>
-                    <th>Rate Per Pc.</th>
+                    <!-- <th>Unit</th> -->
+                    <!-- <th>Rate Per Pc.</th>
                     <th>Disc %</th>
-                    <th>Discounted Rate</th>
-                    <th *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">Add. Discount (%)</th>
-                    <th *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">Add. Discount Amount</th>
+                    <th>Discounted Rate</th> -->
+                    <th *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">Add. Discount (%)</th>
+                    <th *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0">Add. Discount Amount</th>
                     <th>Amount (Without GST)</th>
                     <th>GST Rate in %</th>
                     <th>IGST</th>
@@ -197,13 +207,14 @@
                     <td class="text-right">
                         {{ product?.hsnCode }}
                     </td>
+                    <td class="text-right">{{ product?.salePrice | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td class="text-right"><b>{{ product?.quantity }}</b></td>
-                    <td>PCS</td>
-                    <td class="text-right">{{ product?.price | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <!-- <td>PCS</td> -->
+                    <!-- <td class="text-right">{{ product?.price | currency:productService?.Currency.currency:'symbol'}}</td>
                     <td>{{ product?.discount }}</td>
-                    <td class="text-right">{{ (product?.salePrice) | currency:productService?.Currency.currency:'symbol'}}</td>
-                    <td class="text-right" *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">{{ product?.additionalDiscount}}</td>
-                    <td class="text-right" *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0">{{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td class="text-right">{{ (product?.salePrice) | currency:productService?.Currency.currency:'symbol'}}</td> -->
+                    <td class="text-right" *ngIf="product?.additionalDiscount>0">{{ product?.additionalDiscount}}</td>
+                    <td class="text-right" *ngIf="product?.additionalDiscount>0">{{ product?.additionalDiscountAmount | currency:productService?.Currency.currency:'symbol'}}</td>
 
                     <td class="text-right">
                         <b>
@@ -247,15 +258,16 @@
             <tfoot>
                 <tr>
                     <td></td>
-                    <td class="text-right">Total</td>
-                    <td></td>
-                    <td class="text-right"><b>{{getQty()}} pcs</b></td>
+                    <td class="text-right"><b>Total</b></td>
                     <td></td>
                     <td></td>
-                    <td></td>
-                    <td *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0"></td>
-                    <td *ngIf="orderDetails[0].orderDetails?.additionalDiscount>0"></td>
-                    <td></td>
+                    <td class="text-right"><b>{{getQty()}}</b></td>
+                    <!-- <td><b>PCS</b></td> -->
+                    <!-- <td></td>
+                    <td></td> -->
+                    <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
+                    <td *ngIf="orderDetails[0].orderDetails[0]?.additionalDiscount>0"></td>
+                    <!-- <td></td> -->
                     <td>
                         <b>{{getTotalAmountWithOutGST() | currency:productService?.Currency.currency:'symbol'}}</b>
                     </td>

@@ -20,7 +20,7 @@ table span {
 }
 
 .invoice-container::before {
-    content: "ORDER GENERATED BUT NOT PAID";
+    // content: "ORDER GENERATED BUT NOT PAID";
     font-size: 50pt;
     position: absolute;
     left: 50pt;
@@ -34,7 +34,7 @@ table span {
 }
 
 .invoice-container::after {
-    content: "ORDER GENERATED BUT NOT PAID";
+    // content: "ORDER GENERATED BUT NOT PAID";
     font-size: 50pt;
     position: absolute;
     left: 50pt;
