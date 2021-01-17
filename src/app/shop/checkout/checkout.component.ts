@@ -16,7 +16,7 @@ import { OrderService } from 'src/app/Service/order.service';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+declare var $;
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -55,7 +55,7 @@ export class CheckoutComponent implements OnInit {
   addaddress: boolean = false;
   email: any;
   PinCodeMask: string;
-  IsEmptyCart:boolean=false;
+  IsEmptyCart: boolean = false;
   constructor(private fb: FormBuilder,
     public productService: ProductService,
     //private orderService: OrderService,
@@ -162,12 +162,23 @@ export class CheckoutComponent implements OnInit {
       });
     }
   }
-  
+
   addPinCodeMask(obj: Object) {
     this.PinCodeMask = "000000";
   }
 
   ngOnInit(): void {
+    debugger;
+    // $("#zoom_01").remove();
+    // setTimeout(function(){ 
+    //   $("#zoom_01").css("display", "none");
+    // }, 100);
+
+    setTimeout(function () {
+      $.removeData($('img'), 'elevateZoom');
+      $('.zoomContainer').remove();
+    }, 200);
+
     this.spinner.show();
     this._SharedDataService.lstCart.subscribe(res => {
       this.LoadCart();
@@ -262,12 +273,12 @@ export class CheckoutComponent implements OnInit {
       this._cartService.GetCartProcessedById().subscribe(response => {
         //  
         if (response.length > 0) {
-          this.IsEmptyCart=false;
+          this.IsEmptyCart = false;
           this.spinner.hide();
           this.productSizeColor = response;
         }
-        else{
-          this.IsEmptyCart=true;
+        else {
+          this.IsEmptyCart = true;
           this.productSizeColor = [];
         }
       });
@@ -301,6 +312,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   Continue() {
+    debugger
     this.OrderSummary1 = true;
     this.OrderSummary2 = false;
     this.fafaCheck = true;
@@ -309,6 +321,20 @@ export class CheckoutComponent implements OnInit {
 
     this.PaymentOption1 = false;
     this.PaymentOption2 = true;
+
+
+    // window.scroll({ 
+    //   top: 0, 
+    //   left: 0, 
+    //   behavior: 'smooth' 
+    // });
+
+    //Hack: Scrolls to top of Page after page view initialized
+    let top = document.getElementById('top');
+    if (top !== null) {
+      top.scrollIntoView();
+      top = null;
+    }
 
   }
 
@@ -471,7 +497,7 @@ export class CheckoutComponent implements OnInit {
       this.spinner.hide();
       this._SharedDataService.UserCart([]);
       this.router.navigate(['/shop/checkout/success/' + res]);
-      
+
     });
     //}
   }

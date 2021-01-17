@@ -73,10 +73,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
   ngAfterViewInit() {
 
     $(document).ready(function () {
-      setTimeout(() => $("#zoom_01").ezPlus({
-        zoomWindowWidth: 500,
-        zoomWindowHeight: 500
-      }), 3000);
+
       function scrollSticky() {
         if ($('.sticky-scroll').length) {
 
@@ -86,7 +83,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 600 - 20;
+            var limit = footerPosition - 680 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {
@@ -105,6 +102,10 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
                 top: diff + 142
               })
             }
+            setTimeout(() => $("#zoom_01").ezPlus({
+              zoomWindowWidth: 500,
+              zoomWindowHeight: 500
+            }), 3000);
           });
         }
       }
@@ -239,6 +240,10 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   // Add to cart
   async addToCart(type: Number, minimum: Number) {
+    // setTimeout(function(){ 
+    //   $("#zoom_01").css("display", "none");
+    // }, 1000);
+
     //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;
