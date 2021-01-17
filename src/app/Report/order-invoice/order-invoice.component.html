@@ -6,7 +6,7 @@
         <div class="addresses">
             <div class="company-details bdr-bottom p10">
                 <div class="print-logo mr-3">
-                    <img src="/assets/images/logo1.png" alt="Vikram Creation" />
+                    <img src="assets/images/logo1.png" alt="Vikram Creation" />
                 </div>
                 <div>
                     <h5 style="font-weight: 700;">Vikram Creation Pvt Ltd</h5>
@@ -282,10 +282,10 @@
             </tfoot>
         </table>
         <div class="ammount-word">
-            <div class="left">
+            <!-- <div class="left">
                 Amount Chargeable (in words)
                 <h5>Indian Rupees Fifteen Thousand Four Hundred Forty Only</h5>
-            </div>
+            </div> -->
             <div class="right text-right">
                 E. & O.E
             </div>
@@ -309,19 +309,19 @@
             <tbody>
                 <tr>
                     <td class="text-left">6104</td>
-                    <td>14,705.00</td>
+                    <td> <b>{{getTotalAmountWithOutGST() | currency:productService?.Currency.currency:'symbol'}}</b></td>
                     <td>5%</td>
-                    <td>735.25</td>
-                    <td>735.25</td>
+                    <td>{{getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td>{{getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr class="tax-total">
                     <td>Total</td>
-                    <td>14,705.00</td>
+                    <td><b>{{getTotalAmountWithOutGST() | currency:productService?.Currency.currency:'symbol'}}</b></td>
                     <td></td>
-                    <td>735.25</td>
-                    <td>735.25</td>
+                    <td>{{getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</td>
+                    <td>{{getTotalGSTAmount() | currency:productService?.Currency.currency:'symbol'}}</td>
                 </tr>
             </tfoot>
         </table>
