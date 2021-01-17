@@ -69,7 +69,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 600 - 20;
+            var limit = footerPosition - 680 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {

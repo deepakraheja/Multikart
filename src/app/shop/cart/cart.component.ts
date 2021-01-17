@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/Service/Products.service';
-
+declare var $;
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -53,6 +53,10 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    setTimeout(function () {
+      $.removeData($('img'), 'elevateZoom');
+      $('.zoomContainer').remove();
+    }, 200);
     this._SharedDataService.lstCart.subscribe(res => {
       this.LoadCart();
     });
