@@ -59,10 +59,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   ngAfterViewInit() {
 
     $(document).ready(function () {
-      setTimeout(() => $("#zoom_01").ezPlus({
-        zoomWindowWidth: 500,
-        zoomWindowHeight: 500
-      }), 3000);
+     
       function scrollSticky() {
         if ($('.sticky-scroll').length) {
 
@@ -97,6 +94,11 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
       if ($(window).width() >= 1024) {
         scrollSticky();
       }
+
+      setTimeout(() => $("#zoom_01").ezPlus({
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }), 3000);
     });
   }
   BindProduct(): void {
@@ -258,6 +260,10 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   }
   // Add to cart
   async addToCart(type: Number) {
+    // setTimeout(function(){ 
+    //   $("#zoom_01").css("display", "none");
+    // }, 1000);
+  
     //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;

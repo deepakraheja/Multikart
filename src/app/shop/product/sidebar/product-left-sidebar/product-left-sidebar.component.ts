@@ -71,24 +71,19 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   ngAfterViewInit() {
     //setTimeout(() => imageZoom('zoom_01', 'myresult'), 2000);
-    $(document).ready(function () {
-      setTimeout(() => $("#zoom_01").ezPlus({
-        zoomWindowWidth: 500,
-        zoomWindowHeight: 500
-      }), 3000);
-    });
+
     $(document).ready(function () {
 
       function scrollSticky() {
         if ($('.sticky-scroll').length) {
-          
+
           var el = $('.sticky-scroll');
           var stickyTop = el.offset().top - 142;
 
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 600 - 20;
+            var limit = footerPosition - 680 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {
@@ -110,9 +105,14 @@ export class ProductLeftSidebarComponent implements OnInit {
           });
         }
       }
-      if($(window).width() >= 1024) {
+      if ($(window).width() >= 1024) {
         scrollSticky();
       }
+
+      setTimeout(() => $("#zoom_01").ezPlus({
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }), 1000);
     });
   }
   BindProduct(): void {
@@ -240,6 +240,10 @@ export class ProductLeftSidebarComponent implements OnInit {
 
   // Add to cart
   async addToCart(type: Number) {
+
+
+
+
     //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;
@@ -263,6 +267,17 @@ export class ProductLeftSidebarComponent implements OnInit {
       const status = await this.productService.addToCartProduct(obj);
 
       if (status) {
+        // $("#zoom_01").remove();
+
+        // setTimeout(function(){ 
+        //   $("#zoom_01").css("display", "none");
+        // }, 500);
+
+        // setTimeout(function () {
+        //   $.removeData($('img'), 'elevateZoom');
+        //   $('.zoomContainer').remove();
+        // }, 100);
+
         if (type == 1)
           this.router.navigate(['/shop/cart']);
         else

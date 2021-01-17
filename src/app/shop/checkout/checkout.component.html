@@ -1,4 +1,5 @@
 <!-- <app-breadcrumb [title]="'Checkout'" [breadcrumb]="'Checkout'"></app-breadcrumb> -->
+<div id="top" style="visibility: hidden;">top</div>
 <section class="section-b-space" style="padding-top: 20px !important;">
     <div class="container">
         <div class="col-sm-12 empty-cart-cls text-center" *ngIf="IsEmptyCart==true">
@@ -10,6 +11,7 @@
             </div>
         </div>
         <!--*********************Delivery Address****************-->
+     
         <div class="checkout-page" *ngIf="productSizeColor.length">
             <div class="row">
                 <div class="col-lg-8">
