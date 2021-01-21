@@ -61,8 +61,7 @@
                     <ng-container *ngFor="let product of productskartselling | slice:0:16">
                         <ng-template carouselSlide>
                             <div class="product-box">
-                                <app-product-box [productkart]="product" [currency]="productService?.Currency"
-                                    [thumbnail]="true">
+                                <app-product-box [productkart]="product" [currency]="productService?.Currency" [thumbnail]="true">
                                 </app-product-box>
                             </div>
                         </ng-template>
@@ -76,13 +75,12 @@
 
 <!-- Parallax banner start-->
 <section>
-    <div class="full-banner parallax-banner1 parallax text-center p-left"
-        [ngStyle]="{'background-image': 'url(assets/images/parallax/1.jpg)'}">
+    <div class="full-banner parallax-banner1 parallax text-center p-left" [ngStyle]="{'background-image': 'url(assets/images/parallax/1.jpg)'}">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="banner-contain">
-                        <h2>2020</h2>
+                        <h2>2021</h2>
                         <h3>fashion trends</h3>
                         <h4>special offer</h4>
                     </div>
