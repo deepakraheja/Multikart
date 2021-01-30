@@ -15,6 +15,7 @@ export class OrderInvoiceComponent implements OnInit {
   public ProductImage = environment.ProductImage;
   public orderDetails: any[] = [];
   user: any[] = [];
+  TotalAmountInWord: string = "";
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -28,21 +29,21 @@ export class OrderInvoiceComponent implements OnInit {
       //this.GetOrderById(Number(params.get('orderId')));
       var GUID = params.get('id');
       //if (GUID != null) {
-        let obj = {
-          GUID: GUID
-        };
-        this.spinner.show();
-        this._OrderService.GetSuccessPrintOrderByGUID(obj).subscribe(res => {
-          this.spinner.hide();
+      let obj = {
+        GUID: GUID
+      };
+      this.spinner.show();
+      this._OrderService.GetSuccessPrintOrderByGUID(obj).subscribe(res => {
+        this.spinner.hide();
 
-          //if (res > 0)
-          this.orderDetails = res;
-          //console.log(res);
-          setTimeout(() => {
-            window.print();
-          }, 1000);
-          
-        });
+        //if (res > 0)
+        this.orderDetails = res;
+        //console.log(res);
+        setTimeout(() => {
+          window.print();
+        }, 1000);
+
+      });
       //}
     });
   }
@@ -52,6 +53,8 @@ export class OrderInvoiceComponent implements OnInit {
     (this.orderDetails[0].orderDetails).forEach(element => {
       TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount).toFixed(2));
     });
+    var converter = require('number-to-words');
+    this.TotalAmountInWord=converter.toWordsOrdinal(TotalAmount);
     return TotalAmount;
   }
 
@@ -71,7 +74,7 @@ export class OrderInvoiceComponent implements OnInit {
     return TotalAdditionalDiscountAmount;
   }
 
-  getTotalAmountWithDis(){
+  getTotalAmountWithDis() {
     var TotalAmount = 0;
     (this.orderDetails[0].orderDetails).forEach(element => {
       TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount).toFixed(2));

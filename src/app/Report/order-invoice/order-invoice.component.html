@@ -56,24 +56,26 @@
             </div>
             <div class="Byer p10">
                 <div class="small">Buyer (if other than consignee)</div>
-                <h5>R.S. ENTERPRISES</h5>
+                <h5 style="font-weight: 700;">{{ orderDetails[0].listAgentUsers[0].name }}</h5>
                 <div class="byer-address">
-                    <span>100-B MODEL TOWN, </span><span>PEHOWA, </span><span>HARYANA</span>
+                    <span>{{ orderDetails[0].listAgentUsers[0].address1 }}, {{orderDetails[0].listAgentUsers[0].city}} </span>
+                    <span>{{ orderDetails[0].listAgentUsers[0].state }}, </span>
+                    <span>{{ orderDetails[0].listAgentUsers[0].country }} - {{ orderDetails[0].listAgentUsers[0].zipCode }}</span>
                 </div>
                 <div class="byer-mobile">
-                    <span>Mobile: </span>
+                    <span>Mobile: {{ orderDetails[0].listAgentUsers[0].phone }}</span>
                 </div>
                 <div class="byer-mobile">
-                    <span>Email : </span>
+                    <span>Email : {{ orderDetails[0].listAgentUsers[0].email }}</span>
                 </div>
                 <div class="byer-mobile">
-                    <span>GSTIN/UIN : </span><span>06CXGPG9693E2Z4</span>
+                    <span>GSTIN/UIN : </span><span>{{ orderDetails[0].listAgentUsers[0].gstNo }}</span>
                 </div>
                 <div class="consignee-mobile">
-                    <span>PAN No : </span><span>CFDFDF343434</span>
+                    <span>PAN No : </span><span>{{ orderDetails[0].listAgentUsers[0].panNo }}</span>
                 </div>
                 <div class="byer-state">
-                    <span>GSTIN/UIN : </span><span>Haryana, Code : 06</span>
+                    <span>State Name : </span><span>{{ orderDetails[0].listAgentUsers[0].state }}</span>
                 </div>
             </div>
         </div>
@@ -327,7 +329,7 @@
         </table>
 
         <div>
-            Tax Amount (in words) :<b> Indian Rupees Seven Hundred Thirty Five and Twenty Five paise Only</b>
+            Tax Amount (in words) :<b> Indian Rupees {{TotalAmountInWord}} Only</b>
         </div>
 
         <div class="declaration mt-5">
