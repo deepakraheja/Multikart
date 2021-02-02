@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { ToWords } from 'to-words';
 
 @Component({
   selector: 'app-order-invoice',
@@ -53,8 +54,17 @@ export class OrderInvoiceComponent implements OnInit {
     (this.orderDetails[0].orderDetails).forEach(element => {
       TotalAmount += Number(((element.salePrice * element.quantity) - element.additionalDiscountAmount + element.gstAmount).toFixed(2));
     });
-    var converter = require('number-to-words');
-    this.TotalAmountInWord=converter.toWordsOrdinal(TotalAmount);
+    // var converter = require('number-to-words');
+    // this.TotalAmountInWord=converter.toWordsOrdinal(TotalAmount);
+
+
+    const toWords = new ToWords();
+
+    //let words = toWords.convert(452, { currency: true });
+    // words = Four Hundred Fifty Two Rupees Only
+    
+    this.TotalAmountInWord = toWords.convert(TotalAmount, { currency: true });
+
     return TotalAmount;
   }
 
