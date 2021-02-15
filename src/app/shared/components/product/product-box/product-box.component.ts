@@ -28,7 +28,7 @@ export class ProductBoxComponent implements OnInit {
   @Input() onHowerChangeImage: boolean = false; // Default False
   @Input() cartModal: boolean = false; // Default False
   @Input() loader: boolean = false;
-  public user: any[] = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+  public user: any[] = JSON.parse(localStorage.getItem('LoggedInUser'));
   // @ViewChild("quickView") QuickView: QuickViewComponent;
   // @ViewChild("cartModal") CartModal: CartModalComponent;
   //public closeResult: string;
@@ -45,6 +45,7 @@ export class ProductBoxComponent implements OnInit {
 
   ngOnInit(): void {
     //  ;
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     if (this.loader) {
       setTimeout(() => { this.loader = false; }, 2000); // Skeleton Loader
     }
@@ -91,7 +92,7 @@ export class ProductBoxComponent implements OnInit {
   }
 
   GoToDetail(rowID, productSizeColorId, setType, setNo) {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     //  
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
@@ -120,7 +121,7 @@ export class ProductBoxComponent implements OnInit {
     }
   }
   addToCart(product: any) {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     //  
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
@@ -143,8 +144,29 @@ export class ProductBoxComponent implements OnInit {
     }
   }
 
-  addToWishlist(product: any) {
-    this.productService.addToWishlist(product);
+  async addToWishlist(product: any) {
+    //this.productService.addToWishlist(product);
+
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
+    if (this.user == null || this.user == undefined) {
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
+    }
+    else {
+      debugger
+      let obj={
+        ProductSizeId: Number(product.productSizeId)
+      };
+      const status = await this.productService.addToWishListProduct(obj);
+      // if (status) {
+      //     this.router.navigate(['/shop/wishlist']);
+      // }
+    }
+
   }
 
   addToCompare(product: any) {

@@ -11,6 +11,7 @@ import { SharedDataService } from 'src/app/Service/shared-data.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from 'src/app/Service/cart.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { WishListService } from 'src/app/Service/wish-list.service';
 
 const state = {
   products: JSON.parse(localStorage['products'] || '[]'),
@@ -34,6 +35,7 @@ export class ProductService {
     private modalService: NgbModal,
     private _cartService: CartService,
     private spinner: NgxSpinnerService,
+    private _wishListService: WishListService,
   ) { }
 
   /*
@@ -93,10 +95,23 @@ export class ProductService {
   }
 
   // Remove Wishlist items
-  public removeWishlistItem(product: Product): any {
-    const index = state.wishlist.indexOf(product);
-    state.wishlist.splice(index, 1);
-    localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+  public removeWishlistItem(product: any): any {
+    // const index = state.wishlist.indexOf(product);
+    // state.wishlist.splice(index, 1);
+    // localStorage.setItem("wishlistItems", JSON.stringify(state.wishlist));
+    // return true
+
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
+    //  
+    let obj = {
+      WishListId: product.wishListId
+    };
+    this.spinner.show();
+    this._wishListService.DelWishListById(obj).subscribe(res => {
+      this.spinner.hide();
+      this.toastrService.success('Product has been removed successfully from your Wishlist.');
+      this._SharedDataService.UserwishList([]);
+    });
     return true
   }
 
@@ -107,17 +122,19 @@ export class ProductService {
   */
 
   // Get Compare Items
-  public get compareItems(): Observable<Product[]> {
+  public get compareItems(): Observable<Productkart[]> {
     const itemsStream = new Observable(observer => {
       observer.next(state.compare);
       observer.complete();
+      localStorage.setItem("compareItems", JSON.stringify(state.compare));
+      this._SharedDataService.Usercompare(state.compare);
     });
-    return <Observable<Product[]>>itemsStream;
+    return <Observable<Productkart[]>>itemsStream;
   }
 
   // Add to Compare
   public addToCompare(product): any {
-    const compareItem = state.compare.find(item => item.id === product.id)
+    const compareItem = state.compare.find(item => item.rowID === product.rowID)
     if (!compareItem) {
       state.compare.push({
         ...product
@@ -125,14 +142,17 @@ export class ProductService {
     }
     this.toastrService.success('Product has been added in compare.');
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
+    this._SharedDataService.Usercompare(state.compare);
     return true
   }
 
   // Remove Compare items
-  public removeCompareItem(product: Product): any {
+  public removeCompareItem(product: any): any {
     const index = state.compare.indexOf(product);
     state.compare.splice(index, 1);
+    this.toastrService.success('Product has been removed in compare.');
     localStorage.setItem("compareItems", JSON.stringify(state.compare));
+    this._SharedDataService.Usercompare(state.compare);
     return true
   }
 
@@ -166,7 +186,7 @@ export class ProductService {
   public addToCartProduct(product: any[]): any {
     //  ;
     //console.log(product);
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     //  
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
@@ -219,7 +239,7 @@ export class ProductService {
   public addToCart(product): any {
     //  
 
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     //  
     if (this.user == null || this.user == undefined) {
       //this.router.navigate(['/pages/login/cart']);
@@ -282,7 +302,7 @@ export class ProductService {
 
   // Remove Cart items
   public removeCartItem(product: any): any {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     //  
     let obj = {
       CartId: product.cartId,
@@ -457,5 +477,65 @@ export class ProductService {
       pages: pages
     };
   }
+
+   // added on 13 july 2020 by deepak
+  //Add to Cart 
+  public addToWishListProduct(product: any): any {
+    //  ;
+    //console.log(product);
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
+    //  
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
+    }
+    else {
+      this.spinner.show();
+      this._wishListService.AddToWishList(product).subscribe(res => {
+        this.spinner.hide();
+        this.toastrService.success("Product has been successfully added in WishList.");
+        this._SharedDataService.UserwishList([]);
+      });
+    }
+    return true;
+  }
+
+  public addToWishToCartProduct(product: any): any {
+    //  ;
+    //console.log(product);
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
+    //  
+    if (this.user == null || this.user == undefined) {
+      //this.router.navigate(['/pages/login/cart']);
+      this.modalService.open(LoginComponent, {
+        size: 'lg',
+        ariaLabelledBy: 'Cart-Modal',
+        centered: true,
+        windowClass: 'theme-modal cart-modal CartModal'
+      });
+    }
+    else {
+      var obj: any[] = [];
+      debugger
+      obj.push({
+        ProductSizeId: Number(product.productSizeId),
+        Quantity: 1
+      });
+      this.spinner.show();
+      this._cartService.AddToCart(obj).subscribe(res => {
+        this.spinner.hide();
+        this.toastrService.success("Product has been successfully added in cart.");
+        this._SharedDataService.UserwishList([]);
+        this._SharedDataService.UserCart([]);
+      });
+    }
+    return true;
+  }
+
 
 }

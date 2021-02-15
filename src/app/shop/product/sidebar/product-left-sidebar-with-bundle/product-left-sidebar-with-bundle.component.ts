@@ -139,7 +139,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     this.BindProduct();
     const s = this.renderer2.createElement('script');
     s.type = 'text/javascript';

@@ -693,7 +693,7 @@ export class RegisterComponent implements OnInit {
           // this.userService.ValidLogin(obj).subscribe(res => {
           //   if (res.length > 0) {
 
-          //     sessionStorage.setItem('LoggedInUser', JSON.stringify(res));
+          //     localStorage.setItem('LoggedInUser', JSON.stringify(res));
           //     this._SharedDataService.AssignUser(res);
           //     //  
           //     this.route.paramMap.subscribe((params: ParamMap) => {

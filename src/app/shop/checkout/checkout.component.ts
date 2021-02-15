@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private modalService: NgbModal,
   ) {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     this.checkoutForm = this.fb.group({
       billingAddressId: [0],
       userID: this.user[0].userID,
@@ -265,7 +265,7 @@ export class CheckoutComponent implements OnInit {
   // }
 
   LoadCart() {
-    this.user = JSON.parse(sessionStorage.getItem('LoggedInUser'));
+    this.user = JSON.parse(localStorage.getItem('LoggedInUser'));
     if (this.user != null) {
       // let obj = {
       //   UserID: this.user[0].userID

@@ -90,23 +90,28 @@
         </a>
       </li>
     </ul> -->
-        <!-- <div class="cart-info cart-wrap">
-      <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(productkart)" *ngIf="cartModal">
-        <i class="ti-shopping-cart"></i>
-      </a>
-      <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(productkart)" *ngIf="!cartModal">
-        <i class="ti-shopping-cart"></i>
-      </a>
+    <div style="position: absolute;
+        display: inline-block;
+        top: 12px;
+        right: 12px;   
+        cursor: pointer;">
+      <!-- <a href="javascript:void(0)" title="Add to cart" (click)="CartModal.openModal(productkart)" *ngIf="cartModal">
+                <i class="ti-shopping-cart"></i>
+            </a>
+            <a href="javascript:void(0)" title="Add to cart" (click)="addToCart(productkart)" *ngIf="!cartModal">
+                <i class="ti-shopping-cart"></i>
+            </a> -->
       <a href="javascript:void(0)" title="Add to Wishlist" (click)="addToWishlist(productkart)">
-        <i class="ti-heart" aria-hidden="true"></i>
+        <i class="ti-heart" aria-hidden="true" style="color: #999;
+        font-size: 1.00rem;"> </i>
       </a>
-      <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
-        <i class="ti-search" aria-hidden="true"></i>
-      </a>
-      <a href="javascript:void(0)" title="Compare" (click)="addToCompare(productkart)">
+      <!-- <a href="javascript:void(0)" title="Quick View" (click)="QuickView.openModal()">
+                <i class="ti-search" aria-hidden="true"></i>
+            </a> -->
+      <!-- <a href="javascript:void(0)" title="Compare" (click)="addToCompare(productkart)">
         <i class="ti-reload" aria-hidden="true"></i>
-      </a>
-    </div> -->
+      </a> -->
+    </div>
     </div>
     <div class="product-detail">
         <div>
@@ -154,6 +159,11 @@
 
         </div>
     </div>
+  <span class="only-show-on-hover">
+    <label style="color: #3c5edb;">
+      <input type="checkbox" (change)="addToCompare(productkart)" value="">&nbsp;
+      Add to Compare</label>
+  </span>
 </div>
 <!-- <app-skeleton-product-box *ngIf="loader"></app-skeleton-product-box> -->
 <!-- <app-quick-view #quickView [product]="product" [currency]="currency"></app-quick-view> -->
