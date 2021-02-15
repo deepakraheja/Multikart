@@ -40,18 +40,22 @@
 								<!-- <img [src]="themeLogo" alt="logo"> -->
 								<h4>VIKRAM CREATIONS PRIVATE LIMITED</h4>
 							</div>
-							<p style="text-align: justify;">Established in the year 1999, Vikram Creations Pvt. Ltd, is a well known fashion house based
+							<p style="text-align: justify;">Established in the year 1999, Vikram Creations Pvt. Ltd, is
+								a well known fashion house based
 								out of New
-								Delhi, India. The comapany is a renowned as a manufacturer, wholesaler, trader and supplier
+								Delhi, India. The comapany is a renowned as a manufacturer, wholesaler, trader and
+								supplier
 								of women
-								fashion. The company owns and operates 7 brands namely Elomelo, Style Girl, A Sweet Design,
+								fashion. The company owns and operates 7 brands namely Elomelo, Style Girl, A Sweet
+								Design,
 								Elly Ross,
 								Style Plus, Denim Studio and Active Spirits, each with their own distinct identity. All
 								these branded
-								garments are especially designed and crafted by a well trianed team of in-house designers.
+								garments are especially designed and crafted by a well trianed team of in-house
+								designers.
 							</p>
 						</div>
-						
+
 						<div class="footer-social">
 							<ul>
 								<li>
@@ -68,7 +72,7 @@
 								<li>
 									<a href="https://www.instagram.com/iloveelomelo/?r=nametag"><i
 											class="fa fa-instagram" aria-hidden="true"></i></a>
-								</li>  
+								</li>
 								<!-- <li>
 										<a href="javascript:void(0)"><i class="fa fa-rss" aria-hidden="true"></i></a>
 									</li> -->
@@ -102,12 +106,16 @@
 						</div>
 						<div class="footer-contant uppercase">
 							<ul>
-								<li><a href="javascript:void(0)">Privacy Policy</a></li>
-								<li><a href="javascript:void(0)">Returns</a></li>
-								<li><a href="javascript:void(0)">Terms & Conditions</a></li>
-								<li><a href="javascript:void(0)">Contact Us</a></li>
-								<li><a href="javascript:void(0)">Latest News</a></li>
-								<li><a href="javascript:void(0)">Our Sitemap</a></li>
+								<li><a [routerLink]="['/pages/aboutus']">About Us</a></li>
+								<li><a [routerLink]="['/pages/privacypolicy']">Privacy Policy</a></li>
+								<li><a [routerLink]="['/pages/returnpolicy']">Terms & Conditions</a></li>
+								<!-- <li><a href="javascript:void(0)">Privacy Policy</a></li>
+								<li><a href="javascript:void(0)">Returns</a></li> -->
+								<!-- <li><a href="javascript:void(0)">Terms & Conditions</a></li> -->
+								<li><a [routerLink]="['/pages/contact']">Contact Us</a></li>
+								<!-- <li><a href="javascript:void(0)">Contact Us</a></li> -->
+								<!-- <li><a href="javascript:void(0)">Latest News</a></li>
+								<li><a href="javascript:void(0)">Our Sitemap</a></li> -->
 							</ul>
 						</div>
 					</div>
@@ -139,7 +147,7 @@
 			<div class="row">
 				<div class="col-xl-6 col-md-6 col-sm-12">
 					<div class="footer-end">
-						<p><i class="fa fa-copyright" aria-hidden="true"></i> {{ today | date:'y'}} Copyright  ECom,
+						<p><i class="fa fa-copyright" aria-hidden="true"></i> {{ today | date:'y'}} Copyright ECom,
 							Inc. All
 							rights Reserved.</p>
 					</div>

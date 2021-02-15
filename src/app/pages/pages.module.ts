@@ -12,7 +12,7 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ForgetPasswordComponent } from './account/forget-password/forget-password.component';
 //import { ProfileComponent } from './account/profile/profile.component';
-import { ContactComponent } from './account/contact/contact.component';
+// import { ContactComponent } from './account/contact/contact.component';
 import { CheckoutComponent } from './account/checkout/checkout.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { SearchComponent } from './search/search.component';
@@ -29,6 +29,9 @@ import { FaqComponent } from './faq/faq.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ThanksComponent } from './account/thanks/thanks.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { PrivacypolicyComponent } from './privacypolicy/privacypolicy.component';
+import { ReturnpolicyComponent } from './returnpolicy/returnpolicy.component';
+import { ContactComponent } from './contact/contact.component';
 // Blog Components
 // import { BlogLeftSidebarComponent } from './blog/blog-left-sidebar/blog-left-sidebar.component';
 // import { BlogRightSidebarComponent } from './blog/blog-right-sidebar/blog-right-sidebar.component';
@@ -68,6 +71,8 @@ import { NgxMaskModule } from 'ngx-mask';
     FaqComponent,
     ResetPasswordComponent,
     ThanksComponent,
+    PrivacypolicyComponent,
+    ReturnpolicyComponent,
     // BlogLeftSidebarComponent,
     // BlogRightSidebarComponent,
     // BlogNoSidebarComponent,
