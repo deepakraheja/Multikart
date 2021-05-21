@@ -498,7 +498,7 @@ export class ProductService {
       this.spinner.show();
       this._wishListService.AddToWishList(product).subscribe(res => {
         this.spinner.hide();
-        this.toastrService.success("Product has been successfully added in WishList.");
+        this.toastrService.success("Product has been successfully added in Shortlist.");
         this._SharedDataService.UserwishList([]);
       });
     }

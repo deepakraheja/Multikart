@@ -83,7 +83,7 @@ export class ProductLeftSidebarComponent implements OnInit {
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 680 - 20;
+            var limit = footerPosition - 740 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {
@@ -112,7 +112,8 @@ export class ProductLeftSidebarComponent implements OnInit {
       setTimeout(() => $("#zoom_01").ezPlus({
         zoomWindowWidth: 500,
         zoomWindowHeight: 500
-      }), 1000);
+      }), 3000);
+
     });
   }
   BindProduct(): void {

@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
         //setTimeout(() => this.spinner.hide(), 500);
         if (res.length > 0) {
           if (res[0].isAgent == 1) {
-            this.toastr.error('You are an agent.');
+            this.toastr.error('You are an agent.Please write at the Customercare@Vikramcreations.Com for login.');
             return;
           }
           if (res[0].statusId == 1) {

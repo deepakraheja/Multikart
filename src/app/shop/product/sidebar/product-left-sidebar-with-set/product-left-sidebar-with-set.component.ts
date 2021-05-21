@@ -59,7 +59,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
   ngAfterViewInit() {
 
     $(document).ready(function () {
-     
+
       function scrollSticky() {
         if ($('.sticky-scroll').length) {
 
@@ -69,7 +69,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 680 - 20;
+            var limit = footerPosition - 740 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {
@@ -263,7 +263,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
     // setTimeout(function(){ 
     //   $("#zoom_01").css("display", "none");
     // }, 1000);
-  
+
     //  
     //product.quantity = this.counter || 1;
     //product.productname = productname;

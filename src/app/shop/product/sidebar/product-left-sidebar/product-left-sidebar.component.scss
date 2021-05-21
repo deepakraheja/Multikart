@@ -1,17 +1,37 @@
 @media (min-width:1024px) {
     .sticky-scroll.fixed-section {
-        width: 36%;
+        width: 36.5%;
     }
 }
 
 @media (min-width:1300px) {
     .sticky-scroll.fixed-section {
-        width: 32.5%;
+        width: 36.5%;
     }
 }
 
 @media (min-width:1900px) {
     .sticky-scroll.fixed-section {
-        width: 29%;
+        width: 36.5%;
     }
+}
+
+.mrg-btm-minus {
+    margin-bottom: -1px;
+}
+.mrg-btm-minus .active {
+    border: solid 2px #ff4c3b;
+    margin-bottom: 1px;
+}
+.thumb-left-img {
+    height: 63px;
+    width: 63px;
+    /* padding-bottom: 0px; */
+    padding: 10px;
+    /* background: #ccc; */
+    border: solid 1px #ddd;
+    padding-top: 7px;
+}
+.border-grey {
+    border: solid 1px #ddd;
 }

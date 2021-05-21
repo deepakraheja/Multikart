@@ -17,10 +17,10 @@ export const environment = {
 
   //*********************Local Server************* */
 
-  ProductImage: 'http://localhost:54444/ProductImage/',
-  BASE_API_URL: 'http://localhost:54444/api/',
-  Report_Path: 'http://localhost:54444/ReportGenerate/',
-  WebSite_URL: 'http://localhost:4200/'
+  // ProductImage: 'http://localhost:54444/ProductImage/',
+  // BASE_API_URL: 'http://localhost:54444/api/',
+  // Report_Path: 'http://localhost:54444/ReportGenerate/',
+  // WebSite_URL: 'http://localhost:4200/'
 
   //*********************Production Server************* */
 
@@ -30,10 +30,10 @@ export const environment = {
   // WebSite_URL: 'http://localhost:4200/'
 
   
-  // BASE_API_URL: 'http://103.108.220.24/EcommApiV3/api/',
-  // ProductImage: 'http://103.108.220.24/EcommApiV3/ProductImage/',
-  // Report_Path: 'http://103.108.220.24/EcommApiV3/ReportGenerate/',
-  // WebSite_URL: 'http://103.108.220.24/Ecom/'
+  BASE_API_URL: 'http://103.108.220.24/EcommApiV3/api/',
+  ProductImage: 'http://103.108.220.24/EcommApiV3/ProductImage/',
+  Report_Path: 'http://103.108.220.24/EcommApiV3/ReportGenerate/',
+  WebSite_URL: 'http://103.108.220.24/Ecom/'
 
 };
 

@@ -83,7 +83,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
           $(window).scroll(function () {
 
             var footerPosition = $('.unsticky').offset().top;
-            var limit = footerPosition - 680 - 20;
+            var limit = footerPosition - 740 - 20;
             var windowTop = $(window).scrollTop();
 
             if (stickyTop < windowTop) {
@@ -102,16 +102,17 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
                 top: diff + 142
               })
             }
-            setTimeout(() => $("#zoom_01").ezPlus({
-              zoomWindowWidth: 500,
-              zoomWindowHeight: 500
-            }), 3000);
           });
         }
       }
       if ($(window).width() >= 1024) {
         scrollSticky();
       }
+
+      setTimeout(() => $("#zoom_01").ezPlus({
+        zoomWindowWidth: 500,
+        zoomWindowHeight: 500
+      }), 1000);
     });
   }
   BindProduct(): void {
@@ -171,6 +172,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   changecolor(index: string) {
     //  ;
+    debugger
     this.bigProductImageIndex = Number(index);
     this.activeSlide = Number(index);
   }
@@ -197,7 +199,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
         }
       }
 
-      //console.log(imageColor);
+      console.log(imageColor);
       return imageColor
     }
   }
