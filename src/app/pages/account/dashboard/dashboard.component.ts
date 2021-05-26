@@ -197,7 +197,7 @@ export class DashboardComponent implements OnInit {
     lst.forEach(element => {
       TotalGSTAmount += Number((element.gstAmount).toFixed(2));
     });
-    debugger
+    // debugger
     return TotalGSTAmount;
   }
 
