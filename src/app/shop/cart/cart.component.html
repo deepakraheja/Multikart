@@ -17,7 +17,8 @@
                         <div class="cart-product-details">
                             <div class="row">
                                 <div class="col-sm-2 text-center">
-                                    <a (click)="GoToDetail(product.rowID,product?.productSizeId,product?.setType,product?.setNo);">
+                                    <a
+                                        (click)="GoToDetail(product.rowID,product?.productSizeId,product?.setType,product?.setNo);">
                                         <img class="img-fluid" *ngIf="product?.setNo>0"
                                             [src]="ProductImage+product?.productId+'/productSetImage/'+product?.setNo+'/'+product?.productImg[0]">
                                         <img class="img-fluid" *ngIf="product?.setNo==0"
@@ -36,6 +37,7 @@
                                         <h5 [innerHTML]="(product?.productName)"></h5> -->
                                         <!-- {{ product?.productName| titlecase }}-->
                                         <div class="qty-box">
+
                                             <div class="input-group">
                                                 <span class="input-group-prepend">
                                                     <button *ngIf="product?.setType==3" type="button"
@@ -50,7 +52,9 @@
                                                     </button>
 
                                                 </span>
-                                                <input type="text" style="width: 70px;" name="quantity" class="form-control input-number" disabled [(ngModel)]="product.quantity">
+                                                <input type="text" style="width: 70px;" name="quantity"
+                                                    class="form-control input-number" disabled
+                                                    [(ngModel)]="product.quantity">
                                                 <span class="input-group-prepend">
 
                                                     <button *ngIf="product?.setType==3" type="button"
@@ -87,39 +91,68 @@
                                         <div class="d-flex justify-content-start">
                                             <h4 *ngIf="product?.setType==2" class="text-black">
 
-                                                {{ (product.salePrice*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}
+                                                {{ (product.salePrice*product.totalPieces).toFixed() |
+                                                currency:productService?.Currency.currency:'symbol' }}
                                             </h4>&nbsp;
-                                            <del *ngIf="product?.setType==2">{{ (product.price*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}</del>
+                                            <del *ngIf="product?.setType==2">{{
+                                                (product.price*product.totalPieces).toFixed() |
+                                                currency:productService?.Currency.currency:'symbol' }}</del>
 
 
                                             <h4 *ngIf="product?.setType!=2" class="text-black">
 
-                                                {{ (product.salePrice) | currency:productService?.Currency.currency:'symbol' }}
+                                                {{ (product.salePrice) |
+                                                currency:productService?.Currency.currency:'symbol' }}
                                             </h4>&nbsp;
-                                            <del *ngIf="product?.setType!=2">{{ product.price | currency:productService?.Currency.currency:'symbol' }}</del> &nbsp;
+                                            <del *ngIf="product?.setType!=2">{{ product.price |
+                                                currency:productService?.Currency.currency:'symbol' }}</del> &nbsp;
                                             <h5 class="text-red" *ngIf="product?.setType!=2">
                                                 {{ product.perDiscount/product.totalPieces | number:'1.2-2' }}%</h5>
                                         </div>
 
-                                        <a href="javascript:void(0)" (click)="deleteConfirmation(templateDeleteItem,product)" class="icon">
+                                        <!-- <a href="javascript:void(0)"
+                                            (click)="deleteConfirmation(templateDeleteItem,product)" class="icon">
                                             <i class="ti-trash text-red" style="font-size:1.5rem;"></i>
-                                        </a>
+                                        </a> -->
+                                        <div>
+
+                                            <h3 *ngIf="product?.setType==1">
+                                                {{ product.salePrice*product.totalPieces |
+                                                currency:productService?.Currency.currency:'symbol' }}
+                                            </h3>
+                                            <h3 *ngIf="product?.setType==2">
+                                                {{ (product.salePrice*product.totalPieces).toFixed() |
+                                                currency:productService?.Currency.currency:'symbol' }}
+                                            </h3>
+                                            <h3 *ngIf="product?.setType==3">
+                                                {{ product.salePrice |
+                                                currency:productService?.Currency.currency:'symbol' }}
+                                            </h3>
+                                        </div>
+
                                     </div>
 
                                     <div class="d-flex justify-content-between mt-3">
                                         <h5>Total Pieces: {{ product.totalPieces }}</h5>
-                                        <div>
+                                        <a href="javascript:void(0)"
+                                            (click)="deleteConfirmation(templateDeleteItem,product)" class="icon">
+                                            <i class="ti-trash text-red" style="font-size:1.5rem;"></i>
+                                        </a>
+                                        <!-- <div>
 
                                             <h3 *ngIf="product?.setType==1">
-                                                {{ product.salePrice*product.totalPieces | currency:productService?.Currency.currency:'symbol' }}
+                                                {{ product.salePrice*product.totalPieces |
+                                                currency:productService?.Currency.currency:'symbol' }}
                                             </h3>
                                             <h3 *ngIf="product?.setType==2">
-                                                {{ (product.salePrice*product.totalPieces).toFixed() | currency:productService?.Currency.currency:'symbol' }}
+                                                {{ (product.salePrice*product.totalPieces).toFixed() |
+                                                currency:productService?.Currency.currency:'symbol' }}
                                             </h3>
                                             <h3 *ngIf="product?.setType==3">
-                                                {{ product.salePrice | currency:productService?.Currency.currency:'symbol' }}
+                                                {{ product.salePrice |
+                                                currency:productService?.Currency.currency:'symbol' }}
                                             </h3>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                     <!-- <div class="qty-box">
@@ -161,10 +194,12 @@
                         <hr>
                         <p class="d-flex justify-content-between">
                             <span><b>Total Amount: </b></span>
-                            <span><b>{{ Price-Discount | currency:productService?.Currency.currency:'symbol'}}</b></span>
+                            <span><b>{{ Price-Discount |
+                                    currency:productService?.Currency.currency:'symbol'}}</b></span>
                         </p>
                         <hr>
-                        <p class="text-green mb-4">You will save {{ Discount | currency:productService?.Currency.currency:'symbol'}} on this order</p>
+                        <p class="text-green mb-4">You will save {{ Discount |
+                            currency:productService?.Currency.currency:'symbol'}} on this order</p>
                         <div class="text-center">
                             <a class="btn btn-solid" (click)="ProceedToCheckout()">check out</a>
                         </div>
@@ -207,7 +242,9 @@
                                         <i class="ti-minus"></i>
                                     </button>
                                 </span>
-                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}" style="width: 45px; height: 27px;" class="form-control input-number" [value]="item.quantity" disabled />
+                                <input type="text" name="quantity" id="{{ 'txtqty' + myIndex}}"
+                                    style="width: 45px; height: 27px;" class="form-control input-number"
+                                    [value]="item.quantity" disabled />
                                 <span class="input-group-prepend">
                                     <button type="button" class="btn quantity-right-plus" data-type="plus"
                                         (click)="Min_increment(item)">
@@ -256,7 +293,8 @@
                                         </button>
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-xs-6 text-right">
-                                        <button type="button" class="btn-solid btn" (click)="modal.dismiss('Cross click')">
+                                        <button type="button" class="btn-solid btn"
+                                            (click)="modal.dismiss('Cross click')">
                                             No
                                         </button>
                                     </div>

@@ -79,6 +79,7 @@ export class LoginComponent implements OnInit {
 
       this.loginStart = true;
       this.userService.ValidLogin(this.LoginForm.value).subscribe(res => {
+        debugger
         this.loginStart = false;
         //setTimeout(() => this.spinner.hide(), 500);
         if (res.length > 0) {
