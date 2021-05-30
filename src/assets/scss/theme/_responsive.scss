@@ -2935,8 +2935,13 @@ background-color: $black;*/
         .tab-title2 {
             a {
                 text-transform: capitalize;
+                font-size: 23px;
             }
         }
+    }
+    .logo-size {
+        max-width: 175px;
+    margin-left: 50px;
     }
     .darken-layout,
     .dark-layout {
@@ -6155,6 +6160,7 @@ background-color: $black;*/
             .contact-list {
                 li {
                     line-height: 25px;
+                    font-size: 12px;
                 }
             }
         }
@@ -6198,6 +6204,19 @@ background-color: $black;*/
             }
         }
     }
+    .justify-content-center{
+        .nav{
+            .nav-pills{
+                text-align: center;
+                font-size: 18px;
+                margin-bottom: 30px;
+                margin-top: -6px;
+            }
+         }
+    } 
+       
+   
+
     .home-slider {
         .slider-contain {
             h1 {
@@ -6209,8 +6228,9 @@ background-color: $black;*/
             }
             .btn-solid,
             .btn-outline {
-                margin-top: 10px;
-                padding: 5px 18px;
+                margin-top: 25px;
+    padding: 5px 18px;
+    margin-left: 97px;
             }
         }
         &:hover {
@@ -6724,8 +6744,9 @@ background-color: $black;*/
             }
             .btn-solid,
             .btn-outline {
-                margin-top: 8px;
+                margin-top: 25px;
                 padding: 5px 15px;
+                margin-left: 97px;
             }
         }
         &:hover {
