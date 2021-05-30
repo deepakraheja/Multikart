@@ -44,7 +44,7 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
 
   //public counter: number[] = [1, 1, 1, 1, 1, 1, 1, 1, 1];
   public activeSlide: any = 0;
-
+  public activeColorSlide: any = 0;
   activeSlide1: any = 0;
   public selectedSize: any;
   public mobileSidebar: boolean = false;
@@ -174,7 +174,9 @@ export class ProductLeftSidebarWithBundleComponent implements OnInit {
     //  ;
     debugger
     this.bigProductImageIndex = Number(index);
-    this.activeSlide = Number(index);
+    this.activeColorSlide = Number(index);
+    this.activeSlide = 0;
+    this.ChangeImage();
   }
 
 

@@ -122,7 +122,7 @@
                         
                         
                         <ul class="color-variant">
-                            <li [class]="color" [class.active]="activeSlide == color.colorindex.toString()"
+                            <li [class]="color" [class.active]="activeColorSlide == color.colorindex.toString()"
                                 *ngFor="let color of Color(productkart[0]?.productSizeColor); index as i"
                                 [ngStyle]="{'background-color': color.color}"
                                 (click)="changecolor(i.toString())">

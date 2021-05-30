@@ -35,6 +35,7 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
   public counter: number = 1;
   public activeSlide: any = 0;
+  public activeColorSlide: any = 0;
   public selectedSize: any = 1;
   public mobileSidebar: boolean = false;
   public productId: any;
@@ -161,7 +162,9 @@ export class ProductLeftSidebarWithSetComponent implements OnInit {
 
   changecolor(index: string) {
     this.bigProductImageIndex = Number(index);
-    this.activeSlide = Number(index);
+    this.activeColorSlide = Number(index);
+    this.activeSlide = 0;
+    this.ChangeImage();
   }
 
   // Get Product Color
