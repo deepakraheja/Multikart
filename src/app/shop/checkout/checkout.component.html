@@ -49,7 +49,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="text-right">
+                                                <div class="text-right" *ngIf="lstBilling.isDefault==false">
                                                     <button class="btn btn-link" (click)="EditBillingAddress(templateBillingAddress,lstBilling)"> Edit</button>
                                                 </div>
                                             </div>
@@ -83,7 +83,7 @@
                             </div>
 
                             <!--*********************Add new address****************-->
-                            <div class="checkout-steps" *ngIf="addnewaddress">
+                            <div class="checkout-steps" *ngIf="addnewaddress && (lstBillingAddress?.length<2 && user[0].isAgentCustomer==false)">
                                 <div class="step-heading">
                                     <button class="btn btn-link" (click)="AddNewAddress()"><i class="fa fa-plus"></i>
                                         Add New

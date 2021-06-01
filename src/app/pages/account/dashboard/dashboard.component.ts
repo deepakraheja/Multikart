@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     private _ReportService: ReportService,
     private _InvoiceService: InvoiceService
   ) {
-
+    this.LoadUserData();
   }
 
   addPinCodeMask(obj: Object) {
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
         NewPassword: ['', [Validators.required, Validators.minLength(8)]],
         ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
       });
-      this.LoadUserData();
+      
       this.LoadBillingAddress();
       this.LoadAllOrder();
       this.LoadOrderStatus();

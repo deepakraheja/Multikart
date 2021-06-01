@@ -37,11 +37,11 @@ export class HeaderOneComponent implements OnInit {
     });
     this._SharedDataService.lstcompare.subscribe(response => {
       debugger
-      this.CompareCount = response.length;
+      this.CompareCount = response?.length;
     });
     this._SharedDataService.lstwishList.subscribe(response => {
       debugger
-      this.WishListCount = response.length;
+      this.WishListCount = response?.length;
       this.LoadWishList();
     });
   }
