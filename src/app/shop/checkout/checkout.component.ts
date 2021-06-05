@@ -213,7 +213,11 @@ export class CheckoutComponent implements OnInit {
         this.lstBillingAddress = res;
         this.AddressId = res[0].billingAddressId;
         this.email = res[0].emailId;
-        this.SelectedAddress = res[0].address + ' ' + res[0].city + ' ' + res[0].state + ' ' + res[0].zipCode + ' ' + res[0].country
+        this.SelectedAddress = res[0].address + ' ' + res[0].city + ' ' + res[0].state + ' ' + res[0].zipCode + ' ' + res[0].country;
+        var defaultAddress=res.filter(a=>a.isDefault==true);
+        const state=this.checkoutForm.get('state');
+        state.setValue(defaultAddress[0].state);
+        state.updateValueAndValidity();
       });
     }
     else {
