@@ -35,7 +35,7 @@ export class DashboardComponent implements OnInit {
   public SelectedBillingAddressId: number = 0;
   public ChangePwdForm: FormGroup;
   public lstOrderStatus: any = [];
-  public lstUserData: any[] = [];
+  public lstUserData: any = [];
   PinCodeMask: string;
   constructor(
     private _SharedDataService: SharedDataService,
@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
         NewPassword: ['', [Validators.required, Validators.minLength(8)]],
         ConfirmPwd: ['', [Validators.required, Validators.minLength(8)]],
       });
-      
+
       this.LoadBillingAddress();
       this.LoadAllOrder();
       this.LoadOrderStatus();
@@ -229,6 +229,10 @@ export class DashboardComponent implements OnInit {
       state: ['', Validators.required],
       zipCode: ['', Validators.required],
     });
+    var defaultAddress = this.lstBillingAddress.filter(a => a.isDefault == true);
+    const state = this.checkoutForm.get('state');
+    state.setValue(defaultAddress[0].state);
+    state.updateValueAndValidity();
     this.modalService.open(template, {
       size: 'lg',
       //ariaLabelledBy: 'Cart-Modal',
