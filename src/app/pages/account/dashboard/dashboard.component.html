@@ -19,8 +19,7 @@
                         <ul>
                             <li [ngClass]="ShowTabName=='AccountInfor'?'active':''"><a href="javascript:void(0)"
                                     (click)="ShowTabName='AccountInfor'">Account Info</a></li>
-                            <li *ngIf="LoggedInUser[0].isAgentCustomer==false"
-                                [ngClass]="ShowTabName=='Address'?'active':''"><a href="javascript:void(0)"
+                            <li [ngClass]="ShowTabName=='Address'?'active':''"><a href="javascript:void(0)"
                                     (click)="ShowTabName='Address'">Address Book</a></li>
                             <li [ngClass]="ShowTabName=='MyOrder'?'active':''"><a href="javascript:void(0)"
                                     (click)="ShowTabName='MyOrder'">My Orders</a></li>
