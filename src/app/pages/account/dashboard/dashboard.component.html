@@ -197,7 +197,8 @@
                                     <!-- <span> -->
                                     <!-- <a href="{{WebSite_URL}}report/orderInvoice/{{lst.guid}}" target="_blank">Print
                                         Order</a> -->
-                                    <a href="javaScript:void(0);" (click)="DownloadInvoice(lst)">Print Order</a>
+                                    <!-- <a href="javaScript:void(0);" (click)="DownloadInvoice(lst)">Print Order</a> -->
+                                    <a href="{{Report_URL}}Reporthandler.ashx?id={{lst.guid}}" target="_blank">Print</a>
                                     <!-- </span> -->
 
                                     <!-- <span class="badge badge-success">{{lst.statusName}}</span> -->

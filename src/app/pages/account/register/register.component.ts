@@ -726,6 +726,7 @@ export class RegisterComponent implements OnInit {
             size: 'lg',
             //ariaLabelledBy: 'Cart-Modal',
             centered: true,
+            backdrop: 'static'
             //windowClass: 'theme-modal cart-modal CartModal'
           }).result.then((result) => {
             `Result ${result}`

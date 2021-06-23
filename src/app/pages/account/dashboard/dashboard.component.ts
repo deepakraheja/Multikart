@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit {
   public Report_Path = environment.Report_Path;
   public Invoice_URL = environment.Invoice_URL;
   public WebSite_URL = environment.WebSite_URL;
+  public Report_URL = environment.Report_URL;
+
   public openDashboard: boolean = false;
   public ShowTabName: string = "AccountInfor";
   public LoggedInUser: any[] = [];
